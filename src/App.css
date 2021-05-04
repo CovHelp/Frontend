@@ -1,0 +1,78 @@
+  
+:root{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  --unselected: #a7ffeb;
+  --highlight-bg: #64ffda;
+  --text: #1de9b6;
+  --selected: #00bfa5;
+  --body-bg: #212121;
+  --card-bg: #424242;
+}
+*, ::before, ::after{
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+html {
+  height: 100%;
+}
+
+body{
+  background-color: white;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  font-family: "Poopins" -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #121212;
+}
+
+a {
+  text-decoration: none;
+}
+
+.App {
+  /* max-width: 1920px; */
+  margin: auto;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 70px calc(100% - 70px);
+  background-color: #121212;
+}
+
+.App > .header {
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* box-shadow: 0.1em 0.1em 0.6em #d2d2d2; */
+  justify-content: center;
+  background-color: #424242;
+  padding: 0 20px;
+}
+
+.App > .app_body {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.App > .app_body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.App > .app_body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.App > .app_body > .content {
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+}
