@@ -6,7 +6,7 @@ const NeedHelp = () => {
 
     return (
         <>
-            <Box p={3} d="flex" flexDir={'column'} alignItems={'center'} background="#f0f2f5">
+            <Box p={3} d="flex" flex="0.6" flexDir={'column'} alignItems={'center'} background="#f0f2f5">
                 <h1>Need Help</h1>
                 <NeedHelpCard />
                 <NeedHelpCard />

@@ -7,14 +7,14 @@ import {AiFillMedicineBox} from "react-icons/all"
 import {GiOpenedFoodCan} from "react-icons/all"
 import {GrAidOption} from "react-icons/all"
 import {GiLoveInjection} from "react-icons/all"
-
+import { Checkbox, CheckboxGroup } from "@chakra-ui/react"
 import {FaAmbulance} from "react-icons/fa"
 import {FaHospitalAlt} from "react-icons/fa"
 import { Text } from "@chakra-ui/react"
 
 function Filtersidebar() {
     return (
-        <Stack borderRadius="5px" boxShadow="lg" bg="whiteAlpha.400"  direction={["column"]} spacing="32px" w="16%" p="10px" h="100%" >
+        <Stack borderRadius="5px" boxShadow="lg" bg="whiteAlpha.400"  direction={["column"]} spacing="32px" w="16%" p="10px" >
   <Box>
   <Heading as="h5" size="lg" >
     Filters
@@ -22,16 +22,25 @@ function Filtersidebar() {
 
   </Box>
   <Stack direction={["column"]} spacing="32px">
-  <Box display="flex" alignItems="center" >
+  <Box display="flex" alignItems="center" justifyContent="space-between">
+  
+    <Box display="flex" alignItems="center">
   <AiFillMedicineBox size="30px"/>
-  <Link  to="">
-    <Text fontSize="md" ml="8px">
+  <Link to="">
+    <Text fontSize="md" ml="8px" >
       Oxygen 
     </Text>
   </Link>
+    </Box>
+    
 
-  </Box>
-  <Box display="flex" alignItems="center" >
+    <Checkbox  size="md" colorScheme="gray">
+    
+  </Checkbox>
+    </Box>
+
+  <Box display="flex" alignItems="center"  justifyContent="space-between">
+  <Box display="flex" alignItems="center">
     <FaAmbulance size="30px"/>
   <Link to="">
   <Text  fontSize="md" ml="8px">
@@ -40,7 +49,12 @@ function Filtersidebar() {
       </Text>
   </Link>
   </Box>
-  <Box  display="flex" alignItems="center">
+  <Checkbox size="md" colorScheme="gray">
+    
+  </Checkbox>
+  </Box>
+  <Box  display="flex" alignItems="center" justifyContent="space-between">
+  <Box display="flex" alignItems="center">
     <FaHospitalAlt size="30px"/>
   <Link>
   <Text fontSize="md" ml="8px">
@@ -49,7 +63,12 @@ function Filtersidebar() {
       </Text>
   </Link>
   </Box>
-  <Box  display="flex" alignItems="center">
+  <Checkbox  size="md" colorScheme="gray">
+    
+  </Checkbox>
+  </Box>
+  <Box  display="flex" alignItems="center" justifyContent="space-between">
+  <Box display="flex" alignItems="center">
     <GrAidOption size="30px"/>
   <Link to="">
   <Text fontSize="md" ml="8px">
@@ -58,6 +77,11 @@ function Filtersidebar() {
       </Text>
   </Link>
   </Box>
+  <Checkbox  size="md" colorScheme="gray">
+    
+  </Checkbox>
+  </Box>
+  <Box display="flex" alignItems="center" justifyContent="space-between">
   <Box display="flex" alignItems="center">
     <GiLoveInjection size="30px"/>
   <Link to="">
@@ -68,7 +92,12 @@ function Filtersidebar() {
       </Text>
   </Link>
   </Box>
+  <Checkbox size="md" colorScheme="gray">
+    
+  </Checkbox>
+  </Box>
 
+  <Box display="flex" alignItems="center" justifyContent="space-between">
   <Box display="flex" alignItems="center">
     <GiOpenedFoodCan size="30px"/>
   <Link to="">
@@ -77,6 +106,10 @@ function Filtersidebar() {
       
       </Text>
   </Link>
+  </Box>
+  <Checkbox size="md" colorScheme="gray">
+    
+  </Checkbox>
   </Box>
   </Stack>
 </Stack>

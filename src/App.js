@@ -9,6 +9,7 @@ import NewPost from "./pages/Newpost/NewPost";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Filtersidebar from "./components/sidebarFilter/Filtersidebar";
+import Chat from "./components/chat/Chat";
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
     <div className="App">
       <Navbar />
       <div className="app_body">
+        <Filtersidebar/>
         <Switch>
           <Route exact path="/">
             <NeedHelp />
@@ -39,6 +41,8 @@ const App = () => {
             <NewPost />
           </Route>
         </Switch>
+        <Chat/>
+       
       </div>
     </div>
   );

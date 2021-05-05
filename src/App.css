@@ -55,6 +55,7 @@ a {
 .App > .app_body {
   background-color: #f0f2f5;
   overflow-y: scroll;
+  display:flex;
 }
 
 .App > .app_body::-webkit-scrollbar {
