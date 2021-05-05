@@ -11,7 +11,6 @@ const GiveHelp = () => {
       alignItems={"center"}
       background="#f0f2f5"
     >
-      <h1>GIVE HELP</h1>
       <GiveHelpCard />
     </Box>
   );

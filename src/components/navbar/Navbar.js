@@ -12,7 +12,7 @@ import "./index.css";
 const Navbar = () => {
   const [auth, setauth] = useState(false);
   return (
-    <div class="navbar">
+    <div className="navbar">
       <Flex
         bg="whiteAlpha.200"
         flexDir={"row"}
@@ -37,7 +37,7 @@ const Navbar = () => {
               <Text ml={2}> </Text>Find Help
             </Button>{" "}
           </Link>
-          <Link exact to="/">
+          <Link to="/provide-help">
             <Button m={2}>
               {" "}
               <FaHandHoldingHeart /> <Text ml={2}></Text>Provide Help

@@ -1,10 +1,9 @@
-
-
 .navbar {
     z-index: 10;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    border-bottom: 2px solid rgb(172, 172, 172);
+    border-bottom: 1.5px solid #CBD5E0;
+    background-color: #fff;
 }

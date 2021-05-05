@@ -25,7 +25,10 @@ const App = () => {
               <NeedHelp />
             </Route>
             <Route path="/help">
-              <GiveHelp />
+              <NeedHelp />
+            </Route>
+            <Route path="/provide-help">
+              <GiveHelp/>
             </Route>
             <Route path="/new-post">
               <NewPost />

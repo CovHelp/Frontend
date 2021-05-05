@@ -15,10 +15,8 @@ const NeedHelp = () => {
       >
         <NeedHelpCard />
         <NeedHelpCard />
-
         <NeedHelpCard />
         <NeedHelpCard />
-
         <NeedHelpCard />
         <NeedHelpCard />
         <NeedHelpCard />
