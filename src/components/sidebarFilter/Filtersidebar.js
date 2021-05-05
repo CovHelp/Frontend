@@ -25,12 +25,16 @@ function Filtersidebar() {
         // p="32px"
         my="16px"
       >
-        <Box p="16px">
-          <Heading as="h3" size="lg">
-            Filter by category
-          </Heading>
+        <Box p="20px">
+          <Text fontSize="4xl" fontWeight="600" color="gray.700">
+            Filters
+          </Text>
+          <Text fontSize="sm" color="gray.400">
+            Choose the categories in which you can provide help or want to seek
+            help.
+          </Text>
         </Box>
-        <Divider colorScheme="telegram"/>
+        <Divider colorScheme="telegram" />
 
         <Stack direction={["column"]} spacing="32px">
           <Box
@@ -41,7 +45,7 @@ function Filtersidebar() {
           >
             <Box display="flex" alignItems="center">
               <AiFillMedicineBox mx="4" size="30px" />
-              <Box w="4"/>
+              <Box w="4" />
               <Link to="">
                 <Text fontSize="md" ml="8px">
                   Oxygen
@@ -49,7 +53,7 @@ function Filtersidebar() {
               </Link>
             </Box>
 
-            <Checkbox  size="lg" colorScheme="gray"></Checkbox>
+            <Checkbox size="lg" colorScheme="gray"></Checkbox>
           </Box>
 
           <Divider />
@@ -62,7 +66,7 @@ function Filtersidebar() {
           >
             <Box display="flex" alignItems="center">
               <FaAmbulance size="30px" />
-              <Box w="4"/>
+              <Box w="4" />
 
               <Link to="">
                 <Text fontSize="md" ml="8px">
@@ -83,7 +87,7 @@ function Filtersidebar() {
           >
             <Box display="flex" alignItems="center">
               <FaHospitalAlt size="30px" />
-              <Box w="4"/>
+              <Box w="4" />
 
               <Link>
                 <Text fontSize="md" ml="8px">
@@ -104,7 +108,7 @@ function Filtersidebar() {
           >
             <Box display="flex" alignItems="center">
               <GrAidOption size="30px" />
-              <Box w="4"/>
+              <Box w="4" />
 
               <Link to="">
                 <Text fontSize="md" ml="8px">
@@ -125,7 +129,7 @@ function Filtersidebar() {
           >
             <Box display="flex" alignItems="center">
               <GiLoveInjection size="30px" />
-              <Box w="4"/>
+              <Box w="4" />
 
               <Link to="">
                 <Text fontSize="md" ml="8px">
@@ -146,7 +150,7 @@ function Filtersidebar() {
           >
             <Box display="flex" alignItems="center">
               <GiOpenedFoodCan size="30px" />
-              <Box w="4"/>
+              <Box w="4" />
 
               <Link to="">
                 <Text fontSize="md" ml="8px">
