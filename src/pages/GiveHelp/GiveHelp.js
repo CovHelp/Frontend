@@ -5,7 +5,7 @@ import GiveHelpCard from "../../components/Cards/GiveHelpCard/GiveHelpCard";
 const GiveHelp = () => {
   return (
     <Box
-      p={3}
+      px={3}
       d="flex"
       flexDir={"column"}
       alignItems={"center"}

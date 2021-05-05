@@ -6,7 +6,7 @@ const NeedHelp = () => {
   return (
     <>
       <Box
-        p={3}
+        px={3}
         d="flex"
         flex="1"
         flexDir={"column"}

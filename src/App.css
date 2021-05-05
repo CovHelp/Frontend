@@ -9,23 +9,27 @@
   --body-bg: #212121;
   --card-bg: #424242;
 }
+
 *,
 ::before,
 ::after {
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
+  transition: .3s;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
 #root {
   height: 100%;
-  font-family: "Poopins" -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  font-family: "Poopins"-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
+
 a {
   text-decoration: none;
 }
@@ -35,12 +39,12 @@ a {
   height: 100%;
 }
 
-.main-wrapper{
+.main-wrapper {
   display: grid;
   grid-template-rows: 88px 1fr;
 }
 
-.App > .header {
+.App>.header {
   margin: 0 auto;
   width: 100%;
   display: flex;
@@ -51,42 +55,58 @@ a {
   padding: 0 20px;
 }
 
-.app_body{
+.app_body {
   height: 100%;
   display: grid;
   grid-template-columns: 300px 1fr 300px;
 }
 
-.App > .app_body::-webkit-scrollbar {
+.App>.app_body::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-.App > .app_body {
-  -ms-overflow-style: none; 
-  scrollbar-width: none; /* Firefox */
+.App>.app_body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  /* Firefox */
 }
 
-.App > .app_body > .content {
+.App>.app_body>.content {
   max-width: 1300px;
   width: 100%;
   margin: 0 auto;
 }
- 
+
 
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
- }
- ::-webkit-scrollbar-thumb {
+}
+
+::-webkit-scrollbar-thumb {
   background: #919191;
   border-radius: 15px;
- }
- ::-webkit-scrollbar-thumb:hover{
+}
+
+::-webkit-scrollbar-thumb:hover {
   background: #6b6b6b;
- }
- ::-webkit-scrollbar-track{
+}
+
+::-webkit-scrollbar-track {
   background: #f0f2f5;
   border-radius: 10px;
   box-shadow: inset 7px 10px 12px #f0f0f0;
- }
+}
+
+@media only screen and (max-width: 1246px) {
+  .app_body {
+    grid-template-columns: 250px 1fr 250px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .app_body {
+    grid-template-columns: 250px 1fr 0px;
+  }
+}
