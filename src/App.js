@@ -8,11 +8,15 @@ import NeedHelp from "./pages/NeedHelp/NeedHelp";
 import NewPost from "./pages/Newpost/index";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
+=======
+import Filtersidebar from "./components/sidebarFilter/Filtersidebar";
+
 
 const App = () => {
   return (
     <div className="App">
       <Navbar />
+      <Filtersidebar/>
       <div className="app_body">
         <Switch>
           <Route exact path="/">
