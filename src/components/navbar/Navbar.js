@@ -1,25 +1,18 @@
+import { Button } from '@chakra-ui/button'
+import { Flex } from '@chakra-ui/layout'
 import React from 'react'
-import './index.css'
-import {Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-export default function Navbar() {
+const Navbar = () => {
     return (
-        <div className="navbar">
-            <div className="brand">
-                <h1>KEWL</h1>
-            </div>
+        <>
+            <Flex boxShadow={"xl"} bg="whiteAlpha.200" flexDir={'row'} alignItems={'center'} justifyContent={'center'} w="100%" p={4} color="black">
+                <Link to='/help'><Button m={2}> Find Help</Button > </Link>
+                <Link exact to='/'><Button m={2}> Provide Help</Button ></Link>
+                <Link to='/organization'><Button m={2}>  Organizations</Button></Link>
+            </Flex >
+        </>
 
-            <div className="navbar_links">
-                <div className="navlink">
-                    <Link to='/help'>Find Help</Link>
-                </div>
-                <div className="navlink">
-                    <Link exact to='/'>Provide Help</Link>
-                </div>
-                <div className="navlink">
-                    <Link to='/organization'>Organizations</Link>
-                </div>
-            </div>
-        </div>
     )
 }
+export default Navbar;
