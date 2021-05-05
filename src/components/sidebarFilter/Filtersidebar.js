@@ -5,7 +5,7 @@ import { Heading } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/react";
 import { AiFillMedicineBox } from "react-icons/all";
 import { GiOpenedFoodCan } from "react-icons/all";
-import { GrAidOption } from "react-icons/all";
+import { GrAidOption, BiFilterAlt } from "react-icons/all";
 import { GiLoveInjection } from "react-icons/all";
 import { Checkbox, Divider } from "@chakra-ui/react";
 import { FaAmbulance } from "react-icons/fa";
@@ -25,10 +25,13 @@ function Filtersidebar() {
         // p="32px"
         my="16px"
       >
-        <Box p="20px">
-          <Text fontSize="4xl" fontWeight="600" color="gray.700">
-            Filters
-          </Text>
+        <Box py="8px" px="20px">
+          <Box display="flex" alignItems="center" justifyContent="space-between">
+            <Text fontSize="4xl" fontWeight="600" color="gray.700">
+              Filters
+            </Text>
+            <BiFilterAlt size="24px" color="gray.50"/>
+          </Box>
           <Text fontSize="sm" color="gray.400">
             Choose the categories in which you can provide help or want to seek
             help.
@@ -44,7 +47,7 @@ function Filtersidebar() {
             justifyContent="space-between"
           >
             <Box display="flex" alignItems="center">
-              <AiFillMedicineBox mx="4" size="30px" />
+              <AiFillMedicineBox mx="4" size="24px" />
               <Box w="4" />
               <Link to="">
                 <Text fontSize="md" ml="8px">
@@ -65,7 +68,7 @@ function Filtersidebar() {
             justifyContent="space-between"
           >
             <Box display="flex" alignItems="center">
-              <FaAmbulance size="30px" />
+              <FaAmbulance size="24px" />
               <Box w="4" />
 
               <Link to="">
@@ -86,7 +89,7 @@ function Filtersidebar() {
             justifyContent="space-between"
           >
             <Box display="flex" alignItems="center">
-              <FaHospitalAlt size="30px" />
+              <FaHospitalAlt size="24px" />
               <Box w="4" />
 
               <Link>
@@ -107,7 +110,7 @@ function Filtersidebar() {
             justifyContent="space-between"
           >
             <Box display="flex" alignItems="center">
-              <GrAidOption size="30px" />
+              <GrAidOption size="24px" />
               <Box w="4" />
 
               <Link to="">
@@ -128,7 +131,7 @@ function Filtersidebar() {
             justifyContent="space-between"
           >
             <Box display="flex" alignItems="center">
-              <GiLoveInjection size="30px" />
+              <GiLoveInjection size="24px" />
               <Box w="4" />
 
               <Link to="">
@@ -149,7 +152,7 @@ function Filtersidebar() {
             justifyContent="space-between"
           >
             <Box display="flex" alignItems="center">
-              <GiOpenedFoodCan size="30px" />
+              <GiOpenedFoodCan size="24px" />
               <Box w="4" />
 
               <Link to="">

@@ -1,7 +1,7 @@
 import { Avatar } from "@chakra-ui/avatar";
 import { Button } from "@chakra-ui/button";
 import { Text } from "@chakra-ui/react";
-import { Flex } from "@chakra-ui/layout";
+import { Flex, Grid } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaHandHoldingHeart } from "react-icons/all";
@@ -11,6 +11,7 @@ import "./index.css";
 
 const Navbar = () => {
   const [auth, setauth] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState();
   return (
     <div className="navbar">
       <Flex
@@ -30,27 +31,27 @@ const Navbar = () => {
           />
         </Flex>
         <Flex justifyContent={"center"} flex="1">
-          <Link to="/help">
-            <Button m={2}>
+          <Link onClick={()=>setSelectedMenu(0)} to="/help">
+            <Button size="md" colorScheme={selectedMenu === 0 ? 'linkedin' : 'gray'} m={2}>
               {" "}
               <FaHandsHelping />
               <Text ml={2}> </Text>Find Help
             </Button>{" "}
           </Link>
-          <Link to="/provide-help">
-            <Button m={2}>
+          <Link onClick={()=>setSelectedMenu(1)} to="/provide-help">
+            <Button  size="md"  colorScheme={selectedMenu === 1 ? 'linkedin' : 'gray'} m={2}>
               {" "}
               <FaHandHoldingHeart /> <Text ml={2}></Text>Provide Help
             </Button>
           </Link>
-          <Link to="/organization">
-            <Button m={2}>
+          <Link onClick={()=>setSelectedMenu(2)} to="/organization">
+            <Button  size="md"  colorScheme={selectedMenu === 2 ? 'linkedin' : 'gray'} m={2}>
               {" "}
               <VscOrganization />
               <Text ml={2}></Text> Organizations
             </Button>
           </Link>
-          <Button
+          {/* <Button
             m={2}
             onClick={() => {
               setauth(!auth);
@@ -59,7 +60,7 @@ const Navbar = () => {
           >
             {" "}
             Test Auths
-          </Button>
+          </Button> */}
         </Flex>
 
         <Flex flex="1" flexDir="row-reverse">
