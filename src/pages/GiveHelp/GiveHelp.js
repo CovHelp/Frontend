@@ -1,26 +1,15 @@
 import { Box } from '@chakra-ui/layout'
 import React from 'react'
-import NeedHelpCard from '../../components/Cards/NeedHelp/NeedHelpCard'
+import GiveHelpCard from '../../components/Cards/GiveHelpCard/GiveHelpCard'
 
 
 const GiveHelp = () => {
+    
     return (
-        <Box p={3} d="flex" flexDir={'column'} alignItems={'center'}>
+        <Box p={3} d="flex" flexDir={'column'} alignItems={'center'} background="#f0f2f5">
             
-            <NeedHelpCard />
-            <NeedHelpCard />
-            <NeedHelpCard />
-            <NeedHelpCard />
-            <NeedHelpCard />
-            <NeedHelpCard />
-            <NeedHelpCard />
-            <NeedHelpCard />
-            <NeedHelpCard />
-            <NeedHelpCard />
-            <NeedHelpCard />
-            <NeedHelpCard />
-            <NeedHelpCard />
-            <NeedHelpCard />
+            <h1>GIVE HELP</h1>
+            <GiveHelpCard/>
 
         </Box>
     )

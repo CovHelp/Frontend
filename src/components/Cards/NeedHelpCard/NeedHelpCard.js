@@ -57,7 +57,7 @@ const NeedHelpCard = () => {
 
 
   return (
-    <Flex m={2} w={['95%', '80%', '80%', '40%']} h="auto">
+    <Flex m={2} w={['95%', '80%', '80%', '40%', "40%" , "800px"]} h="auto">
       <Box borderRadius={"xl"} boxShadow={'lg'} maxW="-moz-max-content" mt={4} borderWidth="1px" overflow="hidden">
 
         <Box w={'100%'} p={8} bgColor="white">
@@ -76,7 +76,7 @@ const NeedHelpCard = () => {
             </Box>
           </Flex>
         </Box>
-        <Image src={card.picture} color="gray.600" alt={card.imageAlt} />
+        <Image src={card.picture} objectFit="cover" color="gray.600" alt={card.imageAlt} />
 
         <Box p="8" bgColor="white">
           <Box d="flex" alignItems="baseline" >
@@ -120,12 +120,11 @@ const NeedHelpCard = () => {
           </Box>
           <hr />
 
-          <Flex flexDir={'row'} alignItems={'center'} justifyContent={'space-around'} w="100%" pt={4}>
+          <Flex flexDir={'row'} alignItems={'center'} justifyContent={'space-evenly'} w="100%" pt={4}>
 
-            <CardButtons name="Like" icon={MdThumbUp} />
+
             <CardButtons icon={IoHandLeftSharp} name="I Can help" />
-            <CardButtons icon={FaComment} name="Comment" />
-            <CardButtons icon={IoMdShareAlt} name="Share" />
+
 
           </Flex>
         </Box>
