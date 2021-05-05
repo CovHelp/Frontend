@@ -5,27 +5,30 @@ import { Navbar } from "./components/navbar";
 import Organization from "./pages/Organization/Organization";
 import GiveHelp from "./pages/GiveHelp/GiveHelp";
 import NeedHelp from "./pages/NeedHelp/NeedHelp";
+import NewPost from "./pages/Newpost/index";
 
 const App = () => {
- 
   return (
     <div className="App">
-        <Navbar />
+      <Navbar />
       <div className="app_body">
         <Switch>
           <Route exact path="/">
-           <GiveHelp/>
+            <GiveHelp />
           </Route>
           <Route path="/help">
-           <NeedHelp/>
+            <NeedHelp />
+          </Route>
+          <Route path="/new-post">
+            <NewPost />
           </Route>
           <Route path="/organization">
-            <Organization/>
+            <Organization />
           </Route>
         </Switch>
       </div>
     </div>
   );
-}
+};
 
 export default App;
