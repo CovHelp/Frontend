@@ -17,7 +17,7 @@
   padding: 0px;
 }
 
-html {
+html, body {
   height: 100%;
 }
 
@@ -25,20 +25,19 @@ html {
   height: 100%;
   font-family: "Poopins" -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  /* background-color: #121212; */
 }
 a {
   text-decoration: none;
 }
 
 .App {
-  /* max-width: 1920px; */
   margin: auto;
   height: 100%;
+}
+
+.main-wrapper{
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 70px calc(100% - 70px);
-  /* background-color: #121212; */
+  grid-template-rows: 88px 1fr;
 }
 
 .App > .header {
@@ -52,10 +51,10 @@ a {
   padding: 0 20px;
 }
 
-.App > .app_body {
-  background-color: #f0f2f5;
-  overflow-y: scroll;
-  display:flex;
+.app_body{
+  height: 100%;
+  display: grid;
+  grid-template-columns: 300px 1fr 300px;
 }
 
 .App > .app_body::-webkit-scrollbar {
