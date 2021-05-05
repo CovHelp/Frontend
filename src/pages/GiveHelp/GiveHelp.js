@@ -12,6 +12,14 @@ const GiveHelp = () => {
       background="#f0f2f5"
     >
       <GiveHelpCard />
+      <GiveHelpCard />
+      <GiveHelpCard />
+      <GiveHelpCard />
+      <GiveHelpCard />
+      <GiveHelpCard />
+      <GiveHelpCard />
+      <GiveHelpCard />
+
     </Box>
   );
 };
