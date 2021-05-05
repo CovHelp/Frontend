@@ -60,6 +60,7 @@ a {
 
 .App > .app_body {
   height: 100%;
+  background-color: #f0f2f5;
   overflow-y: scroll;
 }
 
