@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 
 import csc from "country-state-city";
+import { FormLabel } from "@chakra-ui/form-control";
+import { Select } from "@chakra-ui/select";
+import { Box } from "@chakra-ui/layout";
 
 export default function StateCitySelctor() {
   const [allStates, setAllStates] = useState([]);
@@ -27,8 +30,9 @@ export default function StateCitySelctor() {
   };
 
   return (
-    <div className="App">
-      <select onChange={handleSetSelectedState}>
+    <>
+      <FormLabel>Select State</FormLabel>
+      <Select onChange={handleSetSelectedState}>
         {allStates.length > 0 &&
           allStates.map((v, index) => (
             <option key={index} value={v.name}>
@@ -36,8 +40,9 @@ export default function StateCitySelctor() {
               {v.name}{" "}
             </option>
           ))}
-      </select>
-      <select onChange={handleSetSelectedCity}>
+      </Select>
+      <FormLabel >Select City</FormLabel>
+      <Select placeholder="Delhi" onChange={handleSetSelectedCity}>
         {allCities.length > 0 &&
           allCities.map((v, index) => (
             <option key={index} value={v.name}>
@@ -45,14 +50,14 @@ export default function StateCitySelctor() {
               {v.name}{" "}
             </option>
           ))}
-      </select>
+      </Select>
 
-      <h1>
+      {/* <h1>
         Selected State with code: {selectedState.name} | {selectedState.isoCode} | {selectedState.latitude}, {selectedState.longitude}
       </h1>
       <h2>
         Selected City {selectedCity.name} = {selectedCity.latitude}, {selectedCity.longitude}
-      </h2>
-    </div>
+      </h2> */}
+    </>
   );
 }
