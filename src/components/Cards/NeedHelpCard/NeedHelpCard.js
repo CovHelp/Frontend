@@ -3,10 +3,7 @@ import { Button } from "@chakra-ui/button"
 import Icon from "@chakra-ui/icon"
 import { Image } from "@chakra-ui/image"
 import { Badge, Box, Flex, Heading } from "@chakra-ui/layout"
-import { FaComment } from 'react-icons/fa'
-import { IoMdShareAlt } from 'react-icons/io'
 import { IoHandLeftSharp } from 'react-icons/io5'
-import { MdThumbUp } from 'react-icons/md'
 
 
 const CardButtons = (props) => {
@@ -57,7 +54,7 @@ const NeedHelpCard = () => {
 
 
   return (
-    <Flex m={2} w={['95%', '80%', '80%', '40%', "40%" , "800px"]} h="auto">
+    <Flex m={2} w={['95%', '80%', '40%', "40%" , "800px"]}>
       <Box borderRadius={"xl"} boxShadow={'lg'} maxW="-moz-max-content" mt={4} borderWidth="1px" overflow="hidden">
 
         <Box w={'100%'} p={8} bgColor="white">
