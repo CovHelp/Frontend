@@ -1,18 +1,20 @@
 import React from 'react'
 import { Box } from "@chakra-ui/react"
-import { Stack, HStack, VStack } from "@chakra-ui/react"
+import { Stack } from "@chakra-ui/react"
 import { Heading } from "@chakra-ui/react"
-import { PhoneIcon, AddIcon, WarningIcon ,  } from '@chakra-ui/icons'
+import { Link } from "@chakra-ui/react"
+import {AiFillMedicineBox} from "react-icons/all"
+import {GiOpenedFoodCan} from "react-icons/all"
+import {GrAidOption} from "react-icons/all"
+import {GiLoveInjection} from "react-icons/all"
+
+import {FaAmbulance} from "react-icons/fa"
+import {FaHospitalAlt} from "react-icons/fa"
+import { Text } from "@chakra-ui/react"
 
 function Filtersidebar() {
     return (
-        // <Stack spacing="24px" w="20%" h="100%">
-
-        // <Box w="40px" h="40px" bg="gray.100">
-        //     this is filter sidebar
-        // </Box>
-        // </Stack>
-        <Stack boxShadow="dark-lg" bg={'gray.200'}  direction={["column"]} spacing="24px" w="16%" p="10px" h="100%" >
+        <Stack borderRadius="5px" boxShadow="lg" bg="whiteAlpha.400"  direction={["column"]} spacing="32px" w="16%" p="10px" h="100%" >
   <Box>
   <Heading as="h5" size="lg" >
     Filters
@@ -21,24 +23,60 @@ function Filtersidebar() {
   </Box>
   <Stack direction={["column"]} spacing="32px">
   <Box display="flex" alignItems="center" >
-      <PhoneIcon mr="4px"/>
-    Medicine
+  <AiFillMedicineBox size="30px"/>
+  <Link  to="">
+    <Text fontSize="md" ml="8px">
+      Oxygen 
+    </Text>
+  </Link>
+
   </Box>
-  <Box >
-    Hospital Beds
+  <Box display="flex" alignItems="center" >
+    <FaAmbulance size="30px"/>
+  <Link to="">
+  <Text  fontSize="md" ml="8px">
+      Ambulance
+      
+      </Text>
+  </Link>
   </Box>
-  <Box >
-    Oxygen Plasma
+  <Box  display="flex" alignItems="center">
+    <FaHospitalAlt size="30px"/>
+  <Link>
+  <Text fontSize="md" ml="8px">
+      
+      Medicine
+      </Text>
+  </Link>
   </Box>
-  <Box >
-    Plasma
+  <Box  display="flex" alignItems="center">
+    <GrAidOption size="30px"/>
+  <Link to="">
+  <Text fontSize="md" ml="8px">
+      
+      Hospital Beds
+      </Text>
+  </Link>
   </Box>
-  <Box >
-    Food and Tiffin
+  <Box display="flex" alignItems="center">
+    <GiLoveInjection size="30px"/>
+  <Link to="">
+
+  <Text fontSize="md" ml="8px">
+      Plasma
+      
+      </Text>
+  </Link>
   </Box>
 
-  <Box>
-      Ambulance
+  <Box display="flex" alignItems="center">
+    <GiOpenedFoodCan size="30px"/>
+  <Link to="">
+  <Text fontSize="md" ml="8px">
+      Food and Tiffin
+      
+      </Text>
+  </Link>
   </Box>
   </Stack>
 </Stack>
