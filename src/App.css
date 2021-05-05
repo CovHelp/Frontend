@@ -37,7 +37,7 @@ a {
 
 .main-wrapper{
   display: grid;
-  grid-template-rows: 88px 1fr;
+  grid-template-rows: 80px 1fr;
 }
 
 .App > .header {

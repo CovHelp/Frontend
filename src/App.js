@@ -46,6 +46,7 @@ const App = () => {
               <NewPost />
             </Route>
           </Switch>
+          <div></div>
           {/* <Chat/> */}
         </div>
       </div>

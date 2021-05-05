@@ -19,7 +19,7 @@ function Filtersidebar() {
       <Stack
         borderRadius="5px"
         boxShadow="lg"
-        bg="whiteAlpha.400"
+        bg="whiteAlpha"
         direction={["column"]}
         spacing="32px"
         // p="32px"
@@ -27,7 +27,7 @@ function Filtersidebar() {
       >
         <Box py="8px" px="20px">
           <Box display="flex" alignItems="center" justifyContent="space-between">
-            <Text fontSize="4xl" fontWeight="600" color="gray.700">
+            <Text fontSize="4xl" fontWeight="600" color="gray.600">
               Filters
             </Text>
             <BiFilterAlt size="24px" color="gray.50"/>
