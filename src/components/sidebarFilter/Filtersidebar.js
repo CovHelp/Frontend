@@ -25,7 +25,7 @@ function Filtersidebar() {
         // p="32px"
         my="16px"
       >
-        <Box py="8px" px="20px">
+        <Box py="16px" px="20px">
           <Box display="flex" alignItems="center" justifyContent="space-between">
             <Text fontSize="4xl" fontWeight="600" color="gray.600">
               Filters

@@ -18,6 +18,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <Flex
+        h="88"
         bg="whiteAlpha.900"
         flexDir={"row"}
         alignItems={"center"}
