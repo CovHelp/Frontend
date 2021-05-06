@@ -13,6 +13,18 @@
     backdrop-filter: blur(10px);
 }
 
+.bottom-nav {
+    z-index: 9;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border-top: 2px solid #cbd5e073;
+    /* backdrop-filter: blur(100px); */
+    height: 70px;
+}
+
 .navmobile {
     display: none;
     z-index: 10;
@@ -25,7 +37,7 @@
     backdrop-filter: blur(90px);
 }
 
-.navmobile-row{
+.navmobile-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,14 +46,14 @@
     padding: 16px;
 }
 
-.navmobile-col-left{
+.navmobile-col-left {
     flex: 20%;
     max-width: 20%;
 }
 
-.navmobile-col-left > div {
+.navmobile-col-left>div {
     cursor: pointer;
-    border: 2px solid #4A5568;
+    border: 2px solid #909fb8;
     width: 36px;
     height: 36px;
     border-radius: 4px;
@@ -50,7 +62,7 @@
     justify-content: center;
 }
 
-.navmobile-col-center{
+.navmobile-col-center {
     flex: 60%;
     max-width: 60%;
     height: 100%;
@@ -62,7 +74,7 @@
 
 
 
-.navmobile-col-right{
+.navmobile-col-right {
     flex: 20%;
     max-width: 20%;
 }

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import { Navbar } from "./components/navbar";
+import { BottomNav, Navbar } from "./components/navbar";
 import Organization from "./pages/Organization/Organization";
 import GiveHelp from "./pages/GiveHelp/GiveHelp";
 import NeedHelp from "./pages/NeedHelp/NeedHelp";
@@ -56,6 +56,8 @@ const App = () => {
           <div></div>
           {/* <Chat/> */}
         </div>
+      <BottomNav/>
+
       </div>
     </div>
   );

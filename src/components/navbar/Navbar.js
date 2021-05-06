@@ -149,9 +149,9 @@ const Navbar = ({sideBarEvent}) => {
               onClick={handleToggleSidebar}
             >
               {isSidenavVIsible ? (
-                <ImCross color="#4A5568" stroke={0.5} size={16}/>
+                <ImCross color="#909fb8" stroke={0.5} size={16}/>
               ) : (
-                <GiHamburgerMenu color="#4A5568" stroke={1} size={30} />
+                <GiHamburgerMenu color="#909fb8" stroke={1} size={20} />
               )}
             </div>
           </div>
