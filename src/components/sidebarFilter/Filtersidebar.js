@@ -21,7 +21,6 @@ function Filtersidebar() {
         overflow="scroll"
 
         // p="32px"
-        my="16px"
       >
         <Box py="12px" px="20px">
           <Box display="flex" alignItems="center" justifyContent="space-between">
