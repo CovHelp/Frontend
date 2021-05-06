@@ -15,6 +15,12 @@ import React from 'react'
 
 function ProfileSetting() {
     return (
+        <Stack  display="flex" flexDirection="column"  spacing={8} alignItems="flexstart">
+             
+             <Box pl="16px"  mb="8px" mt="16px">
+
+             <Avatar  height="5rem" width="5rem" src="https://bit.ly/broken-link" />
+             </Box>
         <Box pl="16px" width="100%"  display="flex" flexDirection="column"  >
                  <Box pl="0px" my="16px" display="flex" alignItems="center">
                      <AiOutlineHome size="24px"/>
@@ -71,6 +77,7 @@ function ProfileSetting() {
 
 
              </Box>
+             </Stack>
     )
 }
 

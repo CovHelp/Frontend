@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Box, Button, Checkbox, Link, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Stack, Text } from "@chakra-ui/react";
 import { Avatar} from "@chakra-ui/react"
 import {BiEdit} from 'react-icons/all'
-import ProfileSetting from './ProfileSetting';
+
+import {Link } from 'react-router-dom'
 
 function Profile() {
     const [showSetting,setShowSetting]=useState(false);
@@ -23,18 +24,15 @@ function Profile() {
 
              <Text fontSize="md" fontWeight="500">Shashwat</Text>
              <Text fontSize="sm" fontWeight="400">shashwat123@gmail.com</Text>
-             <Button onClick={handleClick} size="xs" colorScheme="linkedin"><BiEdit/> <Text ml="3px">
+             <Link to="/settings"><Button onClick={handleClick} size="xs" colorScheme="linkedin"><BiEdit/> <Text ml="3px">
                  Edit Profile
                  </Text>
                  </Button>
+                 </Link>
              </Box>
              </Box>
-             {
-               showSetting ? (
-                   
-                <ProfileSetting/>
-               ) : (
-                   <Stack >
+            
+                <Stack >
                        <Box bg="gray.100" display="flex">
                            <Box flex="0.5"  textAlign="center" borderBottom="2px solid #2d88ff">
                                <Text fontSize="md" fontWeight="500" p={2}>Need Help</Text>
@@ -49,10 +47,10 @@ function Profile() {
                        </>
                        
                    </Stack>
-               )
+               
              
                  
-            }
+           
              
              
 
