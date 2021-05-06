@@ -88,7 +88,7 @@ const Navbar = ({sideBarEvent}) => {
               icon={FaHandsHelping}
               number="0"
               name="Find Help"
-              to="/help"
+              to="/"
             />
             <NavbarButton
               icon={FaHandHoldingHeart}
