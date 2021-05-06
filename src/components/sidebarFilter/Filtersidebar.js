@@ -98,7 +98,7 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="gray"></Checkbox>
+            <Checkbox size="lg" colorScheme="#2d88ff"></Checkbox>
           </Box>
 
           <Divider />

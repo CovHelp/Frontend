@@ -1,22 +1,11 @@
 import { Avatar } from "@chakra-ui/avatar"
-import { Button } from "@chakra-ui/button"
-import Icon from "@chakra-ui/icon"
 import { Image } from "@chakra-ui/image"
 import { Badge, Box, Flex, Heading } from "@chakra-ui/layout"
 import { IoHandLeftSharp } from 'react-icons/io5'
+import { CardButton } from "../CardButton"
 
 
-const CardButtons = (props) => {
 
-  return (
-    <Button background="transparent">
-      <Flex flexDir={["column", "column", "column", "column", "row"]} alignItems="center" justifyContent="center" minH="1rem">
-        <Icon mr={2} ml={2} w={[5, 6]} h={[5, 6]} as={props.icon} />
-        {props.name}
-      </Flex>
-    </Button>
-  )
-}
 
 const NeedHelpCard = () => {
 
@@ -120,7 +109,7 @@ const NeedHelpCard = () => {
           <Flex flexDir={'row'} alignItems={'center'} justifyContent={'space-evenly'} w="100%" pt={4}>
 
 
-            <CardButtons icon={IoHandLeftSharp} name="I Can help" />
+            <CardButton icon={IoHandLeftSharp} name="I Can help" />
 
 
           </Flex>
