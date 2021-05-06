@@ -41,7 +41,7 @@ export default function StateCitySelctor() {
             </option>
           ))}
       </Select>
-      <FormLabel >Select City</FormLabel>
+      <FormLabel>Select City</FormLabel>
       <Select placeholder="Delhi" onChange={handleSetSelectedCity}>
         {allCities.length > 0 &&
           allCities.map((v, index) => (
