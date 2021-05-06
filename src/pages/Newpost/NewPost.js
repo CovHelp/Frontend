@@ -8,7 +8,7 @@ export default function NewPost() {
             align={'center'}
             justify={'center'}
             pt={4}>
-            <Stack width={'lg'} py={12} >
+            <Stack width={'lg'} py={12}>
                 <Box
                     rounded={'lg'}
                     bg={useColorModeValue('white', 'gray.700')}

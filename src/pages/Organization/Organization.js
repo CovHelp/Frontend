@@ -1,10 +1,11 @@
 import React from 'react'
+import MainHeading from '../../components/MainHeading/MainHeading'
 
 const Organization = () => {
     return (
-        <div>
-            <h1>Organization</h1>
-        </div>
+        <>
+            <MainHeading name="Organizations"/>
+        </>
     )
 }
 
