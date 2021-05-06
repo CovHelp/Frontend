@@ -1,16 +1,8 @@
+import { Box, Checkbox, Link, Stack, Text } from "@chakra-ui/react";
 import React from "react";
-import { Box } from "@chakra-ui/react";
-import { Stack } from "@chakra-ui/react";
-import { Heading } from "@chakra-ui/react";
-import { Link } from "@chakra-ui/react";
-import { AiFillMedicineBox } from "react-icons/all";
-import { GiOpenedFoodCan } from "react-icons/all";
-import { GrAidOption, BiFilterAlt } from "react-icons/all";
-import { GiLoveInjection } from "react-icons/all";
-import { Checkbox, Divider } from "@chakra-ui/react";
-import { FaAmbulance } from "react-icons/fa";
-import { FaHospitalAlt } from "react-icons/fa";
-import { Text } from "@chakra-ui/react";
+import { AiFillMedicineBox, BiFilterAlt, GiLoveInjection, GiOpenedFoodCan, GrAidOption } from "react-icons/all";
+import { FaAmbulance, FaHospitalAlt } from "react-icons/fa";
+import { DividerComponent } from "../divider/DividerComponent";
 import "./index.css";
 
 function Filtersidebar() {
@@ -37,7 +29,7 @@ function Filtersidebar() {
             help.
           </Text>
         </Box>
-        <Divider colorScheme="telegram" />
+        <DividerComponent colorScheme="telegram" />
 
         <Stack direction={["column"]} spacing="32px">
           <Box
@@ -59,7 +51,7 @@ function Filtersidebar() {
             <Checkbox size="lg" colorScheme="gray"></Checkbox>
           </Box>
 
-          <Divider />
+          <DividerComponent />
 
           <Box
             px="8"
@@ -80,7 +72,7 @@ function Filtersidebar() {
             <Checkbox size="lg" colorScheme="gray"></Checkbox>
           </Box>
 
-          <Divider />
+          <DividerComponent />
 
           <Box
             px="8"
@@ -101,7 +93,7 @@ function Filtersidebar() {
             <Checkbox size="lg" colorScheme="#2d88ff"></Checkbox>
           </Box>
 
-          <Divider />
+          <DividerComponent />
 
           <Box
             px="8"
@@ -122,7 +114,7 @@ function Filtersidebar() {
             <Checkbox size="lg" colorScheme="gray"></Checkbox>
           </Box>
 
-          <Divider />
+          <DividerComponent />
 
           <Box
             px="8"
@@ -143,7 +135,7 @@ function Filtersidebar() {
             <Checkbox size="lg" colorScheme="gray"></Checkbox>
           </Box>
 
-          <Divider m={4} />
+          <DividerComponent m={4} />
 
           <Box
             px="8"
@@ -164,7 +156,7 @@ function Filtersidebar() {
             <Checkbox size="lg" colorScheme="gray"></Checkbox>
           </Box>
 
-          <Divider />
+          <DividerComponent />
         </Stack>
       </Stack>
     </div>
