@@ -23,37 +23,50 @@ function Profile() {
              <Box width="100%"  display="flex" flexDirection="column"  >
                  <Box pl="0px" my="16px" display="flex" alignItems="center">
                      <AiOutlineHome size="24px"/>
+                     <Link to="">
                      <Text fontSize="md" ml="24px" fontWeight="500">
                          Account preview
                          </Text>
+                     </Link>
                  </Box>
                  <Divider/>
                  <Box  pl="0px" my="16px" display="flex" alignItems="center">
                      <BiEdit size="24px"/>
+                     <Link to="">
+
                      <Text fontSize="md" ml="24px" fontWeight="500">
                         Edit Profile
                          </Text>
+                     </Link>
                  </Box>
                  <Divider/>
                  <Box  pl="0px" my="16px" display="flex" alignItems="center">
                      <AiOutlineLock size="24px"/>
+                     <Link to="">
+
                      <Text fontSize="md" ml="24px" fontWeight="500">
                          Change Password
                          </Text>
+                     </Link>
                  </Box>
                  <Divider/>
                  <Box  pl="0px" my="16px" display="flex" alignItems="center">
                      <AiOutlineBell size="24px"/>
+                     <Link to="">
+
                      <Text fontSize="md" ml="24px" fontWeight="500">
                          Notification Settings
                          </Text>
+                     </Link>
                  </Box>
                  <Divider/>
                  <Box  pl="0px" my="16px" display="flex" alignItems="center">
                      <GrShieldSecurity size="24px"/>
+                     <Link to ="">
                      <Text fontSize="md" ml="24px" fontWeight="500">
                         Privacy Settings
                          </Text>
+                         </Link>
                  </Box>
                  <Divider/>
                  
