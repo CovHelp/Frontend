@@ -55,7 +55,7 @@ const NeedHelpCard = () => {
 
   return (
     <Flex m={2} w={['100%']} maxW="700px">
-      <Box borderRadius={"xl"} boxShadow={'lg'} maxW="-moz-max-content" mt={4} borderWidth="1px" overflow="hidden">
+      <Box borderRadius={"xl"}  maxW="-moz-max-content" mt={1} borderWidth="1px" overflow="hidden">
 
         <Box w={'100%'} p={8} bgColor="white">
           <Flex>
