@@ -1,15 +1,18 @@
 import { Box, Checkbox, Link, Stack, Text } from "@chakra-ui/react";
 import React from "react";
-import { AiFillMedicineBox, BiFilterAlt, GiLoveInjection, GiOpenedFoodCan, GrAidOption } from "react-icons/all";
+import {
+  AiFillMedicineBox,
+  BiFilterAlt,
+  GiLoveInjection,
+  GiOpenedFoodCan,
+  GrAidOption,
+} from "react-icons/all";
 import { FaAmbulance, FaHospitalAlt } from "react-icons/fa";
 import { DividerComponent } from "../divider/DividerComponent";
 import "./index.css";
 import StateCitySelctor from "../newpost/StateCitySelector";
 
 function Filtersidebar() {
-
-  
- 
   return (
     <div class="sidenav">
       <Stack
@@ -23,27 +26,33 @@ function Filtersidebar() {
         // p="32px"
       >
         <Box py="12px" px="20px">
-          <Box display="flex" alignItems="center" justifyContent="space-between">
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+          >
             <Text fontSize="4xl" fontWeight="600" color="gray.600">
               Filters
             </Text>
-            <BiFilterAlt size="24px" color="gray.50"/>
+            <BiFilterAlt size="24px" color="gray.50" />
           </Box>
           <Text fontSize="sm" color="gray.400">
             Choose the categories in which you can provide help or want to seek
             help.
           </Text>
-          <Box mt="20px" >
-        <StateCitySelctor/>
-          </Box>
-
         </Box>
 
         <DividerComponent colorScheme="telegram" />
 
+        <Box py="16px" px="20px" style={{marginTop: 0}}>
+          <StateCitySelctor />
+        </Box>
 
-        <Stack  direction={["column"]} spacing="32px">
+        <DividerComponent colorScheme="telegram" />
+
+        <Stack direction={["column"]} spacing="32px">
           <Box
+            style={{ marginTop: -16 }}
             px="8"
             display="flex"
             alignItems="center"
@@ -58,15 +67,14 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
-             
 
             <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
-             
           </Box>
 
           <DividerComponent />
 
           <Box
+            style={{ marginTop: 16 }}
             px="8"
             display="flex"
             alignItems="center"
@@ -88,6 +96,7 @@ function Filtersidebar() {
           <DividerComponent />
 
           <Box
+            style={{ marginTop: 16 }}
             px="8"
             display="flex"
             alignItems="center"
@@ -109,6 +118,7 @@ function Filtersidebar() {
           <DividerComponent />
 
           <Box
+            style={{ marginTop: 16 }}
             px="8"
             display="flex"
             alignItems="center"
@@ -130,6 +140,7 @@ function Filtersidebar() {
           <DividerComponent />
 
           <Box
+            style={{ marginTop: 16 }}
             px="8"
             display="flex"
             alignItems="center"
@@ -151,6 +162,7 @@ function Filtersidebar() {
           <DividerComponent m={4} />
 
           <Box
+            style={{ marginTop: 16 }}
             px="8"
             display="flex"
             alignItems="center"

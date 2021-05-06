@@ -4,6 +4,8 @@ import React from 'react'
 export const DividerComponent = (props) => {
     return (
             <Box
+                m={0}
+                style={{marginTop: 16}}
                 height={props.height || 0}
                 width={props.width || "100%"}
                 borderTopColor={props.color || 'telegram'}

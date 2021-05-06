@@ -5,7 +5,9 @@
 .sidenav>div {
     position: fixed;
     width: 300px;
-    height: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    height: calc(100% - 88px);
 
 }
 
