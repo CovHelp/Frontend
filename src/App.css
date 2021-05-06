@@ -110,3 +110,15 @@ a {
     grid-template-columns: 250px 1fr 0px;
   }
 }
+
+
+@media only screen and (max-width: 650px) {
+  .main-wrapper {
+    display: grid;
+    grid-template-rows: 70px 1fr;
+  }
+
+  .app_body {
+    grid-template-columns: 0px 1fr 0px;
+  }
+}

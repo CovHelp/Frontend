@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import { Navbar } from "./components/navbar";
@@ -13,14 +13,18 @@ import NotFound from "./pages/NotFound/NotFound";
 // import Chat from "./components/chat/Chat";
 
 const App = () => {
+  const [isSidebarVisibile, setSidebarVisible] = useState(false);
+  const handleSidebarEvent = (visibility) => {
+    setSidebarVisible(visibility);
+  }
   return (
     <div className="App">
       <div className="main-wrapper">
         <div>
-          <Navbar />
+          <Navbar sideBarEvent = {handleSidebarEvent}/>
         </div>
         <div className="app_body">
-          <Filtersidebar />
+          <Filtersidebar visibility={isSidebarVisibile}/>
           <Switch>
             <Route exact path="/">
               <NeedHelp />
