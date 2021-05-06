@@ -101,6 +101,9 @@
 .navmobile-col-right {
     flex: 20%;
     max-width: 20%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 @media only screen and (max-width: 650px) {

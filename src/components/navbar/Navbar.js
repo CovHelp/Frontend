@@ -7,28 +7,63 @@ import {
   FaHandsHelping,
   GiHamburgerMenu,
   ImCross,
-  VscOrganization
+  VscOrganization,
 } from "react-icons/all";
 import { Link } from "react-router-dom";
+import GoogleLogin from "react-google-login";
+import { useDispatch, useSelector } from "react-redux";
+
 import Logo from "../../assets/images/logo192.png";
 import "./index.css";
+import { register } from "../../api/user";
 
-
-const Navbar = ({sideBarEvent}) => {
-  const [auth, setauth] = useState(false);
+const Navbar = ({ sideBarEvent }) => {
+  // const { colorMode, toggleColorMode } = useColorMode();
+  const dispatch = useDispatch();
+  const userStore = useSelector((store) => store.userStore);
   const [selectedMenu, setSelectedMenu] = useState();
-  const { colorMode, toggleColorMode } = useColorMode();
 
   const [isSidenavVIsible, setSideNavVisibility] = useState(false);
 
-
   const handleToggleSidebar = () => {
     setSideNavVisibility((v) => !v);
-  }
+  };
 
   useEffect(() => {
     sideBarEvent(isSidenavVIsible);
-  }, [isSidenavVIsible, setSideNavVisibility])
+  }, [isSidenavVIsible, setSideNavVisibility]);
+
+  const handleLogin = async (res) => {
+    try {
+      const resp = await register(res.profileObj);
+      dispatch({ type: "SAVE_USER", payload: resp });
+    } catch (e) {}
+  };
+
+  const handleLogout = async (res) => {
+    try {
+      dispatch({
+        type: "SAVE_USER",
+        payload: {
+          userStore: {
+            user: {
+              email: null,
+              firstName: null,
+              lastName: null,
+              email: null,
+              profile_pic: null,
+            },
+            token: null,
+          },
+        },
+      });
+      // window.location.reload();
+    } catch (e) {}
+  };
+
+  const handleLoginFailure = (err) => {
+    console.log(err);
+  };
 
   const NavbarButton = (props) => {
     return (
@@ -39,7 +74,7 @@ const Navbar = ({sideBarEvent}) => {
           m={2}
           h={"4rem"}
           w={"8rem"}
-          _hover={{ bg: "#2d88ff", color: 'white' }}
+          _hover={{ bg: "#2d88ff", color: "white" }}
         >
           <Flex
             direction={"column"}
@@ -54,7 +89,6 @@ const Navbar = ({sideBarEvent}) => {
       </Link>
     );
   };
-
   return (
     <div className="navwrapper">
       <div className="navbar">
@@ -70,7 +104,7 @@ const Navbar = ({sideBarEvent}) => {
         >
           <Flex flex="1">
             <img
-              onClick={toggleColorMode}
+              // onClick={toggleColorMode}
               alt="logo"
               style={{ height: 60 }}
               src={Logo}
@@ -115,17 +149,29 @@ const Navbar = ({sideBarEvent}) => {
           </Flex>
 
           <Flex flex="1" flexDir="row-reverse">
-            {auth && (
+            {!userStore.token && (
               <>
-                <Link to="/register">
-                  <Button m={2}>Register</Button>
-                </Link>
-                <Link to="/login">
-                  <Button m={2}>Login</Button>
-                </Link>
+                <GoogleLogin
+                  clientId="1027672846288-1cplsl3m6pl2p3ngjn1k1msqr07s4at7.apps.googleusercontent.com"
+                  buttonText="Login"
+                  render={(renderProps) => (
+                    <Button
+                      w={100}
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                    >
+                      Login
+                    </Button>
+                  )}
+                  uxMode="popup"
+                  redirectUri="https://mechaadii.web.app"
+                  onSuccess={handleLogin}
+                  onFailure={handleLoginFailure}
+                  cookiePolicy={"single_host_origin"}
+                />
               </>
             )}
-            {!auth && <Button m={2}>Logout</Button>}
+            {userStore.token  && <Button onClick={handleLogout} m={2}>Logout</Button>}
             {/* <Link to="/new-post">
             <Button
               m={2}
@@ -143,11 +189,9 @@ const Navbar = ({sideBarEvent}) => {
       <div className="navmobile">
         <div className="navmobile-row">
           <div className="navmobile-col-left">
-            <div
-              onClick={handleToggleSidebar}
-            >
+            <div onClick={handleToggleSidebar}>
               {isSidenavVIsible ? (
-                <ImCross color="#909fb8" stroke={0.5} size={16}/>
+                <ImCross color="#909fb8" stroke={0.5} size={16} />
               ) : (
                 <GiHamburgerMenu color="#909fb8" stroke={1} size={20} />
               )}
@@ -155,13 +199,36 @@ const Navbar = ({sideBarEvent}) => {
           </div>
           <div className="navmobile-col-center">
             <img
-              onClick={toggleColorMode}
+              // onClick={toggleColorMode}
               alt="logo"
               style={{ height: 50 }}
               src={Logo}
             />
           </div>
-          <div className="navmobile-col-right"></div>
+          <div className="navmobile-col-right">
+            {userStore.token ? (
+              <Button onClick={handleLogout}>LOGOUT</Button>
+            ) : (
+              <GoogleLogin
+                clientId="1027672846288-1cplsl3m6pl2p3ngjn1k1msqr07s4at7.apps.googleusercontent.com"
+                buttonText="Login"
+                render={(renderProps) => (
+                  <Button
+                    w={100}
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                  >
+                    Login
+                  </Button>
+                )}
+                uxMode="popup"
+                redirectUri="https://mechaadii.web.app"
+                onSuccess={handleLogin}
+                onFailure={handleLoginFailure}
+                cookiePolicy={"single_host_origin"}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>
