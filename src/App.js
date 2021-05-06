@@ -9,6 +9,7 @@ import NewPost from "./pages/Newpost/NewPost";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Filtersidebar from "./components/sidebarFilter/Filtersidebar";
+import NotFound from "./pages/NotFound/NotFound";
 // import Chat from "./components/chat/Chat";
 
 const App = () => {
@@ -45,7 +46,9 @@ const App = () => {
             <Route path="/new-post">
               <NewPost />
             </Route>
+            <Route path='*' exact={true} component={NotFound} />
           </Switch>
+          
           <div></div>
           {/* <Chat/> */}
         </div>

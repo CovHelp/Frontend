@@ -28,7 +28,7 @@ const Navbar = () => {
         >
           <Flex direction={"column"} alignItems={"center"} justifyContent={'center'} m={2} >
             <props.icon size={'1.5rem'} />
-            <Text ml={2}>{props.name}</Text>
+            <Text>{props.name}</Text>
           </Flex>
         </Button>
       </Link>
