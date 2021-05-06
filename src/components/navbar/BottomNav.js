@@ -46,33 +46,3 @@ export default function BottomNav() {
     </div>
   );
 }
-
-{
-  /* <div onClick={()=>handleNavIndex(0)}>
-          <FaHandsHelping
-            color={activeIndex === 0 ? "#0078ff" : "#4f5662"}
-            size={24}
-          />
-        </div>
-        <div onClick={()=>handleNavIndex(1)}>
-          <FaHandHoldingHeart
-            color={activeIndex === 1 ? "#0078ff" : "#4f5662"}
-            size={24}
-          />
-        </div>
-        <div onClick={()=>handleNavIndex(2)}>
-          <VscOrganization
-            color={activeIndex === 2 ? "#0078ff" : "#4f5662"}
-            size={24}
-          />
-        </div>
-        <div onClick={()=>handleNavIndex(3)}>
-          <BiChat color={activeIndex === 3 ? "#0078ff" : "#4f5662"} size={24} />
-        </div>
-        <div onClick={()=>handleNavIndex(4)}>
-          <VscAccount
-            color={activeIndex === 4 ? "#0078ff" : "#4f5662"}
-            size={24}
-          />
-        </div> */
-}
