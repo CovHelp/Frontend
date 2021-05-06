@@ -20,13 +20,17 @@ export default function BottomNav() {
     { icon: FaHandHoldingHeart, index: 1, to:"/provide-help", text:"Give help" },
     { icon: VscOrganization, index: 2, to:"/organization", text:"Organizations"},
     { icon: BiChat, index: 3, to:"/", text:"Chat" },
-    { icon: VscAccount, index: 4, to:"/", text:"Profile" },
+    { icon: VscAccount, index: 4, to:"/profile", text:"Profile" , onClick:{handleClick}},
   ];
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleNavIndex = (index) => {
     setActiveIndex(index);
   };
+
+  function handleClick(){
+    console.log("hi")
+  }
 
   return (
     <div className="bottom-nav">
@@ -40,6 +44,7 @@ export default function BottomNav() {
             index={item.index}
             activeIndex={activeIndex}
             handleIndexCallback={handleNavIndex}
+            onClick={handleClick}
           />
         ))}
       </div>
