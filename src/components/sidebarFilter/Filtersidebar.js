@@ -4,8 +4,12 @@ import { AiFillMedicineBox, BiFilterAlt, GiLoveInjection, GiOpenedFoodCan, GrAid
 import { FaAmbulance, FaHospitalAlt } from "react-icons/fa";
 import { DividerComponent } from "../divider/DividerComponent";
 import "./index.css";
+import StateCitySelctor from "../newpost/StateCitySelector";
 
 function Filtersidebar() {
+
+  
+ 
   return (
     <div class="sidenav">
       <Stack
@@ -14,10 +18,12 @@ function Filtersidebar() {
         bg="whiteAlpha"
         direction={["column"]}
         spacing="32px"
+        overflow="scroll"
+
         // p="32px"
         my="16px"
       >
-        <Box py="16px" px="20px">
+        <Box py="12px" px="20px">
           <Box display="flex" alignItems="center" justifyContent="space-between">
             <Text fontSize="4xl" fontWeight="600" color="gray.600">
               Filters
@@ -28,10 +34,16 @@ function Filtersidebar() {
             Choose the categories in which you can provide help or want to seek
             help.
           </Text>
+          <Box mt="20px" >
+        <StateCitySelctor/>
+          </Box>
+
         </Box>
+
         <DividerComponent colorScheme="telegram" />
 
-        <Stack direction={["column"]} spacing="32px">
+
+        <Stack  direction={["column"]} spacing="32px">
           <Box
             px="8"
             display="flex"
@@ -47,8 +59,10 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
+             
 
-            <Checkbox size="lg" colorScheme="gray"></Checkbox>
+            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
+             
           </Box>
 
           <DividerComponent />
@@ -69,7 +83,7 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="gray"></Checkbox>
+            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
           </Box>
 
           <DividerComponent />
@@ -90,7 +104,7 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="#2d88ff"></Checkbox>
+            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
           </Box>
 
           <DividerComponent />
@@ -111,7 +125,7 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="gray"></Checkbox>
+            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
           </Box>
 
           <DividerComponent />
@@ -132,7 +146,7 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="gray"></Checkbox>
+            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
           </Box>
 
           <DividerComponent m={4} />
@@ -153,7 +167,7 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="gray"></Checkbox>
+            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
           </Box>
 
           <DividerComponent />

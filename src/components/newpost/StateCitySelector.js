@@ -32,7 +32,7 @@ export default function StateCitySelctor() {
   return (
     <>
       <FormLabel>Select State</FormLabel>
-      <Select onChange={handleSetSelectedState}>
+      <Select my="10px" onChange={handleSetSelectedState}>
         {allStates.length > 0 &&
           allStates.map((v, index) => (
             <option key={index} value={v.name}>
