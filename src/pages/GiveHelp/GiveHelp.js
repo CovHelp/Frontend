@@ -6,6 +6,8 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 
 const GiveHelp = () => {
   return (
+    <>
+
     <Box
       px={3}
       d="flex"
@@ -24,6 +26,7 @@ const GiveHelp = () => {
       <GiveHelpCard />
 
     </Box>
+    </>
   );
 };
 

@@ -2,12 +2,13 @@ import { Avatar } from "@chakra-ui/avatar";
 import { Button } from "@chakra-ui/button";
 import Icon from "@chakra-ui/icon";
 import { Image } from "@chakra-ui/image";
-import { Badge, Box, Flex, Heading } from "@chakra-ui/layout";
+import { Badge, Grid, Box, Flex, Heading } from "@chakra-ui/layout";
 // eslint-disable-next-line no-unused-vars
 import { FaComment } from "react-icons/fa";
 import { IoMdShareAlt } from "react-icons/io";
 import { IoHandLeftSharp } from "react-icons/io5";
 import { MdThumbUp } from "react-icons/md";
+import { CardButton } from "../CardButton";
 
 const CardButtons = (props) => {
   return (
@@ -138,18 +139,11 @@ const GiveHelpCard = () => {
           </Box>
           <hr />
 
-          <Flex
-            flexDir={"row"}
-            alignItems={"center"}
-            justifyContent={"space-evenly"}
-            w="100%"
-            pt={4}
-          >
-            <CardButtons name="Like" icon={MdThumbUp} />
-            <CardButtons icon={IoHandLeftSharp} name="I need help" />
-            {/* <CardButtons icon={FaComment} name="Comment" /> */}
-            <CardButtons icon={IoMdShareAlt} name="Appreciate" />
-          </Flex>
+          <Grid pt={6} templateColumns="repeat(3, 1fr)" gap={2}>
+            <CardButton name="Like" icon={MdThumbUp} />
+            <CardButton icon={IoHandLeftSharp} name="I need help" />
+            <CardButton icon={IoMdShareAlt} name="Appreciate" />
+          </Grid>
         </Box>
       </Box>
     </Flex>

@@ -10,7 +10,6 @@ const NeedHelp = () => {
       <Box
         px={3}
         d="flex"
-        flex="1"
         flexDir={"column"}
         alignItems={"center"}
         background="#f0f2f5"
