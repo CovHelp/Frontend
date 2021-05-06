@@ -1,20 +1,18 @@
-import { Avatar } from "@chakra-ui/avatar";
 import { Button } from "@chakra-ui/button";
 import { Flex } from "@chakra-ui/layout";
 import { Text, useColorMode } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import {
-  FaCross,
   FaHandHoldingHeart,
   FaHandsHelping,
   GiHamburgerMenu,
   ImCross,
-  VscOrganization,
+  VscOrganization
 } from "react-icons/all";
 import { Link } from "react-router-dom";
+import Logo from "../../assets/images/logo192.png";
 import "./index.css";
 
-import Logo from "../../assets/images/logo192.png";
 
 const Navbar = ({sideBarEvent}) => {
   const [auth, setauth] = useState(false);
@@ -41,7 +39,7 @@ const Navbar = ({sideBarEvent}) => {
           m={2}
           h={"4rem"}
           w={"8rem"}
-          _hover={{ bg: "#2d88ff" }}
+          _hover={{ bg: "#2d88ff", color: 'white' }}
         >
           <Flex
             direction={"column"}
