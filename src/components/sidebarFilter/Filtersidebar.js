@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { Stack } from "@chakra-ui/react";
 import { Heading } from "@chakra-ui/react";
@@ -12,8 +12,12 @@ import { FaAmbulance } from "react-icons/fa";
 import { FaHospitalAlt } from "react-icons/fa";
 import { Text } from "@chakra-ui/react";
 import "./index.css";
+import StateCitySelctor from "../newpost/StateCitySelector";
 
 function Filtersidebar() {
+
+  
+ 
   return (
     <div class="sidenav">
       <Stack
@@ -22,10 +26,12 @@ function Filtersidebar() {
         bg="whiteAlpha"
         direction={["column"]}
         spacing="32px"
+        overflow="scroll"
+
         // p="32px"
-        my="16px"
+        // my="16px"
       >
-        <Box py="16px" px="20px">
+        <Box py="12px" px="20px">
           <Box display="flex" alignItems="center" justifyContent="space-between">
             <Text fontSize="4xl" fontWeight="600" color="gray.600">
               Filters
@@ -36,10 +42,15 @@ function Filtersidebar() {
             Choose the categories in which you can provide help or want to seek
             help.
           </Text>
+          <Box mt="20px" >
+        <StateCitySelctor/>
+          </Box>
+
         </Box>
+
         <Divider colorScheme="telegram" />
 
-        <Stack direction={["column"]} spacing="32px">
+        <Stack  direction={["column"]} spacing="32px">
           <Box
             px="8"
             display="flex"
@@ -55,8 +66,10 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
+             
 
-            <Checkbox size="lg" colorScheme="gray"></Checkbox>
+            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
+             
           </Box>
 
           <Divider />
@@ -77,7 +90,7 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="gray"></Checkbox>
+            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
           </Box>
 
           <Divider />
@@ -98,7 +111,7 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="gray"></Checkbox>
+            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
           </Box>
 
           <Divider />
@@ -119,7 +132,7 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="gray"></Checkbox>
+            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
           </Box>
 
           <Divider />
@@ -140,7 +153,7 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="gray"></Checkbox>
+            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
           </Box>
 
           <Divider m={4} />
@@ -161,7 +174,7 @@ function Filtersidebar() {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="gray"></Checkbox>
+            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
           </Box>
 
           <Divider />

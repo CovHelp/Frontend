@@ -32,7 +32,7 @@ export default function StateCitySelctor() {
   return (
     <>
       <FormLabel>Select State</FormLabel>
-      <Select onChange={handleSetSelectedState}>
+      <Select my="10px" onChange={handleSetSelectedState}>
         {allStates.length > 0 &&
           allStates.map((v, index) => (
             <option key={index} value={v.name}>
@@ -42,7 +42,7 @@ export default function StateCitySelctor() {
           ))}
       </Select>
       <FormLabel >Select City</FormLabel>
-      <Select placeholder="Delhi" onChange={handleSetSelectedCity}>
+      <Select my="10px" placeholder="Delhi" onChange={handleSetSelectedCity}>
         {allCities.length > 0 &&
           allCities.map((v, index) => (
             <option key={index} value={v.name}>
