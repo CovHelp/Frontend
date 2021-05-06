@@ -14,6 +14,7 @@
 }
 
 .bottom-nav {
+    display: none;
     z-index: 9;
     position: fixed;
     bottom: 0;
@@ -80,6 +81,9 @@
 }
 
 @media only screen and (max-width: 650px) {
+    .bottom-nav {
+        display: block !important;
+    }
     .navbar {
         display: none !important;
     }
