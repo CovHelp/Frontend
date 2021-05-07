@@ -6,7 +6,7 @@ import { getNameByCategoryID } from "../../../api/post";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 
-const NeedHelpCard = ({post , isProfile}) => {
+const NeedHelpCard = ({ post, isProfile }) => {
   const asd = {
     user: {
       id: 1,
@@ -39,7 +39,7 @@ const NeedHelpCard = ({post , isProfile}) => {
           comment: "very noice",
         },
       ],
-    }
+    },
   };
 
   return (
@@ -55,16 +55,20 @@ const NeedHelpCard = ({post , isProfile}) => {
             {post.user.firstName} {post.user.LastName}
           </Heading>
           <Box>
-            {new Date(post.createdAt).toLocaleString()} &bull;
+            <p style={{ fontSize: 12 }}>
+              {new Date(post.createdAt).toLocaleString()} &bull;
+              <span>
                 <Badge
-              borderRadius="full"
-              px="2"
-              ml={1}
-              mb={1}
-              colorScheme="green"
-            >
-              {getNameByCategoryID(post.category)} {/* URGENCY */}
-            </Badge>
+                  borderRadius="full"
+                  px="2"
+                  ml={1}
+                  mb={1}
+                  colorScheme="green"
+                >
+                  {getNameByCategoryID(post.category)} {/* URGENCY */}
+                </Badge>
+              </span>
+            </p>
           </Box>
         </Flex>
       </Flex>
@@ -86,7 +90,7 @@ const NeedHelpCard = ({post , isProfile}) => {
             ml="2"
           >
             {post.category} category &bull; {post.baths} baths
-            </Box>
+          </Box>
         </Box>
 
         <Box
@@ -99,30 +103,22 @@ const NeedHelpCard = ({post , isProfile}) => {
           {post.body}
         </Box>
 
-        <Box>
-          {post.formattedPrice}
-          <Box as="span" color="gray.600" fontSize="sm">
-            {post.isClosed} -- Is closed
-            </Box>
-        </Box>
-
-
         <Box d="flex" mt="2" alignItems="center">
           <Box as="span" color="gray.600" fontSize="sm">
             {/* {post.reviewCount} reviews */}
           </Box>
         </Box>
-       
-        {isProfile !== 'true' &&
+
+        {isProfile !== "true" && (
           <>
-          <hr/>
-          <Grid pt={["4", "8"]} templateColumns="repeat(1, 1fr)" gap={2}>
-            <CardButton icon={IoHandLeftSharp} name="I Can help" />
-          </Grid>
+            <hr />
+            <Grid pt={["4", "8"]} templateColumns="repeat(1, 1fr)" gap={2}>
+              <CardButton icon={IoHandLeftSharp} name="I Can help" />
+            </Grid>
           </>
-        }
+        )}
       </Box>
-    </CardBox >
+    </CardBox>
   );
 };
 

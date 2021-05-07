@@ -6,12 +6,15 @@ import NewPost from "../../pages/Newpost/NewPost";
 import { Box, Heading } from '@chakra-ui/layout'
 import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/modal'
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux';
 
 
 
 const SearchBar = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const finalRef = React.useRef()
+
+    const userStore = useSelector(store => store.userStore);
     
     useEffect(() => {
         console.log(props.name);
@@ -79,6 +82,7 @@ const SearchBar = (props) => {
                     <Avatar
                         w={["40px", "48px"]}
                         h={["40px", "48px"]}
+                        src={userStore.user.profile_pic && userStore.user.profile_pic}
                         mr={["2", "4"]} />
 
 

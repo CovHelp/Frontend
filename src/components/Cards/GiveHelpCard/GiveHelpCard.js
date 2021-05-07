@@ -6,6 +6,7 @@ import { Badge, Box, Flex, Grid, Heading } from "@chakra-ui/layout";
 import { IoMdShareAlt } from "react-icons/io";
 import { IoHandLeftSharp } from "react-icons/io5";
 import { MdThumbUp } from "react-icons/md";
+import { getNameByCategoryID } from "../../../api/post";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 
@@ -25,7 +26,7 @@ const CardButtons = (props) => {
   );
 };
 
-const GiveHelpCard = ({post , isProfile}) => {
+const GiveHelpCard = ({ post, isProfile }) => {
   const card = {
     id: 1,
     createdAt: "createdAt",
@@ -62,25 +63,26 @@ const GiveHelpCard = ({post , isProfile}) => {
   return (
     <CardBox>
       <Flex w={"100%"} p={["4", "8"]} bgColor="white">
-        <Avatar
-          w={["40px", "48px"]}
-          h={["40px", "48px"]}
-        />
+        <Avatar w={["40px", "48px"]} h={["40px", "48px"]} />
         <Flex flexDir="column" _dark="true" ml={["2", "4"]}>
           <Heading as="h6" size="sm">
             {card.user.firstName} {card.user.LastName}
           </Heading>
           <Box>
-            {card.createdAt} &bull;
+            <p style={{ fontSize: 12 }}>
+              {new Date(card.createdAt).toLocaleString()} &bull;
+              <span>
                 <Badge
-              borderRadius="full"
-              px="2"
-              ml={1}
-              mb={1}
-              colorScheme="red"
-            >
-              {card.type} {/* URGENCY */}
-            </Badge>
+                  borderRadius="full"
+                  px="2"
+                  ml={1}
+                  mb={1}
+                  colorScheme="green"
+                >
+                  {getNameByCategoryID(card.category)} {/* URGENCY */}
+                </Badge>
+              </span>
+            </p>
           </Box>
         </Flex>
       </Flex>
@@ -105,7 +107,7 @@ const GiveHelpCard = ({post , isProfile}) => {
             ml="2"
           >
             {card.category} category &bull; {card.baths} baths
-            </Box>
+          </Box>
         </Box>
 
         <Box
@@ -118,20 +120,13 @@ const GiveHelpCard = ({post , isProfile}) => {
           {card.body}
         </Box>
 
-        <Box>
-          {card.formattedPrice}
-          <Box as="span" color="gray.600" fontSize="sm">
-            {card.isClosed} -- Is closed
-            </Box>
-        </Box>
-
         <Box d="flex" mt="2" alignItems="center">
           <Box as="span" color="gray.600" fontSize="sm">
             {/* {card.reviewCount} reviews */}
           </Box>
         </Box>
 
-        {isProfile !== 'true' &&
+        {isProfile !== "true" && (
           <>
             <hr />
             <Grid pt={["4", "8"]} templateColumns="repeat(3, 1fr)" gap={2}>
@@ -140,7 +135,7 @@ const GiveHelpCard = ({post , isProfile}) => {
               <CardButton icon={IoMdShareAlt} name="Appreciate" />
             </Grid>
           </>
-        }
+        )}
       </Box>
     </CardBox>
   );
