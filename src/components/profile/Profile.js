@@ -1,8 +1,9 @@
 import { Avatar, Box, Button, Stack, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { BiEdit } from "react-icons/all";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getNeedHelpPosts } from "../../api/post";
 import GiveHelpCard from "../Cards/GiveHelpCard/GiveHelpCard";
 import NeedHelpCard from "../Cards/NeedHelpCard/NeedHelpCard";
 
@@ -10,9 +11,21 @@ const Profile = () => {
   const [active, setActive] = useState(true);
   const [activeProvide, setActiveProvide] = useState(false);
   const userStore = useSelector((store) => store.userStore);
+  const dispatch = useDispatch();
+  const [posts, setPosts] = useState([]);
+  const needHelpPostStoreFiltered = useSelector((store) => store.needHelpPostStoreFiltered);
+
+  const loadNeedHelpPosts = async () => {
+    try {
+      const res = await getNeedHelpPosts();
+      dispatch({ type: "SAVE_NEED_HELP_POSTS", payload: res });
+      setPosts(res);
+    } catch (e) {}
+  };
 
   useEffect(() => {
     console.log(active);
+    loadNeedHelpPosts();
   }, []);
 
   const handleNeedHelp = () => {
@@ -143,7 +156,7 @@ const Profile = () => {
               </Box>
             </Box>
           </Box>
-          {/* {active ?
+          {active ?
 
             <Box
               w="100%"
@@ -153,7 +166,9 @@ const Profile = () => {
               alignItems={"center"}
               background="#f0f2f5"
             >
-              <NeedHelpCard isProfile="true" />
+              {needHelpPostStoreFiltered.length > 0 &&
+                needHelpPostStoreFiltered.map((post) => (
+                  <NeedHelpCard key={post.id} post={post} isProfile="true" />))}
             </Box> :
             <Box
               w="100%"
@@ -165,7 +180,7 @@ const Profile = () => {
             >
               <GiveHelpCard isProfile="true" />
             </Box>}
-           */}
+          
         </Stack>
       </Box>
     </>
