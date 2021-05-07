@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import { Flex } from "@chakra-ui/layout";
+import { Flex, Grid } from "@chakra-ui/layout";
 import { Text, useColorMode } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import {
@@ -8,7 +8,10 @@ import {
   GiHamburgerMenu,
   ImCross,
   VscOrganization,
+  VscAccount,
+  BiChat,
 } from "react-icons/all";
+
 import { Link } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,13 +20,19 @@ import Logo from "../../assets/images/logo192.png";
 import "./index.css";
 import { register } from "../../api/user";
 
+import "./index.css";
+
 const Navbar = ({ sideBarEvent }) => {
   // const { colorMode, toggleColorMode } = useColorMode();
   const dispatch = useDispatch();
   const userStore = useSelector((store) => store.userStore);
   const [selectedMenu, setSelectedMenu] = useState();
-
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isSidenavVIsible, setSideNavVisibility] = useState(false);
+
+  const handleNavIndex = (index) => {
+    setActiveIndex(index);
+  };
 
   const handleToggleSidebar = () => {
     setSideNavVisibility((v) => !v);
@@ -57,7 +66,6 @@ const Navbar = ({ sideBarEvent }) => {
           },
         },
       });
-      // window.location.reload();
     } catch (e) {}
   };
 
@@ -65,30 +73,66 @@ const Navbar = ({ sideBarEvent }) => {
     console.log(err);
   };
 
-  const NavbarButton = (props) => {
+  const NavItem = ({
+    Icon,
+    index,
+    activeIndex,
+    handleIndexCallback,
+    to,
+    text,
+  }) => {
     return (
-      <Link onClick={() => setSelectedMenu(props.number)} to={props.to}>
-        <Button
-          size="md"
-          colorScheme={selectedMenu === props.number ? "messenger" : "gray"}
-          m={2}
-          h={"4rem"}
-          w={"8rem"}
-          _hover={{ bg: "#2d88ff", color: "white" }}
-        >
-          <Flex
-            direction={"column"}
-            alignItems={"center"}
-            justifyContent={"center"}
-            m={2}
-          >
-            <props.icon size={"1.5rem"} />
-            <Text>{props.name}</Text>
-          </Flex>
-        </Button>
+      <Link
+        className={index === activeIndex ? "activeButton" : "btn"}
+        to={to}
+        onClick={() => handleIndexCallback(index)}
+      >
+        <Icon color={activeIndex === index ? "#0078ff" : "#4f5662"} size={24} />
+        {activeIndex === index && <p>{text}</p>}
+        {activeIndex === index && <div className="activeIndicator" />}
       </Link>
     );
   };
+
+  const authedLinks = [
+    { icon: FaHandsHelping, index: 0, to: "/", text: "Get help" },
+    {
+      icon: FaHandHoldingHeart,
+      index: 1,
+      to: "/provide-help",
+      text: "Give help",
+    },
+    {
+      icon: VscOrganization,
+      index: 2,
+      to: "/organization",
+      text: "Organizations",
+    },
+    { icon: BiChat, index: 3, to: "/", text: "Chat" },
+    {
+      icon: VscAccount,
+      index: 4,
+      to: "/profile",
+      text: "Profile",
+    },
+  ];
+
+  const unAuthedLinks = [
+    { icon: FaHandsHelping, index: 0, to: "/", text: "Get help" },
+    {
+      icon: FaHandHoldingHeart,
+      index: 1,
+      to: "/provide-help",
+      text: "Give help",
+    },
+    {
+      icon: VscOrganization,
+      index: 2,
+      to: "/organization",
+      text: "Organizations",
+    },
+  ];
+
   return (
     <div className="navwrapper">
       <div className="navbar">
@@ -99,53 +143,42 @@ const Navbar = ({ sideBarEvent }) => {
           alignItems={"center"}
           justifyContent={"space-between"}
           w="100%"
-          p={4}
+          px={4}
           color="black"
         >
           <Flex flex="1">
-            <img
-              // onClick={toggleColorMode}
-              alt="logo"
-              style={{ height: 60 }}
-              src={Logo}
-            />
+            <img alt="logo" style={{ height: 60 }} src={Logo} />
           </Flex>
-          <Flex
-            justifyContent={"space-between"}
-            flex={["1", "2", "2"]}
-            w={["100%"]}
-            maxW="700px"
-          >
-            <NavbarButton
-              icon={FaHandsHelping}
-              number="0"
-              name="Find Help"
-              to="/"
-            />
-            <NavbarButton
-              icon={FaHandHoldingHeart}
-              number="1"
-              name="Provide Help"
-              to="/provide-help"
-            />
-            <NavbarButton
-              icon={VscOrganization}
-              number="2"
-              name="Organizations"
-              to="/organization"
-            />
-
-            {/* <Button
-            m={2}
-            onClick={() => {
-              setauth(!auth);
-            }}
-            colorScheme="green"
-          >
-            
-            Test Auths
-
-          </Button> */}
+          <Flex h="100%" flex={["1", "2", "2"]} w="100%" maxW="680px">
+            {!userStore.token ? (
+              <Grid w="100%" templateColumns="repeat(3, 1fr)">
+                {unAuthedLinks.map((item, index) => (
+                  <NavItem
+                    key={index}
+                    to={item.to}
+                    text={item.text}
+                    Icon={item.icon}
+                    index={item.index}
+                    activeIndex={activeIndex}
+                    handleIndexCallback={handleNavIndex}
+                  />
+                ))}
+              </Grid>
+            ) : (
+              <Grid w="100%" templateColumns="repeat(5, 1fr)">
+                {authedLinks.map((item, index) => (
+                  <NavItem
+                    key={index}
+                    to={item.to}
+                    text={item.text}
+                    Icon={item.icon}
+                    index={item.index}
+                    activeIndex={activeIndex}
+                    handleIndexCallback={handleNavIndex}
+                  />
+                ))}
+              </Grid>
+            )}
           </Flex>
 
           <Flex flex="1" flexDir="row-reverse">
@@ -171,18 +204,11 @@ const Navbar = ({ sideBarEvent }) => {
                 />
               </>
             )}
-            {userStore.token  && <Button onClick={handleLogout} m={2}>Logout</Button>}
-            {/* <Link to="/new-post">
-            <Button
-              m={2}
-              onClick={() => {
-                setauth(!auth);
-              }}
-              colorScheme="green"
-            >
-              New Post
-            </Button>
-          </Link> */}
+            {userStore.token && (
+              <Button onClick={handleLogout} m={2}>
+                Logout
+              </Button>
+            )}
           </Flex>
         </Flex>
       </div>
