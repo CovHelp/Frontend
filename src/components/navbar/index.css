@@ -47,7 +47,46 @@
 
 .activeButton{
     transform: scale(1.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #0078ff;
+    position: relative;
 }
+
+.activeButton > p {
+    opacity: 1;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+
+.btn {
+    transition: .3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0.9);
+}
+
+.btn > p {
+    opacity: .3;
+}
+
+
+.activeIndicator{
+    width: 100%;
+    height: 4px;
+    background-color: #0078ff;
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    border-radius: 4px;
+}
+
+
 
 .navmobile {
     display: none;
@@ -101,6 +140,9 @@
 .navmobile-col-right {
     flex: 20%;
     max-width: 20%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 @media only screen and (max-width: 650px) {
