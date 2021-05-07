@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 import { BiEdit } from "react-icons/all";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getNeedHelpPosts } from "../../api/post";
+import {
+  getNeedHelpPosts,
+  getNeedHelpPostsByUser,
+  getProvideHelpPostsByUser,
+} from "../../api/post";
 import GiveHelpCard from "../Cards/GiveHelpCard/GiveHelpCard";
 import NeedHelpCard from "../Cards/NeedHelpCard/NeedHelpCard";
 
@@ -12,31 +16,49 @@ const Profile = () => {
   const [activeProvide, setActiveProvide] = useState(false);
   const userStore = useSelector((store) => store.userStore);
   const dispatch = useDispatch();
-  const [posts, setPosts] = useState([]);
-  const needHelpPostStoreFiltered = useSelector((store) => store.needHelpPostStoreFiltered);
+  const [needHelpPosts, setNeedHelpPosts] = useState([]);
+  const [provideHelpPosts, setProvideHelpPosts] = useState([]);
 
   const loadNeedHelpPosts = async () => {
+    console.log("FETCHING USER NEED POSTS");
     try {
-      const res = await getNeedHelpPosts();
-      dispatch({ type: "SAVE_NEED_HELP_POSTS", payload: res });
-      setPosts(res);
+      const res = await getNeedHelpPostsByUser({
+        token: userStore.token.token,
+      });
+      setNeedHelpPosts(res);
+
+      dispatch({ type: "SAVE_USER_NEED_HELP_POSTS", payload: res });
+    } catch (e) {}
+  };
+
+  const loadProvideHelpPosts = async () => {
+    console.log("FETCHING USER PROVIDE POSTS");
+
+    try {
+
+      const res = await getProvideHelpPostsByUser({
+        token: userStore.token.token,
+      });
+      setProvideHelpPosts(res);
+      console.log(res);
+      dispatch({ type: "SAVE_PROVIDE_NEED_HELP_POSTS", payload: res });
     } catch (e) {}
   };
 
   useEffect(() => {
-    console.log(active);
     loadNeedHelpPosts();
+    loadProvideHelpPosts();
   }, []);
 
   const handleNeedHelp = () => {
     setActiveProvide(false);
     setActive(true);
-  }
+  };
 
   const handleProvideHelp = () => {
     setActive(false);
     setActiveProvide(true);
-  }
+  };
 
   if (
     userStore.token === null ||
@@ -62,7 +84,14 @@ const Profile = () => {
           alignItems="center"
           px={["0", "0"]}
         >
-          <Box w="100%" px="16px" mb="8px" mt="32px" display="flex" alignItems="center">
+          <Box
+            w="100%"
+            px="16px"
+            mb="8px"
+            mt="32px"
+            display="flex"
+            alignItems="center"
+          >
             {userStore.user.profile_pic ? (
               <Avatar
                 height="5rem"
@@ -92,11 +121,7 @@ const Profile = () => {
             </Box>
           </Box>
 
-          <Box
-            maxW="700px"
-            w="100%"
-            px={["4", "4", "3", "4", "0"]}
-          >
+          <Box maxW="700px" w="100%" px={["4", "4", "3", "4", "0"]}>
             <Box
               w="100%"
               h="50px"
@@ -104,7 +129,6 @@ const Profile = () => {
               display="flex"
               bg="#fff"
               mt={8}
-
             >
               <Box
                 cursor="pointer"
@@ -115,7 +139,7 @@ const Profile = () => {
               >
                 <Text mt={1} fontSize="md" fontWeight="500" p={2}>
                   Need Help
-              </Text>
+                </Text>
                 {active && (
                   <div
                     style={{
@@ -139,7 +163,7 @@ const Profile = () => {
               >
                 <Text mt={1} fontSize="md" fontWeight="500" p={2}>
                   Provide Help
-              </Text>
+                </Text>
                 {activeProvide && (
                   <div
                     style={{
@@ -156,8 +180,7 @@ const Profile = () => {
               </Box>
             </Box>
           </Box>
-          {active ?
-
+          {active ? (
             <Box
               w="100%"
               px={3}
@@ -166,10 +189,12 @@ const Profile = () => {
               alignItems={"center"}
               background="#f0f2f5"
             >
-              {needHelpPostStoreFiltered.length > 0 &&
-                needHelpPostStoreFiltered.map((post) => (
-                  <NeedHelpCard key={post.id} post={post} isProfile="true" />))}
-            </Box> :
+              {needHelpPosts.length > 0 &&
+                needHelpPosts.map((post) => (
+                  <NeedHelpCard key={post.id} post={post} isProfile="true" />
+                ))}
+            </Box>
+          ) : (
             <Box
               w="100%"
               px={3}
@@ -178,13 +203,16 @@ const Profile = () => {
               alignItems={"center"}
               background="#f0f2f5"
             >
-              <GiveHelpCard isProfile="true" />
-            </Box>}
-          
+              {provideHelpPosts.length > 0 &&
+                provideHelpPosts.map((post) => (
+                  <GiveHelpCard key={post.id} post={post} isProfile="true" />
+                ))}
+            </Box>
+          )}
         </Stack>
       </Box>
     </>
   );
-}
+};
 
 export default Profile;

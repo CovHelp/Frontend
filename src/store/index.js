@@ -22,6 +22,11 @@ const initialState = {
 
     provideHelpPostStore: [],
     provideHelpPostStoreFiltered: [],
+
+    userNeedHelpPostStore: [],
+    userProvideHelpPostStore: [],
+
+
 }
 
 
@@ -34,6 +39,19 @@ const reducer = (state, {
             return {
                 ...state,
                 userStore: payload
+            }
+            break;
+
+        case 'SAVE_USER_NEED_HELP_POSTS':
+            return {
+                ...state,
+                userNeedHelpPostStore: payload
+            }
+            break;
+        case 'SAVE_USER_PROVIDE_HELP_POSTS':
+            return {
+                ...state,
+                userProvideHelpPostStore: payload
             }
             break;
 

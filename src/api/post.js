@@ -21,6 +21,33 @@ export const getProvideHelpPosts = async () => {
     }
 }
 
+export const getProvideHelpPostsByUser = async ({token}) => {
+    try {
+        const res = await JSONClient.post('/posts/user-provide-help-posts', {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return res.data;
+    } catch (e) {
+        throw new CovhelpException(e.response.data, e.response.status);
+    }
+}
+
+export const getNeedHelpPostsByUser = async ({token}) => {
+    try {
+        const res = await JSONClient.post('/posts/user-need-help-posts', {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return res.data;
+    } catch (e) {
+        throw new CovhelpException(e.response.data, e.response.status);
+    }
+}
+
+
 export const createNeedHelpPost = async ({
     body,
     category,
