@@ -8,8 +8,10 @@ const NeedHelp = () => {
   const [posts, setPosts] = useState([]);
 
   const loadNeedHelpPosts = async () => {
+    try{
     const res = await getNeedHelpPosts();
     setPosts(res.reverse());
+    }catch(e){}
   };
 
   useEffect(() => {
