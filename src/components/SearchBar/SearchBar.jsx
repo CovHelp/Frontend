@@ -5,7 +5,6 @@ import { Input, InputGroup } from '@chakra-ui/input'
 import { Box, Heading } from '@chakra-ui/layout'
 import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/modal'
 import React from 'react'
-import MainHeading from '../MainHeading/MainHeading'
 
 
 
@@ -43,8 +42,8 @@ const SearchBar = (props) => {
                 maxW="700px"
                 textAlign="left"
                 mt={4}
-                p={8}
-                pb={10}
+                p={["4", "8"]}
+                pb={["6", "10"]}
                 ref={finalRef}
                 tabIndex={-1}
                 aria-label="Focus moved to this box"
@@ -53,13 +52,12 @@ const SearchBar = (props) => {
                 background="white">
 
                 <Heading
-                    size={"lg"}
+                    fontSize={["1.5rem","2rem"]}
                     fontWeight="semibold"
                     color="#0078ff"
-                    mb={6}
-                    >
+                    mb={["2", "4"]}
+                >
                     {props.name}
-
                 </Heading>
 
                 <InputGroup
@@ -73,8 +71,9 @@ const SearchBar = (props) => {
                 /> */}
 
                     <Avatar
-                        size="md"
-                        mr={4} />
+                        w={["40px","48px"]}
+                        h={["40px","48px"]}
+                        mr={["2", "4"]} />
 
 
                     <Input

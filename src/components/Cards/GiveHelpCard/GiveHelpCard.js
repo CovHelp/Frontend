@@ -63,9 +63,12 @@ const GiveHelpCard = () => {
 
   return (
     <CardBox>
-      <Flex w={"100%"} p={["4","8"]} bgColor="white">
-        <Avatar />
-        <Flex flexDir="column" _dark="true" ml={["2","4"]}>
+      <Flex w={"100%"} p={["4", "8"]} bgColor="white">
+        <Avatar
+          w={["40px", "48px"]}
+          h={["40px", "48px"]}
+        />
+        <Flex flexDir="column" _dark="true" ml={["2", "4"]}>
           <Heading as="h6" size="sm">
             {card.user.firstName} {card.user.LastName}
           </Heading>
@@ -90,7 +93,7 @@ const GiveHelpCard = () => {
         alt={card.imageAlt}
       />
 
-      <Box p={["4","8"]} bgColor="white">
+      <Box p={["4", "8"]} bgColor="white">
         <Box d="flex" alignItems="baseline">
           <Badge borderRadius="full" px="2" colorScheme="red">
             {card.urgency} {/* URGENCY */}
@@ -131,7 +134,7 @@ const GiveHelpCard = () => {
         </Box>
         <hr />
 
-        <Grid pt={["4","8"]}templateColumns="repeat(3, 1fr)" gap={2}>
+        <Grid pt={["4", "8"]} templateColumns="repeat(3, 1fr)" gap={2}>
           <CardButton name="Like" icon={MdThumbUp} />
           <CardButton icon={IoHandLeftSharp} name="I need help" />
           <CardButton icon={IoMdShareAlt} name="Appreciate" />

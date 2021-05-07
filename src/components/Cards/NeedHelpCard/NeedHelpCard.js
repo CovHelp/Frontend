@@ -42,7 +42,10 @@ const NeedHelpCard = () => {
   return (
     <CardBox>
       <Flex w={"100%"} p={["4", "8"]} bgColor="white">
-        <Avatar />
+      <Avatar
+          w={["40px", "48px"]}
+          h={["40px", "48px"]}
+        />
         <Box d="flex" flexDir="column" _dark="true" ml="4">
           <Heading as="h6" size="sm">
             {card.user.firstName} {card.user.LastName}
