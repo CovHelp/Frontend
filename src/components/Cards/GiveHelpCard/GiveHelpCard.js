@@ -8,6 +8,7 @@ import { FaComment } from "react-icons/fa";
 import { IoMdShareAlt } from "react-icons/io";
 import { IoHandLeftSharp } from "react-icons/io5";
 import { MdThumbUp } from "react-icons/md";
+import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 
 const CardButtons = (props) => {
@@ -61,92 +62,85 @@ const GiveHelpCard = () => {
   };
 
   return (
-    <Flex m={2} w={["100%"]} maxW="700px" h="auto">
-      <Box
-        borderRadius={"xl"}
-        maxW="-moz-max-content"
-        mt={1}
-        borderWidth="1px"
-        overflow="hidden"
-      >
-        <Box w={"100%"} p={8} bgColor="white">
-          <Flex>
-            <Avatar />
-            <Box d="flex" flexDir="column" _dark="true" ml="4">
-              <Heading as="h6" size="sm">
-                {card.user.firstName} {card.user.LastName}
-              </Heading>
-              <Box>
-                {card.createdAt} &bull;
-                <Badge
-                  borderRadius="full"
-                  px="2"
-                  ml={1}
-                  mb={1}
-                  colorScheme="red"
-                >
-                  {card.type} {/* URGENCY */}
-                </Badge>
-              </Box>
-            </Box>
-          </Flex>
-        </Box>
-        <Image
-          src={card.picture}
-          objectFit="cover"
-          color="gray.600"
-          alt={card.imageAlt}
+    <CardBox>
+      <Flex w={"100%"} p={["4", "8"]} bgColor="white">
+        <Avatar
+          w={["40px", "48px"]}
+          h={["40px", "48px"]}
         />
-
-        <Box p="8" bgColor="white">
-          <Box d="flex" alignItems="baseline">
-            <Badge borderRadius="full" px="2" colorScheme="red">
-              {card.urgency} {/* URGENCY */}
-            </Badge>
-            <Box
-              color="gray.500"
-              fontWeight="semibold"
-              letterSpacing="wide"
-              fontSize="xs"
-              textTransform="uppercase"
-              ml="2"
-            >
-              {card.category} category &bull; {card.baths} baths
-            </Box>
-          </Box>
-
-          <Box
-            mt="2"
-            fontWeight="semibold"
-            as="h4"
-            lineHeight="tight"
-            noOfLines={[1, 2, 3, 4]}
-          >
-            {card.body}
-          </Box>
-
+        <Flex flexDir="column" _dark="true" ml={["2", "4"]}>
+          <Heading as="h6" size="sm">
+            {card.user.firstName} {card.user.LastName}
+          </Heading>
           <Box>
-            {card.formattedPrice}
-            <Box as="span" color="gray.600" fontSize="sm">
-              {card.isClosed} -- Is closed
-            </Box>
+            {card.createdAt} &bull;
+                <Badge
+              borderRadius="full"
+              px="2"
+              ml={1}
+              mb={1}
+              colorScheme="red"
+            >
+              {card.type} {/* URGENCY */}
+            </Badge>
           </Box>
+        </Flex>
+      </Flex>
+      <Image
+        src={card.picture}
+        objectFit="cover"
+        color="gray.600"
+        alt={card.imageAlt}
+      />
 
-          <Box d="flex" mt="2" alignItems="center">
-            <Box as="span" color="gray.600" fontSize="sm">
-              {/* {card.reviewCount} reviews */}
+      <Box p={["4", "8"]} bgColor="white">
+        <Box d="flex" alignItems="baseline">
+          <Badge borderRadius="full" px="2" colorScheme="red">
+            {card.urgency} {/* URGENCY */}
+          </Badge>
+          <Box
+            color="gray.500"
+            fontWeight="semibold"
+            letterSpacing="wide"
+            fontSize="xs"
+            textTransform="uppercase"
+            ml="2"
+          >
+            {card.category} category &bull; {card.baths} baths
             </Box>
-          </Box>
-          <hr />
-
-          <Grid pt={6} templateColumns="repeat(3, 1fr)" gap={2}>
-            <CardButton name="Like" icon={MdThumbUp} />
-            <CardButton icon={IoHandLeftSharp} name="I need help" />
-            <CardButton icon={IoMdShareAlt} name="Appreciate" />
-          </Grid>
         </Box>
+
+        <Box
+          mt="2"
+          fontWeight="semibold"
+          as="h4"
+          lineHeight="tight"
+          noOfLines={[1, 2, 3, 4]}
+        >
+          {card.body}
+        </Box>
+
+        <Box>
+          {card.formattedPrice}
+          <Box as="span" color="gray.600" fontSize="sm">
+            {card.isClosed} -- Is closed
+            </Box>
+        </Box>
+
+        <Box d="flex" mt="2" alignItems="center">
+          <Box as="span" color="gray.600" fontSize="sm">
+            {/* {card.reviewCount} reviews */}
+          </Box>
+        </Box>
+        <hr />
+
+        <Grid pt={["4", "8"]} templateColumns="repeat(3, 1fr)" gap={2}>
+          <CardButton name="Like" icon={MdThumbUp} />
+          <CardButton icon={IoHandLeftSharp} name="I need help" />
+          <CardButton icon={IoMdShareAlt} name="Appreciate" />
+        </Grid>
       </Box>
-    </Flex>
+    </CardBox>
   );
 };
 
