@@ -2,11 +2,11 @@ import { Box, Flex } from "@chakra-ui/layout"
 
 const CardBox = (props) => {
     return (
+        
         <Flex
             m={2}
             w={["100%"]}
             maxW="700px"
-            border={"1px"}
             h="auto">
             <Box
                 borderRadius={"xl"}

@@ -1,13 +1,12 @@
+import { Avatar, Box, Button, Stack, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { Box, Button, Stack, Text } from "@chakra-ui/react";
-import { Avatar } from "@chakra-ui/react";
 import { BiEdit } from "react-icons/all";
-import { Link } from "react-router-dom";
-import NeedHelp from "../../pages/NeedHelp/NeedHelp";
-import GiveHelp from "../../pages/GiveHelp/GiveHelp";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import GiveHelpCard from "../Cards/GiveHelpCard/GiveHelpCard";
+import NeedHelpCard from "../Cards/NeedHelpCard/NeedHelpCard";
 
-function Profile() {
+const Profile = () => {
   const [active, setActive] = useState(true);
   const [activeProvide, setActiveProvide] = useState(false);
   const userStore = useSelector((store) => store.userStore);
@@ -15,12 +14,13 @@ function Profile() {
   useEffect(() => {
     console.log(active);
   }, []);
-  function handleNeedHelp() {
+
+  const handleNeedHelp = () => {
     setActiveProvide(false);
     setActive(true);
   }
 
-  function handleProvideHelp() {
+  const handleProvideHelp = () => {
     setActive(false);
     setActiveProvide(true);
   }
@@ -79,71 +79,93 @@ function Profile() {
             </Box>
           </Box>
 
-        <Box 
+          <Box
             maxW="700px"
             w="100%"
             px={["4", "4", "3", "4", "0"]}
-        >
-          <Box
-            w="100%"
-            h="50px"
-            borderTopRadius="16px"
-            display="flex"
-            bg="#fff"
-            mt={8}
-
           >
             <Box
-              cursor="pointer"
-              flex="0.5"
-              style={{ position: "relative" }}
-              onClick={handleNeedHelp}
-              textAlign="center"
+              w="100%"
+              h="50px"
+              borderTopRadius="16px"
+              display="flex"
+              bg="#fff"
+              mt={8}
+
             >
-              <Text mt={1} fontSize="md" fontWeight="500" p={2}>
-                Need Help
+              <Box
+                cursor="pointer"
+                flex="0.5"
+                style={{ position: "relative" }}
+                onClick={handleNeedHelp}
+                textAlign="center"
+              >
+                <Text mt={1} fontSize="md" fontWeight="500" p={2}>
+                  Need Help
               </Text>
-              {active && (
-                <div
-                  style={{
-                    left: "0",
-                    bottom: "0",
-                    width: "100%",
-                    position: "absolute",
-                    height: "5px",
-                    backgroundColor: "#0078ff",
-                    borderRadius: "8px",
-                  }}
-                />
-              )}
+                {active && (
+                  <div
+                    style={{
+                      left: "0",
+                      bottom: "0",
+                      width: "100%",
+                      position: "absolute",
+                      height: "5px",
+                      backgroundColor: "#0078ff",
+                      borderRadius: "8px",
+                    }}
+                  />
+                )}
+              </Box>
+              <Box
+                cursor="pointer"
+                flex="0.5"
+                textAlign="center"
+                style={{ position: "relative" }}
+                onClick={handleProvideHelp}
+              >
+                <Text mt={1} fontSize="md" fontWeight="500" p={2}>
+                  Provide Help
+              </Text>
+                {activeProvide && (
+                  <div
+                    style={{
+                      width: "100%",
+                      left: "0",
+                      bottom: "0",
+                      position: "absolute",
+                      height: "5px",
+                      backgroundColor: "#0078ff",
+                      borderRadius: "8px",
+                    }}
+                  />
+                )}
+              </Box>
             </Box>
+          </Box>
+          {/* {active ?
+
             <Box
-              cursor="pointer"
-              flex="0.5"
-              textAlign="center"
-              style={{ position: "relative" }}
-              onClick={handleProvideHelp}
+              w="100%"
+              px={3}
+              d="flex"
+              flexDir={"column"}
+              alignItems={"center"}
+              background="#f0f2f5"
             >
-              <Text mt={1} fontSize="md" fontWeight="500" p={2}>
-                Provide Help
-              </Text>
-              {activeProvide && (
-                <div
-                  style={{
-                    width: "100%",
-                    left: "0",
-                    bottom: "0",
-                    position: "absolute",
-                    height: "5px",
-                    backgroundColor: "#0078ff",
-                    borderRadius: "8px",
-                  }}
-                />
-              )}
-            </Box>
-          </Box>
-          </Box>
-        {/* {active ? <NeedHelp /> : <GiveHelp />} */}
+              <NeedHelpCard isProfile="true" />
+            </Box> :
+            <Box
+              w="100%"
+              px={3}
+              d="flex"
+              flexDir={"column"}
+              alignItems={"center"}
+              background="#f0f2f5"
+            >
+              <GiveHelpCard isProfile="true" />
+            </Box>}
+           */}
         </Stack>
       </Box>
     </>

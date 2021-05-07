@@ -6,38 +6,40 @@ import { getNameByCategoryID } from "../../../api/post";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 
-const NeedHelpCard = ({ post }) => {
-  const card = {
-    id: 1,
-    createdAt: "createdAt",
-    updatedAt: "updatedAt",
-    type: 1,
-    urgency: "urgency",
-    body:
-      "Modern home in city center in the heart of historic Los Angeles Modern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los Angeles",
-    picture: "https://bit.ly/2Z4KKcF",
-    category: 3,
-    isClosed: 2,
-    lat: "asd",
-    long: "asa",
+const NeedHelpCard = ({post},props) => {
+  const asd = {
     user: {
       id: 1,
       createdAt: "createdAt",
       updatedAt: "updatedAt",
-      firstName: "Firstname",
-      LastName: "Lastname",
-      email: "asidjwef",
-      token: "093284029384023",
-      profile_pic: "Picture",
-    },
-    comment: [
-      {
+      type: 1,
+      urgency: "urgency",
+      body:
+        "Modern home in city center in the heart of historic Los Angeles Modern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los Angeles",
+      picture: "https://bit.ly/2Z4KKcF",
+      category: 3,
+      isClosed: 2,
+      lat: "asd",
+      long: "asa",
+      user: {
         id: 1,
         createdAt: "createdAt",
         updatedAt: "updatedAt",
-        comment: "very noice",
+        firstName: "Firstname",
+        LastName: "Lastname",
+        email: "asidjwef",
+        token: "093284029384023",
+        profile_pic: "Picture",
       },
-    ],
+      comment: [
+        {
+          id: 1,
+          createdAt: "createdAt",
+          updatedAt: "updatedAt",
+          comment: "very noice",
+        },
+      ],
+    }
   };
 
   return (
@@ -83,7 +85,7 @@ const NeedHelpCard = ({ post }) => {
             textTransform="uppercase"
             ml="2"
           >
-            {card.category} category &bull; {card.baths} baths
+            {post.category} category &bull; {post.baths} baths
             </Box>
         </Box>
 
@@ -98,22 +100,27 @@ const NeedHelpCard = ({ post }) => {
         </Box>
 
         <Box>
-          {card.formattedPrice}
+          {post.formattedPrice}
           <Box as="span" color="gray.600" fontSize="sm">
-            {card.isClosed} -- Is closed
+            {post.isClosed} -- Is closed
             </Box>
         </Box>
 
 
         <Box d="flex" mt="2" alignItems="center">
           <Box as="span" color="gray.600" fontSize="sm">
-            {/* {card.reviewCount} reviews */}
+            {/* {post.reviewCount} reviews */}
           </Box>
         </Box>
-        <hr />
-        <Grid pt={["4", "8"]} templateColumns="repeat(1, 1fr)" gap={2}>
-          <CardButton icon={IoHandLeftSharp} name="I Can help" />
-        </Grid>
+       
+        {props.isProfile !== 'true' &&
+          <>
+          <hr/>
+          <Grid pt={["4", "8"]} templateColumns="repeat(1, 1fr)" gap={2}>
+            <CardButton icon={IoHandLeftSharp} name="I Can help" />
+          </Grid>
+          </>
+        }
       </Box>
     </CardBox >
   );
