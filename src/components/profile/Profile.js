@@ -39,7 +39,6 @@ function Profile() {
         flexDir={"column"}
         alignItems={"center"}
         background="#f0f2f5"
-        px="3"
       >
         <Stack
           w="100%"
