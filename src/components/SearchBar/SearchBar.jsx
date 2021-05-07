@@ -2,6 +2,7 @@ import { Avatar } from '@chakra-ui/avatar'
 import { Button } from '@chakra-ui/button'
 import { useDisclosure } from '@chakra-ui/hooks'
 import { Input, InputGroup } from '@chakra-ui/input'
+import NewPost from "../../pages/Newpost/NewPost";
 import { Box, Heading } from '@chakra-ui/layout'
 import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/modal'
 import React from 'react'
@@ -15,21 +16,22 @@ const SearchBar = (props) => {
     const CreatePostModal = () => {
         return (
             <>
-                <ModalOverlay />
-                <ModalContent backgroundColor>
-                    <ModalHeader>Modal Title</ModalHeader>
+                <ModalOverlay style={{ backdropFilter: "blur(15px)" }} />
+                <ModalContent >
+                    <ModalHeader fontWeight="bold" fontSize="3xl" >New Post</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        {/* <NewPost/> */}
-                        bruhhh
+                        <NewPost />
                     </ModalBody>
 
-                    <ModalFooter>
-                        <Button colorScheme="messenger" mr={3} onClick={onClose}>
+                    {/*   <ModalFooter>
+                        <Button colorScheme="messenger" mr={3} w="100%" onClick={onClose}>
                             Close
                         </Button>
-                        {/* <Button variant="ghost">Secondary Action</Button> */}
-                    </ModalFooter>
+                       * <Button variant="ghost">Secondary Action</Button>
+                    </ModalFooter> */}
+
+                    
                 </ModalContent>
             </>
         );
@@ -52,11 +54,11 @@ const SearchBar = (props) => {
                 background="white">
 
                 <Heading
-                    fontSize={["1.5rem","2rem"]}
+                    fontSize={["1.5rem", "2rem"]}
                     fontWeight="semibold"
                     color="#111"
                     mb={4}
-                    // border={"1px"}
+                // border={"1px"}
                 >
                     {props.name}
                 </Heading>
@@ -72,8 +74,8 @@ const SearchBar = (props) => {
                 /> */}
 
                     <Avatar
-                        w={["40px","48px"]}
-                        h={["40px","48px"]}
+                        w={["40px", "48px"]}
+                        h={["40px", "48px"]}
                         mr={["2", "4"]} />
 
 

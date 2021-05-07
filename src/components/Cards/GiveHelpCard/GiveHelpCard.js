@@ -2,9 +2,7 @@ import { Avatar } from "@chakra-ui/avatar";
 import { Button } from "@chakra-ui/button";
 import Icon from "@chakra-ui/icon";
 import { Image } from "@chakra-ui/image";
-import { Badge, Grid, Box, Flex, Heading } from "@chakra-ui/layout";
-// eslint-disable-next-line no-unused-vars
-import { FaComment } from "react-icons/fa";
+import { Badge, Box, Flex, Grid, Heading } from "@chakra-ui/layout";
 import { IoMdShareAlt } from "react-icons/io";
 import { IoHandLeftSharp } from "react-icons/io5";
 import { MdThumbUp } from "react-icons/md";
