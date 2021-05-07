@@ -50,7 +50,7 @@ const NewPost = (props) => {
                 : BoilerPlateForGiveHelp[e.target.value - 1]
         );
     };
-    const handleLocationSliderChange = (val) => {setLocationSliderValue(val)};
+    const handleLocationSliderChange = (val) => { setLocationSliderValue(val) };
     const handleUrgencySLiderChange = (val) => setUrgencySliderValue(val);
     const handlePhoneNumberChange = (e) => setPhoneNumber(e.target.value);
     const handleSetBody = (e) => setBody(e.target.value);

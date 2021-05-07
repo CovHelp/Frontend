@@ -65,7 +65,7 @@
 
 .activeButton > p {
     opacity: 1;
-    margin-top: 8px;
+    margin-top: 0px;
     font-size: 14px;
 }
 
@@ -89,7 +89,7 @@
     height: 4px;
     background-color: #0078ff;
     position: absolute;
-    bottom: 3px;
+    bottom: 2.5px;
     left: 0;
     border-radius: 4px;
 }

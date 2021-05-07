@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getAllCitiesByStateCode, getAllStates } from "../../api/misc";
 
 
-export default function StateCitySelctor() {
+export default function StateCitySelctor({onSelected}) {
   const [allStates, setAllStates] = useState([]);
   const [allCities, setAllCities] = useState([]);
   const [selectedState, setSelectedState] = useState("None");
@@ -32,9 +32,9 @@ export default function StateCitySelctor() {
   };
 
   const handleSetSelectedCity = ({ target }) => {
-    // console.log(target.value);
     const city = allCities.filter((city) => city.name === target.value);
     setSelectedCity(city[0]);
+    onSelected(city[0], selectedState);
   };
 
   return (
