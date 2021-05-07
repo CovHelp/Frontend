@@ -14,7 +14,7 @@ const NewPost = (props) => {
     const handleCategoryChange = (e) => {
         setCategory(e.target.value - 1);
 
-        setBody(props.typeofPost === "Request Help" ? BoilerPlateForNeedHelp[e.target.value - 1] : BoilerPlateForGiveHelp[e.target.value - 1]);
+        setBody(props.typeOfPost === "Request Help" ? BoilerPlateForNeedHelp[e.target.value - 1] : BoilerPlateForGiveHelp[e.target.value - 1]);
     }
     const handleSLiderChange = (val) => setSliderValue(val);
     const handlePhoneNumberChange = (e) => setPhoneNumber(e.target.value);
@@ -22,8 +22,8 @@ const NewPost = (props) => {
 
 
     useEffect(() => {
-        console.log(props.typeofPost);
-    }, [props])
+        console.log(props.typeOfPost);
+    }, [])
     
     // PHONE NUMBER LESS THAN 10
     const handleIncorrectNumber = () => {
@@ -49,7 +49,7 @@ const NewPost = (props) => {
                        urgency {sliderValue} | phone {phoneNumber} | body {body}</span> */}
 
                         <FormControl id="Category">
-                            <FormLabel>{props.typeofPost}</FormLabel>
+                            <FormLabel>{props.typeOfPost}</FormLabel>
 
                             <Select
                                 isRequired
@@ -76,9 +76,9 @@ const NewPost = (props) => {
                         </FormControl>
 
                         <StateCitySelctor />
+                        {props.typeOfPost}
 
-
-                        {props.typeofPost === "Request Help" &&
+                        {props.typeOfPost === "Request Help" &&
                             
 
                             <Flex direction="column" m={2}>
