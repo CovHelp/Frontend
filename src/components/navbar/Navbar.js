@@ -40,7 +40,9 @@ const Navbar = ({ sideBarEvent }) => {
 
   const handleLogin = async (res) => {
     try {
+      console.log(res.profileObj)
       const resp = await register(res.profileObj);
+      console.log(resp)
       dispatch({ type: "SAVE_USER", payload: resp });
     } catch (e) {}
   };
