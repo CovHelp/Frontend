@@ -1,23 +1,21 @@
+import React from 'react'
 import { Box, Checkbox, Link, Stack, Text } from "@chakra-ui/react";
 import { Avatar} from "@chakra-ui/react"
 import { Divider } from "@chakra-ui/react"
 import {
-  
-    AiOutlineHome,
+     AiOutlineHome,
     BiEdit,
     AiOutlineLock,
     AiOutlineBell,
     GrShieldSecurity,
-   
-    MdRedeem
-  } from "react-icons/all";
-import React from 'react'
+    } from "react-icons/all";
+    import './Profile.css'
 
 function ProfileSetting() {
     return (
-        <Stack  display="flex" flexDirection="column"  spacing={4} alignItems="flexstart">
+        <div class="settings__container">
              
-             <Box pl="16px"  mb="8px" mt="16px">
+             <Box pl="16px"  mb="16px" mt="16px">
 
              <Avatar  height="5rem" width="5rem" src="https://bit.ly/broken-link" />
              </Box>
@@ -32,7 +30,7 @@ function ProfileSetting() {
                          </Text>
                      </Link>
                      </Box>
-                     <Box pr="16px">
+                     <Box  class="arrow__container"  pr="16px">
                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                    <path d="M9 18L15 12L9 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> 
                    </svg>
@@ -50,7 +48,7 @@ function ProfileSetting() {
                          </Text>
                      </Link>
                      </Box>
-                     <Box pr="16px">
+                     <Box class="arrow__container" pr="16px">
                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                    <path d="M9 18L15 12L9 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> 
                    </svg>
@@ -68,7 +66,7 @@ function ProfileSetting() {
                          </Text>
                      </Link>
                      </Box>
-                     <Box pr="16px">
+                     <Box class="arrow__container"  pr="16px">
                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                    <path d="M9 18L15 12L9 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> 
                    </svg>
@@ -86,7 +84,7 @@ function ProfileSetting() {
                          </Text>
                      </Link>
                      </Box>
-                     <Box pr="16px">
+                     <Box class="arrow__container"  pr="16px">
                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                    <path d="M9 18L15 12L9 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> 
                    </svg>
@@ -103,7 +101,7 @@ function ProfileSetting() {
                          </Text>
                          </Link>
                  </Box>
-                 <Box pr="16px">
+                 <Box  class="arrow__container" pr="16px">
                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                    <path d="M9 18L15 12L9 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> 
                    </svg>
@@ -117,7 +115,7 @@ function ProfileSetting() {
 
 
              </Box>
-             </Stack>
+             </div>
     )
 }
 
