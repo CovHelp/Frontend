@@ -1,92 +1,128 @@
 import { Avatar } from "@chakra-ui/avatar";
 import { Image } from "@chakra-ui/image";
-import { Badge, Box, Flex, Heading } from "@chakra-ui/layout";
+import { Badge, Box, Flex, Grid, Heading } from "@chakra-ui/layout";
 import { IoHandLeftSharp } from "react-icons/io5";
 import { getNameByCategoryID } from "../../../api/post";
+import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 
-const NeedHelpCard = ({ post }) => {
+const NeedHelpCard = ({post , isProfile}) => {
+  const asd = {
+    user: {
+      id: 1,
+      createdAt: "createdAt",
+      updatedAt: "updatedAt",
+      type: 1,
+      urgency: "urgency",
+      body:
+        "Modern home in city center in the heart of historic Los Angeles Modern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los Angeles",
+      picture: "https://bit.ly/2Z4KKcF",
+      category: 3,
+      isClosed: 2,
+      lat: "asd",
+      long: "asa",
+      user: {
+        id: 1,
+        createdAt: "createdAt",
+        updatedAt: "updatedAt",
+        firstName: "Firstname",
+        LastName: "Lastname",
+        email: "asidjwef",
+        token: "093284029384023",
+        profile_pic: "Picture",
+      },
+      comment: [
+        {
+          id: 1,
+          createdAt: "createdAt",
+          updatedAt: "updatedAt",
+          comment: "very noice",
+        },
+      ],
+    }
+  };
+
   return (
-    <Flex m={2} w={["100%"]} maxW="700px" h="auto">
-      <Box
-        w="100%"
-        borderRadius={"xl"}
-        maxW="-moz-max-content"
-        mt={1}
-        borderWidth="1px"
-        overflow="hidden"
-      >
-        <Box w={"100%"} p={8} bgColor="white">
-          <Flex>
-            <Avatar src={post.user.profile_pic}/>
-            <Box d="flex" flexDir="column" _dark="true" ml="4">
-              <Heading as="h6" size="sm">
-                {post.user.firstName} {post.user.LastName}
-              </Heading>
-              <Box>
-                {new Date(post.createdAt).toLocaleString()} &bull;
+    <CardBox>
+      <Flex w={"100%"} p={["4", "8"]} bgColor="white">
+        <Avatar
+          w={["40px", "48px"]}
+          h={["40px", "48px"]}
+          src={post.user.profile_pic}
+        />
+        <Flex flexDir="column" _dark="true" ml={["2", "4"]}>
+          <Heading as="h6" size="sm">
+            {post.user.firstName} {post.user.LastName}
+          </Heading>
+          <Box>
+            {new Date(post.createdAt).toLocaleString()} &bull;
                 <Badge
-                  borderRadius="full"
-                  px="2"
-                  ml={1}
-                  mb={1}
-                  colorScheme="green"
-                >
-                  {getNameByCategoryID(post.category)} {/* URGENCY */}
-                </Badge>
-              </Box>
-            </Box>
-          </Flex>
-        </Box>
-        {post.picture !== "" && (
-          <Image src={post.picture} objectFit="cover" color="gray.600" alt="" />
-        )}
-
-        <Box px="8" bgColor="white">
-          <Box d="flex" alignItems="baseline">
-            <Badge borderRadius="full" px="2" colorScheme="red">
-              Urgency Level: {post.urgency}
+              borderRadius="full"
+              px="2"
+              ml={1}
+              mb={1}
+              colorScheme="green"
+            >
+              {getNameByCategoryID(post.category)} {/* URGENCY */}
             </Badge>
-            <Box
-              color="gray.500"
-              fontWeight="semibold"
-              letterSpacing="wide"
-              fontSize="xs"
-              textTransform="uppercase"
-              ml="2"
-            ></Box>
           </Box>
+        </Flex>
+      </Flex>
+      {post.picture !== "" && (
+        <Image src={post.picture} objectFit="cover" color="gray.600" alt="" />
+      )}
 
+      <Box p={["4", "8"]} bgColor="white">
+        <Box d="flex" alignItems="baseline">
+          <Badge borderRadius="full" px="2" colorScheme="red">
+            Urgency Level: {post.urgency}
+          </Badge>
           <Box
-            mt="2"
+            color="gray.500"
             fontWeight="semibold"
-            as="h4"
-            lineHeight="tight"
-            noOfLines={[1, 2, 3, 4]}
+            letterSpacing="wide"
+            fontSize="xs"
+            textTransform="uppercase"
+            ml="2"
           >
-            {post.body}
-          </Box>
-
-          <Box d="flex" mt="2" alignItems="center">
-            <Box as="span" color="gray.600" fontSize="sm">
-              {/* {card.reviewCount} reviews */}
+            {post.category} category &bull; {post.baths} baths
             </Box>
-          </Box>
-          <hr />
-
-          <Flex
-            flexDir={"row"}
-            alignItems={"center"}
-            justifyContent={"space-evenly"}
-            w="100%"
-            pt={4}
-            pb={4}
-          >
-            <CardButton icon={IoHandLeftSharp} name="I Can help" />
-          </Flex>
         </Box>
+
+        <Box
+          mt="2"
+          fontWeight="semibold"
+          as="h4"
+          lineHeight="tight"
+          noOfLines={[1, 2, 3, 4]}
+        >
+          {post.body}
+        </Box>
+
+        <Box>
+          {post.formattedPrice}
+          <Box as="span" color="gray.600" fontSize="sm">
+            {post.isClosed} -- Is closed
+            </Box>
+        </Box>
+
+
+        <Box d="flex" mt="2" alignItems="center">
+          <Box as="span" color="gray.600" fontSize="sm">
+            {/* {post.reviewCount} reviews */}
+          </Box>
+        </Box>
+       
+        {isProfile !== 'true' &&
+          <>
+          <hr/>
+          <Grid pt={["4", "8"]} templateColumns="repeat(1, 1fr)" gap={2}>
+            <CardButton icon={IoHandLeftSharp} name="I Can help" />
+          </Grid>
+          </>
+        }
       </Box>
-    </Flex>
+    </CardBox >
   );
 };
 
