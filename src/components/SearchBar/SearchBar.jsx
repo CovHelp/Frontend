@@ -54,8 +54,9 @@ const SearchBar = (props) => {
                 <Heading
                     fontSize={["1.5rem","2rem"]}
                     fontWeight="semibold"
-                    color="#0078ff"
-                    mb={["2", "4"]}
+                    color="#111"
+                    mb={4}
+                    // border={"1px"}
                 >
                     {props.name}
                 </Heading>
