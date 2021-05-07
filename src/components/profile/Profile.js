@@ -82,7 +82,7 @@ function Profile() {
         <Box 
             maxW="700px"
             w="100%"
-            px={["4", "4", "3"]}
+            px={["4", "4", "0"]}
         >
           <Box
             w="100%"
