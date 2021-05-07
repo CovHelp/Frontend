@@ -140,7 +140,7 @@ const Navbar = ({ sideBarEvent }) => {
     <div className="navwrapper">
       <div className="navbar">
         <Flex
-          h="88"
+          h="60px"
           bg="whiteAlpha.800"
           flexDir={"row"}
           alignItems={"center"}
@@ -150,7 +150,7 @@ const Navbar = ({ sideBarEvent }) => {
           color="black"
         >
           <Flex flex="1">
-            <img alt="logo" style={{ height: 60 }} src={Logo} />
+            <img alt="logo" style={{ height: 50 }} src={Logo} />
           </Flex>
           <Flex h="100%" flex={["1", "2", "2"]} w="100%" maxW="680px">
             {!userStore.token ? (

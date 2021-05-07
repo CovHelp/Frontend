@@ -112,7 +112,7 @@ const GiveHelpCard = ({ post, isProfile }) => {
 
         <Box
           mt="2"
-          fontWeight="semibold"
+          fontWeight="normal"
           as="h4"
           lineHeight="tight"
           noOfLines={[1, 2, 3, 4]}
