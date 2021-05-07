@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   AiFillMedicineBox,
   BiFilterAlt,
@@ -11,15 +11,84 @@ import { DividerComponent } from "../divider/DividerComponent";
 import "./index.css";
 import StateCitySelctor from "../newpost/StateCitySelector";
 import { Box, Checkbox, Link, Stack, Text } from "@chakra-ui/react";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function MobileSidebar({ isVisible }) {
   const mobileSidebarRef = useRef();
+  const dispatch = useDispatch();
+  const needHelpPostStore = useSelector((store) => store.needHelpPostStore);
+  const [needHelpPosts, setNeedHelpPosts] = useState([]);
+  const [oxygen, setOxygen] = useState(false);
+  const [ambulance, setAmbulance] = useState(false);
+  const [medicine, setMedicine] = useState(false);
+  const [hospitalbeds, setHospitalbeds] = useState(false);
+  const [plasma, setPlasma] = useState(false);
+  const [food, setFood] = useState(false);
+
   useEffect(() => {
-    console.log("Here");
     if (isVisible) mobileSidebarRef.current.style.transform = "translate(0px)";
     else mobileSidebarRef.current.style.transform = "translate(-300px)";
-    console.log(mobileSidebarRef.current.style.transform);
   }, [isVisible]);
+
+  useEffect(() => {
+    console.log("Filtering started");
+    var localFilteredList = [];
+    if (
+      !oxygen &&
+      !ambulance &&
+      !medicine &&
+      !hospitalbeds &&
+      !plasma &&
+      !food
+    ) {
+      setNeedHelpPosts(needHelpPostStore);
+    } else if (
+      oxygen &&
+      ambulance &&
+      medicine &&
+      hospitalbeds &&
+      plasma &&
+      food
+    ) {
+      setNeedHelpPosts(needHelpPostStore);
+    } else {
+      if (oxygen) {
+        let l = needHelpPostStore.filter((post) => post.category == 1);
+        localFilteredList = [...localFilteredList, ...l];
+      }
+      if (ambulance) {
+        let l = needHelpPostStore.filter((post) => post.category == 2);
+        localFilteredList = [...localFilteredList, ...l];
+      }
+      if (medicine) {
+        let l = needHelpPostStore.filter((post) => post.category == 3);
+        localFilteredList = [...localFilteredList, ...l];
+      }
+      if (hospitalbeds) {
+        let l = needHelpPostStore.filter((post) => post.category == 4);
+        localFilteredList = [...localFilteredList, ...l];
+      }
+      if (plasma) {
+        let l = needHelpPostStore.filter((post) => post.category == 5);
+        localFilteredList = [...localFilteredList, ...l];
+      }
+      if (food) {
+        let l = needHelpPostStore.filter((post) => post.category == 6);
+        localFilteredList = [...localFilteredList, ...l];
+      }
+      setNeedHelpPosts(localFilteredList);
+    }
+  }, [oxygen, ambulance, medicine, hospitalbeds, plasma, food]);
+
+
+  useEffect(() => {
+    if (needHelpPosts.length > 0)
+      dispatch({
+        type: "SAVE_NEED_HELP_POSTS_FILTERED",
+        payload: needHelpPosts,
+      });
+  }, [needHelpPosts]);
+  
   return (
     <div ref={mobileSidebarRef} class="sidenav-mobile">
       <Stack
@@ -73,7 +142,13 @@ export default function MobileSidebar({ isVisible }) {
               </Link>
             </Box>
 
-            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
+            <Checkbox
+              size="lg"
+              colorScheme="linkedin"
+              onChange={(e) => {
+                setOxygen(e.target.checked);
+              }}
+            ></Checkbox>
           </Box>
 
           <DividerComponent />
@@ -95,7 +170,13 @@ export default function MobileSidebar({ isVisible }) {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
+            <Checkbox
+              onChange={(e) => {
+                setAmbulance(e.target.checked);
+              }}
+              size="lg"
+              colorScheme="linkedin"
+            ></Checkbox>
           </Box>
 
           <DividerComponent />
@@ -117,7 +198,13 @@ export default function MobileSidebar({ isVisible }) {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
+            <Checkbox
+              size="lg"
+              colorScheme="linkedin"
+              onChange={(e) => {
+                setMedicine(e.target.checked);
+              }}
+            ></Checkbox>
           </Box>
 
           <DividerComponent />
@@ -139,7 +226,13 @@ export default function MobileSidebar({ isVisible }) {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
+            <Checkbox
+              size="lg"
+              colorScheme="linkedin"
+              onChange={(e) => {
+                setHospitalbeds(e.target.checked);
+              }}
+            ></Checkbox>
           </Box>
 
           <DividerComponent />
@@ -161,7 +254,13 @@ export default function MobileSidebar({ isVisible }) {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
+            <Checkbox
+              size="lg"
+              colorScheme="linkedin"
+              onChange={(e) => {
+                setPlasma(e.target.checked);
+              }}
+            ></Checkbox>
           </Box>
 
           <DividerComponent m={4} />
@@ -183,7 +282,13 @@ export default function MobileSidebar({ isVisible }) {
                 </Text>
               </Link>
             </Box>
-            <Checkbox size="lg" colorScheme="linkedin"></Checkbox>
+            <Checkbox
+              size="lg"
+              colorScheme="linkedin"
+              onChange={(e) => {
+                setFood(e.target.checked);
+              }}
+            ></Checkbox>
           </Box>
 
           <DividerComponent />
