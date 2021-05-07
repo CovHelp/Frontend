@@ -16,10 +16,8 @@ const SearchBar = (props) => {
 
     const userStore = useSelector(store => store.userStore);
     
-    useEffect(() => {
-        console.log(props.name);
-    }, [props])
-    const CreatePostModal = () => {
+  
+    const CreatePostModal = ({onClose}) => {
         return (
             <>
                 <ModalOverlay style={{ backdropFilter: "blur(15px)" }} />
@@ -27,7 +25,7 @@ const SearchBar = (props) => {
                     <ModalHeader fontWeight="bold" fontSize="3xl" >{props.name}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <NewPost typeOfPost = {props.name} />
+                        <NewPost onClose={onClose} typeOfPost = {props.name} />
                     </ModalBody>
 
                     {/*   <ModalFooter>
@@ -97,7 +95,10 @@ const SearchBar = (props) => {
 
             </Box>
             <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
-                <CreatePostModal />
+                <CreatePostModal onClose={()=>{
+                    onClose();
+                    window.location.reload();
+                }}/>
             </Modal>
         </>
     )

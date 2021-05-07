@@ -19,7 +19,7 @@
     width: 300px;
     overflow-y: auto;
     overflow-x: auto;
-    height: calc(100% - 88px);
+    height: calc(100% - 60px);
     z-index: 10;
 }
 

@@ -1,9 +1,34 @@
+
+import React,{ useEffect, useState } from "react";
+
 import { Box } from "@chakra-ui/layout";
-import React from "react";
 import GiveHelpCard from "../../components/Cards/GiveHelpCard/GiveHelpCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import { useDispatch, useSelector } from "react-redux";
+import { getProvideHelpPosts } from "../../api/post";
 
 const GiveHelp = () => {
+
+  const dispatch = useDispatch();
+  const [posts, setPosts] = useState([]);
+  const provideHelpPostStoreFiltered = useSelector((store) => store.provideHelpPostStoreFiltered);
+
+  const loadProvideHelpPosts = async () => {
+    try {
+      const res = await getProvideHelpPosts();
+      dispatch({ type: "SAVE_PROVIDE_HELP_POSTS", payload: res });
+      dispatch({ type: "SAVE_PROVIDE_HELP_POSTS_FILTERED", payload: res });
+
+      setPosts(res);
+    } catch (e) {}
+  };
+
+  useEffect(() => {}, [posts]);
+
+  useEffect(() => {
+    loadProvideHelpPosts();
+  }, []);
+
   return (
     <>
 
@@ -16,15 +41,11 @@ const GiveHelp = () => {
       background="#f0f2f5"
     >
       <SearchBar name = "Provide Help"/>
-      <GiveHelpCard />
-      <GiveHelpCard />
-      <GiveHelpCard />
-      <GiveHelpCard />
-      <GiveHelpCard />
-      <GiveHelpCard />
-      <GiveHelpCard />
-      <GiveHelpCard />
-
+      {provideHelpPostStoreFiltered.length > 0 &&
+          provideHelpPostStoreFiltered.map((post) => (
+            <GiveHelpCard key={post.id} post={post} />
+          ))}
+      
     </Box>
     </>
   );

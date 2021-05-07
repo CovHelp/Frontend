@@ -13,12 +13,20 @@ import StateCitySelctor from "../newpost/StateCitySelector";
 
 import { Box, Checkbox, Link, Stack, Text } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from 'react-router-dom'; 
+
 
 export default function DesktopSidebar() {
+  const location = useLocation();
+
   const dispatch = useDispatch();
   const needHelpPostStore = useSelector((store) => store.needHelpPostStore);
+  const provideHelpPostStore = useSelector((store) => store.provideHelpPostStore);
+
   const [needHelpPosts, setNeedHelpPosts] = useState([]);
-  const [oxygen, setOxygen] = useState(false);
+  const [provideHelpPosts, setProvideHelpPosts] = useState([]);
+
+  const [oxygen, setOxygen] = useState(true);
   const [ambulance, setAmbulance] = useState(false);
   const [medicine, setMedicine] = useState(false);
   const [hospitalbeds, setHospitalbeds] = useState(false);
@@ -27,8 +35,57 @@ export default function DesktopSidebar() {
 
   const [filteredInitiated, setFilterInitated] = useState(false);
 
-  useEffect(() => {
-    console.log("Filtering started");
+  const handleProvideHelpFilter = () => {
+    setFilterInitated(true);
+    var localFilteredList = [];
+    if (
+      !oxygen &&
+      !ambulance &&
+      !medicine &&
+      !hospitalbeds &&
+      !plasma &&
+      !food
+    ) {
+      setProvideHelpPosts(provideHelpPostStore);
+    } else if (
+      oxygen &&
+      ambulance &&
+      medicine &&
+      hospitalbeds &&
+      plasma &&
+      food
+    ) {
+      setProvideHelpPosts(provideHelpPostStore);
+    } else {
+      if (oxygen) {
+        var l = provideHelpPostStore.filter((post) => post.category == 1);
+        localFilteredList = [...localFilteredList, ...l];
+      }
+      if (ambulance) {
+        var l = provideHelpPostStore.filter((post) => post.category == 2);
+        localFilteredList = [...localFilteredList, ...l];
+      }
+      if (medicine) {
+        var l = provideHelpPostStore.filter((post) => post.category == 3);
+        localFilteredList = [...localFilteredList, ...l];
+      }
+      if (hospitalbeds) {
+        var l = provideHelpPostStore.filter((post) => post.category == 4);
+        localFilteredList = [...localFilteredList, ...l];
+      }
+      if (plasma) {
+        var l = provideHelpPostStore.filter((post) => post.category == 5);
+        localFilteredList = [...localFilteredList, ...l];
+      }
+      if (food) {
+        var l = provideHelpPostStore.filter((post) => post.category == 6);
+        localFilteredList = [...localFilteredList, ...l];
+      }
+      setProvideHelpPosts(localFilteredList);
+    }
+  };
+
+  const handleNeedHelpFilter = () => {
     setFilterInitated(true);
     var localFilteredList = [];
     if (
@@ -76,7 +133,23 @@ export default function DesktopSidebar() {
       }
       setNeedHelpPosts(localFilteredList);
     }
-  }, [oxygen, ambulance, medicine, hospitalbeds, plasma, food]);
+  };
+
+  useEffect(() => {
+    console.log(window.location.href.split("/").length)
+    if(window.location.href.includes('provide-help')){
+      handleProvideHelpFilter()
+    }else if(window.location.href.split("/").length === 4){
+      handleNeedHelpFilter()
+    }
+  }, [
+    oxygen,
+    ambulance,
+    medicine,
+    hospitalbeds,
+    plasma,
+    food,
+  ]);
 
   useEffect(() => {
     if (filteredInitiated)
@@ -85,6 +158,25 @@ export default function DesktopSidebar() {
         payload: needHelpPosts,
       });
   }, [needHelpPosts]);
+
+  useEffect(() => {
+    if (filteredInitiated)
+      dispatch({
+        type: "SAVE_PROVIDE_HELP_POSTS_FILTERED",
+        payload: provideHelpPosts,
+      });
+  }, [provideHelpPosts]);
+
+
+  useEffect(() => {
+    console.log("New location")
+    setOxygen(false);
+    setAmbulance(false);
+    setMedicine(false);
+    setHospitalbeds(false);
+    setPlasma(false);
+    setFood(false);
+  }, [location]);
 
   return (
     <div class="sidenav">
@@ -140,6 +232,7 @@ export default function DesktopSidebar() {
             </Box>
 
             <Checkbox
+              isChecked={oxygen}
               size="lg"
               colorScheme="linkedin"
               onChange={(e) => {
@@ -168,6 +261,8 @@ export default function DesktopSidebar() {
               </Link>
             </Box>
             <Checkbox
+              isChecked={ambulance}
+
               onChange={(e) => {
                 setAmbulance(e.target.checked);
               }}
@@ -196,6 +291,8 @@ export default function DesktopSidebar() {
               </Link>
             </Box>
             <Checkbox
+              isChecked={medicine}
+
               size="lg"
               colorScheme="linkedin"
               onChange={(e) => {
@@ -224,6 +321,8 @@ export default function DesktopSidebar() {
               </Link>
             </Box>
             <Checkbox
+              isChecked={hospitalbeds}
+
               size="lg"
               colorScheme="linkedin"
               onChange={(e) => {
@@ -252,6 +351,8 @@ export default function DesktopSidebar() {
               </Link>
             </Box>
             <Checkbox
+              isChecked={plasma}
+
               size="lg"
               colorScheme="linkedin"
               onChange={(e) => {
@@ -280,6 +381,8 @@ export default function DesktopSidebar() {
               </Link>
             </Box>
             <Checkbox
+              isChecked={food}
+
               size="lg"
               colorScheme="linkedin"
               onChange={(e) => {
@@ -291,7 +394,6 @@ export default function DesktopSidebar() {
           <DividerComponent />
         </Stack>
       </Stack>
-    
     </div>
   );
 }
