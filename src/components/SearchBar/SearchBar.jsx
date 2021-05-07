@@ -48,7 +48,7 @@ const SearchBar = (props) => {
                 ref={finalRef}
                 tabIndex={-1}
                 aria-label="Focus moved to this box"
-                borderRadius="lg"
+                borderRadius="xl"
                 borderWidth="1px"
                 background="white">
 
