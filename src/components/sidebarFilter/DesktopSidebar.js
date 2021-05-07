@@ -25,8 +25,11 @@ export default function DesktopSidebar() {
   const [plasma, setPlasma] = useState(false);
   const [food, setFood] = useState(false);
 
+  const [filteredInitiated, setFilterInitated] = useState(false);
+
   useEffect(() => {
     console.log("Filtering started");
+    setFilterInitated(true);
     var localFilteredList = [];
     if (
       !oxygen &&
@@ -48,27 +51,27 @@ export default function DesktopSidebar() {
       setNeedHelpPosts(needHelpPostStore);
     } else {
       if (oxygen) {
-        let l = needHelpPostStore.filter((post) => post.category == 1);
+        var l = needHelpPostStore.filter((post) => post.category == 1);
         localFilteredList = [...localFilteredList, ...l];
       }
       if (ambulance) {
-        let l = needHelpPostStore.filter((post) => post.category == 2);
+        var l = needHelpPostStore.filter((post) => post.category == 2);
         localFilteredList = [...localFilteredList, ...l];
       }
       if (medicine) {
-        let l = needHelpPostStore.filter((post) => post.category == 3);
+        var l = needHelpPostStore.filter((post) => post.category == 3);
         localFilteredList = [...localFilteredList, ...l];
       }
       if (hospitalbeds) {
-        let l = needHelpPostStore.filter((post) => post.category == 4);
+        var l = needHelpPostStore.filter((post) => post.category == 4);
         localFilteredList = [...localFilteredList, ...l];
       }
       if (plasma) {
-        let l = needHelpPostStore.filter((post) => post.category == 5);
+        var l = needHelpPostStore.filter((post) => post.category == 5);
         localFilteredList = [...localFilteredList, ...l];
       }
       if (food) {
-        let l = needHelpPostStore.filter((post) => post.category == 6);
+        var l = needHelpPostStore.filter((post) => post.category == 6);
         localFilteredList = [...localFilteredList, ...l];
       }
       setNeedHelpPosts(localFilteredList);
@@ -76,7 +79,7 @@ export default function DesktopSidebar() {
   }, [oxygen, ambulance, medicine, hospitalbeds, plasma, food]);
 
   useEffect(() => {
-    if (needHelpPosts.length > 0)
+    if (filteredInitiated)
       dispatch({
         type: "SAVE_NEED_HELP_POSTS_FILTERED",
         payload: needHelpPosts,
@@ -288,6 +291,7 @@ export default function DesktopSidebar() {
           <DividerComponent />
         </Stack>
       </Stack>
+    
     </div>
   );
 }

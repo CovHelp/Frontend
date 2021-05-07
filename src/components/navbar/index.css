@@ -32,14 +32,22 @@
     grid-template-columns: repeat(5, 1fr);
 }
 
-.bottom-nav-grid > a {
+.bottom-nav-grid-unAuth{
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.bottom-nav-grid > a, 
+.bottom-nav-grid-unAuth > a {
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.bottom-nav-grid > a > p{
+.bottom-nav-grid > a > p, 
+.bottom-nav-grid-unAuth > a > p{
     font-size: 12px;
     color: #0078ff;
     font-weight: 600;
