@@ -187,7 +187,7 @@ const NewPost = (props) => {
                 </Flex>
               )}
 
-            <StateCitySelctor onSelected={handleLocationSelection} />
+           {props.typeOfPost !== "Provide Help" &&  <StateCitySelctor onSelected={handleLocationSelection} />}
             {stateCitySelectorVisible &&
               props.typeOfPost === "Provide Help" && (
                 <StateCitySelctor
