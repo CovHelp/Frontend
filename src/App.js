@@ -11,6 +11,7 @@ import Login from "./pages/Login/Login";
 import Filtersidebar from "./components/sidebarFilter/Filtersidebar";
 import NotFound from "./pages/NotFound/NotFound";
 import Profile from "./components/profile/Profile";
+import ProfileSetting from "./components/profile/ProfileSetting";
 // import Chat from "./components/chat/Chat";
 
 const App = () => {
@@ -53,6 +54,9 @@ const App = () => {
             </Route>
             <Route path="/profile">
               <Profile/>
+            </Route>
+            <Route path="/settings">
+              <ProfileSetting/>
             </Route>
             <Route path='*' exact={true} component={NotFound} />
           </Switch>
