@@ -6,7 +6,7 @@ import { getNameByCategoryID } from "../../../api/post";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 
-const NeedHelpCard = ({post},props) => {
+const NeedHelpCard = ({post , isProfile}) => {
   const asd = {
     user: {
       id: 1,
@@ -113,7 +113,7 @@ const NeedHelpCard = ({post},props) => {
           </Box>
         </Box>
        
-        {props.isProfile !== 'true' &&
+        {isProfile !== 'true' &&
           <>
           <hr/>
           <Grid pt={["4", "8"]} templateColumns="repeat(1, 1fr)" gap={2}>

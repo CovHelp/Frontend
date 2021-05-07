@@ -9,7 +9,7 @@ import { MdThumbUp } from "react-icons/md";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 
-const CardButtons = ({ posts, props }) => {
+const CardButtons = (props) => {
   return (
     <Button background="transparent">
       <Flex
@@ -25,7 +25,7 @@ const CardButtons = ({ posts, props }) => {
   );
 };
 
-const GiveHelpCard = (props) => {
+const GiveHelpCard = ({post , isProfile}) => {
   const card = {
     id: 1,
     createdAt: "createdAt",
@@ -131,7 +131,7 @@ const GiveHelpCard = (props) => {
           </Box>
         </Box>
 
-        {props.isProfile !== 'true' &&
+        {isProfile !== 'true' &&
           <>
             <hr />
             <Grid pt={["4", "8"]} templateColumns="repeat(3, 1fr)" gap={2}>
