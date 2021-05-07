@@ -15,7 +15,7 @@ import React from 'react'
 
 function ProfileSetting() {
     return (
-        <Stack  display="flex" flexDirection="column"  spacing={8} alignItems="flexstart">
+        <Stack  display="flex" flexDirection="column"  spacing={4} alignItems="flexstart">
              
              <Box pl="16px"  mb="8px" mt="16px">
 
