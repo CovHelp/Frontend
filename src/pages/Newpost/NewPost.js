@@ -8,7 +8,8 @@ const NewPost = (props) => {
 
     const [category, setCategory] = useState(0);
     const [shareNumber, setshareNumber] = useState(true)
-    const [sliderValue, setSliderValue] = useState(1)
+    const [urgencySliderValue, setUrgencySliderValue] = useState(1)
+    const [locationSliderValue, setLocationSliderValue] = useState(1)
     const [phoneNumber, setPhoneNumber] = useState('Enter Number')
     const [body, setBody] = useState('')
     const handleCategoryChange = (e) => {
@@ -16,7 +17,8 @@ const NewPost = (props) => {
 
         setBody(props.typeOfPost === "Request Help" ? BoilerPlateForNeedHelp[e.target.value - 1] : BoilerPlateForGiveHelp[e.target.value - 1]);
     }
-    const handleSLiderChange = (val) => setSliderValue(val);
+    const handleUrgencySliderChange = (val) => setUrgencySliderValue(val);
+    const handleLocationSliderChange = (val) => {setLocationSliderValue(val)};
     const handlePhoneNumberChange = (e) => setPhoneNumber(e.target.value);
     const handleSetBody = (e) => setBody(e.target.value);
 
@@ -74,32 +76,30 @@ const NewPost = (props) => {
                                 onChange={(e) => handleSetBody(e)} />
                         </FormControl>
 
-                        
+
 
 
                         {props.typeOfPost === 'Provide Help' &&
                             <Flex direction="column" m={2}>
                                 <FormLabel>
                                     Select Number of Locations
-                            </FormLabel>
+                                </FormLabel>
 
                                 <Slider flex="1" min={1} max={5}
                                     focusThumbOnChange={false}
-                                    sliderValue={sliderValue}
+                                    sliderValue={locationSliderValue}
                                     defaultValue={0}
-                                    onChange={handleSLiderChange}>
+                                    onChange={handleLocationSliderChange}>
 
                                     <SliderTrack>
                                         <SliderFilledTrack defaultValue={1} />
                                     </SliderTrack>
-                                    <SliderThumb fontSize="sm" boxSize="32px" children={sliderValue} />
+                                    <SliderThumb fontSize="sm" boxSize="32px" children={locationSliderValue} />
                                 </Slider>
                             </Flex>
                         }
 
-
-
-                        <StateCitySelctor />
+                        <StateCitySelctor/>
 
                         {props.typeOfPost === "Request Help" &&
 
@@ -112,14 +112,14 @@ const NewPost = (props) => {
 
                                 <Slider flex="1" min={1} max={3}
                                     focusThumbOnChange={false}
-                                    sliderValue={sliderValue}
+                                    sliderValue={urgencySliderValue}
                                     defaultValue={0}
-                                    onChange={handleSLiderChange}>
+                                    onChange={handleUrgencySliderChange}>
 
                                     <SliderTrack>
-                                        <SliderFilledTrack defaultValue={0} bg={sliderValue === 2 ? 'orange' : 'red'} />
+                                        <SliderFilledTrack defaultValue={0} bg={urgencySliderValue === 2 ? 'orange' : 'red'} />
                                     </SliderTrack>
-                                    <SliderThumb fontSize="sm" boxSize="32px" children={sliderValue} />
+                                    <SliderThumb fontSize="sm" boxSize="32px" children={urgencySliderValue} />
                                 </Slider>
                             </Flex>
 
