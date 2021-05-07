@@ -12,8 +12,14 @@ import "./index.css";
 import StateCitySelctor from "../newpost/StateCitySelector";
 
 import { Box, Checkbox, Link, Stack, Text } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
 export default function DesktopSidebar() {
+  const needHelpPostStore = useSelector(store => store.needHelpPostStore);
+  
+  const handleFilter = (index) => {
+    
+  }
   return (
     <div class="sidenav">
       <Stack

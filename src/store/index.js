@@ -16,7 +16,8 @@ const initialState = {
             profile_pic: null
         },
         token: null
-    }
+    },
+    needHelpPostStore: []
 }
 
 
@@ -29,6 +30,12 @@ const reducer = (state, {
             return {
                 ...state,
                 userStore: payload
+            }
+        
+        case 'SAVE_NEED_HELP_POSTS':
+            return {
+                ...state,
+                needHelpPostStore: payload
             }
             default:
                 return {

@@ -18,7 +18,7 @@ const NeedHelpCard = ({ post }) => {
       >
         <Box w={"100%"} p={8} bgColor="white">
           <Flex>
-            <Avatar />
+            <Avatar src={post.user.profile_pic}/>
             <Box d="flex" flexDir="column" _dark="true" ml="4">
               <Heading as="h6" size="sm">
                 {post.user.firstName} {post.user.LastName}
