@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 import { getAllCitiesByStateCode, getAllStates } from "../../api/misc";
 
 
-export default function StateCitySelctor({onSelected}) {
+export default function StateCitySelctor({onSelected, parent="default"}) {
   const [allStates, setAllStates] = useState([]);
   const [allCities, setAllCities] = useState([]);
   const [selectedState, setSelectedState] = useState("None");
   const [selectedCity, setSelectedCity] = useState("None");
-
+  const [stateState, setStateState] = useState();
+  const [cityState, setCityState] = useState();
+  
 
   const fetchStates = async () => {
     try{
@@ -35,13 +37,21 @@ export default function StateCitySelctor({onSelected}) {
     const city = allCities.filter((city) => city.name === target.value);
     setSelectedCity(city[0]);
     onSelected(city[0], selectedState);
+    if(parent === 'provideHelp'){
+      try{
+      selectedCity("None");
+      selectedState("None");
+      setStateState("");
+      setCityState("");
+      }catch(e){}
+    }
   };
 
   return (
     <>
       <FormLabel>Select State</FormLabel>
 
-      <Select border={'2px'} my="10px" onChange={handleSetSelectedState}>
+      <Select value={stateState} border={'2px'} my="10px" onChange={handleSetSelectedState}>
         {allStates.length > 0 &&
           allStates.map((v, index) => (
             <option key={index} value={v.name}>
@@ -53,7 +63,8 @@ export default function StateCitySelctor({onSelected}) {
 
       <FormLabel>Select City</FormLabel>
 
-      <Select border={'2px'} disabled={selectedState === 'None' ? true : false} placeholder={selectedState === 'None' ? "Select State first" : ''} onChange={handleSetSelectedCity}>
+      <Select value={cityState} border={'2px'} disabled={selectedState === 'None' ? true : false} placeholder={selectedState === 'None' ? "Select State first" : ''} onChange={handleSetSelectedCity}>
+        <option>Select a city</option>
         {allCities.length > 0 &&
           allCities.map((v, index) => (
             <option key={index} value={v.name}>

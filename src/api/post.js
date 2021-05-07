@@ -3,9 +3,18 @@ import {
 } from './bootstrap';
 import CovhelpException from './CovhelpException'
 
-export const getNeedHelpPosts = async (data) => {
+export const getNeedHelpPosts = async () => {
     try {
         const res = await JSONClient.get('/posts/need-help-posts');
+        return res.data;
+    } catch (e) {
+        throw new CovhelpException(e.response.data, e.response.status);
+    }
+}
+
+export const getProvideHelpPosts = async () => {
+    try {
+        const res = await JSONClient.get('/posts/provide-help-posts');
         return res.data;
     } catch (e) {
         throw new CovhelpException(e.response.data, e.response.status);
@@ -56,24 +65,18 @@ export const createProvideHelpPost = async ({
     picture,
     isPhoneNumberPublic,
     urgency,
-    city,
-    state,
-    lat,
-    long,
+    locations,
     token
 }) => {
     try {
-        const res = await JSONClient.post('/posts/create-need-help-post', {
+        const res = await JSONClient.post('/posts/create-provide-help-post', {
             body,
             category,
             phoneNumber,
             picture,
             isPhoneNumberPublic,
-            urgency,
-            city,
-            state,
-            lat,
-            long,
+            urgency: 0,
+            locations,
             isClosed: false
         }, {
             headers: {

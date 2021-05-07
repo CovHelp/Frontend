@@ -27,50 +27,19 @@ const CardButtons = (props) => {
 };
 
 const GiveHelpCard = ({ post, isProfile }) => {
-  const card = {
-    id: 1,
-    createdAt: "createdAt",
-    updatedAt: "updatedAt",
-    type: 1,
-    urgency: "urgency",
-    body:
-      "Modern home in city center in the heart of historic Los Angeles Modern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los Angeles",
-    picture: "https://bit.ly/2Z4KKcF",
-    category: 3,
-    isClosed: 2,
-    lat: "asd",
-    long: "asa",
-    user: {
-      id: 1,
-      createdAt: "createdAt",
-      updatedAt: "updatedAt",
-      firstName: "Firstname",
-      LastName: "Lastname",
-      email: "asidjwef",
-      token: "093284029384023",
-      profile_pic: "Picture",
-    },
-    comment: [
-      {
-        id: 1,
-        createdAt: "createdAt",
-        updatedAt: "updatedAt",
-        comment: "very noice",
-      },
-    ],
-  };
+  
 
   return (
     <CardBox>
       <Flex w={"100%"} p={["4", "8"]} bgColor="white">
-        <Avatar w={["40px", "48px"]} h={["40px", "48px"]} />
+        <Avatar src={post.user.profile_pic} w={["40px", "48px"]} h={["40px", "48px"]} />
         <Flex flexDir="column" _dark="true" ml={["2", "4"]}>
           <Heading as="h6" size="sm">
-            {card.user.firstName} {card.user.LastName}
+            {post.user.firstName} {post.user.LastName}
           </Heading>
           <Box>
             <p style={{ fontSize: 12 }}>
-              {new Date(card.createdAt).toLocaleString()} &bull;
+              {new Date(post.createdAt).toLocaleString()} &bull;
               <span>
                 <Badge
                   borderRadius="full"
@@ -79,7 +48,7 @@ const GiveHelpCard = ({ post, isProfile }) => {
                   mb={1}
                   colorScheme="green"
                 >
-                  {getNameByCategoryID(card.category)} {/* URGENCY */}
+                  {getNameByCategoryID(post.category)} {/* URGENCY */}
                 </Badge>
               </span>
             </p>
@@ -87,16 +56,16 @@ const GiveHelpCard = ({ post, isProfile }) => {
         </Flex>
       </Flex>
       <Image
-        src={card.picture}
+        src={post.picture}
         objectFit="cover"
         color="gray.600"
-        alt={card.imageAlt}
+        alt=""
       />
 
-      <Box p={["4", "8"]} pt={card.picture === "" && ["0", "0"]} bgColor="white">
+      <Box p={["4", "8"]} pt={post.picture === "" && ["0", "0"]} bgColor="white">
         <Box d="flex" alignItems="baseline">
           <Badge borderRadius="full" px="2" colorScheme="red">
-            {card.urgency} {/* URGENCY */}
+            Urgency level: {post.urgency} {/* URGENCY */}
           </Badge>
           <Box
             color="gray.500"
@@ -106,7 +75,6 @@ const GiveHelpCard = ({ post, isProfile }) => {
             textTransform="uppercase"
             ml="2"
           >
-            {card.category} category &bull; {card.baths} baths
           </Box>
         </Box>
 
@@ -117,7 +85,7 @@ const GiveHelpCard = ({ post, isProfile }) => {
           lineHeight="tight"
           noOfLines={[1, 2, 3, 4]}
         >
-          {card.body}
+          {post.body}
         </Box>
 
         <Box d="flex" mt="2" alignItems="center">
