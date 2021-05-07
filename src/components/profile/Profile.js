@@ -143,7 +143,7 @@ function Profile() {
             </Box>
           </Box>
           </Box>
-        {active ? <NeedHelp /> : <GiveHelp />}
+        {/* {active ? <NeedHelp /> : <GiveHelp />} */}
         </Stack>
       </Box>
     </>

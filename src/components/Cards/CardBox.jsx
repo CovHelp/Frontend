@@ -6,11 +6,13 @@ const CardBox = (props) => {
             m={2}
             w={["100%"]}
             maxW="700px"
+            border={"1px"}
             h="auto">
             <Box
                 borderRadius={"xl"}
                 maxW="-moz-max-content"
                 mt={1}
+                w={"100%"}
                 borderWidth="1px"
                 overflow="hidden">
                     {props.children}
