@@ -93,7 +93,7 @@ const GiveHelpCard = ({ post, isProfile }) => {
         alt={card.imageAlt}
       />
 
-      <Box p={["4", "8"]} bgColor="white">
+      <Box p={["4", "8"]} pt={card.picture === "" && ["0", "0"]} bgColor="white">
         <Box d="flex" alignItems="baseline">
           <Badge borderRadius="full" px="2" colorScheme="red">
             {card.urgency} {/* URGENCY */}
