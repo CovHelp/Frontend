@@ -1,9 +1,14 @@
 import { Box } from "@chakra-ui/layout";
 import React from "react";
 import GiveHelpCard from "../../components/Cards/GiveHelpCard/GiveHelpCard";
+import MainHeading from "../../components/MainHeading/MainHeading";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import {useDispatch} from 'react-redux'
 
 const GiveHelp = () => {
   return (
+    <>
+
     <Box
       px={3}
       d="flex"
@@ -11,6 +16,7 @@ const GiveHelp = () => {
       alignItems={"center"}
       background="#f0f2f5"
     >
+      <SearchBar name = "Provide Help"/>
       <GiveHelpCard />
       <GiveHelpCard />
       <GiveHelpCard />
@@ -21,6 +27,7 @@ const GiveHelp = () => {
       <GiveHelpCard />
 
     </Box>
+    </>
   );
 };
 

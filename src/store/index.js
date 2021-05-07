@@ -1,19 +1,53 @@
-import { createStore } from 'redux'
-
+import {
+    createStore
+} from 'redux'
+import {
+    persistStore,
+    persistReducer
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 const initialState = {
-    ping: "pong"
-}
-
-
-const reducer = (state, {type, payload}) => {
-    switch(type) {
-        default:
-            return {
-                ...state
-            }
+    userStore: {
+        user: {
+            email: null,
+            firstName: null,
+            lastName: null,
+            email: null,
+            profile_pic: null
+        },
+        token: null
     }
 }
 
-const store = createStore(reducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
+const reducer = (state, {
+    type,
+    payload
+}) => {
+    switch (type) {
+        case 'SAVE_USER':
+            return {
+                ...state,
+                userStore: payload
+            }
+            default:
+                return {
+                    ...state
+                }
+    }
+}
+
+const persistConfig = {
+    key: 'covhelp',
+    storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, reducer)
+
+
+const store = createStore(persistedReducer, initialState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+const persistedStore = persistStore(store);
 export default store

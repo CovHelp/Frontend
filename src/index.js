@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react"
 import theme from "./theme"
 
+
 ReactDOM.render(
   // <React.StrictMode>
     <Router>
@@ -26,4 +27,4 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();
