@@ -30,10 +30,6 @@ const Navbar = ({ sideBarEvent }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isSidenavVIsible, setSideNavVisibility] = useState(false);
 
-  const handleNavIndex = (index) => {
-    setActiveIndex(index);
-  };
-
   const handleToggleSidebar = () => {
     setSideNavVisibility((v) => !v);
   };
@@ -132,6 +128,10 @@ const Navbar = ({ sideBarEvent }) => {
       text: "Organizations",
     },
   ];
+
+  const handleNavIndex = (index) => {
+    setActiveIndex(index);
+  };
 
   return (
     <div className="navwrapper">
