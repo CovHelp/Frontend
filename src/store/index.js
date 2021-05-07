@@ -17,7 +17,8 @@ const initialState = {
         },
         token: null
     },
-    needHelpPostStore: []
+    needHelpPostStore: [],
+    needHelpPostStoreFiltered: [],
 }
 
 
@@ -31,16 +32,26 @@ const reducer = (state, {
                 ...state,
                 userStore: payload
             }
-        
+            break;
+
         case 'SAVE_NEED_HELP_POSTS':
             return {
                 ...state,
                 needHelpPostStore: payload
             }
-            default:
-                return {
-                    ...state
-                }
+            break;
+
+        case 'SAVE_NEED_HELP_POSTS_FILTERED':
+            return {
+                ...state,
+                needHelpPostStoreFiltered: payload
+            }
+            break;
+
+        default:
+            return {
+                ...state
+            }
     }
 }
 

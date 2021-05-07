@@ -8,12 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 const NeedHelp = () => {
   const dispatch = useDispatch();
   const [posts, setPosts] = useState([]);
-  const needPostStore = useSelector((store) => store.needHelpPostStore);
+  const needHelpPostStoreFiltered = useSelector((store) => store.needHelpPostStoreFiltered);
 
   const loadNeedHelpPosts = async () => {
     try {
       const res = await getNeedHelpPosts();
       dispatch({ type: "SAVE_NEED_HELP_POSTS", payload: res });
+      dispatch({ type: "SAVE_NEED_HELP_POSTS_FILTERED", payload: res });
+
       setPosts(res);
     } catch (e) {}
   };
@@ -35,8 +37,8 @@ const NeedHelp = () => {
         background="#f0f2f5"
       >
         <SearchBar name="Request Help" />
-        {needPostStore.length > 0 &&
-          needPostStore.map((post) => (
+        {needHelpPostStoreFiltered.length > 0 &&
+          needHelpPostStoreFiltered.map((post) => (
             <NeedHelpCard key={post.id} post={post} />
           ))}
       </Box>
