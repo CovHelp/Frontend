@@ -5,13 +5,30 @@ import StateCitySelctor from '../../components/newpost/StateCitySelector';
 
 export default function NewPost() {
 
+    const BodyData = {
+        1: `Patient Name {FROM API} and Age {FROM API} has oxygen level __ and need oxygen cylinder/concentrator urgently at address(optional) || or enter a City Name. And I can reach below mentioned cities for getting help. Please contact me if you can help or refer me to the person that can help.`
+        ,
+        2: `Patient Name __ and Age__ require an Ambulance urgently at address(optional)|| or locality || or enter a City Name. Please contact me in the below mentioned number if you can provide help or have information about the one that can provide one. `
+        ,
+        3: `Patient Name __ and Age__ require below mentioned medicines. Please contact or share the information where I can get these. I can reach ____(cuty name)__ for acquiring medicines. 
+            Medicines Prescribed:`
+        ,
+        4: "Patient Name __ and Age_ require an urgent ___ bed in a hospital. Please contact me if  you know the availability of hospital beds in City_Names. "
+        ,
+        5: "Patient Name __ and Age__ urgently require Blood/Plasma. Please contact me if you can reach this hospital( Where a patient Needs)."
+        ,
+        6: "Patient Name __ and Age__ require food and tiffin services. Please contact me if you can provide food and tiffin services. "
+    }
+
     const [category, setCategory] = useState(0);
     const [shareNumber, setshareNumber] = useState(true)
     const [sliderValue, setSliderValue] = useState(1)
-    const [phoneNumber, setPhoneNumber] = useState(0)
-    const [body, setBody] = useState();
-
-    const handleAddrTypeChange = (e) => setCategory(e.target.value);
+    const [phoneNumber, setPhoneNumber] = useState('Enter Number')
+    const [body, setBody] = useState('')
+    const handleCategoryChange = (e) => {
+        setCategory(e.target.value);
+        setBody(BodyData[category]);
+    }
     const handleSLiderChange = (val) => setSliderValue(val);
     const handlePhoneNumberChange = (e) => setPhoneNumber(e.target.value);
     const handleSetBody = (e) => setBody(e.target.value);
@@ -36,8 +53,8 @@ export default function NewPost() {
 
                     <Stack spacing={4} my={2}>
 
-                        <span>bitchh {category} |
-                       urgency {sliderValue} | phone {phoneNumber} | body {body}</span>
+                        {/* <span>bitchh {category} |
+                       urgency {sliderValue} | phone {phoneNumber} | body {body}</span> */}
 
                         <FormControl id="Category">
                             <FormLabel>Select Category</FormLabel>
@@ -46,9 +63,9 @@ export default function NewPost() {
                                 isRequired
                                 placeholder="Select Category"
                                 border={'2px'}
-                                onChange={(e) => handleAddrTypeChange(e)}>
+                                onChange={(e) => handleCategoryChange(e)}>
 
-                                <option value="1" >Oxygen</option>
+                                <option value="1">Oxygen</option>
                                 <option value="2">Ambulance</option>
                                 <option value="3">Medicine</option>
                                 <option value="4">Hospital Beds</option>
@@ -59,8 +76,11 @@ export default function NewPost() {
 
 
                         <FormControl id="Data">
-                            <FormLabel>Enter</FormLabel>
-                            <Textarea border={'2px'} value={body} onChange={(e) => handleSetBody(e)} />
+                            <FormLabel>Enter Details</FormLabel>
+                            <Textarea border={'2px'}
+                                height="auto"
+                                value={body}
+                                onChange={(e) => handleSetBody(e)} />
                         </FormControl>
 
                         <StateCitySelctor />
