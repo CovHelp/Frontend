@@ -5,23 +5,26 @@ import { Input, InputGroup } from '@chakra-ui/input'
 import NewPost from "../../pages/Newpost/NewPost";
 import { Box, Heading } from '@chakra-ui/layout'
 import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/modal'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 
 
 const SearchBar = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const finalRef = React.useRef()
-
+    
+    useEffect(() => {
+        console.log(props.name);
+    }, [props])
     const CreatePostModal = () => {
         return (
             <>
                 <ModalOverlay style={{ backdropFilter: "blur(15px)" }} />
                 <ModalContent >
-                    <ModalHeader fontWeight="bold" fontSize="3xl" >New Post</ModalHeader>
+                    <ModalHeader fontWeight="bold" fontSize="3xl" >{props.name}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <NewPost />
+                        <NewPost typeOfPost = {props.name} />
                     </ModalBody>
 
                     {/*   <ModalFooter>
@@ -31,7 +34,7 @@ const SearchBar = (props) => {
                        * <Button variant="ghost">Secondary Action</Button>
                     </ModalFooter> */}
 
-                    
+
                 </ModalContent>
             </>
         );

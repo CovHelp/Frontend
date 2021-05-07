@@ -1,24 +1,10 @@
 import { Box, Button, Checkbox, Flex, FormControl, FormLabel, Input, InputGroup, InputLeftAddon, Select, Stack, Textarea, useColorModeValue } from '@chakra-ui/react';
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack } from "@chakra-ui/slider";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { BoilerPlateForGiveHelp, BoilerPlateForNeedHelp } from '../../components/newpost/BoilerPlate';
 import StateCitySelctor from '../../components/newpost/StateCitySelector';
 
-export default function NewPost() {
-
-    const BodyData = [
-        `Patient Name {FROM API} and Age {FROM API} has oxygen level __ and need oxygen cylinder/concentrator urgently at address(optional) || or enter a City Name. And I can reach below mentioned cities for getting help. Please contact me if you can help or refer me to the person that can help.`
-        ,
-        `Patient Name __ and Age__ require an Ambulance urgently at address(optional)|| or locality || or enter a City Name. Please contact me in the below mentioned number if you can provide help or have information about the one that can provide one. `
-        ,
-        `Patient Name __ and Age__ require below mentioned medicines. Please contact or share the information where I can get these. I can reach ____(cuty name)__ for acquiring medicines. 
-            Medicines Prescribed`
-        ,
-        "Patient Name __ and Age_ require an urgent ___ bed in a hospital. Please contact me if  you know the availability of hospital beds in City_Names. "
-        ,
-        "Patient Name __ and Age__ urgently require Blood/Plasma. Please contact me if you can reach this hospital( Where a patient Needs)."
-        ,
-        "Patient Name __ and Age__ require food and tiffin services. Please contact me if you can provide food and tiffin services. "
-    ]
+const NewPost = (props) => {
 
     const [category, setCategory] = useState(0);
     const [shareNumber, setshareNumber] = useState(true)
@@ -27,12 +13,18 @@ export default function NewPost() {
     const [body, setBody] = useState('')
     const handleCategoryChange = (e) => {
         setCategory(e.target.value - 1);
-        setBody(BodyData[e.target.value - 1]);
+
+        setBody(props.typeofPost === "Request Help" ? BoilerPlateForNeedHelp[e.target.value - 1] : BoilerPlateForGiveHelp[e.target.value - 1]);
     }
     const handleSLiderChange = (val) => setSliderValue(val);
     const handlePhoneNumberChange = (e) => setPhoneNumber(e.target.value);
     const handleSetBody = (e) => setBody(e.target.value);
 
+
+    useEffect(() => {
+        console.log(props.typeofPost);
+    }, [props])
+    
     // PHONE NUMBER LESS THAN 10
     const handleIncorrectNumber = () => {
         var phoneNumberResponse = phoneNumber.toLocaleString.length < 10 ? false : true
@@ -57,7 +49,7 @@ export default function NewPost() {
                        urgency {sliderValue} | phone {phoneNumber} | body {body}</span> */}
 
                         <FormControl id="Category">
-                            <FormLabel>Select Category</FormLabel>
+                            <FormLabel>{props.typeofPost}</FormLabel>
 
                             <Select
                                 isRequired
@@ -86,32 +78,38 @@ export default function NewPost() {
                         <StateCitySelctor />
 
 
-                        <Flex direction="column" m={2}>
+                        {props.typeofPost === "Request Help" &&
+                            
 
-                            <FormLabel>
-                                Urgency level
+                            <Flex direction="column" m={2}>
+
+                                <FormLabel>
+                                    Urgency level
                             </FormLabel>
 
-                            <Slider flex="1" min={1} max={3}
-                                focusThumbOnChange={false}
-                                sliderValue={sliderValue}
-                                defaultValue={0}
-                                onChange={handleSLiderChange}>
+                                <Slider flex="1" min={1} max={3}
+                                    focusThumbOnChange={false}
+                                    sliderValue={sliderValue}
+                                    defaultValue={0}
+                                    onChange={handleSLiderChange}>
 
-                                <SliderTrack>
-                                    <SliderFilledTrack defaultValue={0} bg={sliderValue === 2 ? 'orange' : 'red'} />
-                                </SliderTrack>
-                                <SliderThumb fontSize="sm" boxSize="32px" children={sliderValue} />
-                            </Slider>
-                        </Flex>
+                                    <SliderTrack>
+                                        <SliderFilledTrack defaultValue={0} bg={sliderValue === 2 ? 'orange' : 'red'} />
+                                    </SliderTrack>
+                                    <SliderThumb fontSize="sm" boxSize="32px" children={sliderValue} />
+                                </Slider>
+                            </Flex>
 
+
+                        }
                         <Checkbox pt={2} outline="none"
                             defaultIsChecked
                             onChange={() => setshareNumber(!shareNumber)}>
                             Share My Phone Number</Checkbox>
+
+
+
                         {shareNumber &&
-
-
                             <FormControl id="phone Number">
                                 <FormLabel>
                                     Phone Number
@@ -128,8 +126,8 @@ export default function NewPost() {
                                         disabled={!shareNumber}
                                         placeholder={'Enter Number'} />
                                 </InputGroup>
-
-                            </FormControl>}
+                            </FormControl>
+                        }
 
                         <Button
                             bg="messenger.500"
@@ -145,3 +143,4 @@ export default function NewPost() {
         </Flex >
     )
 }
+export default NewPost;
