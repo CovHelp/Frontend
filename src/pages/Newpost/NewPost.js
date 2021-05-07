@@ -6,18 +6,18 @@ import StateCitySelctor from '../../components/newpost/StateCitySelector';
 export default function NewPost() {
 
     const BodyData = [
-         `Patient Name {FROM API} and Age {FROM API} has oxygen level __ and need oxygen cylinder/concentrator urgently at address(optional) || or enter a City Name. And I can reach below mentioned cities for getting help. Please contact me if you can help or refer me to the person that can help.`
+        `Patient Name {FROM API} and Age {FROM API} has oxygen level __ and need oxygen cylinder/concentrator urgently at address(optional) || or enter a City Name. And I can reach below mentioned cities for getting help. Please contact me if you can help or refer me to the person that can help.`
         ,
-         `Patient Name __ and Age__ require an Ambulance urgently at address(optional)|| or locality || or enter a City Name. Please contact me in the below mentioned number if you can provide help or have information about the one that can provide one. `
+        `Patient Name __ and Age__ require an Ambulance urgently at address(optional)|| or locality || or enter a City Name. Please contact me in the below mentioned number if you can provide help or have information about the one that can provide one. `
         ,
-         `Patient Name __ and Age__ require below mentioned medicines. Please contact or share the information where I can get these. I can reach ____(cuty name)__ for acquiring medicines. 
+        `Patient Name __ and Age__ require below mentioned medicines. Please contact or share the information where I can get these. I can reach ____(cuty name)__ for acquiring medicines. 
             Medicines Prescribed`
         ,
-         "Patient Name __ and Age_ require an urgent ___ bed in a hospital. Please contact me if  you know the availability of hospital beds in City_Names. "
+        "Patient Name __ and Age_ require an urgent ___ bed in a hospital. Please contact me if  you know the availability of hospital beds in City_Names. "
         ,
-         "Patient Name __ and Age__ urgently require Blood/Plasma. Please contact me if you can reach this hospital( Where a patient Needs)."
+        "Patient Name __ and Age__ urgently require Blood/Plasma. Please contact me if you can reach this hospital( Where a patient Needs)."
         ,
-         "Patient Name __ and Age__ require food and tiffin services. Please contact me if you can provide food and tiffin services. "
+        "Patient Name __ and Age__ require food and tiffin services. Please contact me if you can provide food and tiffin services. "
     ]
 
     const [category, setCategory] = useState(0);
@@ -26,8 +26,8 @@ export default function NewPost() {
     const [phoneNumber, setPhoneNumber] = useState('Enter Number')
     const [body, setBody] = useState('')
     const handleCategoryChange = (e) => {
-        setCategory(e.target.value-1);
-        setBody(BodyData[e.target.value-1]);
+        setCategory(e.target.value - 1);
+        setBody(BodyData[e.target.value - 1]);
     }
     const handleSLiderChange = (val) => setSliderValue(val);
     const handlePhoneNumberChange = (e) => setPhoneNumber(e.target.value);
@@ -95,10 +95,11 @@ export default function NewPost() {
                             <Slider flex="1" min={1} max={3}
                                 focusThumbOnChange={false}
                                 sliderValue={sliderValue}
+                                defaultValue={0}
                                 onChange={handleSLiderChange}>
 
                                 <SliderTrack>
-                                    <SliderFilledTrack bg={sliderValue === 2 ? 'orange' : 'red'} />
+                                    <SliderFilledTrack defaultValue={0} bg={sliderValue === 2 ? 'orange' : 'red'} />
                                 </SliderTrack>
                                 <SliderThumb fontSize="sm" boxSize="32px" children={sliderValue} />
                             </Slider>
@@ -108,27 +109,27 @@ export default function NewPost() {
                             defaultIsChecked
                             onChange={() => setshareNumber(!shareNumber)}>
                             Share My Phone Number</Checkbox>
-
-                        <FormLabel>
-                            Phone Number
-                        </FormLabel>
+                        {shareNumber &&
 
 
-                        <FormControl id="phone Number">
+                            <FormControl id="phone Number">
+                                <FormLabel>
+                                    Phone Number
+                            </FormLabel>
 
-                            <InputGroup mb={4}>
-                                <InputLeftAddon children="+91" />
+                                <InputGroup mb={4}>
+                                    <InputLeftAddon children="+91" />
 
-                                <Input
-                                    border={'2px'}
-                                    type="number"
-                                    value={phoneNumber}
-                                    onChange={(e) => handlePhoneNumberChange(e)}
-                                    disabled={!shareNumber}
-                                    placeholder={!shareNumber ? "Checkbox not selected" : 'Enter Number'} />
-                            </InputGroup>
+                                    <Input
+                                        border={'2px'}
+                                        type="number"
+                                        value={phoneNumber}
+                                        onChange={(e) => handlePhoneNumberChange(e)}
+                                        disabled={!shareNumber}
+                                        placeholder={'Enter Number'} />
+                                </InputGroup>
 
-                        </FormControl>
+                            </FormControl>}
 
                         <Button
                             bg="messenger.500"
