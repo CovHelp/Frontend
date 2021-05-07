@@ -24,7 +24,7 @@ const NewPost = (props) => {
     useEffect(() => {
         console.log(props.typeOfPost);
     }, [])
-    
+
     // PHONE NUMBER LESS THAN 10
     const handleIncorrectNumber = () => {
         var phoneNumberResponse = phoneNumber.toLocaleString.length < 10 ? false : true
@@ -49,7 +49,7 @@ const NewPost = (props) => {
                        urgency {sliderValue} | phone {phoneNumber} | body {body}</span> */}
 
                         <FormControl id="Category">
-                            <FormLabel>{props.typeOfPost}</FormLabel>
+                            <FormLabel>Select Cateogry</FormLabel>
 
                             <Select
                                 isRequired
@@ -66,7 +66,6 @@ const NewPost = (props) => {
                             </Select>
                         </FormControl>
 
-
                         <FormControl id="Data">
                             <FormLabel>Enter Details</FormLabel>
                             <Textarea border={'2px'}
@@ -75,11 +74,35 @@ const NewPost = (props) => {
                                 onChange={(e) => handleSetBody(e)} />
                         </FormControl>
 
+                        
+
+
+                        {props.typeOfPost === 'Provide Help' &&
+                            <Flex direction="column" m={2}>
+                                <FormLabel>
+                                    Select Number of Locations
+                            </FormLabel>
+
+                                <Slider flex="1" min={1} max={5}
+                                    focusThumbOnChange={false}
+                                    sliderValue={sliderValue}
+                                    defaultValue={0}
+                                    onChange={handleSLiderChange}>
+
+                                    <SliderTrack>
+                                        <SliderFilledTrack defaultValue={1} />
+                                    </SliderTrack>
+                                    <SliderThumb fontSize="sm" boxSize="32px" children={sliderValue} />
+                                </Slider>
+                            </Flex>
+                        }
+
+
+
                         <StateCitySelctor />
-                        {props.typeOfPost}
 
                         {props.typeOfPost === "Request Help" &&
-                            
+
 
                             <Flex direction="column" m={2}>
 
