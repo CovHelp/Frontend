@@ -1,0 +1,19 @@
+@media only screen and (min-width:768px){
+    
+    .settings__container{
+        display: flex;
+        flex-direction: column;
+        margin: 1rem 10rem;
+       
+    }
+    
+}
+
+/* @media only screen and (max-width:650px){
+    .settings__container{
+        display: flex;
+        flex-direction: column;
+        margin:0;
+
+    }
+} */
