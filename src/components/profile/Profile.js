@@ -39,6 +39,7 @@ function Profile() {
         flexDir={"column"}
         alignItems={"center"}
         background="#f0f2f5"
+        px="3"
       >
         <Stack
           w="100%"
@@ -82,7 +83,7 @@ function Profile() {
         <Box 
             maxW="700px"
             w="100%"
-            px={["4", "4", "0"]}
+            px={["4", "4", "3", "4", "0"]}
         >
           <Box
             w="100%"
@@ -143,7 +144,7 @@ function Profile() {
             </Box>
           </Box>
           </Box>
-          {active ? <NeedHelp /> : <GiveHelp />}
+        {active ? <NeedHelp /> : <GiveHelp />}
         </Stack>
       </Box>
     </>

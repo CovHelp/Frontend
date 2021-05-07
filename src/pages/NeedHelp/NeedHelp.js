@@ -24,6 +24,7 @@ const NeedHelp = () => {
   return (
     <>
       <Box
+      w="100%"
         px={3}
         d="flex"
         flexDir={"column"}
