@@ -23,7 +23,7 @@ const CommentBubble = (props) => {
                         <Heading fontSize="md">
                             {props.name}
                         </Heading>
-                        {props.date}
+                        <Text ml={2} fontSize="sm">{props.date}</Text>
                     </Flex>
                 </Flex>
 
