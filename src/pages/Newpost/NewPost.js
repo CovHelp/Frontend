@@ -11,21 +11,21 @@ import {
   Select,
   Stack,
   Textarea,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
-import { ImCross } from "react-icons/all";
 import {
   Slider,
   SliderFilledTrack,
   SliderThumb,
-  SliderTrack,
+  SliderTrack
 } from "@chakra-ui/slider";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { ImCross } from "react-icons/all";
 import { useSelector } from "react-redux";
 import { createNeedHelpPost, createProvideHelpPost } from "../../api/post";
 import {
   BoilerPlateForGiveHelp,
-  BoilerPlateForNeedHelp,
+  BoilerPlateForNeedHelp
 } from "../../components/newpost/BoilerPlate";
 import StateCitySelctor from "../../components/newpost/StateCitySelector";
 
@@ -35,7 +35,7 @@ const NewPost = (props) => {
   const [urgencySliderValue, setUrgencySliderValue] = useState(1);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [locationSliderValue, setLocationSliderValue] = useState(1);
-
+  const [loader, setLoader] = useState(false);
   const [body, setBody] = useState("");
   const [city, setCity] = useState({});
   const [state, setState] = useState({});
@@ -83,6 +83,7 @@ const NewPost = (props) => {
   };
 
   const handleCreatePost = async () => {
+    setLoader(!loader);
     if (props.typeOfPost === "Request Help") {
       try {
         await createNeedHelpPost({
@@ -98,6 +99,7 @@ const NewPost = (props) => {
           long: city.longitude,
           token: userStore.token.token,
         });
+        setLoader(!loader);
         props.onClose();
       } catch (e) {
         console.log("Error");
@@ -115,7 +117,7 @@ const NewPost = (props) => {
           token: userStore.token.token,
         });
         props.onClose();
-      } catch (e) {}
+      } catch (e) { }
     }
   };
 
@@ -187,7 +189,7 @@ const NewPost = (props) => {
                 </Flex>
               )}
 
-           {props.typeOfPost !== "Provide Help" &&  <StateCitySelctor onSelected={handleLocationSelection} />}
+            {props.typeOfPost !== "Provide Help" && <StateCitySelctor onSelected={handleLocationSelection} />}
             {stateCitySelectorVisible &&
               props.typeOfPost === "Provide Help" && (
                 <StateCitySelctor
@@ -259,6 +261,7 @@ const NewPost = (props) => {
             )}
 
             <Button
+              isLoading={loader}
               onClick={handleCreatePost}
               bg="messenger.500"
               color={"white"}
