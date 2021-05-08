@@ -5,6 +5,7 @@ import { IoHandLeftSharp } from "react-icons/io5";
 import { getNameByCategoryID } from "../../../api/post";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
+import { FaComment } from 'react-icons/fa'
 
 const NeedHelpCard = ({ post, isProfile }) => {
   const asd = {
@@ -112,8 +113,10 @@ const NeedHelpCard = ({ post, isProfile }) => {
         {isProfile !== "true" && (
           <>
             <hr />
-            <Grid templateColumns="repeat(1, 1fr)">
+            <Grid templateColumns="repeat(2, 1fr)">
               <CardButton icon={IoHandLeftSharp} name="I Can help" />
+              <CardButton icon={FaComment} name="Comment" />
+
             </Grid>
           </>
         )}
