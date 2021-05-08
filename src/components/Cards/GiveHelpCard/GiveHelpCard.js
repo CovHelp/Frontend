@@ -128,16 +128,16 @@ const GiveHelpCard = ({ post, isProfile }) => {
 
         </InputGroup>
 
-        <CommentBubble name="So" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis" />
+        <CommentBubble name="So" date="4/20/69" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis" />
 
 
-        <CommentBubble name="Light" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " />
+        <CommentBubble name="Light" date="4/20/69" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " />
 
 
-        <CommentBubble name="Em" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, " />
+        <CommentBubble name="Em" date="4/20/69" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, " />
 
 
-        <CommentBubble name="Up" comment="Lorem ipsum dolor" />
+        <CommentBubble name="Up" date="4/20/69" comment="Lorem ipsum dolor" />
 
 
 
