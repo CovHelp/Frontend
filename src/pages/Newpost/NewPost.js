@@ -5,50 +5,64 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  Image,
   Input,
   InputGroup,
   InputLeftAddon,
   Select,
   Stack,
+  Text,
   Textarea,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
-import { ImCross } from "react-icons/all";
 import {
   Slider,
   SliderFilledTrack,
   SliderThumb,
-  SliderTrack,
+  SliderTrack
 } from "@chakra-ui/slider";
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import { BsCloudUpload, ImCross } from "react-icons/all";
 import { useSelector } from "react-redux";
-import { createNeedHelpPost, createProvideHelpPost } from "../../api/post";
+import { createNeedHelpPost, createProvideHelpPost, uploadImage } from "../../api/post";
 import {
   BoilerPlateForGiveHelp,
-  BoilerPlateForNeedHelp,
+  BoilerPlateForNeedHelp
 } from "../../components/newpost/BoilerPlate";
 import StateCitySelctor from "../../components/newpost/StateCitySelector";
 
 const NewPost = (props) => {
-  const [category, setCategory] = useState(0);
+  const [category, setCategory] = useState('');
+
   const [shareNumber, setshareNumber] = useState(true);
   const [urgencySliderValue, setUrgencySliderValue] = useState(1);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [locationSliderValue, setLocationSliderValue] = useState(1);
-
+  const [loader, setLoader] = useState(false);
   const [body, setBody] = useState("");
-  const [city, setCity] = useState({});
-  const [state, setState] = useState({});
-
+  const [city, setCity] = useState(null);
+  const [state, setState] = useState(null);
+  const [uploadLoader, setUploadLoader] = useState()
+  const [uploadedImageId, setUploadedImageId] = useState("");
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [stateCitySelectorVisible, setStateCitySelectorVisible] = useState(
     true
   );
 
+
+  // IMAGE  UPLOAD
+  const fileRef = useRef();
+  const imgRef = useRef();
+  const [isImgSelected, setImgSelected] = useState(false);
+  const [selectedFile, setSelectedFile] = useState();
+
+
+
   const userStore = useSelector((store) => store.userStore);
 
   const handleCategoryChange = (e) => {
-    setCategory(e.target.value - 1);
+    setCategory(e.target.value);
 
     setBody(
       props.typeOfPost === "Request Help"
@@ -56,9 +70,7 @@ const NewPost = (props) => {
         : BoilerPlateForGiveHelp[e.target.value - 1]
     );
   };
-  const handleLocationSliderChange = (val) => {
-    setLocationSliderValue(val);
-  };
+
   const handleUrgencySLiderChange = (val) => setUrgencySliderValue(val);
   const handlePhoneNumberChange = (e) => setPhoneNumber(e.target.value);
   const handleSetBody = (e) => setBody(e.target.value);
@@ -82,7 +94,45 @@ const NewPost = (props) => {
     }
   };
 
+  /* IMAGEUPLOAD */
+  const handleImageFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+    setImgSelected(true);
+    imgRef.current.src = URL.createObjectURL(e.target.files[0]);
+  };
+
+  const handleImageUpload = async () => {
+    setUploadLoader(true)
+    console.log(selectedFile);
+    try{
+    const fileId = await uploadImage({ file: selectedFile, token: userStore.token.token});
+    setUploadedImageId(fileId);
+    setUploadLoader(false)
+    } catch (e) {
+      setUploadLoader(false)
+      console.log(e);
+    }
+  };
+
+  const [bodyError, setbodyError] = useState('')
+  const [bodyEditing, setbodyEditing] = useState('')
+
+  const [categoryError, setcategoryError] = useState('')
+  const [categoryEditing, setcategoryEditing] = useState('')
+
+  const [stateError, setstateError] = useState('')
+  const [stateEditing, setstateEditing] = useState('')
+
+  const [cityError, setCityError] = useState('')
+  const [cityEditing, setCityEditing] = useState('')
+
+
+  const [tokenError, settokenError] = useState('')
+
   const handleCreatePost = async () => {
+    //  setLoader(!loader);
+    if (city == null || state === null) return
+    setLoader(true);
     if (props.typeOfPost === "Request Help") {
       try {
         await createNeedHelpPost({
@@ -90,7 +140,7 @@ const NewPost = (props) => {
           category: category,
           phoneNumber: phoneNumber,
           isPhoneNumberPublic: shareNumber,
-          picture: "",
+          picture: uploadedImageId,
           urgency: urgencySliderValue,
           city: city.name,
           state: state.name,
@@ -99,39 +149,86 @@ const NewPost = (props) => {
           token: userStore.token.token,
         });
         props.onClose();
-      } catch (e) {
-        console.log("Error");
       }
-    } else {
+      catch (e) {
+        setLoader(false);
+
+        e.forEach(error => {
+          if (error.msg.includes('City')) {
+            setCityError(true)
+          }
+          if (error.msg.includes('State')) {
+            setstateError(true)
+          }
+          if (error.msg.includes('Category')) {
+            setcategoryError(true)
+          }
+          if (error.msg.includes('Body')) {
+            setbodyError(true)
+          }
+        })
+
+      } setLoader(false);
+
+
+    }
+    else {
       try {
         await createProvideHelpPost({
           body: body,
           category: category,
           phoneNumber: phoneNumber,
           isPhoneNumberPublic: shareNumber,
-          picture: "",
+          picture: uploadedImageId,
           urgency: urgencySliderValue,
           locations: selectedLocations,
           token: userStore.token.token,
         });
         props.onClose();
-      } catch (e) {}
+      }
+      catch (e) {
+
+
+        e.forEach(error => {
+          if (error.msg.includes('Locations')) {
+            setCityError(true)
+          }
+          if (error.msg.includes('Locations')) {
+            setstateError(true)
+          }
+          if (error.msg.includes('Category')) {
+            setcategoryError(true)
+          }
+          if (error.msg.includes('Body')) {
+            setbodyError(true)
+          }
+        })
+
+
+      }
+
     }
   };
+
+
+  useEffect(() => {
+    console.log(categoryEditing);
+    console.log("THE", categoryError);
+  })
+
 
   return (
     <Flex minH={"50vh"} align={"center"} justifyContent={"center"}>
       <Stack width={"md"}>
         <Box rounded={"lg"} bg={useColorModeValue("white", "gray.700")}>
           <Stack spacing={4} my={2}>
-            {/* <span>bitchh {category} |
-                           urgency {urgencySliderValue} | phone {phoneNumber} | body {body}</span> */}
 
-            <FormControl id="Category">
-              <FormLabel>{props.typeOfPost}</FormLabel>
+            <FormControl id="Category"
+              isInvalid={categoryEditing && categoryError}
+              onFocus={() => setcategoryEditing(true)}>
+              <FormLabel>Select Category </FormLabel>
 
               <Select
-                isRequired
                 placeholder="Select Category"
                 border={"2px"}
                 onChange={(e) => handleCategoryChange(e)}
@@ -145,7 +242,9 @@ const NewPost = (props) => {
               </Select>
             </FormControl>
 
-            <FormControl id="Data">
+            <FormControl id="Data"
+              isInvalid={bodyEditing && bodyError}
+              onFocus={() => setbodyEditing(true)}>
               <FormLabel>Enter Details</FormLabel>
               <Textarea
                 border={"2px"}
@@ -154,6 +253,37 @@ const NewPost = (props) => {
                 onChange={(e) => handleSetBody(e)}
               />
             </FormControl>
+
+
+            <FormControl id="img">
+              <FormLabel>Upload Image</FormLabel>
+              <Flex m={0} pt={0} flexDir="column" w="100%" justifyContent="center" borderRadius="lg">
+
+
+                <Box as="label" borderRadius="lg" backgroundColor="whitesmoke">
+                  <Image
+                    ref={imgRef}
+                    alt="img"
+                    borderRadius="lg"
+                    h={isImgSelected ? -10 : 'auto'}
+                    visibility={isImgSelected ? "visible" : "hidden"}
+                  />
+                  {!isImgSelected &&
+                    <Flex justifyContent="center" alignItems="center"  > <BsCloudUpload color="messenger.500" size="40px" /> </Flex>}
+                  <Input
+                    style={{ visibility: "hidden" }}
+                    ref={fileRef}
+                    h={0}
+                    onChange={handleImageFileChange}
+                    type="file"
+                  />
+                </Box>
+                {isImgSelected &&
+                  <Button background={uploadedImageId ? "whatsapp.500" : "messenger.500"} color="white" onClick={handleImageUpload} isLoading={uploadLoader}> {uploadedImageId ? "UPLOADED" : "UPLOAD"}   </Button>
+                }
+              </Flex>
+            </FormControl>
+
 
             {props.typeOfPost === "Provide Help" &&
               selectedLocations.length > 0 && (
@@ -187,14 +317,22 @@ const NewPost = (props) => {
                 </Flex>
               )}
 
-           {props.typeOfPost !== "Provide Help" &&  <StateCitySelctor onSelected={handleLocationSelection} />}
+            {props.typeOfPost !== "Provide Help" && <StateCitySelctor onSelected={handleLocationSelection} />}
+            {props.typeOfPost !== "Provide Help" && <p>{!state || !city ? "Please Select Location" : ""}</p>}
+            {props.typeOfPost === "Provide Help" && selectedLocations.length === 0 && <Text>Please Select Location</Text>}
             {stateCitySelectorVisible &&
               props.typeOfPost === "Provide Help" && (
-                <StateCitySelctor
-                  parent="provideHelp"
-                  onSelected={handleLocationSelection}
-                />
-              )}
+                <div>
+                  <StateCitySelctor
+                    parent="provideHelp"
+                    onSelected={handleLocationSelection}
+                  />
+
+                </div>
+              )
+            }
+
+
             {!stateCitySelectorVisible &&
               props.typeOfPost === "Provide Help" && (
                 <Button onClick={() => setStateCitySelectorVisible(true)}>
@@ -258,14 +396,25 @@ const NewPost = (props) => {
               </FormControl>
             )}
 
-            <Button
+            {body.length > 0 && city && state && props.typeOfPost === 'Request Help' && category !== '' && <Button
+              isLoading={loader}
               onClick={handleCreatePost}
               bg="messenger.500"
               color={"white"}
               borderRadius="lg"
             >
               Post
-            </Button>
+            </Button>}
+
+            {body.length > 0 && city && state && props.typeOfPost === 'Provide Help' && selectedLocations.length > 0 && category !== '' && <Button
+              isLoading={loader}
+              onClick={handleCreatePost}
+              bg="messenger.500"
+              color={"white"}
+              borderRadius="lg"
+            >
+              Post
+            </Button>}
           </Stack>
         </Box>
       </Stack>

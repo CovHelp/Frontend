@@ -1,4 +1,4 @@
-import { Avatar } from "@chakra-ui/avatar";
+ import { Avatar } from "@chakra-ui/avatar";
 import { Button } from "@chakra-ui/button";
 import Icon from "@chakra-ui/icon";
 import { Image } from "@chakra-ui/image";
