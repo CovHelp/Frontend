@@ -136,7 +136,7 @@ const GiveHelpCard = ({ post, isProfile , readMore }) => {
           <CommentBubble name="So" date="4/20/69" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis" />
 
           <CommentBubble name="Up" date="4/20/69" comment="Lorem ipsum dolor" />
-
+          <Link to="/post-detail"> <Text fontWeight="medium" _hover={{textDecoration:'underline'}}>Read More</Text> </Link>
 
 
         </Flex>
