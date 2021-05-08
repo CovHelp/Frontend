@@ -114,7 +114,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
           fontWeight="normal"
           as="h4"
           lineHeight="tight"
-          noOfLines={[3, 4]}
+          noOfLines={!showComments && [3, 4]}
         >
           <div
             dangerouslySetInnerHTML={{
@@ -122,12 +122,15 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
             }}
           />
         </Box>
-        <Link to={`/post-detail/1/${post.id}`}>
-          {" "}
-          <Text fontWeight="medium" _hover={{ textDecoration: "underline" }}>
-            Read More
-          </Text>{" "}
-        </Link>
+        {!showComments && (
+          <Link to={`/post-detail/1/${post.id}`}>
+            {" "}
+            {" "}
+            <Text fontWeight="medium" _hover={{ textDecoration: "underline" }}>
+              Read More
+            </Text>{" "}
+          </Link>
+        )}
 
         <Box d="flex" mt="2" alignItems="center">
           <Box as="span" color="gray.600" fontSize="sm">

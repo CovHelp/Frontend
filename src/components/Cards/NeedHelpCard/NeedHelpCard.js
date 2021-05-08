@@ -156,7 +156,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
           fontWeight="normal"
           as="h4"
           lineHeight="tight"
-          noOfLines={[3, 4]}
+          noOfLines={!showComments && [3, 4]}
         >
           <div
             dangerouslySetInnerHTML={{
@@ -164,11 +164,12 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
             }}
           />
         </Box>
+        {!showComments &&
         <Link to={`/post-detail/0/${post.id}`}>
           <Text fontWeight="medium" _hover={{ textDecoration: "underline" }}>
             Read More
           </Text>{" "}
-        </Link>
+        </Link>}
 
         <Box d="flex" mt="2" alignItems="center">
           <Box as="span" color="gray.600" fontSize="sm">
