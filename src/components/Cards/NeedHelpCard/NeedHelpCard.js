@@ -123,7 +123,7 @@ const NeedHelpCard = ({ post, isProfile }) => {
             <hr />
             <Grid templateColumns="repeat(2, 1fr)">
               <CardButton icon={IoHandLeftSharp} name="I Can help" />
-              <CardButton icon={FaComment} name="Comment" />
+              <CardButton to="post-detail" icon={FaComment} name="Comment" />
 
             </Grid>
           </>
