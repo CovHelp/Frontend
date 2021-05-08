@@ -252,6 +252,35 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
           )}
         </Flex>
       )}
+
+      {!userStore.token && (
+        <Flex
+          flexDirection="column"
+          px={["4", "8"]}
+          pb={["4", "8"]}
+          bgColor="white"
+          h={"auto"}
+        >
+          {showComments && (
+            <div>
+              {comments.length > 0 &&
+                comments.map((comment) => (
+                  <CommentBubble
+                    key={comment.id}
+                    name={comment.user.firstName}
+                    profile_pic={comment.user.profile_pic}
+                    date={
+                      new Date(comment.createdAt).toLocaleDateString() +
+                      ", " +
+                      new Date(comment.createdAt).toLocaleTimeString()
+                    }
+                    comment={comment.comment}
+                  />
+                ))}
+            </div>
+          )}
+        </Flex>
+      )}
     </CardBox>
   );
 };
