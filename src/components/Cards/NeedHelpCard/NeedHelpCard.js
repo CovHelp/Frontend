@@ -1,11 +1,15 @@
 import { Avatar } from "@chakra-ui/avatar";
 import { Image } from "@chakra-ui/image";
-import { Badge, Box, Flex, Grid, Heading } from "@chakra-ui/layout";
+import { Badge, Box, Flex, Grid, Heading, Stack, Text } from "@chakra-ui/layout";
 import { IoHandLeftSharp } from "react-icons/io5";
 import { getNameByCategoryID } from "../../../api/post";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 import { FaComment } from 'react-icons/fa'
+import { Input, InputGroup } from "@chakra-ui/input";
+import { Button } from "@chakra-ui/button";
+import CommentBubble from "../../CommentBubble/CommentBubble";
+import { Link } from "react-router-dom";
 
 const NeedHelpCard = ({ post, isProfile }) => {
   const asd = {
@@ -42,6 +46,8 @@ const NeedHelpCard = ({ post, isProfile }) => {
       ],
     },
   };
+
+
 
   return (
     <CardBox>
@@ -90,7 +96,7 @@ const NeedHelpCard = ({ post, isProfile }) => {
             textTransform="uppercase"
             ml="2"
           >
-            {post.category} category &bull; {post.baths} baths
+            {post.location.city} &bull; {post.location.state}
           </Box>
         </Box>
 
@@ -101,9 +107,9 @@ const NeedHelpCard = ({ post, isProfile }) => {
           lineHeight="tight"
           noOfLines={[3, 4]}
         >
-          
+
           <div dangerouslySetInnerHTML={{ __html: post.body.replaceAll('\n', '<br/>') }} />
-          
+          <Link to="/post-detail"> <Text fontWeight="medium" _hover={{textDecoration:'underline'}}>Read More</Text> </Link>
         </Box>
 
         <Box d="flex" mt="2" alignItems="center">
@@ -117,12 +123,51 @@ const NeedHelpCard = ({ post, isProfile }) => {
             <hr />
             <Grid templateColumns="repeat(2, 1fr)">
               <CardButton icon={IoHandLeftSharp} name="I Can help" />
-              <CardButton icon={FaComment} name="Comment" />
+              <CardButton to="post-detail" icon={FaComment} name="Comment" />
 
             </Grid>
           </>
         )}
       </Box>
+      <Flex flexDirection="column" px={["4", "8"]} minH="100px" pb={["4", "8"]} bgColor="white" h={'auto'}>
+
+
+
+        <InputGroup
+          d="flex"
+          alignItems="center"
+          justifyContent="center"
+          mb={2}
+          dir="row">
+          {/* <InputLeftElement
+            pointerEvents="none"
+            children={<AiOutlineSearch color="gray.300" size='1rem' />}
+        /> */}
+
+          <Avatar
+            w={["40px", "48px"]}
+            h={["40px", "48px"]}
+            src={post.picture}
+            mr={["2", "4"]} />
+
+
+          <Input
+            type="text"
+            placeholder="Comment"
+            borderRadius={"lg"}
+            bgColor="rgb(245,245,245)" />
+
+          <Button colorScheme="messenger" borderRadius="lg" px={[6, 8]} ml={2}>Post</Button>
+
+        </InputGroup>
+
+        <CommentBubble name="So" date="4/20/69" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis" />
+
+        <CommentBubble name="Up" date="4/20/69" comment="Lorem ipsum dolor" />
+        <Link to="/post-detail"> <Text fontWeight="medium" _hover={{textDecoration:'underline'}}>Read More</Text> </Link>
+
+
+      </Flex>
     </CardBox>
   );
 };
