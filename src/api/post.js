@@ -25,6 +25,37 @@ export const getNeedHelpPostByID = async ({
     }
 }
 
+export const createNeedHelpComment = async ({
+    token,
+    post,
+    comment
+}) => {
+    try {
+        const res = await JSONClient.post('/posts/need-help-comment', {
+            post,
+            comment
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    } catch (e) {
+        throw new CovhelpException(e.response.data, e.response.status);
+
+    }
+}
+
+export const getNeedHelpComments = async ({
+    postID
+}) => {
+    try {
+        const res = await JSONClient.get(`/posts/need-help-comments/${postID}`);
+        return res.data;
+    } catch (e) {
+        throw new CovhelpException(e.response.data, e.response.status);
+
+    }
+}
 
 export const getProvideHelpPosts = async () => {
     try {
@@ -43,6 +74,38 @@ export const getProvideHelpPostByID = async ({
         return res.data;
     } catch (e) {
         throw new CovhelpException(e.response.data, e.response.status);
+    }
+}
+
+
+export const createProvideHelpComment = async ({
+    token,
+    post,
+    comment
+}) => {
+    try {
+        const res = await JSONClient.post('/posts/provide-help-comment', {
+            post,
+            comment
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    } catch (e) {
+
+    }
+}
+
+export const getProvideHelpComments = async ({
+    postID
+}) => {
+    try {
+        const res = await JSONClient.get(`/posts/provide-help-comments/${postID}`);
+        return res.data;
+    } catch (e) {
+        throw new CovhelpException(e.response.data, e.response.status);
+
     }
 }
 

@@ -5,16 +5,46 @@ import { Badge, Box, Flex, Grid, Heading, Text } from "@chakra-ui/layout";
 import { FaComment } from "react-icons/fa";
 import { IoHandLeftSharp } from "react-icons/io5";
 import { MdThumbUp } from "react-icons/md";
-import { getNameByCategoryID } from "../../../api/post";
+import {
+  createProvideHelpComment,
+  getNameByCategoryID,
+  getProvideHelpComments,
+} from "../../../api/post";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 import CommentBubble from "../../CommentBubble/CommentBubble";
 import { Button } from "@chakra-ui/button";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 
 const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
   const userStore = useSelector((store) => store.userStore);
+  const [comment, setComment] = useState();
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    handleLoadComments();
+  }, []);
+
+  const handleLoadComments = async () => {
+    try {
+      const res = await getProvideHelpComments({ postID: post.id });
+      setComments(res);
+    } catch (e) {}
+  };
+
+  const handleComment = async () => {
+    try {
+      await createProvideHelpComment({
+        comment: comment,
+        post: post.id,
+        token: userStore.token.token,
+      });
+      setComment("");
+      handleLoadComments();
+    } catch (e) {}
+  };
 
   return (
     <CardBox>
@@ -91,14 +121,13 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
               __html: post.body.replaceAll("\n", "<br/>"),
             }}
           />
-          
         </Box>
         <Link to={`/post-detail/1/${post.id}`}>
-            {" "}
-            <Text fontWeight="medium" _hover={{ textDecoration: "underline" }}>
-              Read More
-            </Text>{" "}
-          </Link>
+          {" "}
+          <Text fontWeight="medium" _hover={{ textDecoration: "underline" }}>
+            Read More
+          </Text>{" "}
+        </Link>
 
         <Box d="flex" mt="2" alignItems="center">
           <Box as="span" color="gray.600" fontSize="sm">
@@ -149,29 +178,41 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
           />
 
           <Input
+            value={comment}
             type="text"
             placeholder="Comment"
+            onChange={(e) => setComment(e.target.value)}
             borderRadius={"lg"}
             bgColor="rgb(245,245,245)"
           />
 
-          <Button colorScheme="messenger" borderRadius="lg" px={[6, 8]} ml={2}>
+          <Button
+            onClick={handleComment}
+            colorScheme="messenger"
+            borderRadius="lg"
+            px={[6, 8]}
+            ml={2}
+          >
             Post
           </Button>
         </InputGroup>
         {showComments && (
           <div>
-            <CommentBubble
-              name="So"
-              date="4/20/69"
-              comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-            />
-
-            <CommentBubble
-              name="Up"
-              date="4/20/69"
-              comment="Lorem ipsum dolor"
-            />
+            {comments.length > 0 &&
+              comments.map((comment) => (
+                <CommentBubble
+                  key={comment.id}
+                  name={comment.user.firstName}
+                  profile_pic={comment.user.profile_pic}
+                  date={
+                    new Date(comment.createdAt).toLocaleDateString() +
+                    ", " +
+                    new Date(comment.createdAt).toTimeString()
+                  }
+                  comment={comment.comment}
+                />
+              ))}
+            {/* <Link to="/post-detail"> <Text fontWeight="medium" _hover={{textDecoration:'underline'}}>Read More</Text> </Link> */}
           </div>
         )}
         {/* <Link to="/post-detail">

@@ -17,6 +17,7 @@ const CommentBubble = (props) => {
                 <Flex alignItems="center">
                     <Avatar w={["20px", "28px"]}
                         h={["20px", "28px"]}
+                        src={props.profile_pic}
                         mr={2} />
 
                     <Flex alignItems="center">
