@@ -178,17 +178,26 @@ export default function MobileSidebar({ isVisible }) {
     var localFilteredList = [];
     console.log("selected location", state, city)
     setFilterInitated(true);
-    var l = provideHelpPostStore.filter((post) => {
-      if(post.locations[0].state == state.name){
-        if(post.locations[0].city == city.name){
-          localFilteredList = [...localFilteredList, post]
-        }
-      }
-    })
     console.log("teh value of posts are ", localFilteredList);
     if(window.location.href.includes('provide-help')){
+      var l = provideHelpPostStore.filter((post) => {
+        for(let i = 0; i < post.locations.length; ++i){
+          if(post.locations[i].state == state.name){
+            if(post.locations[i].city == city.name){
+              localFilteredList = [...localFilteredList, post]
+            }
+          }
+        }
+      })
       setProvideHelpPosts(localFilteredList);
     }else if(window.location.href.split("/").length === 4){
+      var l = needHelpPostStore.filter((post) => {
+        if(post.location.state == state.name){
+          if(post.location.city == city.name){
+            localFilteredList = [...localFilteredList, post]
+          }
+        }
+      })
       setNeedHelpPosts(localFilteredList);
     }
   }

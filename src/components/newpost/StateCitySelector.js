@@ -2,6 +2,7 @@ import { FormLabel } from "@chakra-ui/form-control";
 import { Select } from "@chakra-ui/select";
 // import csc from "country-state-city";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 import { getAllCitiesByStateCode, getAllStates } from "../../api/misc";
 
 
@@ -12,6 +13,7 @@ export default function StateCitySelctor({onSelected, parent="default"}) {
   const [selectedCity, setSelectedCity] = useState("None");
   const [stateState, setStateState] = useState();
   const [cityState, setCityState] = useState();
+  const location = useLocation();
   
 
   const fetchStates = async () => {
@@ -25,6 +27,12 @@ export default function StateCitySelctor({onSelected, parent="default"}) {
   useEffect(() => {
     fetchStates()
   }, []);
+
+  useEffect(() => {
+    console.log(location)
+    setSelectedCity("None")
+    setSelectedState("None")
+  }, [location])
 
   const handleSetSelectedState = async ({ target }) => {
     const state = allStates.filter((state) => state.name === target.value);
