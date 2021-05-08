@@ -150,79 +150,72 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
       {/* Comments */}
 
       {/* {readMore === false && */}
-      <Flex
-        flexDirection="column"
-        px={["4", "8"]}
-        minH="100px"
-        pb={["4", "8"]}
-        bgColor="white"
-        h={"auto"}
-      >
-        <InputGroup
-          d="flex"
-          alignItems="center"
-          justifyContent="center"
-          mb={2}
-          dir="row"
+      {userStore.token && userStore.token.token && (
+        <Flex
+          flexDirection="column"
+          px={["4", "8"]}
+          pb={["4", "8"]}
+          bgColor="white"
+          h={"auto"}
         >
-          {/* <InputLeftElement
-                    pointerEvents="none"
-                    children={<AiOutlineSearch color="gray.300" size='1rem' />}
-                /> */}
-
-          <Avatar
-            w={["40px", "48px"]}
-            h={["40px", "48px"]}
-            src={userStore.token.token && userStore.user.profile_pic}
-            mr={["2", "4"]}
-          />
-
-          <Input
-            value={comment}
-            type="text"
-            placeholder="Comment"
-            onChange={(e) => setComment(e.target.value)}
-            borderRadius={"lg"}
-            bgColor="rgb(245,245,245)"
-          />
-
-          <Button
-            onClick={handleComment}
-            colorScheme="messenger"
-            borderRadius="lg"
-            px={[6, 8]}
-            ml={2}
+          <InputGroup
+            d="flex"
+            alignItems="center"
+            justifyContent="center"
+            mb={2}
+            dir="row"
           >
-            Post
-          </Button>
-        </InputGroup>
-        {showComments && (
-          <div>
-            {comments.length > 0 &&
-              comments.map((comment) => (
-                <CommentBubble
-                  key={comment.id}
-                  name={comment.user.firstName}
-                  profile_pic={comment.user.profile_pic}
-                  date={
-                    new Date(comment.createdAt).toLocaleDateString() +
-                    ", " +
-                    new Date(comment.createdAt).toTimeString()
-                  }
-                  comment={comment.comment}
-                />
-              ))}
-            {/* <Link to="/post-detail"> <Text fontWeight="medium" _hover={{textDecoration:'underline'}}>Read More</Text> </Link> */}
-          </div>
-        )}
-        {/* <Link to="/post-detail">
-          {" "}
-          <Text fontWeight="medium" _hover={{ textDecoration: "underline" }}>
-            Read More
-          </Text>{" "}
-        </Link> */}
-      </Flex>
-      {/* } */}
+            <Avatar
+              w={["40px", "48px"]}
+              h={["40px", "48px"]}
+              src={
+                userStore.token &&
+                userStore.token.token &&
+                userStore.user.profile_pic
+              }
+              mr={["2", "4"]}
+            />
+
+            <Input
+              value={comment}
+              type="text"
+              placeholder="Comment"
+              onChange={(e) => setComment(e.target.value)}
+              borderRadius={"lg"}
+              bgColor="rgb(245,245,245)"
+            />
+
+            <Button
+              isDisabled={!userStore.token}
+              onClick={handleComment}
+              colorScheme="messenger"
+              borderRadius="lg"
+              px={[6, 8]}
+              ml={2}
+            >
+              Post
+            </Button>
+          </InputGroup>
+          {showComments && (
+            <div>
+              {comments.length > 0 &&
+                comments.map((comment) => (
+                  <CommentBubble
+                    key={comment.id}
+                    name={comment.user.firstName}
+                    profile_pic={comment.user.profile_pic}
+                    date={
+                      new Date(comment.createdAt).toLocaleDateString() +
+                      ", " +
+                      new Date(comment.createdAt).toTimeString()
+                    }
+                    comment={comment.comment}
+                  />
+                ))}
+            </div>
+          )}
+        </Flex>
+      )}
     </CardBox>
   );
 };
