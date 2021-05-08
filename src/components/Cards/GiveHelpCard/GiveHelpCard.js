@@ -210,7 +210,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
                     date={
                       new Date(comment.createdAt).toLocaleDateString() +
                       ", " +
-                      new Date(comment.createdAt).toTimeString()
+                      new Date(comment.createdAt).toLocaleTimeString()
                     }
                     comment={comment.comment}
                   />
