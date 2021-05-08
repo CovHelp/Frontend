@@ -1,0 +1,48 @@
+.info-sidebar {
+    border-left: 1.5px solid #CBD5E0;
+    height: 100%;
+    width: 100%;
+    padding: 16px;
+}
+
+.info-sidebar > div {
+    position: fixed;
+    width: 280px;
+    overflow-y: auto;
+    overflow-x: auto;
+    height: calc(100% - 60px);
+    z-index: 10;
+}
+
+.info-sidebar > div > h1 {
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 32px;
+}
+
+.info-card {
+    padding: 8px;
+    height: auto;
+    min-height: 80px;
+    width: 95%;
+    margin: 0 auto;
+    background-color: rgb(245, 245, 245);
+    margin: 20px 0px;
+    border-radius: 8px;
+}
+
+.info-card-title{
+    font-size: 16px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.info-card-body{
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 1246px) {
+    .info-sidebar > div {
+        width: 230px;
+    }
+}

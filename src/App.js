@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import PostDetails from "./pages/PostDetails/PostDetails";
 import Profile from "./components/profile/Profile";
 import ProfileSetting from "./components/profile/ProfileSetting";
+import InfoBar from './components/InfoBar'
 // import Chat from "./components/chat/Chat";
 
 const App = () => {
@@ -65,8 +66,7 @@ const App = () => {
             <Route path='*' exact={true} component={NotFound} />
           </Switch>
 
-          <div></div>
-          {/* <Chat/> */}
+          <InfoBar/>
         </div>
         <BottomNav />
 
