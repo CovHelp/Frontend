@@ -5,11 +5,13 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  Image,
   Input,
   InputGroup,
   InputLeftAddon,
   Select,
   Stack,
+  Text,
   Textarea,
   useColorModeValue
 } from "@chakra-ui/react";
@@ -19,7 +21,8 @@ import {
   SliderThumb,
   SliderTrack
 } from "@chakra-ui/slider";
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import { ImCross } from "react-icons/all";
 import { useSelector } from "react-redux";
 import { createNeedHelpPost, createProvideHelpPost } from "../../api/post";
@@ -44,6 +47,15 @@ const NewPost = (props) => {
   const [stateCitySelectorVisible, setStateCitySelectorVisible] = useState(
     true
   );
+
+
+  // IMAGE  UPLOAD
+  const fileRef = useRef();
+  const imgRef = useRef();
+  const [isImgSelected, setImgSelected] = useState(false);
+  const [selectedFile, setSelectedFile] = useState();
+
+
 
   const userStore = useSelector((store) => store.userStore);
 
@@ -82,6 +94,35 @@ const NewPost = (props) => {
     }
   };
 
+  /* IMAGEUPLOAD */
+  const handleImageFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+    setImgSelected(true);
+    imgRef.current.src = URL.createObjectURL(e.target.files[0]);
+  };
+
+  const handleImageUpload = async () => {
+    console.log("Uploading");
+    console.log(selectedFile);
+    let formData = new FormData();
+    formData.append("file", selectedFile);
+    console.log(formData);
+    try {
+      const res = await axios.post(
+        "https://apis.covhelp.online/v1/posts/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        }
+      );
+      console.log("FILE ID: ", res.data);
+      console.log("Uploaded");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const [bodyError, setbodyError] = useState('')
   const [bodyEditing, setbodyEditing] = useState('')
@@ -222,6 +263,27 @@ const NewPost = (props) => {
                 onChange={(e) => handleSetBody(e)}
               />
             </FormControl>
+
+            <Flex border="1px" flexDir="column" w="100%" justifyContent="center">
+              <Image
+                ref={imgRef}
+                alt="img"
+                visibility={isImgSelected ? "visible" : "hidden"}
+              />
+
+              <label style={{ border: "5px" }}>
+                <Flex as="h1">Select Image </Flex>
+                <Input
+                  style={{ visibility: "hidden" }}
+                  ref={fileRef}
+                  onChange={handleImageFileChange}
+                  type="file"
+                />
+              </label>
+              <Button background="messenger.500" color="white" onClick={handleImageUpload}> UPLOAD </Button>
+            </Flex>
+
+
             {props.typeOfPost === "Provide Help" &&
               selectedLocations.length > 0 && (
                 <Flex direction="column" m={2}>
@@ -256,7 +318,7 @@ const NewPost = (props) => {
 
             {props.typeOfPost !== "Provide Help" && <StateCitySelctor onSelected={handleLocationSelection} />}
             {props.typeOfPost !== "Provide Help" && <p>{!state || !city ? "Please Select Location" : ""}</p>}
-            {props.typeOfPost === "Provide Help" && selectedLocations.length === 0 && <p>"Please Select Location</p>}
+            {props.typeOfPost === "Provide Help" && selectedLocations.length === 0 && <Text>Please Select Location</Text>}
             {stateCitySelectorVisible &&
               props.typeOfPost === "Provide Help" && (
                 <div>
@@ -264,7 +326,7 @@ const NewPost = (props) => {
                     parent="provideHelp"
                     onSelected={handleLocationSelection}
                   />
-                
+
                 </div>
               )
             }
@@ -333,7 +395,7 @@ const NewPost = (props) => {
               </FormControl>
             )}
 
-            {body.length > 0 && city && state  && props.typeOfPost === 'Request Help' && category !== '' && <Button
+            {body.length > 0 && city && state && props.typeOfPost === 'Request Help' && category !== '' && <Button
               isLoading={loader}
               onClick={handleCreatePost}
               bg="messenger.500"
@@ -343,7 +405,7 @@ const NewPost = (props) => {
               Post
             </Button>}
 
-            {body.length > 0 && city && state  && props.typeOfPost === 'Provide Help' && selectedLocations.length > 0 && category !== '' && <Button
+            {body.length > 0 && city && state && props.typeOfPost === 'Provide Help' && selectedLocations.length > 0 && category !== '' && <Button
               isLoading={loader}
               onClick={handleCreatePost}
               bg="messenger.500"
