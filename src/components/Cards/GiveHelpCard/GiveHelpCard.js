@@ -96,6 +96,8 @@ const GiveHelpCard = ({ post, isProfile }) => {
           </>
         )}
       </Box>
+
+
       <Flex flexDirection="column" px={["4", "8"]} minH="100px" pb={["4", "8"]} bgColor="white" h={'auto'}>
 
 
@@ -123,19 +125,12 @@ const GiveHelpCard = ({ post, isProfile }) => {
             placeholder="Comment"
             borderRadius={"lg"}
             bgColor="rgb(245,245,245)" />
-          
-          <Button colorScheme="messenger" borderRadius="lg" px={[6,8]} ml={2}>Post</Button>
+
+          <Button colorScheme="messenger" borderRadius="lg" px={[6, 8]} ml={2}>Post</Button>
 
         </InputGroup>
 
         <CommentBubble name="So" date="4/20/69" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis" />
-
-
-        <CommentBubble name="Light" date="4/20/69" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " />
-
-
-        <CommentBubble name="Em" date="4/20/69" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, " />
-
 
         <CommentBubble name="Up" date="4/20/69" comment="Lorem ipsum dolor" />
 
