@@ -1,12 +1,11 @@
-import { Avatar } from '@chakra-ui/avatar'
-import { Button } from '@chakra-ui/button'
-import { useDisclosure } from '@chakra-ui/hooks'
-import { Input, InputGroup } from '@chakra-ui/input'
-import NewPost from "../../pages/Newpost/NewPost";
-import { Box, Heading } from '@chakra-ui/layout'
-import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/modal'
-import React, { useEffect } from 'react'
+import { Avatar } from '@chakra-ui/avatar';
+import { useDisclosure } from '@chakra-ui/hooks';
+import { Input, InputGroup } from '@chakra-ui/input';
+import { Box, Heading } from '@chakra-ui/layout';
+import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay } from '@chakra-ui/modal';
+import React from 'react';
 import { useSelector } from 'react-redux';
+import NewPost from "../../pages/Newpost/NewPost";
 
 
 

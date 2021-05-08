@@ -1,6 +1,6 @@
 import { Avatar } from "@chakra-ui/avatar";
 import { Image } from "@chakra-ui/image";
-import { Badge, Box, Flex, Grid, Heading } from "@chakra-ui/layout";
+import { Badge, Box, Flex, Grid, Heading, Stack } from "@chakra-ui/layout";
 import { IoHandLeftSharp } from "react-icons/io5";
 import { getNameByCategoryID } from "../../../api/post";
 import CardBox from "../CardBox";
@@ -42,6 +42,8 @@ const NeedHelpCard = ({ post, isProfile }) => {
       ],
     },
   };
+
+  
 
   return (
     <CardBox>
@@ -101,7 +103,7 @@ const NeedHelpCard = ({ post, isProfile }) => {
           lineHeight="tight"
           noOfLines={[3, 4]}
         >
-          
+
           <div dangerouslySetInnerHTML={{ __html: post.body.replaceAll('\n', '<br/>') }} />
           
         </Box>

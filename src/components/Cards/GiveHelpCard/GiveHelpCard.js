@@ -1,7 +1,6 @@
- import { Avatar } from "@chakra-ui/avatar";
-import { Button } from "@chakra-ui/button";
-import Icon from "@chakra-ui/icon";
+import { Avatar } from "@chakra-ui/avatar";
 import { Image } from "@chakra-ui/image";
+import { Input, InputGroup } from "@chakra-ui/input";
 import { Badge, Box, Flex, Grid, Heading } from "@chakra-ui/layout";
 import { FaComment } from "react-icons/fa";
 import { IoHandLeftSharp } from "react-icons/io5";
@@ -9,10 +8,11 @@ import { MdThumbUp } from "react-icons/md";
 import { getNameByCategoryID } from "../../../api/post";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
+import CommentBubble from "../../CommentBubble/CommentBubble";
 
 
 const GiveHelpCard = ({ post, isProfile }) => {
-  
+
 
   return (
     <CardBox>
@@ -42,14 +42,14 @@ const GiveHelpCard = ({ post, isProfile }) => {
         </Flex>
       </Flex>
       {post.picture !== "" && (<Image
-        
+
         src={`https://apis.covhelp.online/v1/posts/file/${post.picture}`}
         objectFit="cover"
         color="gray.600"
         ml='auto' mr="auto"
         alt=""
       />)
-     }
+      }
 
       <Box p={["4", "8"]} pt={post.picture === "" && ["0", "0"]} bgColor="white">
         <Box d="flex" alignItems="baseline">
@@ -74,8 +74,8 @@ const GiveHelpCard = ({ post, isProfile }) => {
           lineHeight="tight"
           noOfLines={[3, 4]}
         >
-          
-          <div dangerouslySetInnerHTML={{__html: post.body.replaceAll('\n', '<br/>')}}/>
+
+          <div dangerouslySetInnerHTML={{ __html: post.body.replaceAll('\n', '<br/>') }} />
         </Box>
 
         <Box d="flex" mt="2" alignItems="center">
@@ -95,6 +95,53 @@ const GiveHelpCard = ({ post, isProfile }) => {
           </>
         )}
       </Box>
+      <Flex flexDirection="column" px={["4", "8"]} minH="100px" pb={["4", "8"]} bgColor="white" h={'auto'}>
+
+
+
+        <InputGroup
+          d="flex"
+          alignItems="center"
+          justifyContent="center"
+          mb={2}
+          dir="row">
+          {/* <InputLeftElement
+                    pointerEvents="none"
+                    children={<AiOutlineSearch color="gray.300" size='1rem' />}
+                /> */}
+
+          <Avatar
+            w={["40px", "48px"]}
+            h={["40px", "48px"]}
+            src={post.picture}
+            mr={["2", "4"]} />
+
+
+          <Input
+            type="text"
+            placeholder="Comment"
+            borderRadius={"lg"}
+            bgColor="rgb(245,245,245)" />
+
+
+
+
+        </InputGroup>
+
+        <CommentBubble name="So" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis" />
+
+
+        <CommentBubble name="Light" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " />
+
+
+        <CommentBubble name="Em" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, " />
+
+
+        <CommentBubble name="Up" comment="Lorem ipsum dolor" />
+
+
+
+      </Flex>
     </CardBox>
   );
 };
