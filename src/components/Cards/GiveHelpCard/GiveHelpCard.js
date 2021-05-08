@@ -95,9 +95,6 @@ const GiveHelpCard = ({ post, isProfile }) => {
           </>
         )}
       </Box>
-      <Box>
-        <h1>ok</h1>
-      </Box>
     </CardBox>
   );
 };
