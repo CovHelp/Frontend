@@ -99,7 +99,7 @@ const NeedHelpCard = ({ post, isProfile }) => {
           fontWeight="normal"
           as="h4"
           lineHeight="tight"
-          noOfLines={[1, 2, 3, 4]}
+          noOfLines={[3, 4]}
         >
           {post.body}
         </Box>

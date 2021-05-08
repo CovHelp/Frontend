@@ -72,7 +72,7 @@ const GiveHelpCard = ({ post, isProfile }) => {
           fontWeight="normal"
           as="h4"
           lineHeight="tight"
-          noOfLines={[1, 2, 3, 4]}
+          noOfLines={[3, 4]}
         >
           {post.body}
         </Box>
@@ -93,6 +93,9 @@ const GiveHelpCard = ({ post, isProfile }) => {
             </Grid>
           </>
         )}
+      </Box>
+      <Box>
+        <h1>ok</h1>
       </Box>
     </CardBox>
   );
