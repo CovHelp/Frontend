@@ -153,20 +153,24 @@ const NewPost = (props) => {
       catch (e) {
         setLoader(false);
 
-        e.forEach(error => {
-          if (error.msg.includes('City')) {
-            setCityError(true)
-          }
-          if (error.msg.includes('State')) {
-            setstateError(true)
-          }
-          if (error.msg.includes('Category')) {
-            setcategoryError(true)
-          }
-          if (error.msg.includes('Body')) {
-            setbodyError(true)
-          }
-        })
+        try{
+          e.forEach(error => {
+            if (error.msg.includes('City')) {
+              setCityError(true)
+            }
+            if (error.msg.includes('State')) {
+              setstateError(true)
+            }
+            if (error.msg.includes('Category')) {
+              setcategoryError(true)
+            }
+            if (error.msg.includes('Body')) {
+              setbodyError(true)
+            }
+          })
+        } catch(e) {
+          console.log(e)
+        }
 
       } setLoader(false);
 
