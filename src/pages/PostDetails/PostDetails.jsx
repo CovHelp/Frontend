@@ -1,10 +1,12 @@
 import React from 'react'
+// import { GiveHelpCard } from '../../components/Cards/GiveHelpCard/GiveHelpCard'
+// import { NeedHelpCard } from '../../components/Cards/NeedHelpCard/NeedHelpCard'
 
 const PostDetails = () => {
     return (
-        <div>
-            pojpweo
-        </div>
+        <h1>
+            here
+        </h1>
     )
 }
 

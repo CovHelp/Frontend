@@ -12,7 +12,7 @@ import CommentBubble from "../../CommentBubble/CommentBubble";
 import { Button } from "@chakra-ui/button";
 
 
-const GiveHelpCard = ({ post, isProfile }) => {
+const GiveHelpCard = ({ post, isProfile , readMore }) => {
 
 
   return (
@@ -54,14 +54,14 @@ const GiveHelpCard = ({ post, isProfile }) => {
 
       <Box p={["4", "8"]} pt={post.picture === "" && ["0", "0"]} bgColor="white">
         <Box d="flex" alignItems="baseline">
-          
+
           <Box
             color="gray.500"
             fontWeight="semibold"
             letterSpacing="wide"
             fontSize="xs"
             textTransform="uppercase"
-          
+
           >
             {post.locations.map((i) => (<span>{i.state} &bull; {i.city}</span>))}
           </Box>
@@ -96,46 +96,49 @@ const GiveHelpCard = ({ post, isProfile }) => {
         )}
       </Box>
 
+      {/* Comments */}
 
-      <Flex flexDirection="column" px={["4", "8"]} minH="100px" pb={["4", "8"]} bgColor="white" h={'auto'}>
+      {/* {readMore === false && */}
+        <Flex flexDirection="column" px={["4", "8"]} minH="100px" pb={["4", "8"]} bgColor="white" h={'auto'}>
 
 
 
-        <InputGroup
-          d="flex"
-          alignItems="center"
-          justifyContent="center"
-          mb={2}
-          dir="row">
-          {/* <InputLeftElement
+          <InputGroup
+            d="flex"
+            alignItems="center"
+            justifyContent="center"
+            mb={2}
+            dir="row">
+            {/* <InputLeftElement
                     pointerEvents="none"
                     children={<AiOutlineSearch color="gray.300" size='1rem' />}
                 /> */}
 
-          <Avatar
-            w={["40px", "48px"]}
-            h={["40px", "48px"]}
-            src={post.picture}
-            mr={["2", "4"]} />
+            <Avatar
+              w={["40px", "48px"]}
+              h={["40px", "48px"]}
+              src={post.picture}
+              mr={["2", "4"]} />
 
 
-          <Input
-            type="text"
-            placeholder="Comment"
-            borderRadius={"lg"}
-            bgColor="rgb(245,245,245)" />
+            <Input
+              type="text"
+              placeholder="Comment"
+              borderRadius={"lg"}
+              bgColor="rgb(245,245,245)" />
 
-          <Button colorScheme="messenger" borderRadius="lg" px={[6, 8]} ml={2}>Post</Button>
+            <Button colorScheme="messenger" borderRadius="lg" px={[6, 8]} ml={2}>Post</Button>
 
-        </InputGroup>
+          </InputGroup>
 
-        <CommentBubble name="So" date="4/20/69" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis" />
+          <CommentBubble name="So" date="4/20/69" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis" />
 
-        <CommentBubble name="Up" date="4/20/69" comment="Lorem ipsum dolor" />
+          <CommentBubble name="Up" date="4/20/69" comment="Lorem ipsum dolor" />
 
 
 
-      </Flex>
+        </Flex>
+      {/* } */}
     </CardBox>
   );
 };
