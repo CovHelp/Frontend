@@ -1,7 +1,7 @@
 import { Avatar } from "@chakra-ui/avatar";
 import { Image } from "@chakra-ui/image";
 import { Input, InputGroup } from "@chakra-ui/input";
-import { Badge, Box, Flex, Grid, Heading } from "@chakra-ui/layout";
+import { Badge, Box, Flex, Grid, Heading, Text } from "@chakra-ui/layout";
 import { FaComment } from "react-icons/fa";
 import { IoHandLeftSharp } from "react-icons/io5";
 import { MdThumbUp } from "react-icons/md";
@@ -10,6 +10,7 @@ import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 import CommentBubble from "../../CommentBubble/CommentBubble";
 import { Button } from "@chakra-ui/button";
+import { Link } from "react-router-dom";
 
 
 const GiveHelpCard = ({ post, isProfile , readMore }) => {
@@ -76,6 +77,7 @@ const GiveHelpCard = ({ post, isProfile , readMore }) => {
         >
 
           <div dangerouslySetInnerHTML={{ __html: post.body.replaceAll('\n', '<br/>') }} />
+          <Link to="/post-detail"> <Text fontWeight="medium" _hover={{textDecoration:'underline'}}>Read More</Text> </Link>
         </Box>
 
         <Box d="flex" mt="2" alignItems="center">
