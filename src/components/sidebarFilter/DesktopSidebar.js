@@ -33,6 +33,13 @@ export default function DesktopSidebar() {
   const [plasma, setPlasma] = useState(false);
   const [food, setFood] = useState(false);
 
+  const [oxygenFilter, setOxygenFilter] = useState(-1)
+  const [ambulanceFilter, setAmbulanceFilter] = useState(-1)
+  const [medicineFilter, setMedicineFilter] = useState(-1)
+  const [hospitalbedsFilter, setHospitalbedsFilter] = useState(-1)
+  const [plasmaFilter, setPlasmaFilter] = useState(-1)
+  const [foodFilter, setFoodFilter] = useState(-1)
+
   const [filteredInitiated, setFilterInitated] = useState(false);
 
   const handleProvideHelpFilter = () => {
@@ -57,30 +64,22 @@ export default function DesktopSidebar() {
     ) {
       setProvideHelpPosts(provideHelpPostStore);
     } else {
-      if (oxygen) {
-        var l = provideHelpPostStore.filter((post) => post.category == 1);
-        localFilteredList = [...localFilteredList, ...l];
-      }
-      if (ambulance) {
-        var l = provideHelpPostStore.filter((post) => post.category == 2);
-        localFilteredList = [...localFilteredList, ...l];
-      }
-      if (medicine) {
-        var l = provideHelpPostStore.filter((post) => post.category == 3);
-        localFilteredList = [...localFilteredList, ...l];
-      }
-      if (hospitalbeds) {
-        var l = provideHelpPostStore.filter((post) => post.category == 4);
-        localFilteredList = [...localFilteredList, ...l];
-      }
-      if (plasma) {
-        var l = provideHelpPostStore.filter((post) => post.category == 5);
-        localFilteredList = [...localFilteredList, ...l];
-      }
-      if (food) {
-        var l = provideHelpPostStore.filter((post) => post.category == 6);
-        localFilteredList = [...localFilteredList, ...l];
-      }
+      var l = provideHelpPostStore.filter((post) => {
+        if(post.category == oxygenFilter){
+          localFilteredList = [...localFilteredList, post]
+        }else if(post.category == ambulanceFilter){
+          localFilteredList = [...localFilteredList, post]
+        }else if(post.category == medicineFilter){
+          localFilteredList = [...localFilteredList, post]
+        }else if(post.category == hospitalbedsFilter){
+          localFilteredList = [...localFilteredList, post]
+        }else if(post.category == plasmaFilter){
+          localFilteredList = [...localFilteredList, post]
+        }else if(post.category == foodFilter){
+          localFilteredList = [...localFilteredList, post]
+        }
+      })
+      // console.log("teh value of posts are ", localFilteredList);
       setProvideHelpPosts(localFilteredList);
     }
   };
@@ -107,30 +106,21 @@ export default function DesktopSidebar() {
     ) {
       setNeedHelpPosts(needHelpPostStore);
     } else {
-      if (oxygen) {
-        var l = needHelpPostStore.filter((post) => post.category == 1);
-        localFilteredList = [...localFilteredList, ...l];
-      }
-      if (ambulance) {
-        var l = needHelpPostStore.filter((post) => post.category == 2);
-        localFilteredList = [...localFilteredList, ...l];
-      }
-      if (medicine) {
-        var l = needHelpPostStore.filter((post) => post.category == 3);
-        localFilteredList = [...localFilteredList, ...l];
-      }
-      if (hospitalbeds) {
-        var l = needHelpPostStore.filter((post) => post.category == 4);
-        localFilteredList = [...localFilteredList, ...l];
-      }
-      if (plasma) {
-        var l = needHelpPostStore.filter((post) => post.category == 5);
-        localFilteredList = [...localFilteredList, ...l];
-      }
-      if (food) {
-        var l = needHelpPostStore.filter((post) => post.category == 6);
-        localFilteredList = [...localFilteredList, ...l];
-      }
+      var l = needHelpPostStore.filter((post) => {
+        if(post.category == oxygenFilter){
+          localFilteredList = [...localFilteredList, post]
+        }else if(post.category == ambulanceFilter){
+          localFilteredList = [...localFilteredList, post]
+        }else if(post.category == medicineFilter){
+          localFilteredList = [...localFilteredList, post]
+        }else if(post.category == hospitalbedsFilter){
+          localFilteredList = [...localFilteredList, post]
+        }else if(post.category == plasmaFilter){
+          localFilteredList = [...localFilteredList, post]
+        }else if(post.category == foodFilter){
+          localFilteredList = [...localFilteredList, post]
+        }
+      })
       setNeedHelpPosts(localFilteredList);
     }
   };
@@ -237,6 +227,11 @@ export default function DesktopSidebar() {
               colorScheme="linkedin"
               onChange={(e) => {
                 setOxygen(e.target.checked);
+                if(e.target.checked){
+                  setOxygenFilter(1);
+                }else{
+                  setOxygenFilter(-1)
+                }
               }}
             ></Checkbox>
           </Box>
@@ -265,6 +260,11 @@ export default function DesktopSidebar() {
 
               onChange={(e) => {
                 setAmbulance(e.target.checked);
+                if(e.target.checked) {
+                  setAmbulanceFilter(2)
+                }else {
+                  setAmbulanceFilter(-1)
+                }
               }}
               size="lg"
               colorScheme="linkedin"
@@ -297,6 +297,11 @@ export default function DesktopSidebar() {
               colorScheme="linkedin"
               onChange={(e) => {
                 setMedicine(e.target.checked);
+                if(e.target.checked){
+                  setMedicineFilter(3)
+                }else{
+                  setMedicineFilter(-1)
+                }
               }}
             ></Checkbox>
           </Box>
@@ -327,6 +332,11 @@ export default function DesktopSidebar() {
               colorScheme="linkedin"
               onChange={(e) => {
                 setHospitalbeds(e.target.checked);
+                if(e.target.checked){
+                  setHospitalbedsFilter(4)
+                }else{
+                  setHospitalbedsFilter(-1)
+                }
               }}
             ></Checkbox>
           </Box>
@@ -357,6 +367,11 @@ export default function DesktopSidebar() {
               colorScheme="linkedin"
               onChange={(e) => {
                 setPlasma(e.target.checked);
+                if(e.target.checked){
+                  setPlasmaFilter(5)
+                }else{
+                  setPlasmaFilter(-1)
+                }
               }}
             ></Checkbox>
           </Box>
@@ -387,6 +402,11 @@ export default function DesktopSidebar() {
               colorScheme="linkedin"
               onChange={(e) => {
                 setFood(e.target.checked);
+                if(e.target.checked){
+                  setFoodFilter(6)
+                }else{
+                  setFoodFilter(-1)
+                }
               }}
             ></Checkbox>
           </Box>
