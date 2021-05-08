@@ -16,7 +16,7 @@ export default function Feedback() {
     try {
       await axios.post(
         "https://discord.com/api/webhooks/840677384897429514/riVatO5tVC2v-c1bEQXnF249qh7GJoZ4BcpNf6p2XUcGgVNwVB-0BnadOmN0omlMOVhY",
-        { content: inputVal.trim() }
+        { content: "```Message: " + inputVal.trim() + "\n" + "Time: " + new Date().toISOString() + "```" }
       );
       setLoading(false);
       alert("Your feedback is received!");
