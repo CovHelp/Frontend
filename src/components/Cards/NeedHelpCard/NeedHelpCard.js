@@ -5,6 +5,7 @@ import { IoHandLeftSharp } from "react-icons/io5";
 import { getNameByCategoryID } from "../../../api/post";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
+import { FaComment } from 'react-icons/fa'
 
 const NeedHelpCard = ({ post, isProfile }) => {
   const asd = {
@@ -73,7 +74,7 @@ const NeedHelpCard = ({ post, isProfile }) => {
         </Flex>
       </Flex>
       {post.picture !== "" && (
-        <Image src={post.picture} objectFit="cover" color="gray.600" alt="" />
+        <Image src={`https://apis.covhelp.online/v1/posts/file/${post.picture}`} objectFit="cover" color="gray.600" alt="" />
       )}
 
       <Box p={["4", "8"]} pt={post.picture === "" && ["0", "0"]} bgColor="white">
@@ -112,8 +113,10 @@ const NeedHelpCard = ({ post, isProfile }) => {
         {isProfile !== "true" && (
           <>
             <hr />
-            <Grid pt={["4", "8"]} templateColumns="repeat(1, 1fr)" gap={2}>
+            <Grid templateColumns="repeat(2, 1fr)">
               <CardButton icon={IoHandLeftSharp} name="I Can help" />
+              <CardButton icon={FaComment} name="Comment" />
+
             </Grid>
           </>
         )}

@@ -14,6 +14,7 @@ export const getNeedHelpPosts = async () => {
     }
 }
 
+
 export const getProvideHelpPosts = async () => {
     try {
         const res = await JSONClient.get('/posts/provide-help-posts');
@@ -60,6 +61,7 @@ export const uploadImage = async ( {file, token} ) => {
             formData,
             {
               headers: {
+                  Authorization: token,
                 "Content-Type": "multipart/form-data"
               }
             }
