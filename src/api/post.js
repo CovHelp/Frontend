@@ -14,6 +14,17 @@ export const getNeedHelpPosts = async () => {
     }
 }
 
+export const getNeedHelpPostByID = async ({
+    postID
+}) => {
+    try {
+        const res = await JSONClient.get(`/posts/need-help-post/${postID}`);
+        return res.data;
+    } catch (e) {
+        throw new CovhelpException(e.response.data, e.response.status);
+    }
+}
+
 
 export const getProvideHelpPosts = async () => {
     try {
@@ -24,7 +35,20 @@ export const getProvideHelpPosts = async () => {
     }
 }
 
-export const getProvideHelpPostsByUser = async ({ token }) => {
+export const getProvideHelpPostByID = async ({
+    postID
+}) => {
+    try {
+        const res = await JSONClient.get(`/posts/provide-help-post/${postID}`);
+        return res.data;
+    } catch (e) {
+        throw new CovhelpException(e.response.data, e.response.status);
+    }
+}
+
+export const getProvideHelpPostsByUser = async ({
+    token
+}) => {
     try {
         const res = await JSONClient.post('/posts/user-provide-help-posts', {}, {
             headers: {
@@ -37,7 +61,9 @@ export const getProvideHelpPostsByUser = async ({ token }) => {
     }
 }
 
-export const getNeedHelpPostsByUser = async ({ token }) => {
+export const getNeedHelpPostsByUser = async ({
+    token
+}) => {
     try {
         const res = await JSONClient.post('/posts/user-need-help-posts', {}, {
             headers: {
@@ -51,29 +77,31 @@ export const getNeedHelpPostsByUser = async ({ token }) => {
 }
 
 
-export const uploadImage = async ( {file, token} ) => {
+export const uploadImage = async ({
+    file,
+    token
+}) => {
     let formData = new FormData();
     formData.append("file", file);
     console.log(formData);
-    try{
+    try {
         const res = await axios.post(
             "https://apis.covhelp.online/v1/posts/upload",
-            formData,
-            {
-              headers: {
-                  Authorization: `Bearer ${token}`,
-                "Content-Type": "multipart/form-data"
-              }
+            formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "multipart/form-data"
+                }
             }
-          );
+        );
         return res.data;
-    //    const res = await FormClient.post('/posts/upload', formData, {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     })
-    //     return res.data;
-    }catch(e){
+        //    const res = await FormClient.post('/posts/upload', formData, {
+        //         headers: {
+        //             Authorization: `Bearer ${token}`
+        //         }
+        //     })
+        //     return res.data;
+    } catch (e) {
         throw new CovhelpException(e.response.data, e.response.status);
     }
 }

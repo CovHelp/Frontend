@@ -60,7 +60,7 @@ const App = () => {
             <Route path="/settings">
               <ProfileSetting />
             </Route>
-            <Route path="/post-detail">
+            <Route path="/post-detail/:id">
               <PostDetails />
             </Route>
             <Route path='*' exact={true} component={NotFound} />

@@ -10,8 +10,10 @@ import { Input, InputGroup } from "@chakra-ui/input";
 import { Button } from "@chakra-ui/button";
 import CommentBubble from "../../CommentBubble/CommentBubble";
 import { Link } from "react-router-dom";
+import {useSelector} from 'react-redux'
 
-const NeedHelpCard = ({ post, isProfile }) => {
+const NeedHelpCard = ({ post, isProfile, showComments=false}) => {
+  const userStore = useSelector(store => store.userStore);
   const asd = {
     user: {
       id: 1,
@@ -109,8 +111,10 @@ const NeedHelpCard = ({ post, isProfile }) => {
         >
 
           <div dangerouslySetInnerHTML={{ __html: post.body.replaceAll('\n', '<br/>') }} />
-          <Link to="/post-detail"> <Text fontWeight="medium" _hover={{textDecoration:'underline'}}>Read More</Text> </Link>
         </Box>
+        <Link to={`/post-detail/0/${post.id}`}>
+        <Text fontWeight="medium" _hover={{textDecoration:'underline'}}>Read More</Text> </Link>
+
 
         <Box d="flex" mt="2" alignItems="center">
           <Box as="span" color="gray.600" fontSize="sm">
@@ -147,7 +151,7 @@ const NeedHelpCard = ({ post, isProfile }) => {
           <Avatar
             w={["40px", "48px"]}
             h={["40px", "48px"]}
-            src={post.picture}
+            src={userStore.token.token && userStore.user.profile_pic}
             mr={["2", "4"]} />
 
 
@@ -160,13 +164,11 @@ const NeedHelpCard = ({ post, isProfile }) => {
           <Button colorScheme="messenger" borderRadius="lg" px={[6, 8]} ml={2}>Post</Button>
 
         </InputGroup>
-
+        {showComments && <div>
         <CommentBubble name="So" date="4/20/69" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis" />
-
         <CommentBubble name="Up" date="4/20/69" comment="Lorem ipsum dolor" />
-        <Link to="/post-detail"> <Text fontWeight="medium" _hover={{textDecoration:'underline'}}>Read More</Text> </Link>
-
-
+        {/* <Link to="/post-detail"> <Text fontWeight="medium" _hover={{textDecoration:'underline'}}>Read More</Text> </Link> */}
+      </div>}
       </Flex>
     </CardBox>
   );
