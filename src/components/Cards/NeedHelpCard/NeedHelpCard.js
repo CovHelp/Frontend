@@ -73,7 +73,7 @@ const NeedHelpCard = ({ post, isProfile }) => {
         </Flex>
       </Flex>
       {post.picture !== "" && (
-        <Image src={post.picture} objectFit="cover" color="gray.600" alt="" />
+        <Image src={`https://apis.covhelp.online/v1/posts/file/${post.picture}`} objectFit="cover" color="gray.600" alt="" />
       )}
 
       <Box p={["4", "8"]} pt={post.picture === "" && ["0", "0"]} bgColor="white">

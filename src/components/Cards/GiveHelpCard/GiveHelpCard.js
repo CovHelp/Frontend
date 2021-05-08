@@ -10,21 +10,6 @@ import { getNameByCategoryID } from "../../../api/post";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 
-const CardButtons = (props) => {
-  return (
-    <Button background="transparent">
-      <Flex
-        flexDir={["column", "column", "column", "column", "row"]}
-        alignItems="center"
-        justifyContent="center"
-        minH="1rem"
-      >
-        <Icon mr={2} ml={2} w={[5, 6]} h={[5, 6]} as={props.icon} />
-        {props.name}
-      </Flex>
-    </Button>
-  );
-};
 
 const GiveHelpCard = ({ post, isProfile }) => {
   
@@ -33,7 +18,7 @@ const GiveHelpCard = ({ post, isProfile }) => {
     <CardBox>
       <Flex w={"100%"} p={["4", "8"]} bgColor="white">
         <Avatar src={post.user.profile_pic} w={["40px", "48px"]} h={["40px", "48px"]} />
-        <Flex flexDir="column" _dark="true" ml={["2", "4"]}>
+        <Flex flexDir="column" _dark=" true" ml={["2", "4"]}>
           <Heading as="h6" size="sm">
             {post.user.firstName} {post.user.LastName}
           </Heading>
@@ -46,6 +31,7 @@ const GiveHelpCard = ({ post, isProfile }) => {
                   px="2"
                   ml={1}
                   mb={1}
+                  py="0.5"
                   colorScheme="green"
                 >
                   {getNameByCategoryID(post.category)} {/* URGENCY */}
@@ -64,7 +50,7 @@ const GiveHelpCard = ({ post, isProfile }) => {
 
       <Box p={["4", "8"]} pt={post.picture === "" && ["0", "0"]} bgColor="white">
         <Box d="flex" alignItems="baseline">
-          <Badge borderRadius="full" px="2" colorScheme="red">
+          <Badge borderRadius="full" px="2" py="1" colorScheme="red">
             Urgency level: {post.urgency} {/* URGENCY */}
           </Badge>
           <Box
