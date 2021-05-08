@@ -79,7 +79,7 @@ export default function DesktopSidebar() {
           localFilteredList = [...localFilteredList, post]
         }
       })
-      // console.log("teh value of posts are ", localFilteredList);
+      console.log("teh value of posts are ", localFilteredList);
       setProvideHelpPosts(localFilteredList);
     }
   };
@@ -157,6 +157,22 @@ export default function DesktopSidebar() {
       });
   }, [provideHelpPosts]);
 
+  const handleLocationSelect = (city, state) => {
+    var localFilteredList = [];
+    console.log("selected location", state, city)
+    setFilterInitated(true);
+    var l = provideHelpPostStore.filter((post) => {
+      if(post.locations[0].state == state.name){
+        if(post.locations[0].city == city.name){
+          localFilteredList = [...localFilteredList, post]
+        }
+      }
+    })
+    console.log("teh value of posts are ", localFilteredList);
+    setProvideHelpPosts(localFilteredList);
+    setNeedHelpPosts(localFilteredList);
+  }
+
 
   useEffect(() => {
     console.log("New location")
@@ -198,7 +214,7 @@ export default function DesktopSidebar() {
         <DividerComponent colorScheme="telegram" />
 
         <Box py="16px" px="20px" style={{ marginTop: 0 }}>
-          <StateCitySelctor />
+          <StateCitySelctor onSelected={handleLocationSelect} />
         </Box>
 
         <DividerComponent colorScheme="telegram" />
