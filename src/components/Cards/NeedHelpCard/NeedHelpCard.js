@@ -101,7 +101,9 @@ const NeedHelpCard = ({ post, isProfile }) => {
           lineHeight="tight"
           noOfLines={[3, 4]}
         >
-          {post.body}
+          
+          <div dangerouslySetInnerHTML={{ __html: post.body.replaceAll('\n', '<br/>') }} />
+          
         </Box>
 
         <Box d="flex" mt="2" alignItems="center">
