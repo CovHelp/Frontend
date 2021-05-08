@@ -92,7 +92,7 @@ const GiveHelpCard = ({ post, isProfile , readMore }) => {
             <Grid templateColumns="repeat(3, 1fr)" >
               <CardButton name="Like" icon={MdThumbUp} />
               <CardButton icon={IoHandLeftSharp} name="I need help" />
-              <CardButton icon={FaComment} name="Comment" />
+              <CardButton to="post-detail" icon={FaComment} name="Comment" />
             </Grid>
           </>
         )}
