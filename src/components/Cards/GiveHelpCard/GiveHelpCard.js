@@ -54,16 +54,14 @@ const GiveHelpCard = ({ post, isProfile }) => {
 
       <Box p={["4", "8"]} pt={post.picture === "" && ["0", "0"]} bgColor="white">
         <Box d="flex" alignItems="baseline">
-          <Badge borderRadius="full" px="2" py="1" colorScheme="red">
-            Urgency level: {post.urgency} {/* URGENCY */}
-          </Badge>
+          
           <Box
             color="gray.500"
             fontWeight="semibold"
             letterSpacing="wide"
             fontSize="xs"
             textTransform="uppercase"
-            ml="2"
+          
           >
             {post.locations.map((i) => (<span>{i.state} &bull; {i.city}</span>))}
           </Box>
