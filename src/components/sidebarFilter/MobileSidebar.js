@@ -186,8 +186,11 @@ export default function MobileSidebar({ isVisible }) {
       }
     })
     console.log("teh value of posts are ", localFilteredList);
-    setProvideHelpPosts(localFilteredList);
-    setNeedHelpPosts(localFilteredList);
+    if(window.location.href.includes('provide-help')){
+      setProvideHelpPosts(localFilteredList);
+    }else if(window.location.href.split("/").length === 4){
+      setNeedHelpPosts(localFilteredList);
+    }
   }
 
   return (
