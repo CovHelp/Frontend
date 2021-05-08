@@ -3,7 +3,7 @@ import { Button } from "@chakra-ui/button";
 import Icon from "@chakra-ui/icon";
 import { Image } from "@chakra-ui/image";
 import { Badge, Box, Flex, Grid, Heading } from "@chakra-ui/layout";
-import { IoMdShareAlt } from "react-icons/io";
+import { FaComment } from "react-icons/fa";
 import { IoHandLeftSharp } from "react-icons/io5";
 import { MdThumbUp } from "react-icons/md";
 import { getNameByCategoryID } from "../../../api/post";
@@ -86,7 +86,7 @@ const GiveHelpCard = ({ post, isProfile }) => {
             <Grid templateColumns="repeat(3, 1fr)" >
               <CardButton name="Like" icon={MdThumbUp} />
               <CardButton icon={IoHandLeftSharp} name="I need help" />
-              <CardButton icon={IoMdShareAlt} name="Appreciate" />
+              <CardButton icon={FaComment} name="Comment" />
             </Grid>
           </>
         )}
