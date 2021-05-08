@@ -23,9 +23,9 @@ import {
 } from "@chakra-ui/slider";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { ImCross } from "react-icons/all";
+import { BsCloudUpload, ImCross } from "react-icons/all";
 import { useSelector } from "react-redux";
-import { createNeedHelpPost, createProvideHelpPost } from "../../api/post";
+import { createNeedHelpPost, createProvideHelpPost, uploadImage } from "../../api/post";
 import {
   BoilerPlateForGiveHelp,
   BoilerPlateForNeedHelp
@@ -34,6 +34,7 @@ import StateCitySelctor from "../../components/newpost/StateCitySelector";
 
 const NewPost = (props) => {
   const [category, setCategory] = useState('');
+
   const [shareNumber, setshareNumber] = useState(true);
   const [urgencySliderValue, setUrgencySliderValue] = useState(1);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -42,7 +43,8 @@ const NewPost = (props) => {
   const [body, setBody] = useState("");
   const [city, setCity] = useState(null);
   const [state, setState] = useState(null);
-  const [err, setErr] = useState()
+  const [uploadLoader, setUploadLoader] = useState()
+  const [uploadedImageId, setUploadedImageId] = useState("");
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [stateCitySelectorVisible, setStateCitySelectorVisible] = useState(
     true
@@ -68,9 +70,7 @@ const NewPost = (props) => {
         : BoilerPlateForGiveHelp[e.target.value - 1]
     );
   };
-  const handleLocationSliderChange = (val) => {
-    setLocationSliderValue(val);
-  };
+
   const handleUrgencySLiderChange = (val) => setUrgencySliderValue(val);
   const handlePhoneNumberChange = (e) => setPhoneNumber(e.target.value);
   const handleSetBody = (e) => setBody(e.target.value);
@@ -102,24 +102,14 @@ const NewPost = (props) => {
   };
 
   const handleImageUpload = async () => {
-    console.log("Uploading");
+    setUploadLoader(true)
     console.log(selectedFile);
-    let formData = new FormData();
-    formData.append("file", selectedFile);
-    console.log(formData);
-    try {
-      const res = await axios.post(
-        "https://apis.covhelp.online/v1/posts/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        }
-      );
-      console.log("FILE ID: ", res.data);
-      console.log("Uploaded");
+    try{
+    const fileId = await uploadImage({ file: selectedFile, token: userStore.token.token});
+    setUploadedImageId(fileId);
+    setUploadLoader(false)
     } catch (e) {
+      setUploadLoader(false)
       console.log(e);
     }
   };
@@ -145,12 +135,12 @@ const NewPost = (props) => {
     setLoader(true);
     if (props.typeOfPost === "Request Help") {
       try {
-        const responseFromRequestHelp = await createNeedHelpPost({
+        await createNeedHelpPost({
           body: body,
           category: category,
           phoneNumber: phoneNumber,
           isPhoneNumberPublic: shareNumber,
-          picture: "",
+          picture: uploadedImageId,
           urgency: urgencySliderValue,
           city: city.name,
           state: state.name,
@@ -189,7 +179,7 @@ const NewPost = (props) => {
           category: category,
           phoneNumber: phoneNumber,
           isPhoneNumberPublic: shareNumber,
-          picture: "",
+          picture: uploadedImageId,
           urgency: urgencySliderValue,
           locations: selectedLocations,
           token: userStore.token.token,
@@ -264,24 +254,35 @@ const NewPost = (props) => {
               />
             </FormControl>
 
-            <Flex border="1px" flexDir="column" w="100%" justifyContent="center">
-              <Image
-                ref={imgRef}
-                alt="img"
-                visibility={isImgSelected ? "visible" : "hidden"}
-              />
 
-              <label style={{ border: "5px" }}>
-                <Flex as="h1">Select Image </Flex>
-                <Input
-                  style={{ visibility: "hidden" }}
-                  ref={fileRef}
-                  onChange={handleImageFileChange}
-                  type="file"
-                />
-              </label>
-              <Button background="messenger.500" color="white" onClick={handleImageUpload}> UPLOAD </Button>
-            </Flex>
+            <FormControl id="img">
+              <FormLabel>Upload Image</FormLabel>
+              <Flex m={0} pt={0} flexDir="column" w="100%" justifyContent="center" borderRadius="lg">
+
+
+                <Box as="label" borderRadius="lg" backgroundColor="whitesmoke">
+                  <Image
+                    ref={imgRef}
+                    alt="img"
+                    borderRadius="lg"
+                    h={isImgSelected ? -10 : 'auto'}
+                    visibility={isImgSelected ? "visible" : "hidden"}
+                  />
+                  {!isImgSelected &&
+                    <Flex justifyContent="center" alignItems="center"  > <BsCloudUpload color="messenger.500" size="40px" /> </Flex>}
+                  <Input
+                    style={{ visibility: "hidden" }}
+                    ref={fileRef}
+                    h={0}
+                    onChange={handleImageFileChange}
+                    type="file"
+                  />
+                </Box>
+                {isImgSelected &&
+                  <Button background={uploadedImageId ? "whatsapp.500" : "messenger.500"} color="white" onClick={handleImageUpload} isLoading={uploadLoader}> {uploadedImageId ? "UPLOADED" : "UPLOAD"}   </Button>
+                }
+              </Flex>
+            </FormControl>
 
 
             {props.typeOfPost === "Provide Help" &&

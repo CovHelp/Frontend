@@ -1,5 +1,7 @@
+import axios from 'axios';
 import {
-    JSONClient
+    JSONClient,
+    FormClient
 } from './bootstrap';
 import CovhelpException from './CovhelpException'
 
@@ -47,6 +49,32 @@ export const getNeedHelpPostsByUser = async ({ token }) => {
     }
 }
 
+
+export const uploadImage = async ( {file, token} ) => {
+    let formData = new FormData();
+    formData.append("file", file);
+    console.log(formData);
+    try{
+        const res = await axios.post(
+            "https://apis.covhelp.online/v1/posts/upload",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data"
+              }
+            }
+          );
+        return res.data;
+    //    const res = await FormClient.post('/posts/upload', formData, {
+    //         headers: {
+    //             Authorization: `Bearer ${token}`
+    //         }
+    //     })
+    //     return res.data;
+    }catch(e){
+        throw new CovhelpException(e.response.data, e.response.status);
+    }
+}
 
 export const createNeedHelpPost = async ({
     body,
