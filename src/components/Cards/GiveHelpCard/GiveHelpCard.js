@@ -9,6 +9,7 @@ import { getNameByCategoryID } from "../../../api/post";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 import CommentBubble from "../../CommentBubble/CommentBubble";
+import { Button } from "@chakra-ui/button";
 
 
 const GiveHelpCard = ({ post, isProfile }) => {
@@ -122,9 +123,8 @@ const GiveHelpCard = ({ post, isProfile }) => {
             placeholder="Comment"
             borderRadius={"lg"}
             bgColor="rgb(245,245,245)" />
-
-
-
+          
+          <Button colorScheme="messenger" borderRadius="lg" px={[6,8]} ml={2}>Post</Button>
 
         </InputGroup>
 
