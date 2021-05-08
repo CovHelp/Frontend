@@ -21,7 +21,7 @@ export const getProvideHelpPosts = async () => {
     }
 }
 
-export const getProvideHelpPostsByUser = async ({token}) => {
+export const getProvideHelpPostsByUser = async ({ token }) => {
     try {
         const res = await JSONClient.post('/posts/user-provide-help-posts', {}, {
             headers: {
@@ -34,7 +34,7 @@ export const getProvideHelpPostsByUser = async ({token}) => {
     }
 }
 
-export const getNeedHelpPostsByUser = async ({token}) => {
+export const getNeedHelpPostsByUser = async ({ token }) => {
     try {
         const res = await JSONClient.post('/posts/user-need-help-posts', {}, {
             headers: {
@@ -61,6 +61,7 @@ export const createNeedHelpPost = async ({
     long,
     token
 }) => {
+    var result;
     try {
         const res = await JSONClient.post('/posts/create-need-help-post', {
             body,
@@ -79,10 +80,13 @@ export const createNeedHelpPost = async ({
                 Authorization: `Bearer ${token}`
             }
         })
-        return res.data;
+        result = res.data;
     } catch (e) {
-        throw CovhelpException(e.response.data, e.response.status)
+        console.log("FROM API", e.response.data.errors);
+        result = e.response.data
+        throw CovhelpException(e.response.data.errors, e.response.status)
     }
+    return result;
 }
 
 export const createProvideHelpPost = async ({
