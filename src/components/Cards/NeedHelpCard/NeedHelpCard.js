@@ -74,7 +74,7 @@ const NeedHelpCard = ({ post, isProfile }) => {
         </Flex>
       </Flex>
       {post.picture !== "" && (
-        <Image src={`https://apis.covhelp.online/v1/posts/file/${post.picture}`} objectFit="cover" color="gray.600" alt="" />
+        <Image src={`https://apis.covhelp.online/v1/posts/file/${post.picture}`} ml='auto' mr="auto" objectFit="cover" color="gray.600" alt="" />
       )}
 
       <Box p={["4", "8"]} pt={post.picture === "" && ["0", "0"]} bgColor="white">
@@ -99,9 +99,11 @@ const NeedHelpCard = ({ post, isProfile }) => {
           fontWeight="normal"
           as="h4"
           lineHeight="tight"
-          noOfLines={[1, 2, 3, 4]}
+          noOfLines={[3, 4]}
         >
-          {post.body}
+          
+          <div dangerouslySetInnerHTML={{ __html: post.body.replaceAll('\n', '<br/>') }} />
+          
         </Box>
 
         <Box d="flex" mt="2" alignItems="center">

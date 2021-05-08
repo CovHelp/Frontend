@@ -41,10 +41,12 @@ const GiveHelpCard = ({ post, isProfile }) => {
           </Box>
         </Flex>
       </Flex>
-     {post.picture !== "" && (<Image
+      {post.picture !== "" && (<Image
+        
         src={`https://apis.covhelp.online/v1/posts/file/${post.picture}`}
         objectFit="cover"
         color="gray.600"
+        ml='auto' mr="auto"
         alt=""
       />)
      }
@@ -70,9 +72,10 @@ const GiveHelpCard = ({ post, isProfile }) => {
           fontWeight="normal"
           as="h4"
           lineHeight="tight"
-          noOfLines={[1, 2, 3, 4]}
+          noOfLines={[3, 4]}
         >
-          {post.body}
+          
+          <div dangerouslySetInnerHTML={{__html: post.body.replaceAll('\n', '<br/>')}}/>
         </Box>
 
         <Box d="flex" mt="2" alignItems="center">
@@ -91,6 +94,9 @@ const GiveHelpCard = ({ post, isProfile }) => {
             </Grid>
           </>
         )}
+      </Box>
+      <Box>
+        <h1>ok</h1>
       </Box>
     </CardBox>
   );
