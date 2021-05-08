@@ -97,7 +97,7 @@ const GiveHelpCard = ({ post, isProfile }) => {
         {isProfile !== "true" && (
           <>
             <hr />
-            <Grid pt={["4", "8"]} templateColumns="repeat(3, 1fr)" gap={2}>
+            <Grid templateColumns="repeat(3, 1fr)" >
               <CardButton name="Like" icon={MdThumbUp} />
               <CardButton icon={IoHandLeftSharp} name="I need help" />
               <CardButton icon={IoMdShareAlt} name="Appreciate" />
