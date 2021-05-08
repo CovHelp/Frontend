@@ -112,7 +112,7 @@ const NeedHelpCard = ({ post, isProfile }) => {
         {isProfile !== "true" && (
           <>
             <hr />
-            <Grid pt={["4", "8"]} templateColumns="repeat(1, 1fr)" gap={2}>
+            <Grid templateColumns="repeat(1, 1fr)">
               <CardButton icon={IoHandLeftSharp} name="I Can help" />
             </Grid>
           </>
