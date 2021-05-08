@@ -41,10 +41,12 @@ const GiveHelpCard = ({ post, isProfile }) => {
           </Box>
         </Flex>
       </Flex>
-     {post.picture !== "" && (<Image
+      {post.picture !== "" && (<Image
+        
         src={`https://apis.covhelp.online/v1/posts/file/${post.picture}`}
         objectFit="cover"
         color="gray.600"
+        ml='auto' mr="auto"
         alt=""
       />)
      }

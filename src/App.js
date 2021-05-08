@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import { BottomNav, Navbar } from "./components/navbar";
@@ -10,6 +10,7 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Filtersidebar from "./components/sidebarFilter/Filtersidebar";
 import NotFound from "./pages/NotFound/NotFound";
+import PostDetails from "./pages/PostDetails/PostDetails";
 import Profile from "./components/profile/Profile";
 import ProfileSetting from "./components/profile/ProfileSetting";
 // import Chat from "./components/chat/Chat";
@@ -23,10 +24,10 @@ const App = () => {
     <div className="App">
       <div className="main-wrapper">
         <div>
-          <Navbar sideBarEvent = {handleSidebarEvent}/>
+          <Navbar sideBarEvent={handleSidebarEvent} />
         </div>
         <div className="app_body">
-          <Filtersidebar visibility={isSidebarVisibile}/>
+          <Filtersidebar visibility={isSidebarVisibile} />
           <Switch>
             <Route exact path="/">
               <NeedHelp />
@@ -35,7 +36,7 @@ const App = () => {
               <NeedHelp />
             </Route>
             <Route path="/provide-help">
-              <GiveHelp/>
+              <GiveHelp />
             </Route>
             <Route path="/new-post">
               <NewPost />
@@ -53,18 +54,21 @@ const App = () => {
               <NewPost />
             </Route>
             <Route path="/profile">
-              <Profile/>
+              <Profile />
             </Route>
             <Route path="/settings">
-              <ProfileSetting/>
+              <ProfileSetting />
+            </Route>
+            <Route path="/post-feed">
+              <PostDetails />
             </Route>
             <Route path='*' exact={true} component={NotFound} />
           </Switch>
-          
+
           <div></div>
           {/* <Chat/> */}
         </div>
-      <BottomNav/>
+        <BottomNav />
 
       </div>
     </div>
