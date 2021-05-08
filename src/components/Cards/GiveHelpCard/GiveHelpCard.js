@@ -65,6 +65,7 @@ const GiveHelpCard = ({ post, isProfile }) => {
             textTransform="uppercase"
             ml="2"
           >
+            {post.locations.map((i) => (<span>{i.state} &bull; {i.city}</span>))}
           </Box>
         </Box>
 
