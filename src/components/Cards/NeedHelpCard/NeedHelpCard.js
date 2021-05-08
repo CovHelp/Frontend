@@ -95,7 +95,7 @@ const NeedHelpCard = ({ post, isProfile }) => {
             textTransform="uppercase"
             ml="2"
           >
-            {post.category} category &bull; {post.baths} baths
+            {post.location.city} &bull; {post.location.state}
           </Box>
         </Box>
 
