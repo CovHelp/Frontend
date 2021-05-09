@@ -84,7 +84,7 @@ export default function MobileSidebar({ isVisible }) {
           localFilteredList = [...localFilteredList, post]
         }
       })
-      console.log("teh value of posts are ", localFilteredList);
+      // console.log("teh value of posts are ", localFilteredList);
       setProvideHelpPosts(localFilteredList);
     }
   };
@@ -132,7 +132,7 @@ export default function MobileSidebar({ isVisible }) {
 
 
   useEffect(() => {
-    console.log(window.location.href.split("/").length)
+    // console.log(window.location.href.split("/").length)
     if(window.location.href.includes('provide-help')){
       handleProvideHelpFilter()
     }else if(window.location.href.split("/").length === 4){
@@ -165,7 +165,7 @@ export default function MobileSidebar({ isVisible }) {
 
   
   useEffect(() => {
-    console.log("New location")
+    // console.log("New location")
     setOxygen(false);
     setAmbulance(false);
     setMedicine(false);
@@ -176,9 +176,9 @@ export default function MobileSidebar({ isVisible }) {
 
   const handleLocationSelect = (city, state) => {
     var localFilteredList = [];
-    console.log("selected location", state, city)
+    // console.log("selected location", state, city)
     setFilterInitated(true);
-    console.log("teh value of posts are ", localFilteredList);
+    // console.log("teh value of posts are ", localFilteredList);
     if(window.location.href.includes('provide-help')){
       var l = provideHelpPostStore.filter((post) => {
         for(let i = 0; i < post.locations.length; ++i){
