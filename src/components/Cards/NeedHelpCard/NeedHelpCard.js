@@ -109,6 +109,13 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
           postID: post.id,
           token: userStore.token.token
         });
+        toast({
+          position: "top-right",
+          isClosable: true,
+          duration: 4000,
+          description: "Chat room created, head over to chat page!",
+          status: "success",
+        });
       } catch (e) {}
     }
   };
