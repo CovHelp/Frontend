@@ -16,6 +16,7 @@ import ProfileSetting from "./components/profile/ProfileSetting";
 import InfoBar from './components/InfoBar'
 import { Chat } from "./components/chat/chat";
 
+
 const App = () => {
   const [isSidebarVisibile, setSidebarVisible] = useState(false);
   const handleSidebarEvent = (visibility) => {
@@ -69,7 +70,7 @@ const App = () => {
             <Route path='*' exact={true} component={NotFound} />
           </Switch>
 
-          <InfoBar/>
+          <InfoBar />
         </div>
         <BottomNav />
 

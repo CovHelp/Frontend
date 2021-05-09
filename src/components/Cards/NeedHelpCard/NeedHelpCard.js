@@ -1,35 +1,35 @@
 import { Avatar } from "@chakra-ui/avatar";
+import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
+import { Input, InputGroup } from "@chakra-ui/input";
 import {
   Badge,
   Box,
   Flex,
   Grid,
   Heading,
-  Stack,
-  Text,
+  Text
 } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
+import { useEffect, useState } from "react";
+import { FaComment } from "react-icons/fa";
 import { IoHandLeftSharp } from "react-icons/io5";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   createNeedHelpComment,
   getNameByCategoryID,
-  getNeedHelpComments,
+  getNeedHelpComments
 } from "../../../api/post";
+import CommentBubble from "../../CommentBubble/CommentBubble";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
-import { FaComment } from "react-icons/fa";
-import { Input, InputGroup } from "@chakra-ui/input";
-import { Button } from "@chakra-ui/button";
-import CommentBubble from "../../CommentBubble/CommentBubble";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
 
 const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
   const userStore = useSelector((store) => store.userStore);
   const [comment, setComment] = useState();
   const [comments, setComments] = useState([]);
-
+  const toast = useToast();
   const asd = {
     user: {
       id: 1,
@@ -70,13 +70,14 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
   }, []);
 
   const [commentLoader, setCommentLoader] = useState()
-  
+
   const handleLoadComments = async () => {
     try {
       const res = await getNeedHelpComments({ postID: post.id });
       setComments(res);
-    } catch (e) {}
+    } catch (e) { }
   };
+
 
   const handleComment = async () => {
     try {
@@ -90,7 +91,19 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
       setComment("");
 
       handleLoadComments();
-    } catch (e) { setCommentLoader(false);  }
+
+      (() => {
+        console.log("toast called");
+        toast({
+          position: "top-right",
+          isClosable: true,
+          duration: 4000,
+          description: "Comment Posted",
+          status: 'success'
+        })
+      })()
+
+    } catch (e) { setCommentLoader(false); }
   };
 
   return (
@@ -169,11 +182,11 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
           />
         </Box>
         {!showComments &&
-        <Link to={`/post-detail/0/${post.id}`}>
-          <Text fontWeight="medium" _hover={{ textDecoration: "underline" }}>
-            Read More
+          <Link to={`/post-detail/0/${post.id}`}>
+            <Text fontWeight="medium" _hover={{ textDecoration: "underline" }}>
+              Read More
           </Text>{" "}
-        </Link>}
+          </Link>}
 
         <Box d="flex" mt="2" alignItems="center">
           <Box as="span" color="gray.600" fontSize="sm">
@@ -186,7 +199,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
             <hr />
             <Grid templateColumns="repeat(2, 1fr)">
               <CardButton icon={IoHandLeftSharp} name="I Can help" />
-              <CardButton to={`post-detail/0/${post.id}`} icon={FaComment} name={(post.comments.length===0? "Comment" : "Comments " + "(" +  post.comments.length + ")")}/>
+              <CardButton to={`post-detail/0/${post.id}`} icon={FaComment} name={(post.comments.length === 0 ? "Comment" : "Comments " + "(" + post.comments.length + ")")} />
             </Grid>
           </>
         )}
