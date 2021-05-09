@@ -153,7 +153,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
         bgColor="white"
       >
         <Box d="flex" alignItems="baseline">
-          <Badge borderRadius="full" px="2" colorScheme="red">
+          <Badge borderRadius="full" px="2" colorScheme={post.urgency > 2 ? 'red' : 'orange'}>
             Urgency Level: {post.urgency}
           </Badge>
           <Box
