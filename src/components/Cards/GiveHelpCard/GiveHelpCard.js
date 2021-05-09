@@ -92,24 +92,27 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
   }
 
   useEffect(() => {
+    try{
     isLiked();
     setLikesCount(post.upvotes.length);
+    }catch(e){}
   }, []);
 
   const isLiked = () => {
     if (userStore.token && userStore.token.token) {
+      try{
       if (post.upvotes.length == 0) {
         setLiked(false);
       }
       var res = post.upvotes.filter(
         (post) => post.userID === userStore.user.id
       );
-      console.log(res);
       if (res.length > 0) {
         setLiked(true);
       } else {
         setLiked(false);
       }
+    }catch(e){}
     } else {
       setLiked(false);
     }
