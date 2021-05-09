@@ -2,24 +2,18 @@ import { Avatar } from "@chakra-ui/avatar";
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Input, InputGroup } from "@chakra-ui/input";
-import {
-  Badge,
-  Box,
-  Flex,
-  Grid,
-  Heading,
-  Text
-} from "@chakra-ui/layout";
+import { Badge, Box, Flex, Grid, Heading, Text } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/toast";
 import { useEffect, useState } from "react";
 import { FaComment } from "react-icons/fa";
 import { IoHandLeftSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { createNeedChannel } from "../../../api/channel";
 import {
   createNeedHelpComment,
   getNameByCategoryID,
-  getNeedHelpComments
+  getNeedHelpComments,
 } from "../../../api/post";
 import CommentBubble from "../../CommentBubble/CommentBubble";
 import CardBox from "../CardBox";
@@ -69,15 +63,14 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
     handleLoadComments();
   }, []);
 
-  const [commentLoader, setCommentLoader] = useState()
+  const [commentLoader, setCommentLoader] = useState();
 
   const handleLoadComments = async () => {
     try {
       const res = await getNeedHelpComments({ postID: post.id });
       setComments(res);
-    } catch (e) { }
+    } catch (e) {}
   };
-
 
   const handleComment = async () => {
     try {
@@ -99,11 +92,25 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
           isClosable: true,
           duration: 4000,
           description: "Comment Posted",
-          status: 'success'
-        })
-      })()
+          status: "success",
+        });
+      })();
+    } catch (e) {
+      setCommentLoader(false);
+    }
+  };
 
-    } catch (e) { setCommentLoader(false); }
+  const handleHelpChannel = async () => {
+    if (userStore.token && userStore.token.token) {
+      try {
+        const res = await createNeedChannel({
+          user1: userStore.user.id,
+          user2: post.user.id,
+          postID: post.id,
+          token: userStore.token.token
+        });
+      } catch (e) {}
+    }
   };
 
   return (
@@ -181,12 +188,13 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
             }}
           />
         </Box>
-        {!showComments &&
+        {!showComments && (
           <Link to={`/post-detail/0/${post.id}`}>
             <Text fontWeight="medium" _hover={{ textDecoration: "underline" }}>
               Read More
-          </Text>{" "}
-          </Link>}
+            </Text>{" "}
+          </Link>
+        )}
 
         <Box d="flex" mt="2" alignItems="center">
           <Box as="span" color="gray.600" fontSize="sm">
@@ -198,8 +206,20 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
           <>
             <hr />
             <Grid templateColumns="repeat(2, 1fr)">
-              <CardButton icon={IoHandLeftSharp} name="I Can help" />
-              <CardButton to={`post-detail/0/${post.id}`} icon={FaComment} name={(post.comments.length === 0 ? "Comment" : "Comments " + "(" + post.comments.length + ")")} />
+              <CardButton
+                onClick={handleHelpChannel}
+                icon={IoHandLeftSharp}
+                name="I Can help"
+              />
+              <CardButton
+                to={`post-detail/0/${post.id}`}
+                icon={FaComment}
+                name={
+                  post.comments.length === 0
+                    ? "Comment"
+                    : "Comments " + "(" + post.comments.length + ")"
+                }
+              />
             </Grid>
           </>
         )}
