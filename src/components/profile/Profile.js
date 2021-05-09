@@ -113,11 +113,11 @@ const Profile = () => {
               <Text fontSize="sm" fontWeight="400">
                 {userStore.user.email && userStore.user.email}
               </Text>
-              <Link to="/settings">
+              {/* <Link to="/settings">
                 <Button size="xs" mt="6px" colorScheme="linkedin">
                   <BiEdit /> <Text ml="3px">Edit Profile</Text>
                 </Button>
-              </Link>
+              </Link> */}
             </Box>
           </Box>
 

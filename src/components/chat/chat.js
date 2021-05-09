@@ -13,7 +13,7 @@ import { createBatcher } from "framer-motion";
 
 export const Chat = () => {
   const SERVER = "https://apis.covhelp.online";
-  var socket = socketClient(SERVER);
+  var socket = socketClient(SERVER, { transports: ["polling"] });
   const [msg, setMsg] = useState();
   const userStore = useSelector((store) => store.userStore);
   const [allChannels, setAllChannels] = useState([]);
@@ -24,17 +24,17 @@ export const Chat = () => {
 
   const handleFetchAllChannels = async () => {
     if (userStore.token && userStore.token.token) {
-      console.log("Requesing");
+    //   console.log("Requesing");
 
       const res = await fetchAllChannels({ token: userStore.token.token });
       setAllChannels(res);
-      console.log("All channels", res);
+    //   console.log("All channels", res);
     } else {
-      console.log("Error?");
+    //   console.log("Error?");
     }
   };
   useEffect(() => {
-    handleFetchAllChannels();  
+    handleFetchAllChannels();
   }, [userStore]);
 
   useEffect(() => {
@@ -42,25 +42,26 @@ export const Chat = () => {
     socket.open();
   }, [joinedChannel]);
 
-  socket.on("on-init", (msg) => {
-    try {
-      setMessages(msg);
-      console.log(msg);
-    } catch (e) {
-      console.log(e);
-    }
-  });
+  useEffect(() => {
+    socket.on("connection", (v) => {});
 
-  socket.on("connection", (v) => {});
-
-  socket.on("on-message", (msg) => {
-    try {
-    console.log(msg);
-      setMessages((msgs) => [...msgs, msg]);
-    } catch (e) {
-      console.log(e);
-    }
-  });
+    socket.on("on-message", (msg) => {
+      try {
+        // console.log(msg);
+        setMessages((msgs) => [...msgs, msg]);
+      } catch (e) {
+        // console.log(e);
+      }
+    });
+    socket.on("on-init", (msg) => {
+      try {
+        setMessages(msg);
+        // console.log(msg);
+      } catch (e) {
+        // console.log(e);
+      }
+    });
+  }, [socket]);
 
   useEffect(() => {
     if (msgList && msgList.current) {
@@ -89,7 +90,7 @@ export const Chat = () => {
             },
           },
           (ack) => {
-            console.log("acknowledged");
+            // console.log("acknowledged");
           }
         );
         inputRef.current.value = "";
@@ -101,6 +102,8 @@ export const Chat = () => {
       }
     }
   };
+
+  if(userStore.token && userStore.token.token){
   return (
     <div className="chat">
       <div className="chat-wrapper">
@@ -158,21 +161,24 @@ export const Chat = () => {
           <div className="chat-container">
             <div className="chat-list" ref={msgList}>
               {messages.length > 0 &&
-                messages.map((msg) => (
-                  <MessageBox
+                messages.map((msg, index) => (
+                  <MessageBox key={index}
                     // avatar={msg.sender.profile_pic}
                     position={
-                      typeof msg.sender === "object" ? (msg.sender.id == userStore.user.id ? "right" : "left") : (msg.sender == userStore.user.id ? "right" : "left")
+                      typeof msg.sender === "object"
+                        ? msg.sender.id == userStore.user.id
+                          ? "right"
+                          : "left"
+                        : msg.sender == userStore.user.id
+                        ? "right"
+                        : "left"
                     }
                     text={msg.message}
                   />
                 ))}
             </div>
             <div className="chat-container-inputbox">
-              <Input
-                ref={inputRef}
-                placeholder="Type your message"
-              />
+              <Input ref={inputRef} placeholder="Type your message" />
               <Button onClick={handleSend} bg="blue.500" color="white">
                 Send
               </Button>
@@ -192,4 +198,7 @@ export const Chat = () => {
       </div>
     </div>
   );
+        }else{
+            return <div> </div>
+        }
 };

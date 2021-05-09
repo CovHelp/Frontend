@@ -42,8 +42,8 @@ const GiveHelp = () => {
     >
       <SearchBar name = "Provide Help"/>
       {provideHelpPostStoreFiltered.length > 0 &&
-          provideHelpPostStoreFiltered.map((post) => (
-            <GiveHelpCard key={post.id} post={post} />
+          provideHelpPostStoreFiltered.map((post, index) => (
+            <GiveHelpCard key={index} post={post} />
           ))}
       
     </Box>

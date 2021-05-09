@@ -29,7 +29,6 @@ export default function StateCitySelctor({onSelected, parent="default"}) {
   }, []);
 
   useEffect(() => {
-    console.log(location)
     setSelectedCity("None")
     setSelectedState("None")
   }, [location])

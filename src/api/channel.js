@@ -57,7 +57,7 @@ export const fetchAllChannels = async ({
                 Authorization: `Bearer ${token}`
             }
         })
-        console.log(res);
+        // console.log(res);
         return res.data;
     } catch (e) {
         throw new CovhelpException(e.response.data, e.response.status)
