@@ -56,3 +56,9 @@
         width: 230px;
     }
 }
+
+@media only screen and (max-width: 650px){
+    .info-sidebar {
+        display: none !important;
+    }
+}
