@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/layout";
-
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { getNeedHelpPostByID, getProvideHelpPostByID } from "../../api/post";
-import NeedHelpCard from "../../components/Cards/NeedHelpCard/NeedHelpCard";
 import GiveHelpCard from "../../components/Cards/GiveHelpCard/GiveHelpCard";
+import NeedHelpCard from "../../components/Cards/NeedHelpCard/NeedHelpCard";
+
 
 const PostDetails = () => {
   const [postType, setPostType] = useState(null);
@@ -21,12 +21,12 @@ const PostDetails = () => {
       postType = postType.split("/")[0];
       setPostID(postId);
       setPostType(postType);
-      if (postType == 0) fetchNeedHelpPost(postId);
-      else if (postType == 1) fetchProvideHelpPost(postId);
+      if (postType === 0) fetchNeedHelpPost(postId);
+      else if (postType === 1) fetchProvideHelpPost(postId);
     } catch (e) {
       history.push("/404");
     }
-  }, []);
+  },[]);
 
   const fetchNeedHelpPost = async (id) => {
     try {
@@ -61,7 +61,7 @@ const PostDetails = () => {
         alignItems={"center"}
         background="#f0f2f5"
       >
-        {isLoaded == true && postType == 0 ? (
+        {isLoaded === true && postType === 0 ? (
          needHelpPost != null && <NeedHelpCard post={needHelpPost} showComments={true} />
         ) : (
             provideHelpPost != null &&

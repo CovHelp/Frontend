@@ -144,7 +144,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
             <Grid templateColumns="repeat(3, 1fr)">
               <CardButton name="Like" icon={MdThumbUp} />
               <CardButton icon={IoHandLeftSharp} name="I need help" />
-              <CardButton to="post-detail" icon={FaComment} name="Comment" />
+              <CardButton to="post-detail" icon={FaComment} name={(post.comments.length===0? "Comment" : "Comments " + "(" +  post.comments.length + ")")}/>
             </Grid>
           </>
         )}
@@ -195,6 +195,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
               borderRadius="lg"
               px={[6, 8]}
               ml={2}
+              isLoading={true}
             >
               Post
             </Button>
