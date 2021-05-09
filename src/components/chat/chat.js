@@ -3,7 +3,7 @@ import { Input } from "@chakra-ui/input";
 import React, { useEffect, useState, useRef } from "react";
 import "./chat.css";
 import { MessageBox } from "react-chat-elements";
-import 'react-chat-elements/dist/main.css';
+import "react-chat-elements/dist/main.css";
 
 import socketClient from "socket.io-client";
 import { fetchAllChannels } from "../../api/channel";
@@ -19,41 +19,43 @@ export const Chat = () => {
   const [allChannels, setAllChannels] = useState([]);
   const [joinedChannel, setJoinedChannel] = useState(0);
   const [messages, setMessages] = useState([]);
-  
-  const msgList = useRef()
+  const inputRef = useRef();
+  const msgList = useRef();
 
   const handleFetchAllChannels = async () => {
     if (userStore.token && userStore.token.token) {
-        console.log("Requesing")
+      console.log("Requesing");
 
       const res = await fetchAllChannels({ token: userStore.token.token });
       setAllChannels(res);
       console.log("All channels", res);
-    }else{
-        console.log("Error?")
+    } else {
+      console.log("Error?");
     }
   };
   useEffect(() => {
-    console.log("Fetching channels")
-    handleFetchAllChannels();
-    socket.on("connection", (v) => {});
+    handleFetchAllChannels();  
   }, [userStore]);
 
   useEffect(() => {
-      socket.close();
-      socket.open()
+    socket.close();
+    socket.open();
   }, [joinedChannel]);
 
   socket.on("on-init", (msg) => {
     try {
       setMessages(msg);
+      console.log(msg);
     } catch (e) {
       console.log(e);
     }
   });
 
+  socket.on("connection", (v) => {});
+
   socket.on("on-message", (msg) => {
     try {
+    console.log(msg);
       setMessages((msgs) => [...msgs, msg]);
     } catch (e) {
       console.log(e);
@@ -61,8 +63,10 @@ export const Chat = () => {
   });
 
   useEffect(() => {
-   // var win = document.getElementById('chatList')
-    msgList.current.scrollTop = ( msgList.current.scrollHeight -  msgList.current.clientHeight) + 10
+    if (msgList && msgList.current) {
+      msgList.current.scrollTop =
+        msgList.current.scrollHeight - msgList.current.clientHeight + 10;
+    }
   }, [messages]);
 
   const handleJoinChannel = (channelID) => {
@@ -73,22 +77,28 @@ export const Chat = () => {
     setJoinedChannel(channelID);
   };
   const handleSend = () => {
-    if (userStore.token && userStore.token.token) {
-      socket.emit(
-        "send-message",
-        {
-          channel: joinedChannel,
-          msgData: {
-            text: msg,
-            user: userStore.user.id,
+    if (inputRef.current.value.length != 0) {
+      if (userStore.token && userStore.token.token) {
+        socket.emit(
+          "send-message",
+          {
+            channel: joinedChannel,
+            msgData: {
+              text: inputRef.current.value,
+              user: userStore.user.id,
+            },
           },
-        },
-        (ack) => {
-          console.log("acknowledged");
-        }
-      );
-      setMsg("");
-      msgList.current.scroll({ top: msgList.current.scrollHeight, behavior: 'smooth' });
+          (ack) => {
+            console.log("acknowledged");
+          }
+        );
+        inputRef.current.value = "";
+        inputRef.current.focus();
+        msgList.current.scroll({
+          top: msgList.current.scrollHeight,
+          behavior: "smooth",
+        });
+      }
     }
   };
   return (
@@ -144,27 +154,42 @@ export const Chat = () => {
               </div>
             ))}
         </div>
-        <div className="chat-container">
-          <div className="chat-list" ref={msgList}>
-            {messages.length > 0 &&
-              messages.map((msg) => (
-                <MessageBox
-                  position={msg.sender.id == userStore.user.id ? "right" : "left"}
-                  text={msg.message}
-                />
-              ))}
+        {joinedChannel != 0 ? (
+          <div className="chat-container">
+            <div className="chat-list" ref={msgList}>
+              {messages.length > 0 &&
+                messages.map((msg) => (
+                  <MessageBox
+                    // avatar={msg.sender.profile_pic}
+                    position={
+                      msg.sender.email ? (msg.sender.id == userStore.user.id ? "right" : "left") : (msg.sender == userStore.user.id ? "right" : "left")
+                    }
+                    text={msg.message + " " + typeof msg.sender}
+                  />
+                ))}
+            </div>
+            <div className="chat-container-inputbox">
+              <Input
+                ref={inputRef}
+                // value={msg}
+                placeholder="Type your message"
+              />
+              <Button onClick={handleSend} bg="blue.500" color="white">
+                Send
+              </Button>
+            </div>
           </div>
-          <div className="chat-container-inputbox">
-            <Input
-            value={msg}
-              onChange={(e) => setMsg(e.target.value)}
-              placeholder="Type your message"
-            />
-            <Button onClick={handleSend} bg="blue.500" color="white">
-              Send
-            </Button>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <h3>Select a thread to start chatting!</h3>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
