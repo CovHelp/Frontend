@@ -9,11 +9,7 @@ const OrganizationCard = () => {
     return (
         <CardBox>
             <Flex w={"auto"} p={["4", "8"]} bgColor="white">
-        {/* <Avatar
-          src={"https://apis.covhelp.online/v1/posts/file/0719c4fd-684b-42c2-96a5-f7db5a28fce2"}
-          w={["40px", "48px"]}
-          h={["40px", "48px"]}
-        /> */}
+
         <Flex flexDir="column" _dark=" true">
           <Heading as="h6" size="sm">
            First Name &bull; Last Name

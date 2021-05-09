@@ -9,7 +9,7 @@ const Organization = () => {
         <Grid
             w="100%"
             justifyContent="center"
-            columnGap={4}
+            p={3}
             templateColumns="repeat(auto-fill,minmax(auto,350px))"
             background="#f0f2f5"
         >
