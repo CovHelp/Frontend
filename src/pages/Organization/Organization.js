@@ -1,37 +1,40 @@
 
-import { Grid } from '@chakra-ui/layout'
+import { Box, Grid } from '@chakra-ui/layout'
 import React from 'react'
 import OrganizationCard from '../../components/Cards/OrganizationCard/OrganizationCard'
 
 const Organization = () => {
     return (
+        <>
+            <Box pt={3} p={["4", "8"]} background="#f0f2f5" >
+                <Grid
+                    
+                    w="100%"
+                    justifyContent="center"
+                    rowGap={3}
+                    templateColumns="repeat(auto-fill,minmax(auto,350px))"
+                    background="#f0f2f5"
+                >
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
+                    <OrganizationCard />
 
-        <Grid
-            w="100%"
-            justifyContent="center"
-            p={3}
-            templateColumns="repeat(auto-fill,minmax(auto,350px))"
-            background="#f0f2f5"
-        >
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-            <OrganizationCard />
-
-        </Grid>
-
+                </Grid>
+            </Box>
+        </>
     )
 }
 

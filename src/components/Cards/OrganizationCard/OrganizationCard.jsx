@@ -1,8 +1,6 @@
-import { Avatar } from '@chakra-ui/avatar'
 import { Image } from '@chakra-ui/image'
 import { Box, Flex, Heading, Text } from '@chakra-ui/layout'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import CardBox from '../CardBox'
 
 const OrganizationCard = () => {
