@@ -1,7 +1,9 @@
 import { Button } from "@chakra-ui/button";
 import { Input } from "@chakra-ui/input";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./chat.css";
+import { MessageBox } from "react-chat-elements";
+import 'react-chat-elements/dist/main.css';
 
 import socketClient from "socket.io-client";
 import { fetchAllChannels } from "../../api/channel";
@@ -17,6 +19,7 @@ export const Chat = () => {
   const [allChannels, setAllChannels] = useState([]);
   const [joinedChannel, setJoinedChannel] = useState(0);
   const [messages, setMessages] = useState([]);
+  const msgList = useRef()
 
   const handleFetchAllChannels = async () => {
     if (userStore.token && userStore.token.token) {
@@ -49,7 +52,8 @@ export const Chat = () => {
   });
 
   useEffect(() => {
-    console.log(messages);
+   // var win = document.getElementById('chatList')
+    msgList.current.scrollTop = ( msgList.current.scrollHeight -  msgList.current.clientHeight) + 10
   }, [messages]);
 
   const handleJoinChannel = (channelID) => {
@@ -74,6 +78,8 @@ export const Chat = () => {
           console.log("acknowledged");
         }
       );
+      setMsg("");
+      msgList.current.scroll({ top: msgList.current.scrollHeight, behavior: 'smooth' });
     }
   };
   return (
@@ -131,12 +137,19 @@ export const Chat = () => {
             ))}
         </div>
         <div className="chat-container">
-          <div>
+          <div className="chat-list" ref={msgList}>
             {messages.length > 0 &&
-              messages.map((msg) => <div>{msg.message}</div>)}
+              messages.map((msg) => (
+                <MessageBox
+                  position={msg.sender == userStore.user.id ? "right" : "left"}
+                  text={msg.message}
+                />
+                // <h1 style={{marginBottom: 100}}>{msg.message}</h1>
+              ))}
           </div>
           <div className="chat-container-inputbox">
             <Input
+            value={msg}
               onChange={(e) => setMsg(e.target.value)}
               placeholder="Type your message"
             />

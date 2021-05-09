@@ -2,6 +2,7 @@
     background-color: rgb(245, 245, 245);
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 
 .chat-wrapper{
@@ -15,7 +16,9 @@
 
 .chat-wrapper > div {
     width: 100%;
-    height: 100%;
+    height: 800px;
+    display: grid;
+    grid-template-rows: 1fr 50px;
 }
 
 .recent-chats { 
@@ -71,16 +74,21 @@
 }
 
 .chat-container{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     background-color: rgb(245, 245, 245);
     position: relative;
     padding: 8px;
+    
+}
+
+.chat-list{
+    overflow-y: auto;
 }
 
 .chat-container-inputbox{
-    position: absolute;
+    /* position: absolute;
     bottom: 0;
-    left: 0;
+    left: 0; */
     display: flex;
     width: 100%;
     align-items: center;
@@ -105,8 +113,18 @@
 @media only screen and (max-width: 550px){
     .chat-wrapper{
         grid-template-columns: 80px 1fr;
+        height: calc(100% - 20px);
+    }
+
+    .chat-container, .recent-chats { 
+        height: calc(100% - 100px) !important;
     }
     .recent-chat-item > div{
         display: none;
+    }
+
+    .chat{
+        overflow: hidden;
+        /* height: calc(100% - 68px); */
     }
 }
