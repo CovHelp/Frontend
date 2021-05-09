@@ -4,18 +4,15 @@ const CardBox = (props) => {
     return (
         
         <Flex
-            // m={2}
-            w={"auto"}
-            maxW={"700px"}
-            minW="auto"
-            justifyContent="center"
-            alignItems="center"
+            m={2}
+            w={["100%"]}
+            maxW="700px"
             h="auto">
             <Box
                 borderRadius={"xl"}
                 maxW="-moz-max-content"
                 mt={1}
-                w="auto"
+                w={"100%"}
                 borderWidth="1px"
                 overflow="hidden">
                     {props.children}
@@ -25,8 +22,6 @@ const CardBox = (props) => {
 }
 
 export default CardBox
-
-
 // <Avatar />
 //           <Flex flexDir="column" _dark="true" ml="4">
 //             <Heading as="h6" size="sm">
