@@ -18,8 +18,6 @@ import { Button } from "@chakra-ui/button";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-// import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
   const userStore = useSelector((store) => store.userStore);
