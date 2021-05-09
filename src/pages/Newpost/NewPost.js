@@ -21,7 +21,6 @@ import {
   SliderThumb,
   SliderTrack
 } from "@chakra-ui/slider";
-import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { BsCloudUpload, ImCross } from "react-icons/all";
 import { useSelector } from "react-redux";
@@ -66,8 +65,8 @@ const NewPost = (props) => {
 
     setBody(
       props.typeOfPost === "Request Help"
-        ? BoilerPlateForNeedHelp[e.target.value - 1]
-        : BoilerPlateForGiveHelp[e.target.value - 1]
+        ? BoilerPlateForNeedHelp[JSON.stringify(e.target.value - 1)]
+        : BoilerPlateForGiveHelp[JSON.stringify(e.target.value - 1)]
     );
   };
 
