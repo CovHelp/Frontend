@@ -164,6 +164,7 @@ export const Chat = () => {
                 messages.map((msg, index) => (
                   <MessageBox key={index}
                     // avatar={msg.sender.profile_pic}
+                    date={new Date(msg.createdAt)}
                     position={
                       typeof msg.sender === "object"
                         ? msg.sender.id == userStore.user.id
