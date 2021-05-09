@@ -4,15 +4,18 @@ const CardBox = (props) => {
     return (
         
         <Flex
-            m={2}
-            w={["100%"]}
-            maxW="700px"
+            // m={2}
+            w={"auto"}
+            maxW={"700px"}
+            minW="auto"
+            justifyContent="center"
+            alignItems="center"
             h="auto">
             <Box
                 borderRadius={"xl"}
                 maxW="-moz-max-content"
                 mt={1}
-                w={"100%"}
+                w="auto"
                 borderWidth="1px"
                 overflow="hidden">
                     {props.children}
