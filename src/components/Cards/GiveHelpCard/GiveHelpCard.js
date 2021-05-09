@@ -34,16 +34,20 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
     } catch (e) {}
   };
 
+  const [commentLoader,setCommentLoader] = useState()
+  
   const handleComment = async () => {
     try {
+      setCommentLoader(true);
       await createProvideHelpComment({
         comment: comment,
         post: post.id,
         token: userStore.token.token,
       });
+      setCommentLoader(false);
       setComment("");
       handleLoadComments();
-    } catch (e) {}
+    } catch (e) { setCommentLoader(false); }
   };
 
   return (
@@ -142,9 +146,9 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
           <>
             <hr />
             <Grid templateColumns="repeat(3, 1fr)">
-              <CardButton name="Like" icon={MdThumbUp} />
+              <CardButton  name="Like" icon={MdThumbUp} name={(post.upvotes.length === 0? "Upvote" : "Upvotes " + "(" +  post.upvotes.length + ")")} />
               <CardButton icon={IoHandLeftSharp} name="I need help" />
-              <CardButton to="post-detail" icon={FaComment} name={(post.comments.length===0? "Comment" : "Comments " + "(" +  post.comments.length + ")")}/>
+              <CardButton to={`post-detail/1/${post.id}`} icon={FaComment} name={(post.comments.length===0? "Comment" : "Comments " + "(" +  post.comments.length + ")")}/>
             </Grid>
           </>
         )}
@@ -195,7 +199,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
               borderRadius="lg"
               px={[6, 8]}
               ml={2}
-              isLoading={true}
+              isLoading={commentLoader}
             >
               Post
             </Button>

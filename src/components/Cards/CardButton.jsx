@@ -8,7 +8,7 @@ export const CardButton = (props) => {
 
   return (
 
-    <Button as={Link} to={props.to} maxW="100%" background="transparent" mt={2} p={6}>
+    <Button as={Link} to={props.to} maxW="100%" background="transparent" mt={2} p={6} >
       
         <Flex flexDir="column" alignItems="center" fontSize="14px" justifyContent="center" minH="1rem">
           <Icon color="gray.600"
