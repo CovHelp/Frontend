@@ -33,12 +33,15 @@
 
 .meta-info{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
-.meta-info > p{
+.date-field{
     font-size: 10px;
+    margin-left: 4px;
+    font-weight: normal;
+    margin-bottom: 4px;
 }
 
 .recent-chat-item  > img{
@@ -51,6 +54,8 @@
 .recent-chat-item  > div > h5{
     font-size: 18px;
     font-weight: bold;
+    line-height: 12px;
+
 }
 
 .need-help-chip, .provide-help-chip{
@@ -89,4 +94,19 @@
 
 .chat-container-inputbox > button{
     width: 15%;
+}
+
+@media only screen and (max-width: 1150px){
+    .chat-wrapper{
+        grid-template-columns: 200px 1fr;
+    }
+}
+
+@media only screen and (max-width: 550px){
+    .chat-wrapper{
+        grid-template-columns: 80px 1fr;
+    }
+    .recent-chat-item > div{
+        display: none;
+    }
 }

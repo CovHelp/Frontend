@@ -7,14 +7,16 @@ import socketClient from "socket.io-client";
 import { fetchAllChannels } from "../../api/channel";
 import { useSelector } from "react-redux";
 import { Divider } from "@chakra-ui/layout";
+import { createBatcher } from "framer-motion";
 
 export const Chat = () => {
   const SERVER = "http://127.0.0.1:3001";
-  //   var socket = socketClient(SERVER);
+  var socket = socketClient(SERVER);
   const [msg, setMsg] = useState();
-  const [channelName, setChannelName] = useState("CHANNEL1");
   const userStore = useSelector((store) => store.userStore);
   const [allChannels, setAllChannels] = useState([]);
+  const [joinedChannel, setJoinedChannel] = useState(0);
+  const [messages, setMessages] = useState([]);
 
   const handleFetchAllChannels = async () => {
     if (userStore.token && userStore.token.token) {
@@ -28,14 +30,51 @@ export const Chat = () => {
     socket.on("connection", (v) => {});
   }, []);
 
+  useEffect(() => {}, [joinedChannel]);
+
+  socket.on("on-init", (msg) => {
+    try {
+      setMessages(msg);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  socket.on("on-message", (msg) => {
+    try {
+      setMessages((msgs) => [...msgs, msg]);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  useEffect(() => {
+    console.log(messages);
+  }, [messages]);
 
   const handleJoinChannel = (channelID) => {
-      console.log(channelID)
-  }
+    if (joinedChannel != 0) {
+      socket.emit("channel-leave", joinedChannel);
+    }
+    socket.emit("channel-join", channelID, (v) => console.log(v));
+    setJoinedChannel(channelID);
+  };
   const handleSend = () => {
-    // socket.emit("send-message", { channel: channelName, msg: msg }, (ack) => {
-    //   console.log("acknowledged");
-    // });
+    if (userStore.token && userStore.token.token) {
+      socket.emit(
+        "send-message",
+        {
+          channel: joinedChannel,
+          msgData: {
+            text: msg,
+            user: userStore.user.id,
+          },
+        },
+        (ack) => {
+          console.log("acknowledged");
+        }
+      );
+    }
   };
   return (
     <div className="chat">
@@ -49,6 +88,9 @@ export const Chat = () => {
                     <img src={channel.user2.profile_pic} />
                     <div>
                       <h5>{channel.user2.firstName}</h5>
+                      <span className="date-field">
+                        {new Date(channel.updatedAt).toLocaleString()}
+                      </span>
                       <div className="meta-info">
                         {channel.postType === 0 ? (
                           <div className="need-help-chip"> Need Help </div>
@@ -58,7 +100,7 @@ export const Chat = () => {
                             Provide Help{" "}
                           </div>
                         )}
-                        <p>{new Date(channel.updatedAt).toLocaleString()}</p>
+                        {/* <p>{new Date(channel.updatedAt).toLocaleString()}</p> */}
                       </div>
                     </div>
                   </div>
@@ -67,6 +109,9 @@ export const Chat = () => {
                     <img src={channel.user1.profile_pic} />
                     <div>
                       <h5>{channel.user1.firstName}</h5>
+                      <span className="date-field">
+                        {new Date(channel.updatedAt).toLocaleString()}
+                      </span>
                       <div className="meta-info">
                         {channel.postType === 0 ? (
                           <div className="need-help-chip"> Need Help </div>
@@ -76,21 +121,20 @@ export const Chat = () => {
                             Provide Help{" "}
                           </div>
                         )}
-                        <p>{new Date(channel.updatedAt).toLocaleString()}</p>
                       </div>
                     </div>
                   </div>
                 )}
+
                 <Divider />
               </div>
             ))}
         </div>
         <div className="chat-container">
-          <Input
-            onChange={(e) => setChannelName(e.target.value)}
-            placeholder="Channel name"
-          />
-
+          <div>
+            {messages.length > 0 &&
+              messages.map((msg) => <div>{msg.message}</div>)}
+          </div>
           <div className="chat-container-inputbox">
             <Input
               onChange={(e) => setMsg(e.target.value)}
