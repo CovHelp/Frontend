@@ -10,7 +10,7 @@ const OrganizationCard = () => {
                 p={["4", "8"]}
                 pb={["6", "10"]}
                 w="100%"
-                h="200px"
+                minH="200px"
                 borderRadius="xl"
                 borderWidth="1px"
                 background="white"
