@@ -164,14 +164,13 @@ export const Chat = () => {
                     position={
                       msg.sender.email ? (msg.sender.id == userStore.user.id ? "right" : "left") : (msg.sender == userStore.user.id ? "right" : "left")
                     }
-                    text={msg.message + " " + typeof msg.sender}
+                    text={msg.message}
                   />
                 ))}
             </div>
             <div className="chat-container-inputbox">
               <Input
                 ref={inputRef}
-                // value={msg}
                 placeholder="Type your message"
               />
               <Button onClick={handleSend} bg="blue.500" color="white">
