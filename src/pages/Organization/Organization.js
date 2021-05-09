@@ -1,5 +1,5 @@
 
-import { Box, Grid } from '@chakra-ui/layout'
+import { Box, Flex, Grid } from '@chakra-ui/layout'
 import React from 'react'
 import OrganizationCard from '../../components/Cards/OrganizationCard/OrganizationCard'
 
@@ -9,8 +9,8 @@ const Organization = () => {
             <Box pt={3} p={["4", "8"]} background="#f0f2f5" >
                 <Grid
                     
-                    w="100%"
                     justifyContent="center"
+                    alignItems="center"
                     rowGap={3}
                     columnGap={[0,3]}
                     templateColumns="repeat(auto-fill,minmax(auto,350px))"
