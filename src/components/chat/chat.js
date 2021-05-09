@@ -19,21 +19,30 @@ export const Chat = () => {
   const [allChannels, setAllChannels] = useState([]);
   const [joinedChannel, setJoinedChannel] = useState(0);
   const [messages, setMessages] = useState([]);
+  
   const msgList = useRef()
 
   const handleFetchAllChannels = async () => {
     if (userStore.token && userStore.token.token) {
+        console.log("Requesing")
+
       const res = await fetchAllChannels({ token: userStore.token.token });
       setAllChannels(res);
       console.log("All channels", res);
+    }else{
+        console.log("Error?")
     }
   };
   useEffect(() => {
+    console.log("Fetching channels")
     handleFetchAllChannels();
     socket.on("connection", (v) => {});
-  }, []);
+  }, [userStore]);
 
-  useEffect(() => {}, [joinedChannel]);
+  useEffect(() => {
+      socket.close();
+      socket.open()
+  }, [joinedChannel]);
 
   socket.on("on-init", (msg) => {
     try {
@@ -106,7 +115,6 @@ export const Chat = () => {
                             Provide Help{" "}
                           </div>
                         )}
-                        {/* <p>{new Date(channel.updatedAt).toLocaleString()}</p> */}
                       </div>
                     </div>
                   </div>
@@ -141,10 +149,9 @@ export const Chat = () => {
             {messages.length > 0 &&
               messages.map((msg) => (
                 <MessageBox
-                  position={msg.sender == userStore.user.id ? "right" : "left"}
+                  position={msg.sender.id == userStore.user.id ? "right" : "left"}
                   text={msg.message}
                 />
-                // <h1 style={{marginBottom: 100}}>{msg.message}</h1>
               ))}
           </div>
           <div className="chat-container-inputbox">

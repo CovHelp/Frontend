@@ -20,6 +20,7 @@ import { Button } from "@chakra-ui/button";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { createProvideChannel } from "../../../api/channel";
 
 const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
   const userStore = useSelector((store) => store.userStore);
@@ -70,7 +71,18 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
   };
 
   const handleHelpChannel = async () => {
-    
+    if(userStore.token && userStore.token.token){
+      try{
+        const res = await createProvideChannel({
+          user1: userStore.user.id,
+          user2: post.user.id,
+          postID: post.id,
+          token: userStore.token.token
+        })
+      }catch(e){
+
+      }
+    }
   }
 
   useEffect(() => {
