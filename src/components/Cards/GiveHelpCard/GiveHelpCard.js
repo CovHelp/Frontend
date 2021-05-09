@@ -69,6 +69,10 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
     }
   };
 
+  const handleHelpChannel = async () => {
+    
+  }
+
   useEffect(() => {
     isLiked();
     setLikesCount(post.upvotes.length);
@@ -232,7 +236,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
                 }
               />
 
-              <CardButton icon={IoHandLeftSharp} name="I need help" />
+              <CardButton onClick={handleHelpChannel} icon={IoHandLeftSharp} name="I need help" />
               <CardButton
                 to={`post-detail/1/${post.id}`}
                 icon={FaComment}

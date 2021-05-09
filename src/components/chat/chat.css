@@ -20,6 +20,49 @@
 
 .recent-chats { 
     background-color: white;
+    padding: 16px;
+}
+
+.recent-chat-item{
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 8px 0px
+}
+
+.meta-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.meta-info > p{
+    font-size: 10px;
+}
+
+.recent-chat-item  > img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.recent-chat-item  > div > h5{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.need-help-chip, .provide-help-chip{
+    padding: 3px 8px;
+    border-radius: 16px;
+    font-size: 10px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #22543dc9;
+    margin-right: 8px;
 }
 
 .chat-container{
