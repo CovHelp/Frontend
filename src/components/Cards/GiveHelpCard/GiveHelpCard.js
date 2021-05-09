@@ -10,6 +10,7 @@ import {
   getNameByCategoryID,
   getProvideHelpComments,
 } from "../../../api/post";
+import { useToast } from "@chakra-ui/toast";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 import CommentBubble from "../../CommentBubble/CommentBubble";
@@ -17,12 +18,14 @@ import { Button } from "@chakra-ui/button";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+// import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
   const userStore = useSelector((store) => store.userStore);
   const [comment, setComment] = useState();
   const [comments, setComments] = useState([]);
-
+  const toast = useToast();
   useEffect(() => {
     handleLoadComments();
   }, []);
@@ -47,6 +50,19 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
       setCommentLoader(false);
       setComment("");
       handleLoadComments();
+
+      (() => {
+        console.log("toast called");
+        toast({
+          position: "top-right",
+          isClosable: true,
+          duration: 4000,
+          description: "Comment Posted",
+          status: 'success'
+        })
+      })()
+
+      
     } catch (e) { setCommentLoader(false); }
   };
 
