@@ -44,7 +44,7 @@ export default function BottomNav() {
       to: "/organization",
       text: "Organizations",
     },
-    { icon: BiChat, index: 3, to: "/", text: "Chat" },
+    { icon: BiChat, index: 3, to: "/chat", text: "Chat" },
     {
       icon: VscAccount,
       index: 4,

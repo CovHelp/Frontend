@@ -162,7 +162,7 @@ export const Chat = () => {
                   <MessageBox
                     // avatar={msg.sender.profile_pic}
                     position={
-                      msg.sender.email ? (msg.sender.id == userStore.user.id ? "right" : "left") : (msg.sender == userStore.user.id ? "right" : "left")
+                      typeof msg.sender === "object" ? (msg.sender.id == userStore.user.id ? "right" : "left") : (msg.sender == userStore.user.id ? "right" : "left")
                     }
                     text={msg.message}
                   />
