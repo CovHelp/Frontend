@@ -9,10 +9,10 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 const initialState = {
     userStore: {
         user: {
+            id: null,
             email: null,
             firstName: null,
             lastName: null,
-            email: null,
             profile_pic: null
         },
         token: null
