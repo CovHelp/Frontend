@@ -69,6 +69,8 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
     handleLoadComments();
   }, []);
 
+  const [commentLoader, setCommentLoader] = useState()
+  
   const handleLoadComments = async () => {
     try {
       const res = await getNeedHelpComments({ postID: post.id });
@@ -78,15 +80,17 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
 
   const handleComment = async () => {
     try {
+      setCommentLoader(true);
       await createNeedHelpComment({
         comment: comment,
         post: post.id,
         token: userStore.token.token,
       });
+      setCommentLoader(false);
       setComment("");
 
       handleLoadComments();
-    } catch (e) {}
+    } catch (e) { setCommentLoader(false);  }
   };
 
   return (
@@ -182,7 +186,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
             <hr />
             <Grid templateColumns="repeat(2, 1fr)">
               <CardButton icon={IoHandLeftSharp} name="I Can help" />
-              <CardButton to="post-detail" icon={FaComment} name="Comment" />
+              <CardButton to={`post-detail/1/${post.id}`} icon={FaComment} name={(post.comments.length===0? "Comment" : "Comments " + "(" +  post.comments.length + ")")}/>
             </Grid>
           </>
         )}
@@ -229,6 +233,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
               borderRadius="lg"
               px={[6, 8]}
               ml={2}
+              isLoading={commentLoader}
             >
               POST
             </Button>

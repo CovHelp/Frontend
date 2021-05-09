@@ -14,7 +14,7 @@ import PostDetails from "./pages/PostDetails/PostDetails";
 import Profile from "./components/profile/Profile";
 import ProfileSetting from "./components/profile/ProfileSetting";
 import InfoBar from './components/InfoBar'
-// import Chat from "./components/chat/Chat";
+import { Chat } from "./components/chat/chat";
 
 const App = () => {
   const [isSidebarVisibile, setSidebarVisible] = useState(false);
@@ -62,6 +62,9 @@ const App = () => {
             </Route>
             <Route path="/post-detail/:id">
               <PostDetails />
+            </Route>
+            <Route path="/chat">
+              <Chat />
             </Route>
             <Route path='*' exact={true} component={NotFound} />
           </Switch>
