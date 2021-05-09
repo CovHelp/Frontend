@@ -12,6 +12,7 @@ const Organization = () => {
                     w="100%"
                     justifyContent="center"
                     rowGap={3}
+                    columnGap={[0,3]}
                     templateColumns="repeat(auto-fill,minmax(auto,350px))"
                     background="#f0f2f5"
                 >
