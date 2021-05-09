@@ -9,6 +9,8 @@ import {
   createProvideHelpComment,
   getNameByCategoryID,
   getProvideHelpComments,
+  createProvideHelpDepvote,
+  createProvideHelpUpvote,
 } from "../../../api/post";
 import { useToast } from "@chakra-ui/toast";
 import CardBox from "../CardBox";
@@ -23,6 +25,9 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
   const userStore = useSelector((store) => store.userStore);
   const [comment, setComment] = useState();
   const [comments, setComments] = useState([]);
+  const [liked, setLiked] = useState(null);
+  const [likesCount, setLikesCount] = useState(null);
+
   const toast = useToast();
   useEffect(() => {
     handleLoadComments();
@@ -35,8 +40,8 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
     } catch (e) {}
   };
 
-  const [commentLoader,setCommentLoader] = useState()
-  
+  const [commentLoader, setCommentLoader] = useState();
+
   const handleComment = async () => {
     try {
       setCommentLoader(true);
@@ -56,12 +61,68 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
           isClosable: true,
           duration: 4000,
           description: "Comment Posted",
-          status: 'success'
-        })
-      })()
+          status: "success",
+        });
+      })();
+    } catch (e) {
+      setCommentLoader(false);
+    }
+  };
 
-      
-    } catch (e) { setCommentLoader(false); }
+  useEffect(() => {
+    isLiked();
+    setLikesCount(post.upvotes.length);
+  }, []);
+
+  const isLiked = () => {
+    if (userStore.token && userStore.token.token) {
+      if (post.upvotes.length == 0) {
+        setLiked(false);
+      }
+      var res = post.upvotes.filter(
+        (post) => post.userID === userStore.user.id
+      );
+      console.log(res);
+      if (res.length > 0) {
+        setLiked(true);
+      } else {
+        setLiked(false);
+      }
+    } else {
+      setLiked(false);
+    }
+  };
+
+  const unlike = async () => {
+    setLiked(false);
+    setLikesCount(c=>c-1);
+    await createProvideHelpDepvote({
+      userID: userStore.user.id,
+      token: userStore.token.token,
+      postID: post.id,
+    });
+    
+  };
+
+  const like = async () => {
+    setLiked(true);
+    setLikesCount(c=>c+1);
+    await createProvideHelpUpvote({
+      userID: userStore.user.id,
+      token: userStore.token.token,
+      postID: post.id,
+    });
+   
+  };
+
+  const handleLikeAction = async () => {
+    if (userStore.token && userStore.token.token) {
+      if (liked) {
+        await unlike();
+      } else {
+        await like();
+      }
+    }
   };
 
   return (
@@ -143,7 +204,6 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
         {!showComments && (
           <Link to={`/post-detail/1/${post.id}`}>
             {" "}
-            {" "}
             <Text fontWeight="medium" _hover={{ textDecoration: "underline" }}>
               Read More
             </Text>{" "}
@@ -160,9 +220,28 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
           <>
             <hr />
             <Grid templateColumns="repeat(3, 1fr)">
-              <CardButton  name="Like" icon={MdThumbUp} name={(post.upvotes.length === 0? "Upvote" : "Upvotes " + "(" +  post.upvotes.length + ")")} />
+              <CardButton
+                isLiked={liked}
+                onClick={handleLikeAction}
+                name="Like"
+                icon={MdThumbUp}
+                name={
+                  likesCount === 0 || !likesCount
+                    ? "Upvote"
+                    : "Upvotes " + "(" + likesCount + ")"
+                }
+              />
+
               <CardButton icon={IoHandLeftSharp} name="I need help" />
-              <CardButton to={`post-detail/1/${post.id}`} icon={FaComment} name={(post.comments.length===0? "Comment" : "Comments " + "(" +  post.comments.length + ")")}/>
+              <CardButton
+                to={`post-detail/1/${post.id}`}
+                icon={FaComment}
+                name={
+                  post.comments.length === 0
+                    ? "Comment"
+                    : "Comments " + "(" + post.comments.length + ")"
+                }
+              />
             </Grid>
           </>
         )}

@@ -94,6 +94,39 @@ export const createProvideHelpComment = async ({
             }
         })
     } catch (e) {
+        throw new CovhelpException(e.response.data, e.response.status);
+
+    }
+}
+
+export const createProvideHelpUpvote = async ({token, userID, postID}) => {
+    try{
+        const res = await JSONClient.post(`/posts/upvote/${postID}`, {
+            userID
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return res.data;
+    }catch(e){
+        throw new CovhelpException(e.response.data, e.response.status);
+
+    }
+}
+
+export const createProvideHelpDepvote = async ({token, userID, postID}) => {
+    try{
+        const res = await JSONClient.post(`/posts/devote/${postID}`, {
+            userID
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return res.data;
+    }catch(e){
+        throw new CovhelpException(e.response.data, e.response.status);
 
     }
 }
