@@ -1,38 +1,45 @@
-import React from 'react'
-import { Image } from '@chakra-ui/image'
-import { Box, Heading, Stack, Text } from '@chakra-ui/layout'
+import { Button } from "@chakra-ui/button";
+import { Input } from "@chakra-ui/input";
+import React, { useEffect, useState } from "react";
+import "./chat.css";
+
+import socketClient from "socket.io-client";
 
 export const Chat = () => {
-    return (
-        <Stack flex="0.4" borderRadius="10px" boxShadow="lg" bg="whiteAlpha.400" direction={["column"]} spacing="32px" w="16%" p="10px">
-            <Box>
-                <Heading as="h5" size="lg" >
-                    Chat
-                </Heading>
+  const SERVER = "http://127.0.0.1:3001";
+  var socket = socketClient(SERVER);
+  const [msg, setMsg] = useState()
+  const [channelName, setChannelName] = useState('CHANNEL1')
 
-            </Box>
 
-            <Box display="flex" alignContent="center">
-                <Image borderRadius="50%" h="40px" w="40px" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" />
-                <Text fontSize="md" ml="16px">Name</Text>
-            </Box>
-            <Box display="flex" alignContent="center">
-                <Image borderRadius="50%" h="40px" w="40px" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" />
-                <Text fontSize="md" ml="16px">Name</Text>
-            </Box>
-            <Box display="flex" alignContent="center">
-                <Image borderRadius="50%" h="40px" w="40px" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" />
-                <Text fontSize="md" ml="16px">Name</Text>
-            </Box>
-            <Box display="flex" alignContent="center">
-                <Image borderRadius="50%" h="40px" w="40px" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" />
-                <Text fontSize="md" ml="16px">Name</Text>
-            </Box>
-            <Box display="flex" alignContent="center">
-                <Image borderRadius="50%" h="40px" w="40px" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" />
-                <Text fontSize="md" ml="16px">Name</Text>
-            </Box>
-        </Stack>
-    )
-}
+  useEffect(() => {
+    socket.on("connection", (v) => {
+      socket.emit("channel-join", channelName, (ack) => {
+        console.log("acknowledged");
+      });
+      socket.on('on-message', msgs => console.log(msgs));
+    });
+  }, []);
+  const handleSend = () => {
+    socket.emit("send-message", {channel: channelName, msg: msg}, (ack) => {
+      console.log("acknowledged");
+    });
+  };
+  return (
+    <div className="chat">
+      <div className="chat-wrapper">
+        <div className="recent-chats"></div>
+        <div className="chat-container">
+        <Input onChange={e=>setChannelName(e.target.value)} placeholder="Channel name" />
 
+          <div className="chat-container-inputbox">
+            <Input onChange={e=>setMsg(e.target.value)} placeholder="Type your message" />
+            <Button onClick={handleSend} bg="blue.500" color="white">
+              Send
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

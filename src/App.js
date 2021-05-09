@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import { BottomNav, Navbar } from "./components/navbar";
@@ -17,7 +18,11 @@ import InfoBar from './components/InfoBar'
 import { Chat } from "./components/chat/chat";
 
 
+
+
 const App = () => {
+  
+
   const [isSidebarVisibile, setSidebarVisible] = useState(false);
   const handleSidebarEvent = (visibility) => {
     setSidebarVisible(visibility);
