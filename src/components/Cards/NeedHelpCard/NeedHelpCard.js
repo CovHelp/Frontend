@@ -186,7 +186,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
             <hr />
             <Grid templateColumns="repeat(2, 1fr)">
               <CardButton icon={IoHandLeftSharp} name="I Can help" />
-              <CardButton to={`post-detail/1/${post.id}`} icon={FaComment} name={(post.comments.length===0? "Comment" : "Comments " + "(" +  post.comments.length + ")")}/>
+              <CardButton to={`post-detail/0/${post.id}`} icon={FaComment} name={(post.comments.length===0? "Comment" : "Comments " + "(" +  post.comments.length + ")")}/>
             </Grid>
           </>
         )}

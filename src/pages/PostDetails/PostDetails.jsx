@@ -21,8 +21,8 @@ const PostDetails = () => {
       postType = postType.split("/")[0];
       setPostID(postId);
       setPostType(postType);
-      if (postType === 0) fetchNeedHelpPost(postId);
-      else if (postType === 1) fetchProvideHelpPost(postId);
+      if (postType == 0) fetchNeedHelpPost(postId);
+      else if (postType == 1) fetchProvideHelpPost(postId);
     } catch (e) {
       history.push("/404");
     }
@@ -33,7 +33,6 @@ const PostDetails = () => {
       const res = await getNeedHelpPostByID({ postID: id });
       setNeedHelpPost(res[0]);
       setIsLoaded(true);
-      console.log("Fetched", res);
 
     } catch (e) {
       console.log(e);
@@ -45,7 +44,6 @@ const PostDetails = () => {
       const res = await getProvideHelpPostByID({ postID: id });
       setProvideHelpPost(res[0]);
       setIsLoaded(true);
-        console.log("Fetched", res);
     } catch (e) {
       console.log(e);
     }
@@ -61,7 +59,7 @@ const PostDetails = () => {
         alignItems={"center"}
         background="#f0f2f5"
       >
-        {isLoaded === true && postType === 0 ? (
+        {isLoaded === true && postType == 0 ? (
          needHelpPost != null && <NeedHelpCard post={needHelpPost} showComments={true} />
         ) : (
             provideHelpPost != null &&

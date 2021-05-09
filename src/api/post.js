@@ -69,6 +69,7 @@ export const getProvideHelpPosts = async () => {
 export const getProvideHelpPostByID = async ({
     postID
 }) => {
+
     try {
         const res = await JSONClient.get(`/posts/provide-help-post/${postID}`);
         return res.data;
