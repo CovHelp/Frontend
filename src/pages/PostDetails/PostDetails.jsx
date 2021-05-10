@@ -8,6 +8,7 @@ import NeedHelpCard from "../../components/Cards/NeedHelpCard/NeedHelpCard";
 
 const PostDetails = () => {
   const [postType, setPostType] = useState(null);
+  // eslint-disable-next-line
   const [postID, setPostID] = useState(null);
   const [needHelpPost, setNeedHelpPost] = useState(null);
   const [provideHelpPost, setProvideHelpPost] = useState(null);
@@ -21,11 +22,12 @@ const PostDetails = () => {
       postType = postType.split("/")[0];
       setPostID(postId);
       setPostType(postType);
-      if (postType == 0) fetchNeedHelpPost(postId);
-      else if (postType == 1) fetchProvideHelpPost(postId);
+      if (postType === 0) fetchNeedHelpPost(postId);
+      else if (postType === 1) fetchProvideHelpPost(postId);
     } catch (e) {
       history.push("/404");
     }
+    // eslint-disable-next-line
   },[]);
 
   const fetchNeedHelpPost = async (id) => {
@@ -59,7 +61,7 @@ const PostDetails = () => {
         alignItems={"center"}
         background="#f0f2f5"
       >
-        {isLoaded === true && postType == 0 ? (
+        {isLoaded === true && postType === 0 ? (
          needHelpPost != null && <NeedHelpCard post={needHelpPost} showComments={true} />
         ) : (
             provideHelpPost != null &&

@@ -27,6 +27,7 @@ const GiveHelp = () => {
 
   useEffect(() => {
     loadProvideHelpPosts();
+    // eslint-disable-next-line
   }, []);
 
   return (

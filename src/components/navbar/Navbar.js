@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/button";
 import { Flex, Grid } from "@chakra-ui/layout";
-import { Text, useColorMode } from "@chakra-ui/react";
+// import { Text, useColorMode } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import {
   FaHandHoldingHeart,
@@ -26,7 +26,7 @@ const Navbar = ({ sideBarEvent }) => {
   // const { colorMode, toggleColorMode } = useColorMode();
   const dispatch = useDispatch();
   const userStore = useSelector((store) => store.userStore);
-  const [selectedMenu, setSelectedMenu] = useState();
+  // const [selectedMenu, setSelectedMenu] = useState();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isSidenavVIsible, setSideNavVisibility] = useState(false);
 
@@ -36,6 +36,7 @@ const Navbar = ({ sideBarEvent }) => {
 
   useEffect(() => {
     sideBarEvent(isSidenavVIsible);
+     // eslint-disable-next-line
   }, [isSidenavVIsible, setSideNavVisibility]);
 
   const handleLogin = async (res) => {
@@ -56,7 +57,7 @@ const Navbar = ({ sideBarEvent }) => {
               email: null,
               firstName: null,
               lastName: null,
-              email: null,
+              // email: null,
               profile_pic: null,
             },
             token: null,

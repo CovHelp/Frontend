@@ -3,7 +3,7 @@ import { BiChat } from "react-icons/bi";
 import { FaHandHoldingHeart, FaHandsHelping } from "react-icons/fa";
 import { VscAccount, VscOrganization } from "react-icons/vsc";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import "./index.css";
 

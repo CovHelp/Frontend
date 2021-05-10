@@ -1,6 +1,6 @@
-import { Box, Flex, Grid } from "@chakra-ui/layout";
+// import { Box, Flex, Grid } from "@chakra-ui/layout";
 import React from "react";
-import OrganizationCard from "../../components/Cards/OrganizationCard/OrganizationCard";
+// import OrganizationCard from "../../components/Cards/OrganizationCard/OrganizationCard";
 
 const Organization = () => {
   return (
