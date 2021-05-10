@@ -9,7 +9,7 @@ const Organization = () => {
 
       {/* <Box pt={3} p={["4", "8"]} background="#f0f2f5">
         <Grid
-          justifyContent="center"
+          justifyContent="cen/ter"
           alignItems="center"
           rowGap={3}
           w="100%"

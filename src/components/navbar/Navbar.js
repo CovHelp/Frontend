@@ -2,25 +2,25 @@ import { Button } from "@chakra-ui/button";
 import { Flex, Grid } from "@chakra-ui/layout";
 // import { Text, useColorMode } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import GoogleLogin from "react-google-login";
 import {
-  FaHandHoldingHeart,
+  AiOutlineInfoCircle, BiChat, FaHandHoldingHeart,
   FaHandsHelping,
   GiHamburgerMenu,
   ImCross,
-  VscOrganization,
-  VscAccount,
-  BiChat,
+
+  IoLogOutOutline,
+
+  VscAccount, VscOrganization
 } from "react-icons/all";
-
-import { Link } from "react-router-dom";
-import GoogleLogin from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Link } from "react-router-dom";
+import { register } from "../../api/user";
 import Logo from "../../assets/images/logo192.png";
 import "./index.css";
-import { register } from "../../api/user";
 
-import "./index.css";
+
+
 
 const Navbar = ({ sideBarEvent }) => {
   // const { colorMode, toggleColorMode } = useColorMode();
@@ -36,7 +36,7 @@ const Navbar = ({ sideBarEvent }) => {
 
   useEffect(() => {
     sideBarEvent(isSidenavVIsible);
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [isSidenavVIsible, setSideNavVisibility]);
 
   const handleLogin = async (res) => {
@@ -44,7 +44,7 @@ const Navbar = ({ sideBarEvent }) => {
       const resp = await register(res.profileObj);
       dispatch({ type: "SAVE_USER", payload: resp });
       // window.location.reload()
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const handleLogout = async (res) => {
@@ -66,7 +66,7 @@ const Navbar = ({ sideBarEvent }) => {
       });
       // window.location.reload()
 
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const handleLoginFailure = (err) => {
@@ -209,10 +209,15 @@ const Navbar = ({ sideBarEvent }) => {
               </>
             )}
             {userStore.token && (
-              <Button onClick={handleLogout} m={2}>
+              <Button leftIcon={<IoLogOutOutline size="28px" />} onClick={handleLogout} m={["5", "2"]}>
                 Logout
               </Button>
             )}
+            <Link to="/about">
+              <Button leftIcon={<AiOutlineInfoCircle size="25px" />} m={["5", "2"]} bg="whatsapp.500" color="white">
+                About us
+              </Button>
+            </Link>
           </Flex>
         </Flex>
       </div>
@@ -236,8 +241,15 @@ const Navbar = ({ sideBarEvent }) => {
             />
           </div>
           <div className="navmobile-col-right">
+            {/* <Link to="/about">
+              <Button mr={1} bg="whatsapp.500" color="white" w={"50px"}>
+                <AiOutlineInfoCircle size="20px" />
+              </Button>
+            </Link> */}
             {userStore.token ? (
-              <Button onClick={handleLogout}>LOGOUT</Button>
+              <Button onClick={handleLogout} w={"100px"}>
+                <IoLogOutOutline size="25px" />
+              </Button>
             ) : (
               <GoogleLogin
                 clientId="1027672846288-1cplsl3m6pl2p3ngjn1k1msqr07s4at7.apps.googleusercontent.com"
