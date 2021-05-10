@@ -13,6 +13,7 @@ import {
   Stack,
   Text,
   Textarea,
+  Tooltip,
   useColorModeValue
 } from "@chakra-ui/react";
 import {
@@ -103,10 +104,10 @@ const NewPost = (props) => {
   const handleImageUpload = async () => {
     setUploadLoader(true)
     console.log(selectedFile);
-    try{
-    const fileId = await uploadImage({ file: selectedFile, token: userStore.token.token});
-    setUploadedImageId(fileId);
-    setUploadLoader(false)
+    try {
+      const fileId = await uploadImage({ file: selectedFile, token: userStore.token.token });
+      setUploadedImageId(fileId);
+      setUploadLoader(false)
     } catch (e) {
       setUploadLoader(false)
       console.log(e);
@@ -152,7 +153,7 @@ const NewPost = (props) => {
       catch (e) {
         setLoader(false);
 
-        try{
+        try {
           e.forEach(error => {
             if (error.msg.includes('City')) {
               setCityError(true)
@@ -167,7 +168,7 @@ const NewPost = (props) => {
               setbodyError(true)
             }
           })
-        } catch(e) {
+        } catch (e) {
           console.log(e)
         }
 
@@ -251,7 +252,8 @@ const NewPost = (props) => {
               <FormLabel>Enter Details</FormLabel>
               <Textarea
                 border={"2px"}
-                height="auto"
+                minH="150px"
+                h="auto"
                 value={body}
                 onChange={(e) => handleSetBody(e)}
               />
