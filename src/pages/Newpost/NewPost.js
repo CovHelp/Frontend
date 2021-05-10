@@ -13,7 +13,6 @@ import {
   Stack,
   Text,
   Textarea,
-  Tooltip,
   useColorModeValue
 } from "@chakra-ui/react";
 import {

@@ -185,7 +185,7 @@ const Navbar = ({ sideBarEvent }) => {
             )}
           </Flex>
 
-          <Flex flex="1" flexDir="row-reverse">
+          <Flex alignItems="center" flex="1" flexDir="row-reverse">
             {!userStore.token && (
               <>
                 <GoogleLogin

@@ -1,7 +1,5 @@
 let CACHE_NAME = "cache1";
 const urlsToCache = [
-  "/",
-  "/index.html",
 ];
 
 
@@ -10,7 +8,6 @@ this.addEventListener("install", function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
     .then(function (cache) {
-      console.log("Opened cache");
       return cache.addAll(urlsToCache);
     })
   );
@@ -32,7 +29,6 @@ this.addEventListener("install", function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
     .then(function (cache) {
-      console.log("Opened cache");
       return cache.addAll(urlsToCache);
     })
   );
