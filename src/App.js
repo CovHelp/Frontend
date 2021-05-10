@@ -16,6 +16,7 @@ import Profile from "./components/profile/Profile";
 import ProfileSetting from "./components/profile/ProfileSetting";
 import InfoBar from './components/InfoBar'
 import { Chat } from "./components/chat/chat";
+import AboutUs from "./pages/About/AboutUs";
 
 
 
@@ -71,6 +72,9 @@ const App = () => {
             </Route>
             <Route path="/chat">
               <Chat />
+            </Route>
+            <Route path="/about">
+              <AboutUs />
             </Route>
             <Route path='*' exact={true} component={NotFound} />
           </Switch>
