@@ -35,7 +35,7 @@ const Navbar = ({ sideBarEvent }) => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log(location.pathname);
+//     console.log(location.pathname);
     if(location.pathname === '/'){
       let navState = {
         getHelp: true,
@@ -107,7 +107,7 @@ const Navbar = ({ sideBarEvent }) => {
 
 
   useEffect(() => {
-    console.log(location.pathname);
+//     console.log(location.pathname);
     if(location.pathname === '/'){
       let navState = {
         getHelp: true,
@@ -178,7 +178,7 @@ const Navbar = ({ sideBarEvent }) => {
   }, [])
 
   useEffect(() => {
-    console.log(navState)
+//     console.log(navState)
   }, [navState])
 
   const handleToggleSidebar = () => {
