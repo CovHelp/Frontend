@@ -24,6 +24,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
   const [comment, setComment] = useState();
   const [comments, setComments] = useState([]);
   const toast = useToast();
+  // eslint-disable-next-line
   const asd = {
     user: {
       id: 1,
@@ -61,6 +62,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
 
   useEffect(() => {
     handleLoadComments();
+    // eslint-disable-next-line
   }, []);
 
   const [commentLoader, setCommentLoader] = useState();
@@ -103,6 +105,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
   const handleHelpChannel = async () => {
     if (userStore.token && userStore.token.token) {
       try {
+        // eslint-disable-next-line
         const res = await createNeedChannel({
           user1: userStore.user.id,
           user2: post.user.id,
@@ -224,6 +227,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
                 name={
                   post.comments.length === 0
                     ? "Comment"
+                    // eslint-disable-next-line
                     : "Comments " + "(" + post.comments.length + ")"
                 }
               />

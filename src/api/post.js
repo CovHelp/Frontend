@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {
     JSONClient,
-    FormClient
 } from './bootstrap';
 import CovhelpException from './CovhelpException'
 
@@ -31,6 +30,7 @@ export const createNeedHelpComment = async ({
     comment
 }) => {
     try {
+        // eslint-disable-next-line
         const res = await JSONClient.post('/posts/need-help-comment', {
             post,
             comment
@@ -85,6 +85,7 @@ export const createProvideHelpComment = async ({
     comment
 }) => {
     try {
+        // eslint-disable-next-line
         const res = await JSONClient.post('/posts/provide-help-comment', {
             post,
             comment

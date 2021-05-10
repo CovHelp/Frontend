@@ -32,6 +32,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
   const toast = useToast();
   useEffect(() => {
     handleLoadComments();
+    // eslint-disable-next-line
   }, []);
 
   const handleLoadComments = async () => {
@@ -72,6 +73,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
   const handleHelpChannel = async () => {
     if(userStore.token && userStore.token.token){
       try{
+        // eslint-disable-next-line
         const res = await createProvideChannel({
           user1: userStore.user.id,
           user2: post.user.id,
@@ -96,12 +98,13 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
     isLiked();
     setLikesCount(post.upvotes.length);
     }catch(e){}
+    // eslint-disable-next-line
   }, []);
 
   const isLiked = () => {
     if (userStore.token && userStore.token.token) {
       try{
-      if (post.upvotes.length == 0) {
+      if (post.upvotes.length === 0) {
         setLiked(false);
       }
       var res = post.upvotes.filter(
@@ -248,11 +251,12 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
               <CardButton
                 isLiked={liked}
                 onClick={handleLikeAction}
-                name="Like"
+                // name="Like"
                 icon={MdThumbUp}
                 name={
                   likesCount === 0 || !likesCount
                     ? "Upvote"
+                    // eslint-disable-next-line
                     : "Upvotes " + "(" + likesCount + ")"
                 }
               />
@@ -264,6 +268,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
                 name={
                   post.comments.length === 0
                     ? "Comment"
+                    // eslint-disable-next-line
                     : "Comments " + "(" + post.comments.length + ")"
                 }
               />
