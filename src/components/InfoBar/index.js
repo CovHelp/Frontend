@@ -1,4 +1,4 @@
-import { Divider, Spacer } from "@chakra-ui/layout";
+import { Divider } from "@chakra-ui/layout";
 import React from "react";
 import Feedback from "./Feedback";
 import "./index.css";

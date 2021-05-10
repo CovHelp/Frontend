@@ -37,7 +37,7 @@ const NewPost = (props) => {
   const [shareNumber, setshareNumber] = useState(true);
   const [urgencySliderValue, setUrgencySliderValue] = useState(1);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [locationSliderValue, setLocationSliderValue] = useState(1);
+  // const [locationSliderValue, setLocationSliderValue] = useState(1);
   const [loader, setLoader] = useState(false);
   const [body, setBody] = useState("");
   const [city, setCity] = useState(null);
@@ -118,19 +118,19 @@ const NewPost = (props) => {
 
   const [categoryError, setcategoryError] = useState('')
   const [categoryEditing, setcategoryEditing] = useState('')
-
+  // eslint-disable-next-line
   const [stateError, setstateError] = useState('')
-  const [stateEditing, setstateEditing] = useState('')
-
+  // const [stateEditing, setstateEditing] = useState('')
+  // eslint-disable-next-line
   const [cityError, setCityError] = useState('')
-  const [cityEditing, setCityEditing] = useState('')
+  // const [cityEditing, setCityEditing] = useState('')
 
 
-  const [tokenError, settokenError] = useState('')
+  // const [tokenError, settokenError] = useState('')
 
   const handleCreatePost = async () => {
     //  setLoader(!loader);
-    if (city == null || state === null) return
+    if (city === null || state === null) return
     setLoader(true);
     if (props.typeOfPost === "Request Help") {
       try {
