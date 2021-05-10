@@ -208,7 +208,7 @@ export default function DesktopSidebar() {
   }, [location]);
 
   return (
-    <div class="sidenav">
+    <div className="sidenav">
       <Stack
         borderRadius="5px"
         boxShadow="lg"

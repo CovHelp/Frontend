@@ -215,7 +215,7 @@ export default function MobileSidebar({ isVisible }) {
   }
 
   return (
-    <div ref={mobileSidebarRef} class="sidenav-mobile">
+    <div ref={mobileSidebarRef} className="sidenav-mobile">
       <Stack
         borderRadius="5px"
         boxShadow="lg"

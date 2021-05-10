@@ -22,8 +22,9 @@ const PostDetails = () => {
       postType = postType.split("/")[0];
       setPostID(postId);
       setPostType(postType);
-      if (postType === 0) fetchNeedHelpPost(postId);
-      else if (postType === 1) fetchProvideHelpPost(postId);
+      
+      if (parseInt(postType) === 0) fetchNeedHelpPost(postId);
+      else if (parseInt(postType) === 1) fetchProvideHelpPost(postId);
     } catch (e) {
       history.push("/404");
     }
@@ -62,10 +63,10 @@ const PostDetails = () => {
         background="#f0f2f5"
       >
         {isLoaded === true && postType === 0 ? (
-         needHelpPost != null && <NeedHelpCard post={needHelpPost} showComments={true} />
+         needHelpPost != null && <NeedHelpCard key="needHelp" post={needHelpPost} showComments={true} />
         ) : (
             provideHelpPost != null &&
-          <GiveHelpCard post={provideHelpPost} showComments={true} />
+          <GiveHelpCard key="giveHelp" post={provideHelpPost} showComments={true} />
         )}
       </Box>
     </>

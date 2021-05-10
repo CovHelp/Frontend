@@ -6,7 +6,7 @@ import Infocard from "./Infocard.js";
 
 export default function index() {
   return (
-    <div class="info-sidebar">
+    <div className="info-sidebar">
       <div>
         <h1>Tips</h1>
         <Infocard
