@@ -14,7 +14,7 @@ import {
   VscAccount, VscOrganization
 } from "react-icons/all";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { register } from "../../api/user";
 import Logo from "../../assets/images/logo192.png";
 import "./index.css";
@@ -26,9 +26,160 @@ const Navbar = ({ sideBarEvent }) => {
   // const { colorMode, toggleColorMode } = useColorMode();
   const dispatch = useDispatch();
   const userStore = useSelector((store) => store.userStore);
+  const navState = useSelector((store) => store.navState);
+
   // const [selectedMenu, setSelectedMenu] = useState();
-  const [activeIndex, setActiveIndex] = useState(0);
+  // const [activeIndex, setActiveIndex] = useState(0);
   const [isSidenavVIsible, setSideNavVisibility] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location.pathname);
+    if(location.pathname === '/'){
+      let navState = {
+        getHelp: true,
+        provideHelp: false,
+        oganization: false,
+        chat: false,
+        profile: false,
+      }
+
+      dispatch({
+        type: 'UPDATE_NAV',
+        payload: navState
+      })
+    } else if(location.pathname === '/provide-help'){
+      let navState = {
+        getHelp: false,
+        provideHelp: true,
+        oganization: false,
+        chat: false,
+        profile: false,
+      }
+
+      dispatch({
+        type: 'UPDATE_NAV',
+        payload: navState
+      })
+    } else if(location.pathname === '/organization'){
+      let navState = {
+        getHelp: false,
+        provideHelp: false,
+        oganization: true,
+        chat: false,
+        profile: false,
+      }
+
+      dispatch({
+        type: 'UPDATE_NAV',
+        payload: navState
+      })
+    }else if(location.pathname === '/chat'){
+      let navState = {
+        getHelp: false,
+        provideHelp: false,
+        oganization: false,
+        chat: true,
+        profile: false,
+      }
+
+      dispatch({
+        type: 'UPDATE_NAV',
+        payload: navState
+      })
+    } else if(location.pathname === '/profile'){
+      let navState = {
+        getHelp: false,
+        provideHelp: false,
+        oganization: false,
+        chat: false,
+        profile: true,
+      }
+
+      dispatch({
+        type: 'UPDATE_NAV',
+        payload: navState
+      })
+    }
+    // eslint-disable-next-line
+  }, [location, dispatch])
+
+
+  useEffect(() => {
+    console.log(location.pathname);
+    if(location.pathname === '/'){
+      let navState = {
+        getHelp: true,
+        provideHelp: false,
+        oganization: false,
+        chat: false,
+        profile: false,
+      }
+
+      dispatch({
+        type: 'UPDATE_NAV',
+        payload: navState
+      })
+    } else if(location.pathname === '/provide-help'){
+      let navState = {
+        getHelp: false,
+        provideHelp: true,
+        oganization: false,
+        chat: false,
+        profile: false,
+      }
+
+      dispatch({
+        type: 'UPDATE_NAV',
+        payload: navState
+      })
+    } else if(location.pathname === '/organization'){
+      let navState = {
+        getHelp: false,
+        provideHelp: false,
+        oganization: true,
+        chat: false,
+        profile: false,
+      }
+
+      dispatch({
+        type: 'UPDATE_NAV',
+        payload: navState
+      })
+    }else if(location.pathname === '/chat'){
+      let navState = {
+        getHelp: false,
+        provideHelp: false,
+        oganization: false,
+        chat: true,
+        profile: false,
+      }
+
+      dispatch({
+        type: 'UPDATE_NAV',
+        payload: navState
+      })
+    } else if(location.pathname === '/profile'){
+      let navState = {
+        getHelp: false,
+        provideHelp: false,
+        oganization: false,
+        chat: false,
+        profile: true,
+      }
+
+      dispatch({
+        type: 'UPDATE_NAV',
+        payload: navState
+      })
+    }
+    // eslint-disable-next-line
+  }, [])
+
+  useEffect(() => {
+    console.log(navState)
+  }, [navState])
 
   const handleToggleSidebar = () => {
     setSideNavVisibility((v) => !v);
@@ -75,67 +226,65 @@ const Navbar = ({ sideBarEvent }) => {
 
   const NavItem = ({
     Icon,
-    index,
     activeIndex,
-    handleIndexCallback,
     to,
     text,
   }) => {
     return (
       <Link
-        className={index === activeIndex ? "activeButton" : "btn"}
+        className={activeIndex ? "activeButton" : "btn"}
         to={to}
-        onClick={() => handleIndexCallback(index)}
       >
-        <Icon color={activeIndex === index ? "#0078ff" : "#4f5662"} size={24} />
-        {activeIndex === index && <p>{text}</p>}
-        {activeIndex === index && <div className="activeIndicator" />}
+        <Icon color={activeIndex ? "#0078ff" : "#4f5662"} size={24} />
+        {activeIndex && <p>{text}</p>}
+        {activeIndex && <div className="activeIndicator" />}
       </Link>
     );
   };
 
   const authedLinks = [
-    { icon: FaHandsHelping, index: 0, to: "/", text: "Get help" },
+    { icon: FaHandsHelping, index: 0, to: "/", text: "Get help", activeValue: navState.getHelp },
     {
       icon: FaHandHoldingHeart,
       index: 1,
       to: "/provide-help",
       text: "Give help",
+      activeValue: navState.provideHelp,
     },
     {
       icon: VscOrganization,
       index: 2,
       to: "/organization",
       text: "Organizations",
+      activeValue: navState.oganization,
     },
-    { icon: BiChat, index: 3, to: "/chat", text: "Chat" },
+    { icon: BiChat, index: 3, to: "/chat", text: "Chat", activeValue: navState.chat },
     {
       icon: VscAccount,
       index: 4,
       to: "/profile",
       text: "Profile",
+      activeValue: navState.profile,
     },
   ];
 
   const unAuthedLinks = [
-    { icon: FaHandsHelping, index: 0, to: "/", text: "Get help" },
+    { icon: FaHandsHelping, index: 0, to: "/", text: "Get help", activeValue: navState.getHelp },
     {
       icon: FaHandHoldingHeart,
       index: 1,
       to: "/provide-help",
       text: "Give help",
+      activeValue: navState.provideHelp,
     },
     {
       icon: VscOrganization,
       index: 2,
       to: "/organization",
       text: "Organizations",
+      activeValue: navState.organization,
     },
   ];
-
-  const handleNavIndex = (index) => {
-    setActiveIndex(index);
-  };
 
   return (
     <div className="navwrapper">
@@ -156,29 +305,25 @@ const Navbar = ({ sideBarEvent }) => {
           <Flex h="100%" flex={["1", "2", "2"]} w="100%" maxW="680px">
             {!userStore.token ? (
               <Grid w="100%" templateColumns="repeat(3, 1fr)">
-                {unAuthedLinks.map((item, index) => (
+                {unAuthedLinks.map((item) => (
                   <NavItem
-                    key={index}
+                    key={item.index}
                     to={item.to}
                     text={item.text}
                     Icon={item.icon}
-                    index={item.index}
-                    activeIndex={activeIndex}
-                    handleIndexCallback={handleNavIndex}
+                    activeIndex={item.activeValue}
                   />
                 ))}
               </Grid>
             ) : (
               <Grid w="100%" templateColumns="repeat(5, 1fr)">
-                {authedLinks.map((item, index) => (
+                {authedLinks.map((item) => (
                   <NavItem
-                    key={index}
+                    key={item.index}
                     to={item.to}
                     text={item.text}
                     Icon={item.icon}
-                    index={item.index}
-                    activeIndex={activeIndex}
-                    handleIndexCallback={handleNavIndex}
+                    activeIndex={item.activeValue}
                   />
                 ))}
               </Grid>

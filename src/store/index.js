@@ -7,6 +7,13 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 const initialState = {
+    navState: {
+        getHelp: true,
+        provideHelp: false,
+        oganization: false,
+        chat: false,
+        profile: false,
+    },
     userStore: {
         user: {
             id: null,
@@ -81,6 +88,11 @@ const reducer = (state, {
                 provideHelpPostStoreFiltered: payload
             }
             // break;
+        case "UPDATE_NAV":
+            return {
+                ...state,
+                navState: payload 
+            }
 
         default:
             return {
