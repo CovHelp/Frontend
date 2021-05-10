@@ -15,8 +15,10 @@ const AboutUs = () => {
                     Let's get Familiar
                 </Heading>
 
-                <Text textAlign="justify" fontSize={["md", "lg", "xl"]}>
-                    CovHelp is made with a vision of creating a centralized information source for requesting and providing help. Sharing on social media sites could delay propagating the information or outdated information might be circulating. On our platform, we make sure a user can update information instantly whether he got help or no longer requires it, whether the person providing help is out of stock or resources.  Also, we provide a chat option to the user of the post which facilitates easy contact. We believe that the best way to come across this pandemic crisis is by helping each other. The platform is free and without any hidden charges.
+                <Text as="p" textAlign="left" fontSize={["md", "lg", "xl"]}>
+                    CovHelp is made with a vision of creating a centralized information source for requesting and providing help. Sharing on social media sites could delay propagating the information or outdated information might be circulating. On our platform, we make sure a user can update information instantly whether he got help or no longer requires it, whether the person providing help is out of stock or resources.  Also, we provide a chat option to the user of the post which facilitates easy contact. We believe that the best way to come across this pandemic crisis is by helping each other. <b>The platform is free and without any hidden charges.</b>
+                    <br/><br/>
+                    You can reach us directly :  <a href="mailto:covhelp.online@gmail.com" style={{color:"blue"}}>covhelp.online@gmail.com</a>
                 </Text>
 
 
