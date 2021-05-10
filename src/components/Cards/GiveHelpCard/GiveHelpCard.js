@@ -24,7 +24,7 @@ import { createProvideChannel } from "../../../api/channel";
 
 const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
   const userStore = useSelector((store) => store.userStore);
-  const [comment, setComment] = useState();
+  const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [liked, setLiked] = useState(null);
   const [likesCount, setLikesCount] = useState(null);
@@ -316,7 +316,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
             />
 
             <Button
-              isDisabled={!userStore.token}
+              isDisabled={comment.trim().length === 0 || !userStore.token}
               onClick={handleComment}
               colorScheme="messenger"
               borderRadius="lg"
