@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import { Flex, Grid } from "@chakra-ui/layout";
+import { Flex, Grid, Text } from "@chakra-ui/layout";
 // import { Text, useColorMode } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import {
@@ -10,6 +10,7 @@ import {
   VscOrganization,
   VscAccount,
   BiChat,
+  AiOutlineInfoCircle,
 } from "react-icons/all";
 
 import { Link } from "react-router-dom";
@@ -36,7 +37,7 @@ const Navbar = ({ sideBarEvent }) => {
 
   useEffect(() => {
     sideBarEvent(isSidenavVIsible);
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [isSidenavVIsible, setSideNavVisibility]);
 
   const handleLogin = async (res) => {
@@ -44,7 +45,7 @@ const Navbar = ({ sideBarEvent }) => {
       const resp = await register(res.profileObj);
       dispatch({ type: "SAVE_USER", payload: resp });
       // window.location.reload()
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const handleLogout = async (res) => {
@@ -66,7 +67,7 @@ const Navbar = ({ sideBarEvent }) => {
       });
       // window.location.reload()
 
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const handleLoginFailure = (err) => {
@@ -209,10 +210,15 @@ const Navbar = ({ sideBarEvent }) => {
               </>
             )}
             {userStore.token && (
-              <Button onClick={handleLogout} m={2}>
+              <Button onClick={handleLogout} m={["5", "2"]}>
                 Logout
               </Button>
             )}
+            <Link to="/about">
+              <Button leftIcon={<AiOutlineInfoCircle size="25px" />} m={["5", "2"]} bg="whatsapp.500" color="white">
+                About us
+              </Button>
+            </Link>
           </Flex>
         </Flex>
       </div>
@@ -236,6 +242,11 @@ const Navbar = ({ sideBarEvent }) => {
             />
           </div>
           <div className="navmobile-col-right">
+            <Link to="/about">
+              <Button leftIcon={<AiOutlineInfoCircle />} m={["5", "2"]} bg="whatsapp.500" color="white">
+                <Text d={["none","null","inline"]} border="1px" borderColor="white">About us</Text>
+              </Button>
+            </Link>
             {userStore.token ? (
               <Button onClick={handleLogout}>LOGOUT</Button>
             ) : (

@@ -1,7 +1,5 @@
-import { Box, Text } from '@chakra-ui/layout'
-import { Flex, Heading } from '@chakra-ui/layout'
+import { Box, Flex, Heading, Text } from '@chakra-ui/layout'
 import React from 'react'
-import CardBox from '../../components/Cards/CardBox'
 
 const AboutUs = () => {
     return (
