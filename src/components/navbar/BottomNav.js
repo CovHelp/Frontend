@@ -8,17 +8,10 @@ import { useSelector } from "react-redux";
 import "./index.css";
 import { useDispatch } from "react-redux";
 
-const NavItem = ({
-  Icon,
-  activeIndex,
-  to,
-  text,
-}) => {
+const NavItem = ({ Icon, activeIndex, to, text }) => {
   return (
-    <Link
-      className={activeIndex ? "activeButton" : "btn"}
-      to={to}
-    >
+    <Link className={activeIndex ? "activeButton" : "btn"} to={to}>
+      {activeIndex}
       <Icon color={activeIndex ? "#0078ff" : "#4f5662"} size={20} />
       {activeIndex && <p>{text}</p>}
     </Link>
@@ -31,156 +24,160 @@ export default function BottomNav() {
   const navState = useSelector((store) => store.navState);
   const location = useLocation();
 
-  useEffect(() => {
-    // console.log(location.pathname);
-    if(location.pathname === '/'){
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const initNavStateHandler = async () => {
+    await sleep(500);
+    if (location.pathname === "/") {
       let navState = {
         getHelp: true,
         provideHelp: false,
         oganization: false,
         chat: false,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    } else if(location.pathname === '/provide-help'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/provide-help") {
       let navState = {
         getHelp: false,
         provideHelp: true,
         oganization: false,
         chat: false,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    } else if(location.pathname === '/organization'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/organization") {
       let navState = {
         getHelp: false,
         provideHelp: false,
         oganization: true,
         chat: false,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    }else if(location.pathname === '/chat'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/chat") {
       let navState = {
         getHelp: false,
         provideHelp: false,
         oganization: false,
         chat: true,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    } else if(location.pathname === '/profile'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/profile") {
       let navState = {
         getHelp: false,
         provideHelp: false,
         oganization: false,
         chat: false,
         profile: true,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
     }
-    // eslint-disable-next-line
-  }, [location])
-
+  };
 
   useEffect(() => {
-    console.log(location.pathname);
-    if(location.pathname === '/'){
+    if (location.pathname === "/") {
       let navState = {
         getHelp: true,
         provideHelp: false,
         oganization: false,
         chat: false,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    } else if(location.pathname === '/provide-help'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/provide-help") {
       let navState = {
         getHelp: false,
         provideHelp: true,
         oganization: false,
         chat: false,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    } else if(location.pathname === '/organization'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/organization") {
       let navState = {
         getHelp: false,
         provideHelp: false,
         oganization: true,
         chat: false,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    }else if(location.pathname === '/chat'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/chat") {
       let navState = {
         getHelp: false,
         provideHelp: false,
         oganization: false,
         chat: true,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    } else if(location.pathname === '/profile'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/profile") {
       let navState = {
         getHelp: false,
         provideHelp: false,
         oganization: false,
         chat: false,
         profile: true,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
     }
     // eslint-disable-next-line
-  }, [])
+  }, [location]);
 
   useEffect(() => {
-    console.log(navState)
-    // eslint-disable-next-line
-  }, [location])
+    initNavStateHandler();
+  }, []);
 
   const items = [
-    { icon: FaHandsHelping, index: 0, to: "/", text: "Get help", activeValue: navState.getHelp },
+    {
+      icon: FaHandsHelping,
+      index: 0,
+      to: "/",
+      text: "Get help",
+      activeValue: navState.getHelp,
+    },
     {
       icon: FaHandHoldingHeart,
       index: 1,
@@ -195,7 +192,13 @@ export default function BottomNav() {
       text: "Organizations",
       activeValue: navState.oganization,
     },
-    { icon: BiChat, index: 3, to: "/chat", text: "Chat", activeValue: navState.chat },
+    {
+      icon: BiChat,
+      index: 3,
+      to: "/chat",
+      text: "Chat",
+      activeValue: navState.chat,
+    },
     {
       icon: VscAccount,
       index: 4,
@@ -205,8 +208,14 @@ export default function BottomNav() {
     },
   ];
 
-  const unAuthItems =[
-    { icon: FaHandsHelping, index: 0, to: "/", text: "Get help", activeValue: navState.getHelp },
+  const unAuthItems = [
+    {
+      icon: FaHandsHelping,
+      index: 0,
+      to: "/",
+      text: "Get help",
+      activeValue: navState.getHelp,
+    },
     {
       icon: FaHandHoldingHeart,
       index: 1,

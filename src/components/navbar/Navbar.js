@@ -4,14 +4,15 @@ import { Flex, Grid } from "@chakra-ui/layout";
 import React, { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
 import {
-  AiOutlineInfoCircle, BiChat, FaHandHoldingHeart,
+  AiOutlineInfoCircle,
+  BiChat,
+  FaHandHoldingHeart,
   FaHandsHelping,
   GiHamburgerMenu,
   ImCross,
-
   IoLogOutOutline,
-
-  VscAccount, VscOrganization
+  VscAccount,
+  VscOrganization,
 } from "react-icons/all";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
@@ -19,167 +20,158 @@ import { register } from "../../api/user";
 import Logo from "../../assets/images/logo192.png";
 import "./index.css";
 
-
-
-
 const Navbar = ({ sideBarEvent }) => {
-  // const { colorMode, toggleColorMode } = useColorMode();
   const dispatch = useDispatch();
   const userStore = useSelector((store) => store.userStore);
   const navState = useSelector((store) => store.navState);
-
-  // const [selectedMenu, setSelectedMenu] = useState();
-  // const [activeIndex, setActiveIndex] = useState(0);
   const [isSidenavVIsible, setSideNavVisibility] = useState(false);
-
   const location = useLocation();
 
-  useEffect(() => {
-//     console.log(location.pathname);
-    if(location.pathname === '/'){
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const initNavStateHandler = async () => {
+    await sleep(500);
+    if (location.pathname === "/") {
       let navState = {
         getHelp: true,
         provideHelp: false,
         oganization: false,
         chat: false,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    } else if(location.pathname === '/provide-help'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/provide-help") {
       let navState = {
         getHelp: false,
         provideHelp: true,
         oganization: false,
         chat: false,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    } else if(location.pathname === '/organization'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/organization") {
       let navState = {
         getHelp: false,
         provideHelp: false,
         oganization: true,
         chat: false,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    }else if(location.pathname === '/chat'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/chat") {
       let navState = {
         getHelp: false,
         provideHelp: false,
         oganization: false,
         chat: true,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    } else if(location.pathname === '/profile'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/profile") {
       let navState = {
         getHelp: false,
         provideHelp: false,
         oganization: false,
         chat: false,
         profile: true,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
     }
-    // eslint-disable-next-line
-  }, [location, dispatch])
-
+  };
 
   useEffect(() => {
-//     console.log(location.pathname);
-    if(location.pathname === '/'){
+    if (location.pathname === "/") {
       let navState = {
         getHelp: true,
         provideHelp: false,
         oganization: false,
         chat: false,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    } else if(location.pathname === '/provide-help'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/provide-help") {
       let navState = {
         getHelp: false,
         provideHelp: true,
         oganization: false,
         chat: false,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    } else if(location.pathname === '/organization'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/organization") {
       let navState = {
         getHelp: false,
         provideHelp: false,
         oganization: true,
         chat: false,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    }else if(location.pathname === '/chat'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/chat") {
       let navState = {
         getHelp: false,
         provideHelp: false,
         oganization: false,
         chat: true,
         profile: false,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
-    } else if(location.pathname === '/profile'){
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/profile") {
       let navState = {
         getHelp: false,
         provideHelp: false,
         oganization: false,
         chat: false,
         profile: true,
-      }
+      };
 
       dispatch({
-        type: 'UPDATE_NAV',
-        payload: navState
-      })
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
     }
     // eslint-disable-next-line
-  }, [])
+  }, [location]);
 
   useEffect(() => {
-//     console.log(navState)
-  }, [navState])
+    initNavStateHandler();
+  }, []);
 
   const handleToggleSidebar = () => {
     setSideNavVisibility((v) => !v);
@@ -195,7 +187,7 @@ const Navbar = ({ sideBarEvent }) => {
       const resp = await register(res.profileObj);
       dispatch({ type: "SAVE_USER", payload: resp });
       // window.location.reload()
-    } catch (e) { }
+    } catch (e) {}
   };
 
   const handleLogout = async (res) => {
@@ -216,25 +208,16 @@ const Navbar = ({ sideBarEvent }) => {
         },
       });
       // window.location.reload()
-
-    } catch (e) { }
+    } catch (e) {}
   };
 
   const handleLoginFailure = (err) => {
     console.log(err);
   };
 
-  const NavItem = ({
-    Icon,
-    activeIndex,
-    to,
-    text,
-  }) => {
+  const NavItem = ({ Icon, activeIndex, to, text }) => {
     return (
-      <Link
-        className={activeIndex ? "activeButton" : "btn"}
-        to={to}
-      >
+      <Link className={activeIndex ? "activeButton" : "btn"} to={to}>
         <Icon color={activeIndex ? "#0078ff" : "#4f5662"} size={24} />
         {activeIndex && <p>{text}</p>}
         {activeIndex && <div className="activeIndicator" />}
@@ -243,7 +226,13 @@ const Navbar = ({ sideBarEvent }) => {
   };
 
   const authedLinks = [
-    { icon: FaHandsHelping, index: 0, to: "/", text: "Get help", activeValue: navState.getHelp },
+    {
+      icon: FaHandsHelping,
+      index: 0,
+      to: "/",
+      text: "Get help",
+      activeValue: navState.getHelp,
+    },
     {
       icon: FaHandHoldingHeart,
       index: 1,
@@ -258,7 +247,13 @@ const Navbar = ({ sideBarEvent }) => {
       text: "Organizations",
       activeValue: navState.oganization,
     },
-    { icon: BiChat, index: 3, to: "/chat", text: "Chat", activeValue: navState.chat },
+    {
+      icon: BiChat,
+      index: 3,
+      to: "/chat",
+      text: "Chat",
+      activeValue: navState.chat,
+    },
     {
       icon: VscAccount,
       index: 4,
@@ -269,7 +264,13 @@ const Navbar = ({ sideBarEvent }) => {
   ];
 
   const unAuthedLinks = [
-    { icon: FaHandsHelping, index: 0, to: "/", text: "Get help", activeValue: navState.getHelp },
+    {
+      icon: FaHandsHelping,
+      index: 0,
+      to: "/",
+      text: "Get help",
+      activeValue: navState.getHelp,
+    },
     {
       icon: FaHandHoldingHeart,
       index: 1,
@@ -354,12 +355,21 @@ const Navbar = ({ sideBarEvent }) => {
               </>
             )}
             {userStore.token && (
-              <Button leftIcon={<IoLogOutOutline size="28px" />} onClick={handleLogout} m={["5", "2"]}>
+              <Button
+                leftIcon={<IoLogOutOutline size="28px" />}
+                onClick={handleLogout}
+                m={["5", "2"]}
+              >
                 Logout
               </Button>
             )}
             <Link to="/about">
-              <Button leftIcon={<AiOutlineInfoCircle size="25px" />} m={["5", "2"]} bg="whatsapp.500" color="white">
+              <Button
+                leftIcon={<AiOutlineInfoCircle size="25px" />}
+                m={["5", "2"]}
+                bg="whatsapp.500"
+                color="white"
+              >
                 About us
               </Button>
             </Link>
