@@ -21,7 +21,7 @@ import { CardButton } from "../CardButton";
 
 const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
   const userStore = useSelector((store) => store.userStore);
-  const [comment, setComment] = useState();
+  const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const toast = useToast();
   // eslint-disable-next-line
@@ -71,7 +71,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
     try {
       const res = await getNeedHelpComments({ postID: post.id });
       setComments(res);
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const handleComment = async () => {
@@ -119,7 +119,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
           description: "Chat room created, head over to chat page!",
           status: "success",
         });
-      } catch (e) {}
+      } catch (e) { }
     }
   };
 
@@ -271,7 +271,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
             />
 
             <Button
-              isDisabled={!userStore.token}
+              isDisabled={comment.trim().length === 0 || !userStore.token}
               onClick={handleComment}
               colorScheme="messenger"
               borderRadius="lg"
