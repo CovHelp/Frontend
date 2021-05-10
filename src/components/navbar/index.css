@@ -164,4 +164,12 @@
     .navmobile {
         display: block !important;
     }
+    .navmobile-col-center{
+        flex: 30% !important;
+        max-width: 30% !important;
+    }
+    .navmobile-col-right , .navmobile-col-left{
+        flex: 30% !important;
+        max-width: 30% !important;
+    }
 }

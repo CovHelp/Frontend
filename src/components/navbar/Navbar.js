@@ -241,13 +241,13 @@ const Navbar = ({ sideBarEvent }) => {
             />
           </div>
           <div className="navmobile-col-right">
-            {/* <Link to="/about">
+            <Link to="/about">
               <Button mr={1} bg="whatsapp.500" color="white" w={"50px"}>
                 <AiOutlineInfoCircle size="20px" />
               </Button>
-            </Link> */}
+            </Link>
             {userStore.token ? (
-              <Button onClick={handleLogout} w={"100px"}>
+              <Button onClick={handleLogout} w={"50px"}>
                 <IoLogOutOutline size="25px" />
               </Button>
             ) : (
