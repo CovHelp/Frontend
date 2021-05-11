@@ -21,6 +21,7 @@ import {
 } from "../../../api/post";
 import CommentBubble from "../../CommentBubble/CommentBubble";
 import CardBox from "../CardBox";
+import { RWebShare } from 'react-web-share';
 import { CardButton } from "../CardButton";
 
 const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
@@ -143,9 +144,19 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
               {/*      <MenuItem icon={<GoReport fontSize="20px" />}>
                     Report Spam!
             </MenuItem> */}
+                   <RWebShare
+                  data={{
+                    text: `${post.body}`,
+                    url: `https://covhelp.online/post-detail/1/${post.id}`,
+                    title: `${post.user.firstname} Shared on ${post.category}`,
+                  }}
+                  // sites={{'facebook'}}
+                  onClick={() => console.log("shared successfully!")}
+                >
                   <MenuItem icon={<RiShareForwardLine fontSize="20px" />}>
                     Share
             </MenuItem>
+                </RWebShare>
                 </MenuList>
               </Menu>
             </Box>
