@@ -6,31 +6,31 @@ import { Badge, Box, Flex, Grid, Heading, Text } from "@chakra-ui/layout";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
 import { useToast } from "@chakra-ui/toast";
 import { useEffect, useState } from "react";
-import { CgCloseR } from 'react-icons/cg';
+import { CgCloseR } from "react-icons/cg";
 import { FaComment } from "react-icons/fa";
-import { GoKebabVertical } from 'react-icons/go';
+import { GoKebabVertical } from "react-icons/go";
 import { IoHandLeftSharp } from "react-icons/io5";
 import { MdThumbUp } from "react-icons/md";
-import { RiShareForwardLine } from 'react-icons/ri';
+import { RiShareForwardLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createProvideChannel } from "../../../api/channel";
-import { RWebShare } from 'react-web-share';
+import { RWebShare } from "react-web-share";
 import {
+  closeProvideHelpPost,
   createProvideHelpComment,
   createProvideHelpDepvote,
   createProvideHelpUpvote,
   getNameByCategoryID,
-  getProvideHelpComments
+  getProvideHelpComments,
 } from "../../../api/post";
 import CommentBubble from "../../CommentBubble/CommentBubble";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
 
-
 const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
   const userStore = useSelector((store) => store.userStore);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [liked, setLiked] = useState(null);
   const [likesCount, setLikesCount] = useState(null);
@@ -45,7 +45,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
     try {
       const res = await getProvideHelpComments({ postID: post.id });
       setComments(res);
-    } catch (e) { }
+    } catch (e) {}
   };
 
   const [commentLoader, setCommentLoader] = useState();
@@ -76,6 +76,17 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
     }
   };
 
+  const handleCloseProvidePost = async () => {
+    try {
+      await closeProvideHelpPost({
+        token: userStore.token.token,
+        postID: post.id,
+      });
+      window.location.reload()
+
+    } catch (E) {}
+  };
+
   const handleHelpChannel = async () => {
     if (userStore.token && userStore.token.token) {
       try {
@@ -84,8 +95,8 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
           user1: userStore.user.id,
           user2: post.user.id,
           postID: post.id,
-          token: userStore.token.token
-        })
+          token: userStore.token.token,
+        });
         toast({
           position: "top-right",
           isClosable: true,
@@ -93,17 +104,15 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
           description: "Chat room created, head over to chat page!",
           status: "success",
         });
-      } catch (e) {
-
-      }
+      } catch (e) {}
     }
-  }
+  };
 
   useEffect(() => {
     try {
       isLiked();
       setLikesCount(post.upvotes.length);
-    } catch (e) { }
+    } catch (e) {}
     // eslint-disable-next-line
   }, []);
 
@@ -121,7 +130,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
         } else {
           setLiked(false);
         }
-      } catch (e) { }
+      } catch (e) {}
     } else {
       setLiked(false);
     }
@@ -129,24 +138,22 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
 
   const unlike = async () => {
     setLiked(false);
-    setLikesCount(c => c - 1);
+    setLikesCount((c) => c - 1);
     await createProvideHelpDepvote({
       userID: userStore.user.id,
       token: userStore.token.token,
       postID: post.id,
     });
-
   };
 
   const like = async () => {
     setLiked(true);
-    setLikesCount(c => c + 1);
+    setLikesCount((c) => c + 1);
     await createProvideHelpUpvote({
       userID: userStore.user.id,
       token: userStore.token.token,
       postID: post.id,
     });
-
   };
 
   const handleLikeAction = async () => {
@@ -176,7 +183,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
               <Box>
                 <p style={{ fontSize: 12 }}>
                   {new Date(post.createdAt).toLocaleString()} &bull;
-              <span>
+                  <span>
                     <Badge
                       borderRadius="full"
                       px="2"
@@ -192,7 +199,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
             </Flex>
           </Flex>
           <Box>
-            <Menu placement="left-start" >
+            <Menu placement="left-start">
               <MenuButton
                 isLazy
                 as={IconButton}
@@ -204,9 +211,15 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
                 {/*  <MenuItem icon={<FiEdit fontSize="20px" />}>
                     Edit Post
             </MenuItem> */}
-                <MenuItem icon={<CgCloseR fontSize="20px" />}>
-                  I can no longer <br />provide this
-            </MenuItem>
+                {post.user.id === userStore.user.id && (
+                  <MenuItem
+                    onClick={handleCloseProvidePost}
+                    icon={<CgCloseR fontSize="20px" />}
+                  >
+                    I can no longer <br />
+                    provide this
+                  </MenuItem>
+                )}
                 {/* <MenuItem icon={<GoReport fontSize="20px" />}>
                     Report Spam!
             </MenuItem> */}
@@ -221,25 +234,23 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
                 >
                   <MenuItem icon={<RiShareForwardLine fontSize="20px" />}>
                     Share
-            </MenuItem>
+                  </MenuItem>
                 </RWebShare>
               </MenuList>
             </Menu>
           </Box>
         </Flex>
       </Flex>
-      {
-        post.picture !== "" && (
-          <Image
-            src={`https://apis.covhelp.online/v1/posts/file/${post.picture}`}
-            objectFit="cover"
-            color="gray.600"
-            ml="auto"
-            mr="auto"
-            alt=""
-          />
-        )
-      }
+      {post.picture !== "" && (
+        <Image
+          src={`https://apis.covhelp.online/v1/posts/file/${post.picture}`}
+          objectFit="cover"
+          color="gray.600"
+          ml="auto"
+          mr="auto"
+          alt=""
+        />
+      )}
 
       <Box
         p={["4", "8"]}
@@ -302,20 +313,24 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
                 name={
                   likesCount === 0 || !likesCount
                     ? "Upvote"
-                    // eslint-disable-next-line
-                    : "Upvotes " + "(" + likesCount + ")"
+                    : // eslint-disable-next-line
+                      "Upvotes " + "(" + likesCount + ")"
                 }
               />
 
-              <CardButton onClick={handleHelpChannel} icon={IoHandLeftSharp} name="I need help" />
+              <CardButton
+                onClick={handleHelpChannel}
+                icon={IoHandLeftSharp}
+                name="I need help"
+              />
               <CardButton
                 to={`post-detail/1/${post.id}`}
                 icon={FaComment}
                 name={
                   post.comments.length === 0
                     ? "Comment"
-                    // eslint-disable-next-line
-                    : "Comments " + "(" + post.comments.length + ")"
+                    : // eslint-disable-next-line
+                      "Comments " + "(" + post.comments.length + ")"
                 }
               />
             </Grid>
@@ -326,107 +341,103 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
       {/* Comments */}
 
       {/* {readMore === false && */}
-      {
-        userStore.token && userStore.token.token && (
-          <Flex
-            flexDirection="column"
-            px={["4", "8"]}
-            pb={["4", "8"]}
-            bgColor="white"
-            h={"auto"}
+      {userStore.token && userStore.token.token && (
+        <Flex
+          flexDirection="column"
+          px={["4", "8"]}
+          pb={["4", "8"]}
+          bgColor="white"
+          h={"auto"}
+        >
+          <InputGroup
+            d="flex"
+            alignItems="center"
+            justifyContent="center"
+            mb={2}
+            dir="row"
           >
-            <InputGroup
-              d="flex"
-              alignItems="center"
-              justifyContent="center"
-              mb={2}
-              dir="row"
+            <Avatar
+              w={["40px", "48px"]}
+              h={["40px", "48px"]}
+              src={
+                userStore.token &&
+                userStore.token.token &&
+                userStore.user.profile_pic
+              }
+              mr={["2", "4"]}
+            />
+
+            <Input
+              value={comment}
+              type="text"
+              placeholder="Comment"
+              onChange={(e) => setComment(e.target.value)}
+              borderRadius={"lg"}
+              bgColor="rgb(245,245,245)"
+            />
+
+            <Button
+              isDisabled={comment.trim().length === 0 || !userStore.token}
+              onClick={handleComment}
+              colorScheme="messenger"
+              borderRadius="lg"
+              px={[6, 8]}
+              ml={2}
+              isLoading={commentLoader}
             >
-              <Avatar
-                w={["40px", "48px"]}
-                h={["40px", "48px"]}
-                src={
-                  userStore.token &&
-                  userStore.token.token &&
-                  userStore.user.profile_pic
-                }
-                mr={["2", "4"]}
-              />
-
-              <Input
-                value={comment}
-                type="text"
-                placeholder="Comment"
-                onChange={(e) => setComment(e.target.value)}
-                borderRadius={"lg"}
-                bgColor="rgb(245,245,245)"
-              />
-
-              <Button
-                isDisabled={comment.trim().length === 0 || !userStore.token}
-                onClick={handleComment}
-                colorScheme="messenger"
-                borderRadius="lg"
-                px={[6, 8]}
-                ml={2}
-                isLoading={commentLoader}
-              >
-                Post
+              Post
             </Button>
-            </InputGroup>
-            {showComments && (
-              <div>
-                {comments.length > 0 &&
-                  comments.map((comment) => (
-                    <CommentBubble
-                      key={comment.id}
-                      name={comment.user.firstName}
-                      profile_pic={comment.user.profile_pic}
-                      date={
-                        new Date(comment.createdAt).toLocaleDateString() +
-                        ", " +
-                        new Date(comment.createdAt).toLocaleTimeString()
-                      }
-                      comment={comment.comment}
-                    />
-                  ))}
-              </div>
-            )}
-          </Flex>
-        )
-      }
+          </InputGroup>
+          {showComments && (
+            <div>
+              {comments.length > 0 &&
+                comments.map((comment) => (
+                  <CommentBubble
+                    key={comment.id}
+                    name={comment.user.firstName}
+                    profile_pic={comment.user.profile_pic}
+                    date={
+                      new Date(comment.createdAt).toLocaleDateString() +
+                      ", " +
+                      new Date(comment.createdAt).toLocaleTimeString()
+                    }
+                    comment={comment.comment}
+                  />
+                ))}
+            </div>
+          )}
+        </Flex>
+      )}
 
-      {
-        !userStore.token && (
-          <Flex
-            flexDirection="column"
-            px={["4", "8"]}
-            pb={["4", "8"]}
-            bgColor="white"
-            h={"auto"}
-          >
-            {showComments && (
-              <div>
-                {comments.length > 0 &&
-                  comments.map((comment) => (
-                    <CommentBubble
-                      key={comment.id}
-                      name={comment.user.firstName}
-                      profile_pic={comment.user.profile_pic}
-                      date={
-                        new Date(comment.createdAt).toLocaleDateString() +
-                        ", " +
-                        new Date(comment.createdAt).toLocaleTimeString()
-                      }
-                      comment={comment.comment}
-                    />
-                  ))}
-              </div>
-            )}
-          </Flex>
-        )
-      }
-    </CardBox >
+      {!userStore.token && (
+        <Flex
+          flexDirection="column"
+          px={["4", "8"]}
+          pb={["4", "8"]}
+          bgColor="white"
+          h={"auto"}
+        >
+          {showComments && (
+            <div>
+              {comments.length > 0 &&
+                comments.map((comment) => (
+                  <CommentBubble
+                    key={comment.id}
+                    name={comment.user.firstName}
+                    profile_pic={comment.user.profile_pic}
+                    date={
+                      new Date(comment.createdAt).toLocaleDateString() +
+                      ", " +
+                      new Date(comment.createdAt).toLocaleTimeString()
+                    }
+                    comment={comment.comment}
+                  />
+                ))}
+            </div>
+          )}
+        </Flex>
+      )}
+    </CardBox>
   );
 };
 

@@ -57,6 +57,25 @@ export const getNeedHelpComments = async ({
     }
 }
 
+
+export const closeNeedHelpPost = async ({
+    postID,
+    token
+}) => {
+    try {
+        const res = await JSONClient.post('/posts/need-help-close', {
+            postID: postID
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return res.data;
+    } catch (e) {
+        throw new CovhelpException(e.response.data, e.response.status);
+    }
+}
+
 export const getProvideHelpPosts = async () => {
     try {
         const res = await JSONClient.get('/posts/provide-help-posts');
@@ -100,8 +119,12 @@ export const createProvideHelpComment = async ({
     }
 }
 
-export const createProvideHelpUpvote = async ({token, userID, postID}) => {
-    try{
+export const createProvideHelpUpvote = async ({
+    token,
+    userID,
+    postID
+}) => {
+    try {
         const res = await JSONClient.post(`/posts/upvote/${postID}`, {
             userID
         }, {
@@ -110,14 +133,18 @@ export const createProvideHelpUpvote = async ({token, userID, postID}) => {
             }
         })
         return res.data;
-    }catch(e){
+    } catch (e) {
         throw new CovhelpException(e.response.data, e.response.status);
 
     }
 }
 
-export const createProvideHelpDepvote = async ({token, userID, postID}) => {
-    try{
+export const createProvideHelpDepvote = async ({
+    token,
+    userID,
+    postID
+}) => {
+    try {
         const res = await JSONClient.post(`/posts/devote/${postID}`, {
             userID
         }, {
@@ -126,9 +153,27 @@ export const createProvideHelpDepvote = async ({token, userID, postID}) => {
             }
         })
         return res.data;
-    }catch(e){
+    } catch (e) {
         throw new CovhelpException(e.response.data, e.response.status);
 
+    }
+}
+
+export const closeProvideHelpPost = async ({
+    postID,
+    token
+}) => {
+    try {
+        const res = await JSONClient.post('/posts/provide-help-close', {
+            postID: postID
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return res.data;
+    } catch (e) {
+        throw new CovhelpException(e.response.data, e.response.status);
     }
 }
 

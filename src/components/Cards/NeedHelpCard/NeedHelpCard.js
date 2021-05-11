@@ -15,18 +15,19 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createNeedChannel } from "../../../api/channel";
 import {
+  closeNeedHelpPost,
   createNeedHelpComment,
   getNameByCategoryID,
-  getNeedHelpComments
+  getNeedHelpComments,
 } from "../../../api/post";
 import CommentBubble from "../../CommentBubble/CommentBubble";
 import CardBox from "../CardBox";
-import { RWebShare } from 'react-web-share';
+import { RWebShare } from "react-web-share";
 import { CardButton } from "../CardButton";
 
 const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
   const userStore = useSelector((store) => store.userStore);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const toast = useToast();
   // eslint-disable-next-line
@@ -41,7 +42,16 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
     try {
       const res = await getNeedHelpComments({ postID: post.id });
       setComments(res);
-    } catch (e) { }
+    } catch (e) {}
+  };
+
+  const handleCloseNeedPost = async () => {
+    try {
+      await closeNeedHelpPost({
+        token: userStore.token.token,
+        postID: post.id,
+      });
+    } catch (e) {}
   };
 
   const handleComment = async () => {
@@ -80,7 +90,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
           user1: userStore.user.id,
           user2: post.user.id,
           postID: post.id,
-          token: userStore.token.token
+          token: userStore.token.token,
         });
         toast({
           position: "top-right",
@@ -89,7 +99,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
           description: "Chat room created, head over to chat page!",
           status: "success",
         });
-      } catch (e) { }
+      } catch (e) {}
     }
   };
 
@@ -110,7 +120,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
               <Box>
                 <p style={{ fontSize: 12 }}>
                   {new Date(post.createdAt).toLocaleString()} &bull;
-              <span>
+                  <span>
                     <Badge
                       borderRadius="full"
                       px="2"
@@ -124,27 +134,32 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
                 </p>
               </Box>
             </Flex>
-            </Flex>
-            <Box>
-              <Menu placement="left-start" >
-                <MenuButton
-                  isLazy
-                  as={IconButton}
-                  aria-label="Options"
-                  icon={<GoKebabVertical />}
-                  variant="outline"
-                />
-                <MenuList>
-                  {/* <MenuItem icon={<FiEdit fontSize="20px" />}>
+          </Flex>
+          <Box>
+            <Menu placement="left-start">
+              <MenuButton
+                isLazy
+                as={IconButton}
+                aria-label="Options"
+                icon={<GoKebabVertical />}
+                variant="outline"
+              />
+              <MenuList>
+                {/* <MenuItem icon={<FiEdit fontSize="20px" />}>
                     Edit Post
             </MenuItem> */}
-                  <MenuItem icon={<CgCloseR fontSize="20px" />}>
-                  I've got the help
-           </MenuItem>
-              {/*      <MenuItem icon={<GoReport fontSize="20px" />}>
+                {post.user.id === userStore.user.id && (
+                  <MenuItem
+                    onClick={handleCloseNeedPost}
+                    icon={<CgCloseR fontSize="20px" />}
+                  >
+                    I've got the help
+                  </MenuItem>
+                )}
+                {/*      <MenuItem icon={<GoReport fontSize="20px" />}>
                     Report Spam!
             </MenuItem> */}
-                   <RWebShare
+                <RWebShare
                   data={{
                     text: `${post.body}`,
                     url: `https://covhelp.online/post-detail/0/${post.id}`,
@@ -155,12 +170,12 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
                 >
                   <MenuItem icon={<RiShareForwardLine fontSize="20px" />}>
                     Share
-            </MenuItem>
+                  </MenuItem>
                 </RWebShare>
-                </MenuList>
-              </Menu>
-            </Box>
-          </Flex>
+              </MenuList>
+            </Menu>
+          </Box>
+        </Flex>
       </Flex>
       {post.picture !== "" && (
         <Image
@@ -179,7 +194,11 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
         bgColor="white"
       >
         <Box d="flex" alignItems="baseline">
-          <Badge borderRadius="full" px="2" colorScheme={post.urgency > 2 ? 'red' : 'orange'}>
+          <Badge
+            borderRadius="full"
+            px="2"
+            colorScheme={post.urgency > 2 ? "red" : "orange"}
+          >
             Urgency Level: {post.urgency}
           </Badge>
           <Box
@@ -236,8 +255,8 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
                 name={
                   post.comments.length === 0
                     ? "Comment"
-                    // eslint-disable-next-line
-                    : "Comments " + "(" + post.comments.length + ")"
+                    : // eslint-disable-next-line
+                      "Comments " + "(" + post.comments.length + ")"
                 }
               />
             </Grid>
