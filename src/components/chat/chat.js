@@ -12,8 +12,10 @@ import { Divider } from "@chakra-ui/layout";
 // import { createBatcher } from "framer-motion";
 
 export const Chat = () => {
-  const SERVER = "https://apis.covhelp.online";
-  var socket = socketClient(SERVER, { transports: ["polling"] });
+  const SERVER = "http://localhost:3001";
+  var socket = socketClient(SERVER, 
+    // { transports: ["websockets"] }
+    );
   // const [msg, setMsg] = useState();
   const userStore = useSelector((store) => store.userStore);
   const [allChannels, setAllChannels] = useState([]);

@@ -25,10 +25,29 @@ if (firebase.messaging.isSupported()) {
         const title = payload.data.title;
         const options = {
             body: payload.data.body,
+            data: {
+                url: payload.data.url
+            },
+            actions: [{
+                action: "open_url",
+                title: "Open covhelp"
+            }]
             // icon: payload.notification.icon
         }
         return self.registration.showNotification(title, options);
     });
+
+    self.addEventListener('notificationclick', function (event) {
+
+        switch (event.action) {
+            case 'open_url':
+                clients.openWindow(event.notification.data.url); //which we got from above
+                break;
+            case 'any_other_action':
+                clients.openWindow("https://www.example.com");
+                break;
+        }
+    }, false);
 } else {
     console.log('back notifications not supported')
 }
