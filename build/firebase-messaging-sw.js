@@ -16,29 +16,32 @@ var app = firebase.initializeApp(firebaseConfig);
 
 let messaging = null;
 if (firebase.messaging.isSupported()) {
-    messaging = firebase.messaging()
+    try {
+        messaging = firebase.messaging()
 
-    messaging.onBackgroundMessage(function (payload) {
-        console.log(payload);
-        // console.log('[firebase-messaging-sw.js] Received background message ', payload);
-        // Customize notification here
-        const title = payload.data.title;
-        const options = {
-            body: payload.data.body,
-            data: {
-                url: payload.data.url
-            },
-            actions: [{
-                action: "open_url",
-                title: "Open covhelp"
-            }]
-            // icon: payload.notification.icon
-        }
-        return self.registration.showNotification(title, options);
-    });
+        messaging.onBackgroundMessage(function (payload) {
+            console.log(payload);
+            // console.log('[firebase-messaging-sw.js] Received background message ', payload);
+            // Customize notification here
+            const title = payload.data.title;
+            const options = {
+                body: payload.data.body,
+                data: {
+                    url: payload.data.url
+                },
+                actions: [{
+                    action: "open_url",
+                    title: "Open covhelp"
+                }]
+                // icon: payload.notification.icon
+            }
+            return self.registration.showNotification(title, options);
+        });
 
+    } catch (e) {}
     self.addEventListener('notificationclick', function (event) {
 
+        try{
         switch (event.action) {
             case 'open_url':
                 clients.openWindow(event.notification.data.url); //which we got from above
@@ -47,6 +50,7 @@ if (firebase.messaging.isSupported()) {
                 clients.openWindow("https://www.example.com");
                 break;
         }
+    }catch(e){}
     }, false);
 } else {
     console.log('back notifications not supported')

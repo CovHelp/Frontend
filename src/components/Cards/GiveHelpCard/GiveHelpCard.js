@@ -211,7 +211,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
                 {/*  <MenuItem icon={<FiEdit fontSize="20px" />}>
                     Edit Post
             </MenuItem> */}
-                {post.user.id === userStore.user.id && (
+                {userStore.token && userStore.token.token && post.user.id === userStore.user.id && (
                   <MenuItem
                     onClick={handleCloseProvidePost}
                     icon={<CgCloseR fontSize="20px" />}
