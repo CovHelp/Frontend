@@ -7,6 +7,13 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 const initialState = {
+    navState: {
+        getHelp: true,
+        provideHelp: false,
+        oganization: false,
+        chat: false,
+        profile: false,
+    },
     userStore: {
         user: {
             id: null,
@@ -40,48 +47,52 @@ const reducer = (state, {
                 ...state,
                 userStore: payload
             }
-            break;
 
         case 'SAVE_USER_NEED_HELP_POSTS':
             return {
                 ...state,
                 userNeedHelpPostStore: payload
             }
-            break;
+
         case 'SAVE_USER_PROVIDE_HELP_POSTS':
             return {
                 ...state,
                 userProvideHelpPostStore: payload
             }
-            break;
+
 
         case 'SAVE_NEED_HELP_POSTS':
             return {
                 ...state,
                 needHelpPostStore: payload
             }
-            break;
+            // break;
 
         case 'SAVE_NEED_HELP_POSTS_FILTERED':
             return {
                 ...state,
                 needHelpPostStoreFiltered: payload
             }
-            break;
+            // break;
 
         case 'SAVE_PROVIDE_HELP_POSTS':
             return {
                 ...state,
                 provideHelpPostStore: payload
             }
-            break;
+            // break;
 
         case 'SAVE_PROVIDE_HELP_POSTS_FILTERED':
             return {
                 ...state,
                 provideHelpPostStoreFiltered: payload
             }
-            break;
+            // break;
+        case "UPDATE_NAV":
+            return {
+                ...state,
+                navState: payload 
+            }
 
         default:
             return {
@@ -102,5 +113,6 @@ const store = createStore(persistedReducer, initialState,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+// eslint-disable-next-line
 const persistedStore = persistStore(store);
 export default store

@@ -8,6 +8,7 @@ import NeedHelpCard from "../../components/Cards/NeedHelpCard/NeedHelpCard";
 
 const PostDetails = () => {
   const [postType, setPostType] = useState(null);
+  // eslint-disable-next-line
   const [postID, setPostID] = useState(null);
   const [needHelpPost, setNeedHelpPost] = useState(null);
   const [provideHelpPost, setProvideHelpPost] = useState(null);
@@ -19,13 +20,15 @@ const PostDetails = () => {
       var postType = window.location.href.split("detail/")[1];
       var postId = postType.split("/")[1];
       postType = postType.split("/")[0];
-      setPostID(postId);
-      setPostType(postType);
-      if (postType == 0) fetchNeedHelpPost(postId);
-      else if (postType == 1) fetchProvideHelpPost(postId);
+      setPostID(parseInt(postId));
+      setPostType(parseInt(postType));
+      
+      if (parseInt(postType) === 0) fetchNeedHelpPost(postId);
+      else if (parseInt(postType) === 1) fetchProvideHelpPost(postId);
     } catch (e) {
       history.push("/404");
     }
+    // eslint-disable-next-line
   },[]);
 
   const fetchNeedHelpPost = async (id) => {
@@ -58,12 +61,14 @@ const PostDetails = () => {
         flexDir={"column"}
         alignItems={"center"}
         background="#f0f2f5"
-      >
-        {isLoaded === true && postType == 0 ? (
-         needHelpPost != null && <NeedHelpCard post={needHelpPost} showComments={true} />
+      > 
+      
+     
+        {isLoaded === true && postType === 0 ? (
+         needHelpPost != null && <NeedHelpCard key="needHelp" post={needHelpPost} showComments={true} />
         ) : (
             provideHelpPost != null &&
-          <GiveHelpCard post={provideHelpPost} showComments={true} />
+          <GiveHelpCard key="giveHelp" post={provideHelpPost} showComments={true} />
         )}
       </Box>
     </>

@@ -4,8 +4,8 @@ import React from "react";
 
 const OrganizationCard = ({ firstName, lastName, picture }) => {
   return (
-    <Box w={"auto"} borderRadius="xl">
-      <Flex p={["4", "8"]} bgColor="white" borderRadius="xl">
+    <Box w={"auto"} borderRadius="xl" h={"400px"}>
+      <Flex p={["4", "8"]} bgColor="white" borderRadius="xl" >
         <Flex flexDir="column" _dark=" true" w="100%">
           <Heading as="h6" size="sm">
             First Name &bull; Last Name
@@ -14,7 +14,7 @@ const OrganizationCard = ({ firstName, lastName, picture }) => {
       </Flex>
       {/* {post.picture !== "" && ( */}
       <Image
-        src={"https://apis.covhelp.online/v1/posts/file/13ba811d-05a5-4e79-bf77-38e0e1a704da"}
+        src={"https://i.picsum.photos/id/261/1280/720.jpg?hmac=R_OI-94N7zbLGI6atqtYv-po-xnEbtv0Zk0hNgDzWoY"}
         objectFit="cover"
         color="gray.600"
         ml="auto"

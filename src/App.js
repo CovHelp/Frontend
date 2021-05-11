@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
@@ -14,19 +14,49 @@ import NotFound from "./pages/NotFound/NotFound";
 import PostDetails from "./pages/PostDetails/PostDetails";
 import Profile from "./components/profile/Profile";
 import ProfileSetting from "./components/profile/ProfileSetting";
-import InfoBar from './components/InfoBar'
+import InfoBar from "./components/InfoBar";
 import { Chat } from "./components/chat/chat";
-
-
-
+import AboutUs from "./pages/About/AboutUs";
+import firebase from "firebase";
+import covfire from "./covFire";
+import { useSelector } from "react-redux";
+import { updateDeviceToken } from "./api/user";
 
 const App = () => {
-  
+  var messaging = null;
+  const userStore = useSelector((store) => store.userStore);
+
+  // console.log(userStore);
+
+  useEffect(() => {
+    try {
+      if (firebase.messaging.isSupported()) {
+        messaging = firebase.messaging();
+        
+        try{
+        messaging.getToken().then(async (v) => {
+          if (userStore.token && userStore.token.token) {
+            // console.log("User is logged in, updating device token");
+            try {
+              await updateDeviceToken({
+                deviceToken: v,
+                authToken: userStore.token.token,
+              });
+            } catch (e) {}
+          }
+        }).catch(e=>{});
+        messaging.onMessage(async (event) => {
+          // console.log(event);
+        }).catch(e=>{});
+      }catch(e){}
+      }
+    } catch (e) {}
+  }, [userStore]);
 
   const [isSidebarVisibile, setSidebarVisible] = useState(false);
   const handleSidebarEvent = (visibility) => {
     setSidebarVisible(visibility);
-  }
+  };
   return (
     <div className="App">
       <div className="main-wrapper">
@@ -72,13 +102,15 @@ const App = () => {
             <Route path="/chat">
               <Chat />
             </Route>
-            <Route path='*' exact={true} component={NotFound} />
+            <Route path="/about">
+              <AboutUs />
+            </Route>
+            <Route path="*" exact={true} component={NotFound} />
           </Switch>
 
           <InfoBar />
         </div>
         <BottomNav />
-
       </div>
     </div>
   );

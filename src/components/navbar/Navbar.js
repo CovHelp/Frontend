@@ -1,34 +1,177 @@
 import { Button } from "@chakra-ui/button";
 import { Flex, Grid } from "@chakra-ui/layout";
-import { Text, useColorMode } from "@chakra-ui/react";
+// import { Text, useColorMode } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import GoogleLogin from "react-google-login";
 import {
+  AiOutlineInfoCircle,
+  BiChat,
   FaHandHoldingHeart,
   FaHandsHelping,
   GiHamburgerMenu,
   ImCross,
-  VscOrganization,
+  IoLogOutOutline,
   VscAccount,
-  BiChat,
+  VscOrganization,
 } from "react-icons/all";
-
-import { Link } from "react-router-dom";
-import GoogleLogin from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
-
-import Logo from "../../assets/images/logo192.png";
-import "./index.css";
+import { Link, useLocation } from "react-router-dom";
 import { register } from "../../api/user";
-
+import Logo from "../../assets/images/logo192.png";
 import "./index.css";
 
 const Navbar = ({ sideBarEvent }) => {
-  // const { colorMode, toggleColorMode } = useColorMode();
   const dispatch = useDispatch();
   const userStore = useSelector((store) => store.userStore);
-  const [selectedMenu, setSelectedMenu] = useState();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const navState = useSelector((store) => store.navState);
   const [isSidenavVIsible, setSideNavVisibility] = useState(false);
+  const location = useLocation();
+
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const initNavStateHandler = async () => {
+    await sleep(500);
+    if (location.pathname === "/") {
+      let navState = {
+        getHelp: true,
+        provideHelp: false,
+        oganization: false,
+        chat: false,
+        profile: false,
+      };
+
+      dispatch({
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/provide-help") {
+      let navState = {
+        getHelp: false,
+        provideHelp: true,
+        oganization: false,
+        chat: false,
+        profile: false,
+      };
+
+      dispatch({
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/organization") {
+      let navState = {
+        getHelp: false,
+        provideHelp: false,
+        oganization: true,
+        chat: false,
+        profile: false,
+      };
+
+      dispatch({
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/chat") {
+      let navState = {
+        getHelp: false,
+        provideHelp: false,
+        oganization: false,
+        chat: true,
+        profile: false,
+      };
+
+      dispatch({
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/profile") {
+      let navState = {
+        getHelp: false,
+        provideHelp: false,
+        oganization: false,
+        chat: false,
+        profile: true,
+      };
+
+      dispatch({
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      let navState = {
+        getHelp: true,
+        provideHelp: false,
+        oganization: false,
+        chat: false,
+        profile: false,
+      };
+
+      dispatch({
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/provide-help") {
+      let navState = {
+        getHelp: false,
+        provideHelp: true,
+        oganization: false,
+        chat: false,
+        profile: false,
+      };
+
+      dispatch({
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/organization") {
+      let navState = {
+        getHelp: false,
+        provideHelp: false,
+        oganization: true,
+        chat: false,
+        profile: false,
+      };
+
+      dispatch({
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/chat") {
+      let navState = {
+        getHelp: false,
+        provideHelp: false,
+        oganization: false,
+        chat: true,
+        profile: false,
+      };
+
+      dispatch({
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    } else if (location.pathname === "/profile") {
+      let navState = {
+        getHelp: false,
+        provideHelp: false,
+        oganization: false,
+        chat: false,
+        profile: true,
+      };
+
+      dispatch({
+        type: "UPDATE_NAV",
+        payload: navState,
+      });
+    }
+    // eslint-disable-next-line
+  }, [location]);
+
+  useEffect(() => {
+    initNavStateHandler();
+  }, []);
 
   const handleToggleSidebar = () => {
     setSideNavVisibility((v) => !v);
@@ -36,6 +179,7 @@ const Navbar = ({ sideBarEvent }) => {
 
   useEffect(() => {
     sideBarEvent(isSidenavVIsible);
+    // eslint-disable-next-line
   }, [isSidenavVIsible, setSideNavVisibility]);
 
   const handleLogin = async (res) => {
@@ -56,7 +200,7 @@ const Navbar = ({ sideBarEvent }) => {
               email: null,
               firstName: null,
               lastName: null,
-              email: null,
+              // email: null,
               profile_pic: null,
             },
             token: null,
@@ -64,7 +208,6 @@ const Navbar = ({ sideBarEvent }) => {
         },
       });
       // window.location.reload()
-
     } catch (e) {}
   };
 
@@ -72,69 +215,77 @@ const Navbar = ({ sideBarEvent }) => {
     console.log(err);
   };
 
-  const NavItem = ({
-    Icon,
-    index,
-    activeIndex,
-    handleIndexCallback,
-    to,
-    text,
-  }) => {
+  const NavItem = ({ Icon, activeIndex, to, text }) => {
     return (
-      <Link
-        className={index === activeIndex ? "activeButton" : "btn"}
-        to={to}
-        onClick={() => handleIndexCallback(index)}
-      >
-        <Icon color={activeIndex === index ? "#0078ff" : "#4f5662"} size={24} />
-        {activeIndex === index && <p>{text}</p>}
-        {activeIndex === index && <div className="activeIndicator" />}
+      <Link className={activeIndex ? "activeButton" : "btn"} to={to}>
+        <Icon color={activeIndex ? "#0078ff" : "#4f5662"} size={24} />
+        {activeIndex && <p>{text}</p>}
+        {activeIndex && <div className="activeIndicator" />}
       </Link>
     );
   };
 
   const authedLinks = [
-    { icon: FaHandsHelping, index: 0, to: "/", text: "Get help" },
+    {
+      icon: FaHandsHelping,
+      index: 0,
+      to: "/",
+      text: "Get help",
+      activeValue: navState.getHelp,
+    },
     {
       icon: FaHandHoldingHeart,
       index: 1,
       to: "/provide-help",
       text: "Give help",
+      activeValue: navState.provideHelp,
     },
     {
       icon: VscOrganization,
       index: 2,
       to: "/organization",
       text: "Organizations",
+      activeValue: navState.oganization,
     },
-    { icon: BiChat, index: 3, to: "/chat", text: "Chat" },
+    {
+      icon: BiChat,
+      index: 3,
+      to: "/chat",
+      text: "Chat",
+      activeValue: navState.chat,
+    },
     {
       icon: VscAccount,
       index: 4,
       to: "/profile",
       text: "Profile",
+      activeValue: navState.profile,
     },
   ];
 
   const unAuthedLinks = [
-    { icon: FaHandsHelping, index: 0, to: "/", text: "Get help" },
+    {
+      icon: FaHandsHelping,
+      index: 0,
+      to: "/",
+      text: "Get help",
+      activeValue: navState.getHelp,
+    },
     {
       icon: FaHandHoldingHeart,
       index: 1,
       to: "/provide-help",
       text: "Give help",
+      activeValue: navState.provideHelp,
     },
     {
       icon: VscOrganization,
       index: 2,
       to: "/organization",
       text: "Organizations",
+      activeValue: navState.organization,
     },
   ];
-
-  const handleNavIndex = (index) => {
-    setActiveIndex(index);
-  };
 
   return (
     <div className="navwrapper">
@@ -155,36 +306,32 @@ const Navbar = ({ sideBarEvent }) => {
           <Flex h="100%" flex={["1", "2", "2"]} w="100%" maxW="680px">
             {!userStore.token ? (
               <Grid w="100%" templateColumns="repeat(3, 1fr)">
-                {unAuthedLinks.map((item, index) => (
+                {unAuthedLinks.map((item) => (
                   <NavItem
-                    key={index}
+                    key={item.index}
                     to={item.to}
                     text={item.text}
                     Icon={item.icon}
-                    index={item.index}
-                    activeIndex={activeIndex}
-                    handleIndexCallback={handleNavIndex}
+                    activeIndex={item.activeValue}
                   />
                 ))}
               </Grid>
             ) : (
               <Grid w="100%" templateColumns="repeat(5, 1fr)">
-                {authedLinks.map((item, index) => (
+                {authedLinks.map((item) => (
                   <NavItem
-                    key={index}
+                    key={item.index}
                     to={item.to}
                     text={item.text}
                     Icon={item.icon}
-                    index={item.index}
-                    activeIndex={activeIndex}
-                    handleIndexCallback={handleNavIndex}
+                    activeIndex={item.activeValue}
                   />
                 ))}
               </Grid>
             )}
           </Flex>
 
-          <Flex flex="1" flexDir="row-reverse">
+          <Flex alignItems="center" flex="1" flexDir="row-reverse">
             {!userStore.token && (
               <>
                 <GoogleLogin
@@ -208,10 +355,24 @@ const Navbar = ({ sideBarEvent }) => {
               </>
             )}
             {userStore.token && (
-              <Button onClick={handleLogout} m={2}>
+              <Button
+                leftIcon={<IoLogOutOutline size="28px" />}
+                onClick={handleLogout}
+                m={["5", "2"]}
+              >
                 Logout
               </Button>
             )}
+            <Link to="/about">
+              <Button
+                leftIcon={<AiOutlineInfoCircle size="25px" />}
+                m={["5", "2"]}
+                bg="whatsapp.500"
+                color="white"
+              >
+                About us
+              </Button>
+            </Link>
           </Flex>
         </Flex>
       </div>
@@ -235,8 +396,15 @@ const Navbar = ({ sideBarEvent }) => {
             />
           </div>
           <div className="navmobile-col-right">
+            <Link to="/about">
+              <Button mr={1} bg="whatsapp.500" color="white" w={"50px"}>
+                <AiOutlineInfoCircle size="20px" />
+              </Button>
+            </Link>
             {userStore.token ? (
-              <Button onClick={handleLogout}>LOGOUT</Button>
+              <Button onClick={handleLogout} w={"50px"}>
+                <IoLogOutOutline size="25px" />
+              </Button>
             ) : (
               <GoogleLogin
                 clientId="1027672846288-1cplsl3m6pl2p3ngjn1k1msqr07s4at7.apps.googleusercontent.com"

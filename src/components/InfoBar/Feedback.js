@@ -1,14 +1,15 @@
 import { Button } from "@chakra-ui/button";
-import { Input } from "@chakra-ui/input";
+// import { Input } from "@chakra-ui/input";
 import { Textarea } from "@chakra-ui/textarea";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 
 export default function Feedback() {
   const [loading, setLoading] = useState(false);
   const [inputVal, setInputVal] = useState("");
   const [isActive, setIsActive] = useState(false);
+  // eslint-disable-next-line
   const [isMessageSent, setIsMessageSent] = useState(true);
 
   const handleSubmit = async () => {
@@ -16,6 +17,7 @@ export default function Feedback() {
     try {
       await axios.post(
         "https://discord.com/api/webhooks/840677384897429514/riVatO5tVC2v-c1bEQXnF249qh7GJoZ4BcpNf6p2XUcGgVNwVB-0BnadOmN0omlMOVhY",
+        // eslint-disable-next-line
         { content: "```Message: " + inputVal.trim() + "\n" + "Time: " + new Date().toISOString() + "```" }
       );
       setLoading(false);

@@ -1,5 +1,5 @@
 
-import React,{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Box } from "@chakra-ui/layout";
 import GiveHelpCard from "../../components/Cards/GiveHelpCard/GiveHelpCard";
@@ -20,33 +20,33 @@ const GiveHelp = () => {
       dispatch({ type: "SAVE_PROVIDE_HELP_POSTS_FILTERED", payload: res });
 
       setPosts(res);
-    } catch (e) {}
+    } catch (e) { }
   };
 
-  useEffect(() => {}, [posts]);
+  useEffect(() => { }, [posts]);
 
   useEffect(() => {
     loadProvideHelpPosts();
+    // eslint-disable-next-line
   }, []);
 
   return (
     <>
-
-    <Box
-    w="100%"
-      px={3}
-      d="flex"
-      flexDir={"column"}
-      alignItems={"center"}
-      background="#f0f2f5"
-    >
-      <SearchBar name = "Provide Help"/>
-      {provideHelpPostStoreFiltered.length > 0 &&
+      <Box
+        w="100%"
+        px={3}
+        d="flex"
+        flexDir={"column"}
+        alignItems={"center"}
+        background="#f0f2f5"
+      >
+        <SearchBar name = "Provide Help"/>
+        {provideHelpPostStoreFiltered.length > 0 &&
           provideHelpPostStoreFiltered.map((post, index) => (
             <GiveHelpCard key={index} post={post} />
           ))}
-      
-    </Box>
+
+      </Box>
     </>
   );
 };

@@ -1,10 +1,10 @@
-import { Avatar, Box, Button, Stack, Text } from "@chakra-ui/react";
+import { Avatar, Box, Stack, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { BiEdit } from "react-icons/all";
+// import { BiEdit } from "react-icons/all";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import {
-  getNeedHelpPosts,
+  // getNeedHelpPosts,
   getNeedHelpPostsByUser,
   getProvideHelpPostsByUser,
 } from "../../api/post";
@@ -48,6 +48,7 @@ const Profile = () => {
   useEffect(() => {
     loadNeedHelpPosts();
     loadProvideHelpPosts();
+     // eslint-disable-next-line
   }, []);
 
   const handleNeedHelp = () => {

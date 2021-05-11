@@ -9,12 +9,14 @@ import socketClient from "socket.io-client";
 import { fetchAllChannels } from "../../api/channel";
 import { useSelector } from "react-redux";
 import { Divider } from "@chakra-ui/layout";
-import { createBatcher } from "framer-motion";
+// import { createBatcher } from "framer-motion";
 
 export const Chat = () => {
   const SERVER = "https://apis.covhelp.online";
-  var socket = socketClient(SERVER, { transports: ["polling"] });
-  const [msg, setMsg] = useState();
+  var socket = socketClient(SERVER, 
+    // { transports: ["websockets"] }
+    );
+  // const [msg, setMsg] = useState();
   const userStore = useSelector((store) => store.userStore);
   const [allChannels, setAllChannels] = useState([]);
   const [joinedChannel, setJoinedChannel] = useState(0);
@@ -35,11 +37,13 @@ export const Chat = () => {
   };
   useEffect(() => {
     handleFetchAllChannels();
+     // eslint-disable-next-line
   }, [userStore]);
 
   useEffect(() => {
     socket.close();
     socket.open();
+     // eslint-disable-next-line
   }, [joinedChannel]);
 
   useEffect(() => {
@@ -71,14 +75,14 @@ export const Chat = () => {
   }, [messages]);
 
   const handleJoinChannel = (channelID) => {
-    if (joinedChannel != 0) {
+    if (joinedChannel !== 0) {
       socket.emit("channel-leave", joinedChannel);
     }
     socket.emit("channel-join", channelID, (v) => console.log(v));
     setJoinedChannel(channelID);
   };
   const handleSend = () => {
-    if (inputRef.current.value.length != 0) {
+    if (inputRef.current.value.length !== 0) {
       if (userStore.token && userStore.token.token) {
         socket.emit(
           "send-message",
@@ -113,7 +117,7 @@ export const Chat = () => {
               <div key={index} onClick={() => handleJoinChannel(channel.id)}>
                 {channel.user1.email === userStore.user.email ? (
                   <div className="recent-chat-item">
-                    <img src={channel.user2.profile_pic} />
+                    <img src={channel.user2.profile_pic} alt="userpic2" />
                     <div>
                       <h5>{channel.user2.firstName}</h5>
                       <span className="date-field">
@@ -133,7 +137,7 @@ export const Chat = () => {
                   </div>
                 ) : (
                   <div className="recent-chat-item">
-                    <img src={channel.user1.profile_pic} />
+                    <img src={channel.user1.profile_pic} alt="userpic1" />
                     <div>
                       <h5>{channel.user1.firstName}</h5>
                       <span className="date-field">
@@ -157,7 +161,7 @@ export const Chat = () => {
               </div>
             ))}
         </div>
-        {joinedChannel != 0 ? (
+        {joinedChannel !== 0 ? (
           <div className="chat-container">
             <div className="chat-list" ref={msgList}>
               {messages.length > 0 &&
@@ -167,10 +171,10 @@ export const Chat = () => {
                     date={new Date(msg.createdAt)}
                     position={
                       typeof msg.sender === "object"
-                        ? msg.sender.id == userStore.user.id
+                        ? msg.sender.id === userStore.user.id
                           ? "right"
                           : "left"
-                        : msg.sender == userStore.user.id
+                        : msg.sender === userStore.user.id
                         ? "right"
                         : "left"
                     }

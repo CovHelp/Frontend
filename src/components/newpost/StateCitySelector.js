@@ -58,7 +58,7 @@ export default function StateCitySelctor({onSelected, parent="default"}) {
     <>
       <FormLabel>Select State</FormLabel>
 
-      <Select value={selectedState == 'None' ? "Select State first" : stateState} border={'2px'} my="10px" placeholder={selectedState === 'None' ? "Select State first" : ''} onChange={handleSetSelectedState}>
+      <Select value={selectedState === 'None' ? "Select State first" : stateState} border={'2px'} my="10px" placeholder={selectedState === 'None' ? "Select State first" : ''} onChange={handleSetSelectedState}>
         {allStates.length > 0 &&
           allStates.map((v, index) => (
             <option key={index} value={v.name}>
@@ -70,7 +70,7 @@ export default function StateCitySelctor({onSelected, parent="default"}) {
 
       <FormLabel>Select City</FormLabel>
 
-      <Select value={selectedState == 'None' ? "Select State first" : cityState} border={'2px'} disabled={selectedState === 'None' ? true : false} placeholder={selectedState === 'None' ? "Select State first" : ''} onChange={handleSetSelectedCity}>
+      <Select value={selectedState === 'None' ? "Select State first" : cityState} border={'2px'} disabled={selectedState === 'None' ? true : false} placeholder={selectedState === 'None' ? "Select State first" : ''} onChange={handleSetSelectedCity}>
         <option>Select a city</option>
         {allCities.length > 0 &&
           allCities.map((v, index) => (

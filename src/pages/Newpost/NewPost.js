@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Checkbox,
+
   Flex,
   FormControl,
   FormLabel,
@@ -12,7 +13,6 @@ import {
   Select,
   Stack,
   Text,
-  Textarea,
   useColorModeValue
 } from "@chakra-ui/react";
 import {
@@ -24,6 +24,7 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { BsCloudUpload, ImCross } from "react-icons/all";
 import { useSelector } from "react-redux";
+import { DefaultEditor } from 'react-simple-wysiwyg';
 import { createNeedHelpPost, createProvideHelpPost, uploadImage } from "../../api/post";
 import {
   BoilerPlateForGiveHelp,
@@ -32,12 +33,12 @@ import {
 import StateCitySelctor from "../../components/newpost/StateCitySelector";
 
 const NewPost = (props) => {
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState("");
 
   const [shareNumber, setshareNumber] = useState(true);
   const [urgencySliderValue, setUrgencySliderValue] = useState(1);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [locationSliderValue, setLocationSliderValue] = useState(1);
+  // const [locationSliderValue, setLocationSliderValue] = useState(1);
   const [loader, setLoader] = useState(false);
   const [body, setBody] = useState("");
   const [city, setCity] = useState(null);
@@ -102,14 +103,14 @@ const NewPost = (props) => {
 
   const handleImageUpload = async () => {
     setUploadLoader(true)
-    console.log(selectedFile);
-    try{
-    const fileId = await uploadImage({ file: selectedFile, token: userStore.token.token});
-    setUploadedImageId(fileId);
-    setUploadLoader(false)
+    // console.log(selectedFile);
+    try {
+      const fileId = await uploadImage({ file: selectedFile, token: userStore.token.token });
+      setUploadedImageId(fileId);
+      setUploadLoader(false)
     } catch (e) {
       setUploadLoader(false)
-      console.log(e);
+      // console.log(e);
     }
   };
 
@@ -118,19 +119,19 @@ const NewPost = (props) => {
 
   const [categoryError, setcategoryError] = useState('')
   const [categoryEditing, setcategoryEditing] = useState('')
-
+  // eslint-disable-next-line
   const [stateError, setstateError] = useState('')
-  const [stateEditing, setstateEditing] = useState('')
-
+  // const [stateEditing, setstateEditing] = useState('')
+  // eslint-disable-next-line
   const [cityError, setCityError] = useState('')
-  const [cityEditing, setCityEditing] = useState('')
+  // const [cityEditing, setCityEditing] = useState('')
 
 
-  const [tokenError, settokenError] = useState('')
+  // const [tokenError, settokenError] = useState('')
 
   const handleCreatePost = async () => {
     //  setLoader(!loader);
-    if (city == null || state === null) return
+    if (city === null || state === null) return
     setLoader(true);
     if (props.typeOfPost === "Request Help") {
       try {
@@ -152,7 +153,7 @@ const NewPost = (props) => {
       catch (e) {
         setLoader(false);
 
-        try{
+        try {
           e.forEach(error => {
             if (error.msg.includes('City')) {
               setCityError(true)
@@ -167,8 +168,8 @@ const NewPost = (props) => {
               setbodyError(true)
             }
           })
-        } catch(e) {
-          console.log(e)
+        } catch (e) {
+          // console.log(e)
         }
 
       } setLoader(false);
@@ -214,11 +215,10 @@ const NewPost = (props) => {
   };
 
 
-  useEffect(() => {
-    console.log(categoryEditing);
-    console.log("THE", categoryError);
-  })
-
+  // useEffect(() => {
+  //   // console.log(categoryEditing);
+  //   // console.log("THE", categoryError);
+  // })
 
   return (
     <Flex minH={"50vh"} align={"center"} justifyContent={"center"}>
@@ -232,10 +232,11 @@ const NewPost = (props) => {
               <FormLabel>Select Category </FormLabel>
 
               <Select
-                placeholder="Select Category"
                 border={"2px"}
+                placeholder={category === "" ? "Select Cateogry" : ''}
                 onChange={(e) => handleCategoryChange(e)}
               >
+
                 <option value="1">Oxygen</option>
                 <option value="2">Ambulance</option>
                 <option value="3">Medicine</option>
@@ -249,9 +250,9 @@ const NewPost = (props) => {
               isInvalid={bodyEditing && bodyError}
               onFocus={() => setbodyEditing(true)}>
               <FormLabel>Enter Details</FormLabel>
-              <Textarea
-                border={"2px"}
-                height="auto"
+              <DefaultEditor
+                minH="150px"
+                h="auto"
                 value={body}
                 onChange={(e) => handleSetBody(e)}
               />

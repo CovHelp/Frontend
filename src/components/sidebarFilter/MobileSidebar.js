@@ -69,20 +69,22 @@ export default function MobileSidebar({ isVisible }) {
     ) {
       setProvideHelpPosts(provideHelpPostStore);
     } else {
+       // eslint-disable-next-line
       var l = provideHelpPostStore.filter((post) => {
-        if(post.category == oxygenFilter){
+        if(post.category === oxygenFilter){
           localFilteredList = [...localFilteredList, post]
-        }else if(post.category == ambulanceFilter){
+        }else if(post.category === ambulanceFilter){
           localFilteredList = [...localFilteredList, post]
-        }else if(post.category == medicineFilter){
+        }else if(post.category === medicineFilter){
           localFilteredList = [...localFilteredList, post]
-        }else if(post.category == hospitalbedsFilter){
+        }else if(post.category === hospitalbedsFilter){
           localFilteredList = [...localFilteredList, post]
-        }else if(post.category == plasmaFilter){
+        }else if(post.category === plasmaFilter){
           localFilteredList = [...localFilteredList, post]
-        }else if(post.category == foodFilter){
+        }else if(post.category === foodFilter){
           localFilteredList = [...localFilteredList, post]
         }
+        return null;
       })
       // console.log("teh value of posts are ", localFilteredList);
       setProvideHelpPosts(localFilteredList);
@@ -111,20 +113,22 @@ export default function MobileSidebar({ isVisible }) {
     ) {
       setNeedHelpPosts(needHelpPostStore);
     } else {
+       // eslint-disable-next-line
       var l = needHelpPostStore.filter((post) => {
-        if(post.category == oxygenFilter){
+        if(post.category === oxygenFilter){
           localFilteredList = [...localFilteredList, post]
-        }else if(post.category == ambulanceFilter){
+        }else if(post.category === ambulanceFilter){
           localFilteredList = [...localFilteredList, post]
-        }else if(post.category == medicineFilter){
+        }else if(post.category === medicineFilter){
           localFilteredList = [...localFilteredList, post]
-        }else if(post.category == hospitalbedsFilter){
+        }else if(post.category === hospitalbedsFilter){
           localFilteredList = [...localFilteredList, post]
-        }else if(post.category == plasmaFilter){
+        }else if(post.category === plasmaFilter){
           localFilteredList = [...localFilteredList, post]
-        }else if(post.category == foodFilter){
+        }else if(post.category === foodFilter){
           localFilteredList = [...localFilteredList, post]
         }
+        return null;
       })
       setNeedHelpPosts(localFilteredList);
     }
@@ -138,6 +142,7 @@ export default function MobileSidebar({ isVisible }) {
     }else if(window.location.href.split("/").length === 4){
       handleNeedHelpFilter()
     }
+    // eslint-disable-next-line
   }, [
     oxygen,
     ambulance,
@@ -153,6 +158,7 @@ export default function MobileSidebar({ isVisible }) {
         type: "SAVE_NEED_HELP_POSTS_FILTERED",
         payload: needHelpPosts,
       });
+      // eslint-disable-next-line
   }, [needHelpPosts]);
 
   useEffect(() => {
@@ -161,6 +167,7 @@ export default function MobileSidebar({ isVisible }) {
         type: "SAVE_PROVIDE_HELP_POSTS_FILTERED",
         payload: provideHelpPosts,
       });
+      // eslint-disable-next-line
   }, [provideHelpPosts]);
 
   
@@ -172,6 +179,7 @@ export default function MobileSidebar({ isVisible }) {
     setHospitalbeds(false);
     setPlasma(false);
     setFood(false);
+    // eslint-disable-next-line
   }, [location]);
 
   const handleLocationSelect = (city, state) => {
@@ -180,30 +188,34 @@ export default function MobileSidebar({ isVisible }) {
     setFilterInitated(true);
     // console.log("teh value of posts are ", localFilteredList);
     if(window.location.href.includes('provide-help')){
+      // eslint-disable-next-line
       var l = provideHelpPostStore.filter((post) => {
         for(let i = 0; i < post.locations.length; ++i){
-          if(post.locations[i].state == state.name){
-            if(post.locations[i].city == city.name){
+          if(post.locations[i].state === state.name){
+            if(post.locations[i].city === city.name){
               localFilteredList = [...localFilteredList, post]
             }
           }
         }
+        return null;
       })
       setProvideHelpPosts(localFilteredList);
     }else if(window.location.href.split("/").length === 4){
+      // eslint-disable-next-line
       var l = needHelpPostStore.filter((post) => {
-        if(post.location.state == state.name){
-          if(post.location.city == city.name){
+        if(post.location.state === state.name){
+          if(post.location.city === city.name){
             localFilteredList = [...localFilteredList, post]
           }
         }
+        return null;
       })
       setNeedHelpPosts(localFilteredList);
     }
   }
 
   return (
-    <div ref={mobileSidebarRef} class="sidenav-mobile">
+    <div ref={mobileSidebarRef} className="sidenav-mobile">
       <Stack
         borderRadius="5px"
         boxShadow="lg"
