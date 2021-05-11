@@ -20,8 +20,8 @@ const PostDetails = () => {
       var postType = window.location.href.split("detail/")[1];
       var postId = postType.split("/")[1];
       postType = postType.split("/")[0];
-      setPostID(postId);
-      setPostType(postType);
+      setPostID(parseInt(postId));
+      setPostType(parseInt(postType));
       
       if (parseInt(postType) === 0) fetchNeedHelpPost(postId);
       else if (parseInt(postType) === 1) fetchProvideHelpPost(postId);
