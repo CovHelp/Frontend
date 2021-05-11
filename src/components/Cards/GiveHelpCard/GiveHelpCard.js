@@ -200,15 +200,15 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
                   variant="outline"
                 />
                 <MenuList>
-                  <MenuItem icon={<FiEdit fontSize="20px" />}>
+                 {/*  <MenuItem icon={<FiEdit fontSize="20px" />}>
                     Edit Post
-            </MenuItem>
+            </MenuItem> */}
                   <MenuItem icon={<CgCloseR fontSize="20px" />}>
                   I can no longer <br/>provide this
             </MenuItem>
-                  <MenuItem icon={<GoReport fontSize="20px" />}>
+                  {/* <MenuItem icon={<GoReport fontSize="20px" />}>
                     Report Spam!
-            </MenuItem>
+            </MenuItem> */}
                   <MenuItem icon={<RiShareForwardLine fontSize="20px" />}>
                     Share
             </MenuItem>
@@ -236,9 +236,6 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
         bgColor="white"
       >
         <Box d="flex" alignItems="baseline">
-          <Badge borderRadius="full" px="2" colorScheme={"blue"}>
-            Urgency Level: 3
-          </Badge>
           <Box
             color="gray.500"
             fontWeight="semibold"

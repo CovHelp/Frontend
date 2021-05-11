@@ -135,15 +135,15 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
                   variant="outline"
                 />
                 <MenuList>
-                  <MenuItem icon={<FiEdit fontSize="20px" />}>
+                  {/* <MenuItem icon={<FiEdit fontSize="20px" />}>
                     Edit Post
-            </MenuItem>
+            </MenuItem> */}
                   <MenuItem icon={<CgCloseR fontSize="20px" />}>
                   I've got the help
-            </MenuItem>
-                  <MenuItem icon={<GoReport fontSize="20px" />}>
+           </MenuItem>
+              {/*      <MenuItem icon={<GoReport fontSize="20px" />}>
                     Report Spam!
-            </MenuItem>
+            </MenuItem> */}
                   <MenuItem icon={<RiShareForwardLine fontSize="20px" />}>
                     Share
             </MenuItem>
