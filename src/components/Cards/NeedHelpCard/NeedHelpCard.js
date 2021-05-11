@@ -147,7 +147,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
                    <RWebShare
                   data={{
                     text: `${post.body}`,
-                    url: `https://covhelp.online/post-detail/1/${post.id}`,
+                    url: `https://covhelp.online/post-detail/0/${post.id}`,
                     title: `${post.user.firstname} Shared on ${post.category}`,
                   }}
                   // sites={{'facebook'}}
