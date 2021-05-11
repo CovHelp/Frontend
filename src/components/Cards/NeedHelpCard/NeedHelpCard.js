@@ -139,7 +139,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
                     Edit Post
             </MenuItem>
                   <MenuItem icon={<CgCloseR fontSize="20px" />}>
-                  I can no longer <br/>provide this
+                  I've got the help
             </MenuItem>
                   <MenuItem icon={<GoReport fontSize="20px" />}>
                     Report Spam!
