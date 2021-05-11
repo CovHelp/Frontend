@@ -51,6 +51,7 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
         token: userStore.token.token,
         postID: post.id,
       });
+      window.location.reload()
     } catch (e) {}
   };
 
