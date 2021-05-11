@@ -13,7 +13,7 @@ import {
   Select,
   Stack,
   Text,
-  Textarea,
+
   useColorModeValue
 } from "@chakra-ui/react";
 import {
@@ -251,7 +251,7 @@ const NewPost = (props) => {
               isInvalid={bodyEditing && bodyError}
               onFocus={() => setbodyEditing(true)}>
               <FormLabel>Enter Details</FormLabel>
-              <Textarea
+              <DefaultEditor
                 minH="150px"
                 h="auto"
                 value={body}

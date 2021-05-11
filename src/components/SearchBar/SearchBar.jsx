@@ -23,7 +23,7 @@ const SearchBar = (props) => {
   const CreatePostModal = ({ onClose }) => {
     return (
       <>
-        <ModalOverlay style={{ backdropFilter: "blur(15px)" }} />
+        <ModalOverlay style={{ backdropFilter: "blur(5px)" }} />
         <ModalContent>
           <ModalHeader fontWeight="bold" fontSize="3xl">
             {props.name}
