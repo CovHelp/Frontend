@@ -103,14 +103,14 @@ const NewPost = (props) => {
 
   const handleImageUpload = async () => {
     setUploadLoader(true)
-    console.log(selectedFile);
+    // console.log(selectedFile);
     try {
       const fileId = await uploadImage({ file: selectedFile, token: userStore.token.token });
       setUploadedImageId(fileId);
       setUploadLoader(false)
     } catch (e) {
       setUploadLoader(false)
-      console.log(e);
+      // console.log(e);
     }
   };
 
@@ -169,7 +169,7 @@ const NewPost = (props) => {
             }
           })
         } catch (e) {
-          console.log(e)
+          // console.log(e)
         }
 
       } setLoader(false);
@@ -215,10 +215,10 @@ const NewPost = (props) => {
   };
 
 
-  useEffect(() => {
-    console.log(categoryEditing);
-    console.log("THE", categoryError);
-  })
+  // useEffect(() => {
+  //   // console.log(categoryEditing);
+  //   // console.log("THE", categoryError);
+  // })
 
   return (
     <Flex minH={"50vh"} align={"center"} justifyContent={"center"}>

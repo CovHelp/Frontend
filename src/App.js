@@ -26,7 +26,7 @@ const App = () => {
   var messaging = null;
   const userStore = useSelector((store) => store.userStore);
 
-  console.log(userStore);
+  // console.log(userStore);
 
   useEffect(() => {
     try {
@@ -36,7 +36,7 @@ const App = () => {
         try{
         messaging.getToken().then(async (v) => {
           if (userStore.token && userStore.token.token) {
-            console.log("User is logged in, updating device token");
+            // console.log("User is logged in, updating device token");
             try {
               await updateDeviceToken({
                 deviceToken: v,
@@ -46,7 +46,7 @@ const App = () => {
           }
         }).catch(e=>{});
         messaging.onMessage(async (event) => {
-          console.log(event);
+          // console.log(event);
         }).catch(e=>{});
       }catch(e){}
       }

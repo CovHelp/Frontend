@@ -24,7 +24,7 @@ export const updateDeviceToken = async ({
                 Authorization: `Bearer ${authToken}`
             }
         })
-        console.log(res)
+        // console.log(res)
     } catch (e) {
         throw new CovhelpException(e.response.data, e.response.status);
 
