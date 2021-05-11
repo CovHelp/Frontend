@@ -32,6 +32,8 @@ const App = () => {
     try {
       if (firebase.messaging.isSupported()) {
         messaging = firebase.messaging();
+        
+        try{
         messaging.getToken().then(async (v) => {
           if (userStore.token && userStore.token.token) {
             console.log("User is logged in, updating device token");
@@ -42,10 +44,11 @@ const App = () => {
               });
             } catch (e) {}
           }
-        });
+        }).catch(e=>{});
         messaging.onMessage(async (event) => {
           console.log(event);
-        });
+        }).catch(e=>{});
+      }catch(e){}
       }
     } catch (e) {}
   }, [userStore]);
