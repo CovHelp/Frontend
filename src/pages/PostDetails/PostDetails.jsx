@@ -61,7 +61,9 @@ const PostDetails = () => {
         flexDir={"column"}
         alignItems={"center"}
         background="#f0f2f5"
-      >
+      > 
+      
+     
         {isLoaded === true && postType === 0 ? (
          needHelpPost != null && <NeedHelpCard key="needHelp" post={needHelpPost} showComments={true} />
         ) : (

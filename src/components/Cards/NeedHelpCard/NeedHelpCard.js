@@ -1,22 +1,27 @@
 import { Avatar } from "@chakra-ui/avatar";
-import { Button } from "@chakra-ui/button";
+import { Button, IconButton } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Input, InputGroup } from "@chakra-ui/input";
 import { Badge, Box, Flex, Grid, Heading, Text } from "@chakra-ui/layout";
+import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
 import { useToast } from "@chakra-ui/toast";
 import { useEffect, useState } from "react";
+import { CgCloseR } from "react-icons/cg";
 import { FaComment } from "react-icons/fa";
+import { GoKebabVertical } from "react-icons/go";
 import { IoHandLeftSharp } from "react-icons/io5";
+import { RiShareForwardLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createNeedChannel } from "../../../api/channel";
 import {
   createNeedHelpComment,
   getNameByCategoryID,
-  getNeedHelpComments,
+  getNeedHelpComments
 } from "../../../api/post";
 import CommentBubble from "../../CommentBubble/CommentBubble";
 import CardBox from "../CardBox";
+import { RWebShare } from 'react-web-share';
 import { CardButton } from "../CardButton";
 
 const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
@@ -25,41 +30,6 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
   const [comments, setComments] = useState([]);
   const toast = useToast();
   // eslint-disable-next-line
-  const asd = {
-    user: {
-      id: 1,
-      createdAt: "createdAt",
-      updatedAt: "updatedAt",
-      type: 1,
-      urgency: "urgency",
-      body:
-        "Modern home in city center in the heart of historic Los Angeles Modern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los AngelesModern home in city center in the heart of historic Los Angeles",
-      picture: "https://bit.ly/2Z4KKcF",
-      category: 3,
-      isClosed: 2,
-      lat: "asd",
-      long: "asa",
-      user: {
-        id: 1,
-        createdAt: "createdAt",
-        updatedAt: "updatedAt",
-        firstName: "Firstname",
-        LastName: "Lastname",
-        email: "asidjwef",
-        token: "093284029384023",
-        profile_pic: "Picture",
-      },
-      comment: [
-        {
-          id: 1,
-          createdAt: "createdAt",
-          updatedAt: "updatedAt",
-          comment: "very noice",
-        },
-      ],
-    },
-  };
-
   useEffect(() => {
     handleLoadComments();
     // eslint-disable-next-line
@@ -126,32 +96,71 @@ const NeedHelpCard = ({ post, isProfile, showComments = false }) => {
   return (
     <CardBox>
       <Flex w={"100%"} p={["4", "8"]} bgColor="white">
-        <Avatar
-          w={["40px", "48px"]}
-          h={["40px", "48px"]}
-          src={post.user.profile_pic}
-        />
-        <Flex flexDir="column" _dark="true" ml={["2", "4"]}>
-          <Heading as="h6" size="sm">
-            {post.user.firstName} {post.user.LastName}
-          </Heading>
-          <Box>
-            <p style={{ fontSize: 12 }}>
-              {new Date(post.createdAt).toLocaleString()} &bull;
+        <Flex justifyContent="space-between" alignItems="center" w="100%">
+          <Flex>
+            <Avatar
+              w={["40px", "48px"]}
+              h={["40px", "48px"]}
+              src={post.user.profile_pic}
+            />
+            <Flex flexDir="column" _dark="true" ml={["2", "4"]}>
+              <Heading as="h6" size="sm">
+                {post.user.firstName} {post.user.LastName}
+              </Heading>
+              <Box>
+                <p style={{ fontSize: 12 }}>
+                  {new Date(post.createdAt).toLocaleString()} &bull;
               <span>
-                <Badge
-                  borderRadius="full"
-                  px="2"
-                  ml={1}
-                  mb={1}
-                  colorScheme="green"
+                    <Badge
+                      borderRadius="full"
+                      px="2"
+                      ml={1}
+                      mb={1}
+                      colorScheme="green"
+                    >
+                      {getNameByCategoryID(post.category)} {/* URGENCY */}
+                    </Badge>
+                  </span>
+                </p>
+              </Box>
+            </Flex>
+            </Flex>
+            <Box>
+              <Menu placement="left-start" >
+                <MenuButton
+                  isLazy
+                  as={IconButton}
+                  aria-label="Options"
+                  icon={<GoKebabVertical />}
+                  variant="outline"
+                />
+                <MenuList>
+                  {/* <MenuItem icon={<FiEdit fontSize="20px" />}>
+                    Edit Post
+            </MenuItem> */}
+                  <MenuItem icon={<CgCloseR fontSize="20px" />}>
+                  I've got the help
+           </MenuItem>
+              {/*      <MenuItem icon={<GoReport fontSize="20px" />}>
+                    Report Spam!
+            </MenuItem> */}
+                   <RWebShare
+                  data={{
+                    text: `${post.body}`,
+                    url: `https://covhelp.online/post-detail/1/${post.id}`,
+                    title: `${post.user.firstname} Shared on ${post.category}`,
+                  }}
+                  // sites={{'facebook'}}
+                  onClick={() => console.log("shared successfully!")}
                 >
-                  {getNameByCategoryID(post.category)} {/* URGENCY */}
-                </Badge>
-              </span>
-            </p>
-          </Box>
-        </Flex>
+                  <MenuItem icon={<RiShareForwardLine fontSize="20px" />}>
+                    Share
+            </MenuItem>
+                </RWebShare>
+                </MenuList>
+              </Menu>
+            </Box>
+          </Flex>
       </Flex>
       {post.picture !== "" && (
         <Image

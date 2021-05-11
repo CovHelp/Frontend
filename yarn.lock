@@ -10659,6 +10659,11 @@ react-style-singleton@^2.1.0:
     invariant "^2.2.4"
     tslib "^1.0.0"
 
+react-web-share@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-web-share/-/react-web-share-1.1.0.tgz#6f1bd1b1b24531dc9b842827d9fc094e3063ac8e"
+  integrity sha512-7/KnhwWsjpCHmCcuEmBpOi2MhAEg0vdMpy9PDaWJbQ8mwks+EQJTYqhAldtZS1BQoOURLdc2sRd921TE/WAVpw==
+
 react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
