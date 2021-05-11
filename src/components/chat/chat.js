@@ -12,7 +12,7 @@ import { Divider } from "@chakra-ui/layout";
 // import { createBatcher } from "framer-motion";
 
 export const Chat = () => {
-  const SERVER = "http://localhost:3001";
+  const SERVER = "https://apis.covhelp.online";
   var socket = socketClient(SERVER, 
     // { transports: ["websockets"] }
     );
