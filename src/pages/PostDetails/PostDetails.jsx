@@ -54,21 +54,23 @@ const PostDetails = () => {
 
   return (
     <>
-      <Box
+      {/* <Box
         w="100%"
         px={3}
         d="flex"
         flexDir={"column"}
         alignItems={"center"}
         background="#f0f2f5"
-      >
+      > 
+      
+      */}
         {isLoaded === true && postType === 0 ? (
          needHelpPost != null && <NeedHelpCard key="needHelp" post={needHelpPost} showComments={true} />
         ) : (
             provideHelpPost != null &&
           <GiveHelpCard key="giveHelp" post={provideHelpPost} showComments={true} />
         )}
-      </Box>
+      {/* </Box> */}
     </>
   );
 };
