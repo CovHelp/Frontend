@@ -8,8 +8,7 @@ import { useToast } from "@chakra-ui/toast";
 import { useEffect, useState } from "react";
 import { CgCloseR } from "react-icons/cg";
 import { FaComment } from "react-icons/fa";
-import { FiEdit } from "react-icons/fi";
-import { GoKebabVertical, GoReport } from "react-icons/go";
+import { GoKebabVertical } from "react-icons/go";
 import { IoHandLeftSharp } from "react-icons/io5";
 import { RiShareForwardLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
@@ -18,7 +17,7 @@ import { createNeedChannel } from "../../../api/channel";
 import {
   createNeedHelpComment,
   getNameByCategoryID,
-  getNeedHelpComments,
+  getNeedHelpComments
 } from "../../../api/post";
 import CommentBubble from "../../CommentBubble/CommentBubble";
 import CardBox from "../CardBox";

@@ -6,16 +6,16 @@ import { Badge, Box, Flex, Grid, Heading, Text } from "@chakra-ui/layout";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
 import { useToast } from "@chakra-ui/toast";
 import { useEffect, useState } from "react";
+import { CgCloseR } from 'react-icons/cg';
 import { FaComment } from "react-icons/fa";
-import { FiEdit } from 'react-icons/fi';
-import { GoKebabVertical, GoReport } from 'react-icons/go';
-import { IoCloseOutline, IoHandLeftSharp } from "react-icons/io5";
+import { GoKebabVertical } from 'react-icons/go';
+import { IoHandLeftSharp } from "react-icons/io5";
 import { MdThumbUp } from "react-icons/md";
 import { RiShareForwardLine } from 'react-icons/ri';
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { CgCloseR } from 'react-icons/cg'
 import { createProvideChannel } from "../../../api/channel";
+import { RWebShare } from 'react-web-share';
 import {
   createProvideHelpComment,
   createProvideHelpDepvote,
@@ -26,6 +26,7 @@ import {
 import CommentBubble from "../../CommentBubble/CommentBubble";
 import CardBox from "../CardBox";
 import { CardButton } from "../CardButton";
+
 
 const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
   const userStore = useSelector((store) => store.userStore);
@@ -189,33 +190,43 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
                 </p>
               </Box>
             </Flex>
-            </Flex>
-            <Box>
-              <Menu placement="left-start" >
-                <MenuButton
-                  isLazy
-                  as={IconButton}
-                  aria-label="Options"
-                  icon={<GoKebabVertical />}
-                  variant="outline"
-                />
-                <MenuList>
-                 {/*  <MenuItem icon={<FiEdit fontSize="20px" />}>
+          </Flex>
+          <Box>
+            <Menu placement="left-start" >
+              <MenuButton
+                isLazy
+                as={IconButton}
+                aria-label="Options"
+                icon={<GoKebabVertical />}
+                variant="outline"
+              />
+              <MenuList>
+                {/*  <MenuItem icon={<FiEdit fontSize="20px" />}>
                     Edit Post
             </MenuItem> */}
-                  <MenuItem icon={<CgCloseR fontSize="20px" />}>
-                  I can no longer <br/>provide this
+                <MenuItem icon={<CgCloseR fontSize="20px" />}>
+                  I can no longer <br />provide this
             </MenuItem>
-                  {/* <MenuItem icon={<GoReport fontSize="20px" />}>
+                {/* <MenuItem icon={<GoReport fontSize="20px" />}>
                     Report Spam!
             </MenuItem> */}
+                <RWebShare
+                  data={{
+                    text: `${post.body}`,
+                    url: `https://covhelp.online/post-detail/1/${post.id}`,
+                    title: `${post.user.firstname} Shared on ${post.category}`,
+                  }}
+                  // sites={{'facebook'}}
+                  onClick={() => console.log("shared successfully!")}
+                >
                   <MenuItem icon={<RiShareForwardLine fontSize="20px" />}>
                     Share
             </MenuItem>
-                </MenuList>
-              </Menu>
-            </Box>
-          </Flex>
+                </RWebShare>
+              </MenuList>
+            </Menu>
+          </Box>
+        </Flex>
       </Flex>
       {
         post.picture !== "" && (
@@ -282,7 +293,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
         {isProfile !== "true" && (
           <>
             <hr />
-            <Grid templateColumns="repeat(2, 1fr)">
+            <Grid templateColumns="repeat(3, 1fr)">
               <CardButton
                 isLiked={liked}
                 onClick={handleLikeAction}
@@ -296,7 +307,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
                 }
               />
 
-              {/* <CardButton onClick={handleHelpChannel} icon={IoHandLeftSharp} name="I need help" /> */}
+              <CardButton onClick={handleHelpChannel} icon={IoHandLeftSharp} name="I need help" />
               <CardButton
                 to={`post-detail/1/${post.id}`}
                 icon={FaComment}
