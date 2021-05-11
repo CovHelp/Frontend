@@ -13,6 +13,7 @@ import {
   Select,
   Stack,
   Text,
+  Textarea,
   useColorModeValue
 } from "@chakra-ui/react";
 import {
@@ -33,7 +34,7 @@ import {
 import StateCitySelctor from "../../components/newpost/StateCitySelector";
 
 const NewPost = (props) => {
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState("");
 
   const [shareNumber, setshareNumber] = useState(true);
   const [urgencySliderValue, setUrgencySliderValue] = useState(1);
@@ -220,7 +221,6 @@ const NewPost = (props) => {
     console.log("THE", categoryError);
   })
 
-
   return (
     <Flex minH={"50vh"} align={"center"} justifyContent={"center"}>
       <Stack width={"md"}>
@@ -233,10 +233,11 @@ const NewPost = (props) => {
               <FormLabel>Select Category </FormLabel>
 
               <Select
-                placeholder="Select Category"
                 border={"2px"}
+                placeholder={category === "" ? "Select Cateogry" : ''}
                 onChange={(e) => handleCategoryChange(e)}
               >
+
                 <option value="1">Oxygen</option>
                 <option value="2">Ambulance</option>
                 <option value="3">Medicine</option>
@@ -250,7 +251,7 @@ const NewPost = (props) => {
               isInvalid={bodyEditing && bodyError}
               onFocus={() => setbodyEditing(true)}>
               <FormLabel>Enter Details</FormLabel>
-              <DefaultEditor
+              <Textarea
                 minH="150px"
                 h="auto"
                 value={body}
