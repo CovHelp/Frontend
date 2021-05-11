@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Checkbox,
+
   Flex,
   FormControl,
   FormLabel,
@@ -12,7 +13,6 @@ import {
   Select,
   Stack,
   Text,
-  Textarea,
   useColorModeValue
 } from "@chakra-ui/react";
 import {
@@ -24,6 +24,7 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { BsCloudUpload, ImCross } from "react-icons/all";
 import { useSelector } from "react-redux";
+import { DefaultEditor } from 'react-simple-wysiwyg';
 import { createNeedHelpPost, createProvideHelpPost, uploadImage } from "../../api/post";
 import {
   BoilerPlateForGiveHelp,
@@ -249,8 +250,7 @@ const NewPost = (props) => {
               isInvalid={bodyEditing && bodyError}
               onFocus={() => setbodyEditing(true)}>
               <FormLabel>Enter Details</FormLabel>
-              <Textarea
-                border={"2px"}
+              <DefaultEditor
                 minH="150px"
                 h="auto"
                 value={body}

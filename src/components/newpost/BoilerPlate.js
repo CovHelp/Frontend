@@ -1,27 +1,27 @@
 export const BoilerPlateForNeedHelp = [
-    `Patient Name __ENTER NAME__ and age __ENTER AGE__ has oxygen level __ENTER PERCENTAGE__ % and need oxygen cylinder/concentrator urgently at address __ENTER ADDRESS__. And I can reach below mentioned cities for getting help. Please contact me if you can help or refer me to the person that can help.`
+    `Patient Name <b>REPLACE WITH NAME</b> and age <b>REPLACE WITH AGE</b> has oxygen level <b>REPLACE WITH PERCENTAGE</b> % and need oxygen cylinder/concentrator urgently at address <b>REPLACE WITH ADDRESS</b>. And I can reach below mentioned cities for getting help. Please contact me if you can help or refer me to the person that can help.`
     ,
-    `Patient Name __ENTER NAME__ and age __ENTER AGE__ require an Ambulance urgently at address __ENTER ADDRESS__. Please contact me in the below mentioned number if you can provide help or have information about the one that can provide one. `
+    `Patient Name <b>REPLACE WITH NAME</b> and age <b>REPLACE WITH AGE</b> require an Ambulance urgently at address <b>REPLACE WITH ADDRESS</b>. Please contact me in the below mentioned number if you can provide help or have information about the one that can provide one. `
     ,
-    `Patient Name __ENTER NAME__ and age __ENTER AGE__ require below mentioned medicines. Please contact or share the information where I can get these. I can reach __Enter City Name __for acquiring medicines. 
-    __Enter Medicines__ Medicines Prescribed`
+    `Patient Name <b>REPLACE WITH NAME</b> and age <b>REPLACE WITH AGE</b> require below mentioned medicines. Please contact or share the information where I can get these. I can reach <b>REPLACE WITH City Name </b>for acquiring medicines. 
+    <b>REPLACE WITH Medicines</b> Medicines Prescribed`
     ,
-    `Patient Name __ENTER NAME__ and age __ENTER AGE__ require an urgent  bed in a hospital. Please contact me if you know the availability of hospital beds in __ENTER ADDRESS__ `
+    `Patient Name <b>REPLACE WITH NAME</b> and age <b>REPLACE WITH AGE</b> require an urgent  bed in a hospital. Please contact me if you know the availability of hospital beds in <b>REPLACE WITH ADDRESS</b> `
     ,
-    `Patient Name __ENTER NAME__ and age __ENTER AGE__ urgently require Blood/Plasma. Please contact me if you can reach this hospital __ENTER ADDRESS__`
+    `Patient Name <b>REPLACE WITH NAME</b> and age <b>REPLACE WITH AGE</b> urgently require Blood/Plasma. Please contact me if you can reach this hospital <b>REPLACE WITH ADDRESS</b>`
     ,
-    `Patient Name __ENTER NAME__ and age __ENTER AGE__ require food and tiffin services. Please contact me if you can provide food and tiffin services. `
+    `Patient Name <b>REPLACE WITH NAME</b> and age <b>REPLACE WITH AGE</b> require food and tiffin services. Please contact me if you can provide food and tiffin services. `
 ]
 
 export const BoilerPlateForGiveHelp = [
-    `I have __ENTER (UNITS)__ of oxygen cylinders/concentrators available in the below mentioned address. Please contact me if you need one.`,
-    `Ambulance with __ENTER FACILITY__ is available in the below mentioned city. Please contact if you need one. `,
+    `I have <b>REPLACE WITH (UNITS)</b> of oxygen cylinders/concentrators available in the below mentioned address. Please contact me if you need one.`,
+    `Ambulance with <b>REPLACE WITH FACILITY</b> is available in the below mentioned city. Please contact if you need one. `,
     `Are available at the below mentioned address, please contact if you need them. `,
-    `__ENTER TYPE OF BED__ of beds are available at the __ENTER NAME AND ADDRESS OF HOSPITAL
- __. Please contact this number if you need one. `,
-    `Plasma is available at the hospital __ENTER NAME AND ADDRESS OF HOSPITAL
- __. Please contact me if you need it. `,
-    `Food and Tiffin service is available at __ENTER ADDRESS __. Please contact me if you need my service. `
+    `<b>REPLACE WITH TYPE OF BED</b> of beds are available at the <b>REPLACE WITH NAME AND ADDRESS OF HOSPITAL
+ </b>. Please contact this number if you need one. `,
+    `Plasma is available at the hospital <b>REPLACE WITH NAME AND ADDRESS OF HOSPITAL
+ </b>. Please contact me if you need it. `,
+    `Food and Tiffin service is available at <b>REPLACE WITH ADDRESS </b>. Please contact me if you need my service. `
 ]
 
 // ------------// 
