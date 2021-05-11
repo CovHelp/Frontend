@@ -20,7 +20,7 @@ const SearchBar = (props) => {
 
   const userStore = useSelector((store) => store.userStore);
 
-  const CreatePostModal = ({ onClose }) => {
+  const CreatePostModal = ({ onClose }) => {q
     return (
       <>
         <ModalOverlay style={{ backdropFilter: "blur(5px)" }} />
