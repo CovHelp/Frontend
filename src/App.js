@@ -29,23 +29,25 @@ const App = () => {
   console.log(userStore);
 
   useEffect(() => {
-    if (firebase.messaging.isSupported()) {
-      messaging = firebase.messaging();
-      messaging.getToken().then(async (v) => {
-        if (userStore.token && userStore.token.token) {
-          console.log("User is logged in, updating device token");
-          try {
-            await updateDeviceToken({
-              deviceToken: v,
-              authToken: userStore.token.token,
-            });
-          } catch (e) {}
-        }
-      });
-      messaging.onMessage(async (event) => {
-        console.log(event);
-      });
-    }
+    try {
+      if (firebase.messaging.isSupported()) {
+        messaging = firebase.messaging();
+        messaging.getToken().then(async (v) => {
+          if (userStore.token && userStore.token.token) {
+            console.log("User is logged in, updating device token");
+            try {
+              await updateDeviceToken({
+                deviceToken: v,
+                authToken: userStore.token.token,
+              });
+            } catch (e) {}
+          }
+        });
+        messaging.onMessage(async (event) => {
+          console.log(event);
+        });
+      }
+    } catch (e) {}
   }, [userStore]);
 
   const [isSidebarVisibile, setSidebarVisible] = useState(false);
