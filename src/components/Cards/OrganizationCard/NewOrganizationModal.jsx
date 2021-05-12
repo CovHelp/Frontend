@@ -2,9 +2,9 @@ import { Button } from '@chakra-ui/button'
 import { useColorModeValue } from '@chakra-ui/color-mode'
 import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Image } from '@chakra-ui/image'
-import { Input, InputGroup, InputLeftAddon, InputRightAddon } from '@chakra-ui/input'
+import { Input, InputGroup, InputLeftAddon } from '@chakra-ui/input'
 import { Box, Flex, Stack } from '@chakra-ui/layout'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { BsCloudUpload } from 'react-icons/bs'
 import { ImCross } from 'react-icons/im'
 import { DefaultEditor } from 'react-simple-wysiwyg'
@@ -14,14 +14,12 @@ import StateCitySelctor from '../../newpost/StateCitySelector'
 
 const NewOrganization = () => {
 
-
-    const [body, setBody] = useState("");
-    const [stateCitySelectorVisible, setStateCitySelectorVisible] = useState(
-        true
-    );
-    const [city, setCity] = useState(null);
-    const [state, setState] = useState(null);
-
+    const [name, setName] = useState(null)
+    const [body, setBody] = useState(null);
+    const [loader, setLoader] = useState(false);
+    const [website, setWebsite] = useState(null);
+    const [contact, setContact] = useState(null);
+    const [donationMedium, setDonationMedium] = useState(null)
     // IMAGE  UPLOAD
     const fileRef = useRef();
     const imgRef = useRef();
@@ -29,7 +27,28 @@ const NewOrganization = () => {
     const [selectedFile, setSelectedFile] = useState();
     const [uploadLoader, setUploadLoader] = useState()
     const [uploadedImageId, setUploadedImageId] = useState("");
+    /* LOCATION */
     const [selectedLocations, setSelectedLocations] = useState([]);
+    const [stateCitySelectorVisible, setStateCitySelectorVisible] = useState(true);
+    const [city, setCity] = useState(null);
+    const [state, setState] = useState(null);
+
+    /* SET NAME */
+    const handleSetName = (e) => {
+        setName(e.target.value)
+    }
+    /* SET BODY */
+    const handleSetBody = (e) => {
+        setBody(e.target.value)
+    }
+    /* SET DONATION MEDIUM */
+    const handleSetDonationMedium = (e) => {
+        setDonationMedium(e.target.value)
+    }
+    /* SET CONTACT MEDIUM */
+    const handleSetContact = (e) => {
+        setContact(e.target.value)
+    }
 
     /* IMAGEUPLOAD */
     const handleImageFileChange = (e) => {
@@ -37,6 +56,7 @@ const NewOrganization = () => {
         setImgSelected(true);
         imgRef.current.src = URL.createObjectURL(e.target.files[0]);
     };
+
 
     const handleImageUpload = async () => {
         setUploadLoader(true)
@@ -54,6 +74,10 @@ const NewOrganization = () => {
         }
     };
 
+    /* HANDLE SETTING OF WEBSITE */
+    const handleSetWebsite = () => {
+        setWebsite(website)
+    }
 
     /* HANDLE DELETION OF LOCATIONS */
     const handleDeleteLocation = (city) => {
@@ -77,8 +101,34 @@ const NewOrganization = () => {
         setStateCitySelectorVisible(false);
     };
 
+    const handleCreatePost = async () => {
+        if (city === null || state === null) return
+        setLoader(true);
+        // try {
+        //     // await createNewOrganization
+        //     ({
+        //         body: body,
+        //         contact: contact,
+        //         picture: uploadedImageId,
+        //         city: city.name,
+        //         website: website,
+        //         state: state.name,
+        //         donationMedium: donationMedium,
+        //         lat: city.latitude,
+        //         long: city.longitude,
+        //     });
+        // }
+        // catch (e) { }
+    }
 
+    useEffect(() => {
+        console.log("locations", selectedLocations.length);
+        console.log("website", website)
+        console.log("body", body);
+        console.log("ddon", donationMedium)
+        console.log("contact", contact);
 
+    })
     return (
         <>
             <Flex minH={"50vh"} align={"center"} justifyContent={"center"}>
@@ -88,7 +138,7 @@ const NewOrganization = () => {
 
                             <FormControl id="name">
                                 <FormLabel>Enter Name</FormLabel>
-                                <Input type="name" />
+                                <Input placeholder="Organization Name" type="name" value={name} onChange={(e) => handleSetName} />
                             </FormControl>
 
 
@@ -102,7 +152,7 @@ const NewOrganization = () => {
                                     minH="150px"
                                     h="auto"
                                     value={body}
-                                //onChange={(e) => handleSetBody(e)}
+                                    onChange={(e) => handleSetBody(e)}
                                 />
                             </FormControl>
 
@@ -136,14 +186,12 @@ const NewOrganization = () => {
                             </Flex>
 
                             {!stateCitySelectorVisible &&
-                                // props.typeOfPost === "Provide Help" && (
-                                    <Button onClick={() => setStateCitySelectorVisible(true)}>
-                                        Add More Locations
+                                <Button onClick={() => setStateCitySelectorVisible(true)}>
+                                    Add More Locations
                                     </Button>
-                                // )
                             }
 
-                            {selectedLocations.length === 0 &&
+                            {stateCitySelectorVisible &&
                                 <StateCitySelctor
                                     parent="provideHelp"
                                     onSelected={handleLocationSelection}
@@ -155,7 +203,7 @@ const NewOrganization = () => {
                             >
                                 <FormLabel>Donation Medium </FormLabel>
 
-                                <Input type="name" placeholder="Donation Medium" />
+                                <Input type="name" placeholder="Donation Medium" value={donationMedium} onChange={(e) => handleSetDonationMedium} />
                             </FormControl>
 
 
@@ -166,7 +214,7 @@ const NewOrganization = () => {
 
                                     <Input
                                         border={"2px"}
-                                        type="number"
+                                        type="text"
                                         // value={phoneNumber}
                                         // onChange={(e) => handlePhoneNumberChange(e)}
                                         // disabled={!shareNumber}
@@ -179,7 +227,7 @@ const NewOrganization = () => {
                                 <FormLabel>Enter Website</FormLabel>
                                 <InputGroup size="sm">
                                     <InputLeftAddon children="https://" />
-                                      <Input placeholder="mysite" />
+                                    <Input placeholder="mysite" value={website} onChange={(e) => handleSetWebsite(e)} />
                                 </InputGroup>
                             </FormControl>
 
@@ -214,16 +262,17 @@ const NewOrganization = () => {
                                     }
                                 </Flex>
                             </FormControl>
-                            <Button
-                                // isLoading={loader}
-                                // onClick={handleCreatePost}   
-                                bg="messenger.500"
-                                color={"white"}
-                                borderRadius="lg"
+                            {website && donationMedium && body.length > 0 &&
+                                <Button
+                                    isLoading={loader}
+                                    // onClick={handleCreatePost}
+                                    bg="messenger.500"
+                                    color={"white"}
+                                    borderRadius="lg"
 
-                            >
-                                Post
-            </Button>
+                                >
+                                    Post
+                            </Button>}
                         </Stack>
                     </Box>
                 </Stack>
