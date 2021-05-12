@@ -75,8 +75,8 @@ const NewOrganization = () => {
     };
 
     /* HANDLE SETTING OF WEBSITE */
-    const handleSetWebsite = () => {
-        setWebsite(website)
+    const handleSetWebsite = (e) => {
+        setWebsite(e.target.value)
     }
 
     /* HANDLE DELETION OF LOCATIONS */
@@ -122,12 +122,14 @@ const NewOrganization = () => {
     }
 
     useEffect(() => {
+        console.log("-----------START-----------")
+        console.log("name" , name);
         console.log("locations", selectedLocations.length);
         console.log("website", website)
         console.log("body", body);
         console.log("ddon", donationMedium)
         console.log("contact", contact);
-
+        console.log('\n');
     })
     return (
         <>
@@ -138,7 +140,7 @@ const NewOrganization = () => {
 
                             <FormControl id="name">
                                 <FormLabel>Enter Name</FormLabel>
-                                <Input placeholder="Organization Name" type="name" value={name} onChange={(e) => handleSetName} />
+                                <Input placeholder="Organization Name" type="name" value={name} onChange={(e) => handleSetName(e)} />
                             </FormControl>
 
 
@@ -203,7 +205,7 @@ const NewOrganization = () => {
                             >
                                 <FormLabel>Donation Medium </FormLabel>
 
-                                <Input type="name" placeholder="Donation Medium" value={donationMedium} onChange={(e) => handleSetDonationMedium} />
+                                <Input type="name" placeholder="Donation Medium" value={donationMedium} onChange={(e) => handleSetDonationMedium(e)} />
                             </FormControl>
 
 
@@ -215,9 +217,8 @@ const NewOrganization = () => {
                                     <Input
                                         border={"2px"}
                                         type="text"
-                                        // value={phoneNumber}
-                                        // onChange={(e) => handlePhoneNumberChange(e)}
-                                        // disabled={!shareNumber}
+                                        value={contact}
+                                        onChange={(e) => handleSetContact(e)}
                                         placeholder={"Enter Any Contact info"}
                                     />
                                 </InputGroup>
@@ -262,7 +263,7 @@ const NewOrganization = () => {
                                     }
                                 </Flex>
                             </FormControl>
-                            {website && donationMedium && body.length > 0 &&
+                            {name && body.length > 0 && website && contact && donationMedium && selectedLocations.length > 0 &&
                                 <Button
                                     isLoading={loader}
                                     // onClick={handleCreatePost}
