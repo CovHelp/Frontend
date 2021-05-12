@@ -20,7 +20,7 @@ const SearchBar = (props) => {
 
   const userStore = useSelector((store) => store.userStore);
 
-  const CreatePostModal = ({ onClose }) => {q
+  const CreatePostModal = ({ onClose }) => {
     return (
       <>
         <ModalOverlay style={{ backdropFilter: "blur(5px)" }} />
@@ -50,7 +50,7 @@ const SearchBar = (props) => {
         tabIndex={-1}
         aria-label="Focus moved to this box"
         borderRadius="xl"
-        borderWidth="1px"
+        borderWidth="1pyarx"
         background="white"
       >
         <Heading

@@ -3,7 +3,7 @@ import { Flex, Heading } from '@chakra-ui/layout'
 import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay } from '@chakra-ui/modal'
 import React from 'react'
 import { BsPlusCircle } from 'react-icons/bs'
-import NewOrganization from './NewOrganization'
+import NewOrganization from './NewOrganizationModal'
 
 
 const AddOrganizationCard = () => {
@@ -18,15 +18,15 @@ const AddOrganizationCard = () => {
                 <ModalOverlay style={{ backdropFilter: "blur(5px)" }} />
                 <ModalContent>
                     <ModalHeader fontWeight="bold" fontSize="3xl">
-                        <NewOrganization/>
-              </ModalHeader>
+                        Add New Organization
+                    </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <NewOrganization onClose={onClose} typeOfPost='' />
+                        <NewOrganization onClose={onClose} typeOfPost="{props.name}" />
                     </ModalBody>
                 </ModalContent>
             </>
-            
+
         );
     };
 
