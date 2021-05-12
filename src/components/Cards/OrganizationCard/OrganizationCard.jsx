@@ -2,19 +2,25 @@ import { Image } from "@chakra-ui/image";
 import { Box, Flex, Heading, Text } from "@chakra-ui/layout";
 import React from "react";
 
-const OrganizationCard = ({ firstName, lastName, picture }) => {
+const OrganizationCard = ({ name, website, picture }) => {
+
+  const getImageUrl = (id) => {
+    return `
+    https://c1bea73bb520.ngrok.io/v1/posts/file/${id}`
+  }
+
   return (
     <Box w={"auto"} borderRadius="xl" h={"400px"}>
       <Flex p={["4", "8"]} bgColor="white" borderRadius="xl" >
         <Flex flexDir="column" _dark=" true" w="100%">
           <Heading as="h6" size="sm">
-            First Name &bull; Last Name
+            {name}
           </Heading>
         </Flex>
       </Flex>
       {/* {post.picture !== "" && ( */}
       <Image
-        src={"https://i.picsum.photos/id/261/1280/720.jpg?hmac=R_OI-94N7zbLGI6atqtYv-po-xnEbtv0Zk0hNgDzWoY"}
+        src={getImageUrl(picture)}
         objectFit="cover"
         color="gray.600"
         ml="auto"

@@ -1,10 +1,28 @@
 // import { Box, Flex, Grid } from "@chakra-ui/layout";
 import { Box, Grid } from "@chakra-ui/layout";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { fetchOrganizationPosts } from "../../api/post";
 import AddOrganizationCard from "../../components/Cards/OrganizationCard/AddOrganizationCard";
 import OrganizationCard from "../../components/Cards/OrganizationCard/OrganizationCard";
 
 const Organization = () => {
+
+  const [posts, setPosts] = useState([]);
+
+  const loadOrganizationPosts = async () => {
+
+    try {
+      const res = await fetchOrganizationPosts();
+      setPosts(res);
+    } catch (error) {}
+  }
+
+
+  useEffect(() => {
+    loadOrganizationPosts();
+  }, [])
+
   return (
     <>
       {/* <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%'}}> <h1 style={{fontSize: 50}}>Coming soon!</h1> </div> */}
@@ -21,21 +39,9 @@ const Organization = () => {
           background="#f0f2f5"
         >
           <AddOrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
-          <OrganizationCard />
+          {posts.length > 0 && posts.map((post, index) =>
+            <OrganizationCard name={post.name} picture={post.image} />
+          )}
         </Grid>
       </Box>
     </>
