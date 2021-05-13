@@ -49,7 +49,7 @@ const Organization = () => {
           <AddOrganizationCard />
           {posts.length > 0 && posts.map((post) =>
             <OrganizationCard name={post.name} picture={post.image} key=
-              {post.id} website={post.website} category={post.category} contact={post.contact} address={post.address}/>
+              {post.id} website={post.website} category={post.category} contact={post.contact} address={post.address} locations={post.locations}/>
           )}
         </Grid>
       </Box>
