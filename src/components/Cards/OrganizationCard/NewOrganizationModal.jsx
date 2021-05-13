@@ -4,7 +4,7 @@ import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Image } from '@chakra-ui/image'
 import { Input, InputGroup, InputLeftAddon } from '@chakra-ui/input'
 import { Box, Flex, Stack } from '@chakra-ui/layout'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { BsCloudUpload } from 'react-icons/bs'
 import { ImCross } from 'react-icons/im'
 import { useSelector } from 'react-redux'
@@ -34,6 +34,8 @@ const NewOrganization = (props) => {
     const [stateCitySelectorVisible, setStateCitySelectorVisible] = useState(true);
     const [city, setCity] = useState(null);
     const [state, setState] = useState(null);
+
+    const [postButtonVisible, setPostButtonVisible] = useState(false);
 
     const userStore = useSelector((store) => store.userStore);
     /* SET NAME */
@@ -109,6 +111,21 @@ const NewOrganization = (props) => {
         setStateCitySelectorVisible(false);
     };
 
+    /* HANDLE POST BUTTON VISIBILITY */
+    useEffect(() => {
+        const HandlePostButtonVisibility = () => {
+            if (name && category && website && contact && donationMedium && selectedLocations.length > 0 && selectedFile != "") {
+                setPostButtonVisible(true)
+            }
+            else {
+                setPostButtonVisible(false);
+            }
+
+        }
+
+        HandlePostButtonVisibility();
+        console.log("BUTTON" ,postButtonVisible);
+    }, [name, category, website, contact, donationMedium, selectedLocations, selectedFile, postButtonVisible])
 
     const handleCreateOrganization = async () => {
         if (city === null || state === null) return
@@ -126,7 +143,7 @@ const NewOrganization = (props) => {
                     website: website,
                     donation: donationMedium,
                 });
-                props.onClose();
+            props.onClose();
         }
         catch (e) {
             // here
@@ -282,17 +299,18 @@ const NewOrganization = (props) => {
                                     }
                                 </Flex>
                             </FormControl>
-                            {name && category && website && contact && donationMedium && selectedLocations.length > 0 && selectedFile != ""&&
-                                <Button
-                                    isLoading={loader}
-                                    onClick={handleCreateOrganization}
-                                    bg="messenger.500"
-                                    color={"white"}
-                                    borderRadius="lg"
 
-                                >
-                                    Post
-                            </Button>}
+                            <Button
+                                isDisabled={!postButtonVisible}
+                                isLoading={loader}
+                                onClick={handleCreateOrganization}
+                                bg="messenger.500"
+                                color={"white"}
+                                borderRadius="lg"
+
+                            >
+                                Post
+                            </Button>
                         </Stack>
                     </Box>
                 </Stack>
