@@ -6,7 +6,7 @@ import React from "react";
 const OrganizationCard = ({ name, website, picture, locations, category, contact, address, donation }) => {
 
   const getImageUrl = (id) => {
-    return `https://690300506f4b.ngrok.io/v1/posts/file/${id}`
+    return `https://apis.covhelp.online/v1/posts/file/${id}`
   }
 
   return (
