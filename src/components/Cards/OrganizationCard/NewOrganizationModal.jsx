@@ -282,7 +282,7 @@ const NewOrganization = (props) => {
                                     }
                                 </Flex>
                             </FormControl>
-                            {name && website && contact && donationMedium && selectedLocations.length > 0 &&
+                            {name && category && website && contact && donationMedium && selectedLocations.length > 0 &&
                                 <Button
                                     isLoading={loader}
                                     onClick={handleCreateOrganization}
