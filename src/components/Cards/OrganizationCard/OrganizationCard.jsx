@@ -16,7 +16,7 @@ const OrganizationCard = ({ name, website, picture, locations, category, contact
           <Heading as="h6" size="sm">
             {name}
           </Heading>
-          <Text as="a" href={website} target="_blank" color="messenger.500" _hover={{ textDecoration: "underline" }}><b>Website: </b>{website}</Text>
+          <Text as="span"><b>Website: </b></Text><Text as="a" href={`https://${website}`} target="_blank" color="messenger.500" _hover={{ textDecoration: "underline" }}>{website}</Text>
           <Text><b>Contact : </b>{contact}</Text>
         </Flex>
       </Flex>
