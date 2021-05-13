@@ -9,24 +9,11 @@ const Organization = () => {
 
   const [posts, setPosts] = useState([]);
 
-  //   try {
-  //     const res = await axios.get("https://9aa951456745.ngrok.io/v1/org")
-  //     console.log("chal jaa ", res.data);
-  //     return res.data
-  //   } catch (e) { return "NOPE"}
-  //   // throw new CovhelpException(e.response.data, e.response.status);
-  //   // try {
-  //   //   const res = await fetchOrganizationPosts();
-  //   //   setPosts(res);
-  //   // } catch (error) {}
-  // }
-
 
 
   useEffect(() => {
     const fetch = async () => {
       const res = await fetchOrganizationPosts();
-      console.log("PLEEEE", res)
       setPosts(res)
     }
     fetch();

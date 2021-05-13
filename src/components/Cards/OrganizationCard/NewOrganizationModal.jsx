@@ -26,7 +26,7 @@ const NewOrganization = (props) => {
     const fileRef = useRef();
     const imgRef = useRef();
     const [isImgSelected, setImgSelected] = useState(false);
-    const [selectedFile, setSelectedFile] = useState();
+    const [selectedFile, setSelectedFile] = useState("");
     const [uploadLoader, setUploadLoader] = useState()
     const [uploadedImageId, setUploadedImageId] = useState("");
     /* LOCATION */
@@ -282,7 +282,7 @@ const NewOrganization = (props) => {
                                     }
                                 </Flex>
                             </FormControl>
-                            {name && category && website && contact && donationMedium && selectedLocations.length > 0 &&
+                            {name && category && website && contact && donationMedium && selectedLocations.length > 0 && selectedFile != ""&&
                                 <Button
                                     isLoading={loader}
                                     onClick={handleCreateOrganization}

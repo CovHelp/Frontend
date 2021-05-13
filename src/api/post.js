@@ -350,10 +350,8 @@ export const createOrganization = async ({
         })
         return res.data
     } catch (e) {
-        console.log("TOKEN", token);
         // e.response.data i want the error to sent to the function 
         // consuming the api 
-        console.log("FROM API", e.response.data);
         throw CovhelpException(e.response.data.errors, e.response.status)
     }
 }
@@ -362,7 +360,6 @@ export const createOrganization = async ({
 export const fetchOrganizationPosts = async () => {
     try {
         const res = await axios.get("/org")
-        console.log("chal jaa ", res.data);
         return res.data
     } catch (e) {
         throw new CovhelpException(e.response.data, e.response.status);
