@@ -10,7 +10,7 @@ const OrganizationCard = ({ name, website, picture, locations, category, contact
   }
 
   return (
-    <Box borderRadius="xl" minW={0} h={["auto", "auto"]} minH={["auto","580px"]} m={1} background="white">
+    <Box borderRadius="xl" minW={0} h={["auto", "auto"]} minH={["auto", "580px"]} m={1} background="white">
       <Flex w="100%" p={["4", "6"]} bgColor="white" borderRadius="xl" >
         <Flex flexDir="column" _dark=" true" w="100%">
           <Heading as="h6" size="sm">
@@ -35,19 +35,19 @@ const OrganizationCard = ({ name, website, picture, locations, category, contact
         flexDirection="column"
         p={["4", "6"]}
         w="auto"
-        h="230px"
+        maxH="auto"
         // border="5px solid black"
         // pt={post.picture === "" && ["0", "0"]}
         bgColor="white"
         borderBottomRadius="xl"
       >
-         <span><b>Active Locations: </b></span>
+        <span><b>Active Locations: </b></span>
         {locations.map((i) => (
           <Text fontSize="smaller" >
             {i.state} &bull; {i.city}
           </Text>
         ))}
-        <Box d="flex" alignItems="baseline" flexWrap="wrap">
+        <Box d="flex" wordBreak="break-all" alignItems="baseline" flexWrap="wrap">
 
           {/* <Badge
             color="gray.800"
@@ -61,12 +61,12 @@ const OrganizationCard = ({ name, website, picture, locations, category, contact
             textTransform="uppercase"
           > */}
           {category.map((i) => (
-            <Badge colorScheme="green" px="2" mr={1} my={2} borderRadius="full" as="span">{i}</Badge>
+            <Badge isTruncated overflow="hidden" h="auto" colorScheme="green" px="2" mr={1} my={2} borderRadius="full" as="span">{i}</Badge>
           ))}
 
           {/* </Badge> */}
         </Box>
-        <Flex direction="column" w="auto" wrap="wrap" height="auto" minW={0}>
+        <Flex direction="column" w="auto" wordBreak="break-all" height="auto" minW={0}>
           <Text w="auto" minW={0} fontWeight="medium" noOfLines={3}>
             <span><b>Address : </b></span>
             <span
