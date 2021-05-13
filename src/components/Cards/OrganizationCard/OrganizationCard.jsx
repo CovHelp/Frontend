@@ -41,6 +41,7 @@ const OrganizationCard = ({ name, website, picture, locations, category, contact
         bgColor="white"
         borderBottomRadius="xl"
       >
+         <span><b>Active Locations: </b></span>
         {locations.map((i) => (
           <Text fontSize="smaller" >
             {i.state} &bull; {i.city}
