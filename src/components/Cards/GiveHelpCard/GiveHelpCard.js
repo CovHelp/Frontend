@@ -176,7 +176,7 @@ const GiveHelpCard = ({ post, isProfile, readMore, showComments = false }) => {
               h={["40px", "48px"]}
               src={post.user.profile_pic}
             />
-            <Flex flexDir="column" _dark="true" ml={["2", "4"]}>
+            <Flex flexDir="column" _dark="true" ml={["2", "4"]}>  
               <Heading as="h6" size="sm">
                 {post.user.firstName} {post.user.LastName}
               </Heading>

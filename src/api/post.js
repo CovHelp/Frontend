@@ -361,7 +361,7 @@ export const createOrganization = async ({
 
 export const fetchOrganizationPosts = async () => {
     try {
-        const res = await axios.get("https://091ba7940ecb.ngrok.io/v1/org")
+        const res = await axios.get("https://690300506f4b.ngrok.io/v1/org")
         console.log("chal jaa ", res.data);
         return res.data
     } catch (e) {
