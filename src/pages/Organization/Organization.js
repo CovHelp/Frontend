@@ -1,26 +1,34 @@
 // import { Box, Flex, Grid } from "@chakra-ui/layout";
 import { Box, Grid } from "@chakra-ui/layout";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { fetchOrganizationPosts } from "../../api/post";
 import AddOrganizationCard from "../../components/Cards/OrganizationCard/AddOrganizationCard";
 import OrganizationCard from "../../components/Cards/OrganizationCard/OrganizationCard";
-
+import { fetchOrganizationPosts } from '../../api/post'
 const Organization = () => {
 
   const [posts, setPosts] = useState([]);
 
-  const loadOrganizationPosts = async () => {
+  //   try {
+  //     const res = await axios.get("https://9aa951456745.ngrok.io/v1/org")
+  //     console.log("chal jaa ", res.data);
+  //     return res.data
+  //   } catch (e) { return "NOPE"}
+  //   // throw new CovhelpException(e.response.data, e.response.status);
+  //   // try {
+  //   //   const res = await fetchOrganizationPosts();
+  //   //   setPosts(res);
+  //   // } catch (error) {}
+  // }
 
-    try {
-      const res = await fetchOrganizationPosts();
-      setPosts(res);
-    } catch (error) {}
-  }
 
 
   useEffect(() => {
-    loadOrganizationPosts();
+    const fetch = async () => {
+      const res = await fetchOrganizationPosts();
+      console.log("PLEEEE", res)
+      setPosts(res)
+    }
+    fetch();
   }, [])
 
   return (

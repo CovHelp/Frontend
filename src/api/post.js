@@ -361,7 +361,8 @@ export const createOrganization = async ({
 
 export const fetchOrganizationPosts = async () => {
     try {
-        const res = await axios.get("https://c1bea73bb520.ngrok.io/v1/org")
+        const res = await axios.get("https://9aa951456745.ngrok.io/v1/org")
+        console.log("chal jaa ", res.data);
         return res.data
     } catch (e) {
         throw new CovhelpException(e.response.data, e.response.status);
