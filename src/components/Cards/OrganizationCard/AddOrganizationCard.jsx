@@ -33,8 +33,8 @@ const AddOrganizationCard = () => {
 
     return (
         <>
-            <Flex p={3} bgColor="white" borderRadius="xl" h={"400px"} border="3px dashed">
-                <Flex onClick={onOpen} alignItems="center" justifyContent="center" flexDir="column" _dark=" true" w="100%" minH="400px" maxH="700px" textAlign="center"
+            <Flex p={6} m={2} mt="4px" bgColor="white" borderRadius="xl" border="3px dashed" minH={["auto","auto","auto","580px"]}>
+                <Flex onClick={onOpen} alignItems="center" justifyContent="center" flexDir="column" _dark=" true" w="100%" textAlign="center"
                     tabIndex={-1}
                     aria-label="Focus moved to this box"
                     _hover={{

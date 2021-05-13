@@ -40,7 +40,7 @@ const GiveHelp = () => {
         alignItems={"center"}
         background="#f0f2f5"
       >
-        <SearchBar name = "Provide Help"/>
+        <SearchBar name="Provide Help" />
         {provideHelpPostStoreFiltered.length > 0 &&
           provideHelpPostStoreFiltered.map((post, index) => (
             <GiveHelpCard key={index} post={post} />

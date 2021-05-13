@@ -1,0 +1,21 @@
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto auto;
+}
+
+@media only  screen and (max-width: 1386px){
+    .grid{
+        grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto ;
+
+    }
+}
+
+@media only  screen and (max-width: 1180px){
+    .grid{
+        grid-template-columns: 1fr;
+    grid-template-rows:  auto;
+
+    }
+}

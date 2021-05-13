@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {
+    FormClient,
     JSONClient,
 } from './bootstrap';
 import CovhelpException from './CovhelpException'
@@ -231,11 +232,11 @@ export const uploadImage = async ({
         const res = await axios.post(
             "https://apis.covhelp.online/v1/posts/upload",
             formData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data"
-                }
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data"
             }
+        }
         );
         return res.data;
         //    const res = await FormClient.post('/posts/upload', formData, {
@@ -318,6 +319,70 @@ export const createProvideHelpPost = async ({
         return res.data;
     } catch (e) {
         throw CovhelpException(e.response.data, e.response.status)
+    }
+}
+
+export const createOrganization = async ({
+    name,
+    locations,
+    website,
+    image,
+    address,
+    category,
+    donation,
+    contact,
+    token
+}) => {
+    try {
+        const res = await JSONClient.post('/org/create', {
+            name,
+            locations,
+            website,
+            image,
+            address,
+            category,
+            donation,
+            contact,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return res.data
+    } catch (e) {
+        console.log("TOKEN", token);
+        // e.response.data i want the error to sent to the function 
+        // consuming the api 
+        console.log("FROM API", e.response.data);
+        throw CovhelpException(e.response.data.errors, e.response.status)
+    }
+}
+
+
+export const fetchOrganizationPosts = async () => {
+    try {
+        const res = await axios.get("https://690300506f4b.ngrok.io/v1/org")
+        console.log("chal jaa ", res.data);
+        return res.data
+    } catch (e) {
+        throw new CovhelpException(e.response.data, e.response.status);
+    }
+}
+
+
+
+export const uploadOrgImage = async ({ image, token }) => {
+    const formData = new FormData()
+    formData.append('file', image)
+    try {
+        const url = await FormClient.post('/org/upload', formData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return url.data;
+    } catch (E) {
+        console.log(E);
     }
 }
 
